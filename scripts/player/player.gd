@@ -5,7 +5,7 @@ extends CharacterBody3D
 @export var sprint_duration: float = 0.6
 @export var sprint_cooldown: float = 2.0
 @export var jump_force: float = 4.5
-@export var mouse_sensitivity: float = 0.015
+@export var mouse_sensitivity: float = 0.001
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _sprint_time_left: float = 0.0

@@ -14,6 +14,13 @@ func reset_money() -> void:
     money = 0
     money_changed.emit(money)
 
+func spend_money(amount: int) -> bool:
+    if money < amount:
+        return false
+    money -= amount
+    money_changed.emit(money)
+    return true
+
 func set_carrying(item_name: String) -> void:
     carrying_item = item_name
     carrying_changed.emit(carrying_item)
