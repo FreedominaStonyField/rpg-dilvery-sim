@@ -16,16 +16,16 @@ func _ready() -> void:
 	sleep_spot.body_exited.connect(_on_sleep_exited)
 
 func _on_safe_entered(body: Node3D) -> void:
-    if not body.is_in_group("player"):
-        return
-    TimeSystem.set_outdoors(false)
-    UIEvents.show_message("Inside inn.")
+	if not body.is_in_group("player"):
+		return
+	TimeSystem.set_outdoors(false)
+	UIEvents.show_message("Inside inn.")
 
 func _on_safe_exited(body: Node3D) -> void:
-    if not body.is_in_group("player"):
-        return
-    TimeSystem.set_outdoors(true)
-    can_sleep = false
+	if not body.is_in_group("player"):
+		return
+	TimeSystem.set_outdoors(true)
+	can_sleep = false
 
 func _on_sleep_entered(body: Node3D) -> void:
 	if not body.is_in_group("player"):

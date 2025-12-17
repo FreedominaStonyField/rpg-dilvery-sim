@@ -26,7 +26,7 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 	available = false
 	mesh_instance.visible = false
-	collision_shape.disabled = true
+	collision_shape.set_deferred("disabled", true)
 	Jobs.start_job(dropoff)
 	PlayerData.set_carrying(item_name)
 	UIEvents.show_message("Picked up delivery.")
@@ -34,4 +34,4 @@ func _on_body_entered(body: Node3D) -> void:
 func _on_job_available() -> void:
 	available = true
 	mesh_instance.visible = true
-	collision_shape.disabled = false
+	collision_shape.set_deferred("disabled", false)
