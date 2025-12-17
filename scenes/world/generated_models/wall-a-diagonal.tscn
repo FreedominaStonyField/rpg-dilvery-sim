@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_xbae2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oaje"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ri0fy"]
+resource_name = "wall_lines"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n7q5f"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAD/////AAD/////AAAAAP///////wAAAAAAAP//AAD//wAA//8AAP//AAAAAAAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAgAEAAAAAAAFAAMABQAEAAIAAgADAAUA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("////////AAD//wAA//8AAAAAAAD//wAA//8AAAAAAAAAAP////8AAP////8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6yk10"]
+resource_name = "wall-a-diagonal_wall-a-diagonal"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("kaRU9W2b//9tm1T1AABU9SQJVPUkCf//"),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": SubResource("StandardMaterial3D_5oaje"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(28, 24, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAD/////////////AAD/////////////AAAAAP///7///wAA////v///AAAAAP+//3//v/9//7//f/+/AAD/fwAA/38AAP9/")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("//8AAP///39l5v9/ZeYAAJmZAAAyswAAMrP/f5mZ/3/MzP9/MrP/fzKzAADMzAAA"),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgA"),
+"material": SubResource("StandardMaterial3D_ri0fy"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(10, 2, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("////////AID//wAA//8AgAAAAAD//wCAAAD/////AID/////////v/////8AAP+///8AAAAA/7///wAA////vwAAAAD////f//8AAAAA/9//////AAD/3wAA///////f/3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_n7q5f")
+
+[node name="wall-a-diagonal2" type="Node3D"]
+
+[node name="wall-a-diagonal" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_6yk10")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_xbae2")
+surface_material_override/1 = ExtResource("1_xbae2")

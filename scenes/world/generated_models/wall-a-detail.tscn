@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_uw5mm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fptdv"]
+resource_name = "_defaultMat"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6vvc"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2obp"]
+resource_name = "wall_lines"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3n0ds"]
+_surfaces = [{
+"aabb": AABB(-0.3, 0, -0.1, 0.6, 1e-05, 0.2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "_defaultMat",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAFTVAAAAAAAAqioAAAAAAAA=")
+}, {
+"aabb": AABB(-0.3, 1, -0.1, 0.6, 1e-05, 0.2),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("VNUAAAAAAAD//wAA//8AAAAAAAD//wAAqioAAAAAAAA=")
+}, {
+"aabb": AABB(-0.3, 0, -0.1, 0.6, 1, 0.2),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgAEAAAAAwAFAAIAAAAEAAYABgAFAAMABgAHAAAAAwAHAAYA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AACqKgAAAAAAAKoq//8AAAAAVNUAAAAAAAAAAP////8AAFTV//8AAAAA////////AAD//wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jo3dn"]
+resource_name = "wall-a-detail_wall-a-detail"
+_surfaces = [{
+"aabb": AABB(-0.3, 0, -0.1, 0.6, 1e-05, 0.2),
+"attribute_data": PackedByteArray("AAD//wAA//8AAP//AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_fptdv"),
+"name": "_defaultMat",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///////wAA/////1TVAAAAAP//qioAAAAA////f/8//3//P/9//z//f/8/")
+}, {
+"aabb": AABB(-0.3, 1, -0.1, 0.6, 1e-05, 0.2),
+"attribute_data": PackedByteArray("qfL////v5f3//+X9VP3//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_k6vvc"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(9.6, 24.4, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("VNUAAAAA/////wAA/////wAAAAD/////qioAAAAA////f/+//3//v/9//7//f/+/")
+}, {
+"aabb": AABB(-0.3, 0, -0.1, 0.6, 1, 0.2),
+"attribute_data": PackedByteArray("d2//fz5s/38+bAAAd28AAOqmAADqpv9/JqH/fyahAADtnQAAJqEAACah/3/tnf9/pQj/f6UI//8AAP//AAD/fw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwA"),
+"material": SubResource("StandardMaterial3D_t2obp"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(17.760864, 2, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAAP//49KqKgAAAADj0qoq//8AAOPSAAD/////49KqKv//AAD//6oqAAAAAP//VNUAAAAA//9U1f//AAD//////////+PSVNX//wAA49JU1QAAAADj0v//AAD//+PS////////AID//wAA//8AgAAAAAD//wCAAAD/////AID/f////3////9/////f////3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3n0ds")
+
+[node name="wall-a-detail2" type="Node3D"]
+
+[node name="wall-a-detail" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_jo3dn")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_uw5mm")
+surface_material_override/1 = ExtResource("1_uw5mm")
+surface_material_override/2 = ExtResource("1_uw5mm")

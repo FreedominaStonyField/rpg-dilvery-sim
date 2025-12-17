@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_rijni"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dn85s"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w62xj"]
+resource_name = "wall_metal"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yanxt"]
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwACAAQABQADAAQABQAEAAYABgAHAAUACAAJAAoACwAIAAoACwAKAAwADQALAAwADQAMAA4ADgAPAA0A"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAvgAAgD8AAAA+AAAAvgAAgD+pE9CmAAAAvgAAgD8AAAC+qRPQpgAAgD8AAAA+qRPQpgAAgD8AAAC+AAAAPgAAgD8AAAA+AAAAPgAAgD8AAAC+AAAAPgAAgD80EbYnAAAAvgAAAAAAAAC+AAAAvgAAAACpE9CmAAAAvgAAAAAAAAA+qRPQpgAAAAAAAAC+qRPQpgAAAAAAAAA+AAAAPgAAAAAAAAC+AAAAPgAAAAAAAAA+AAAAPgAAAAA0EbYn")
+}, {
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABQADAAIABAAGAAEAAgAHAAUACAAGAAQACQAFAAcABAAKAAgABwALAAkADAAIAAoACQALAA0ACgAOAAwADQAPAAkADAAOAA8ADwANAAwA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/3///wAAAAD/fwAAAAAAAP//AAAAAAAA/////wAAAAAAAP//AAAAAP//////fwAAAAAAAAAAAAD//wAA/38AAAAAAAD/fwAA////////AAAAAP///38AAP//AAD//wAAAAAAAP//AAD/fwAA//8AAAAA/////wAA/3//////AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_40ovd"]
+resource_name = "wall-b-column_wall-b-column"
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"attribute_data": PackedByteArray("Rg+QQLT4N0FFD5BAefw7QUUPkEA/AEBBRQ+QQD8AQEFFD5BAefw7QUYPkEC0+DdBKQCAQDgAQEEpAIBAcvw7QSoAgECt+DdBtweIQDsAQEG4B4hAsPg3QUUPkEA/AEBBRg+QQLT4N0EqAIBArfg3QSkAgEBy/DtBKQCAQDgAQEG4B4hAsPg3QbcHiEA7AEBBRg+QQLT4N0FFD5BAPwBAQQ=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYACAAKAAkACgALAAkACgAMAAsADQAOAA8ADwAQAA0ADwARABAAEQASABAAEQATABIA"),
+"material": SubResource("StandardMaterial3D_dn85s"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAvgAAgD8AAAA+AAAAvgAAgD+pE9CmAAAAvgAAgD8AAAC+AAAAvgAAAAAAAAC+AAAAvgAAAACpE9CmAAAAvgAAAAAAAAA+AAAAPgAAgD8AAAC+AAAAPgAAgD80EbYnAAAAPgAAgD8AAAA+qRPQpgAAgD8AAAC+qRPQpgAAgD8AAAA+AAAAvgAAgD8AAAC+AAAAvgAAgD8AAAA+AAAAPgAAAAAAAAA+AAAAPgAAAAA0EbYnAAAAPgAAAAAAAAC+qRPQpgAAAAAAAAA+qRPQpgAAAAAAAAC+AAAAvgAAAAAAAAA+AAAAvgAAAAAAAAC+/3////9/////f////3//P/9/////f////38AAP9/////fwAA/3//v/9/AAD/f////3///wAA/7//f////3//v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//fwAAAAD/P/9/AAD/f/8//38AAAAA/z//fwAAAAD/P/9/AAAAAP8//38AAAAA/z//fwAAAAD/Pw==")
+}, {
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"attribute_data": PackedByteArray("//f/f//3///a9v//2vb/f////3//////2v7//9r+/3//9///2vb//9r2/3//9/9//////9r+///a/v9/////f9r2/3//9/9///f//9r2////9/9///f//9r2///a9v9/////f//////a/v//2v7/f9r+/3////9//////9r+//8="),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwA"),
+"material": SubResource("StandardMaterial3D_w62xj"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(28, 2, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("/3///wAA////fwAAAAD/////AAAAAP///////wAA//8AAP//AAD//wAAAAAAAP///38AAAAA////f///AAD//wAAAAD/f/+/AAAAAAAA/78AAP//AAD/vwAA////f/+/AAAAAP///78AAAAA/3//vwAA////f/+/AAD//////7//////////v///////f/+///8AAP9//7///wAA////v/9//////wCA/38AAP//AIAAAAAA//8AgAAA/////wCA////////AID//wAA//8AgP9/AAD//wCA/3//////AID//////3//v/////8AAP+///8AAAAA/7///wAA/3//v/9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yanxt")
+
+[node name="wall-b-column2" type="Node3D"]
+
+[node name="wall-b-column" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_40ovd")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_rijni")
+surface_material_override/1 = ExtResource("1_rijni")

@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_56x8x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbp27"]
+resource_name = "bars"
+transparency = 4
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i2yk0"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"format": 34359742465,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAQAAAAIAAwACAAAAAgADAAAA"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_v5ixc"]
+resource_name = "wall-c-flat_wall-c-flat"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 1e-05),
+"attribute_data": PackedByteArray("AABgQQAAAAAAAGBBAACAPwAAUEEAAIA/AABQQQAAAAAAAGBBAACAPwAAYEEAAAAAAABQQQAAgD8AAFBBAAAAAA=="),
+"format": 34359742487,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAGAAUA"),
+"material": SubResource("StandardMaterial3D_vbp27"),
+"name": "bars",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAvwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAAAAAAvwAAAAAAAAAAAAAAvwAAgD8AAAAAAAAAPwAAAAAAAAAAAAAAPwAAgD8AAAAA/////wAA/7//////AAD/v/////8AAP+//////wAA/7//f/9/AAD/P/9//38AAP8//3//fwAA/z//f/9/AAD/Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_i2yk0")
+
+[node name="wall-c-flat2" type="Node3D"]
+
+[node name="wall-c-flat" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_v5ixc")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_56x8x")

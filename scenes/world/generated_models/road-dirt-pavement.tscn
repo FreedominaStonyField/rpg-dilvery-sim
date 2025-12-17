@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/dirt.tres" id="1_7bcxt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2k6y"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3bw64"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r4pss"]
+resource_name = "road-dirt-pavement_road-dirt-pavement"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray(255, 255, 255, 255, 169, 234, 255, 255, 169, 234, 84, 245, 255, 255, 84, 245),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 2, 0, 3, 0, 0, 0),
+"material": SubResource("StandardMaterial3D_e2k6y"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(12, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191, 255, 127, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3bw64")
+
+[node name="road-dirt-pavement2" type="Node3D"]
+
+[node name="road-dirt-pavement" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_r4pss")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_7bcxt")

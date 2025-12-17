@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://world"]
+[gd_scene load_steps=17 format=3 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://scenes/world/InnInterior.tscn" id="4"]
 [ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="5"]
 [ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://bnlwu6ce3mheg" path="res://assets/models/retro-urban-kit/GLB format/wall-b-low.glb" id="7_252at"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
 
@@ -87,3 +88,6 @@ mesh = SubResource("5")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -8)
 
 [node name="HUD" parent="." instance=ExtResource("3")]
+
+[node name="wall-b-low2" parent="." instance=ExtResource("7_252at")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1390123, 0, -9.679963)

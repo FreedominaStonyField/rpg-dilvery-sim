@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/asphalt.tres" id="1_lawkf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mo4we"]
+resource_name = "asphalt"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ciff"]
+resource_name = "concreteSmooth"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r0njc"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAgAEAAAABAAFAAAABgADAAAAAAAHAAYA"),
+"name": "asphalt",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAACSqAAAkqgAACWRAAD/vwAA/78AACWRAAD/fwAA//8AAAAAAAD//wAA//8AAP9/AAD//wAAAAAAAA==")
+}, {
+"aabb": AABB(0, 0, 2.869598e-14, 0.5, 0.05, 0.5),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgAEAAAABAAFAAAAAwAGAAIABAAHAAUACAAFAAcACQAHAAQABwAJAAgACgAEAAIAAgAGAAoABAAKAAkACgAGAAMACAAJAAoAAwALAAoACgALAAgA"),
+"name": "concreteSmooth",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("JVEAACVRAAD/fwAATCIAAP9///9MIgAA//8AAAAAAAAlUf//JVEAAEwiAAD/fwAA/////wAAAABMIv///38AAAAAAAD//wAAAAD/////AAD///////8AAP//AAD//wAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o77na"]
+resource_name = "road-asphalt-corner-outer_road-asphalt-corner-outer"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("AAD/n0lUEbWSSP+3/z//vwAA/78AAP//AAD/3/8//9+SSP/nSVTs6g=="),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAGAAcABwAIAAUACAAJAAUA"),
+"material": SubResource("StandardMaterial3D_mo4we"),
+"name": "asphalt",
+"primitive": 3,
+"uv_scale": Vector4(2.0000002, 8, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AAAAAAAA/7+SqAAAkqj/vyWRAAD/v/+//38AAP///78AAAAA////vwAAAAAAAFTV//8AAAAAVNX//wAA/39U1f+/AAAlkVTVkqgAAJKoVNX///9/////f////3////9/////f6qqqqqqqqqqqqqqqqqqqqqqqqqq")
+}, {
+"aabb": AABB(0, 0, 2.869598e-14, 0.5, 0.05, 0.5),
+"attribute_data": PackedByteArray("kLi/ivq1v4r6tTyKkLg8iie7v4onuzyK2888itvPv4quyr+Krso8ikqXv4odkr+KHZI8ikqXPIr/1KyO/89bj//PPIrT1ryN/9k8iqjYzIz/9f////V7////e/////////X////r////63v///V7/w=="),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAAAwAFAAQABgAHAAgACAAJAAYACgALAAwADAANAAoADgAPABAAEAARAA4AEQAQABIAEgATABEAFAAVABYAFgAXABQAGAAZABoAGgAbABgA"),
+"material": SubResource("StandardMaterial3D_2ciff"),
+"name": "concreteSmooth",
+"primitive": 3,
+"uv_scale": Vector4(12.8, 25, 0, 0),
+"vertex_count": 28,
+"vertex_data": PackedByteArray("JVEAACVR/9//fwAATCKp6v9///9MIqnqJVH//yVR/99MIgAA/39U1Uwi////f1TV/3///0wiqer/fwAATCKp6v//AAAAAFT1/////wAAVPUAAAAA//+pykwiAAD/f1TVTCL///9/VNUAAP////+pyv9///9MIv///////wAA/////////////yVR//8lUf//AAD///////9MIv///3////////////////8AAP////8AAAAA/////wAA////////////////////////AAD/////AAAAAP////8AAP//////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9//7//f/+//3//v/9//7//f/+//3//v/9//3//f/9//3//f/9//3//v/9//7//f/+//3//v/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_r0njc")
+
+[node name="road-asphalt-corner-outer2" type="Node3D"]
+
+[node name="road-asphalt-corner-outer" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_o77na")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_lawkf")
+surface_material_override/1 = ExtResource("1_lawkf")

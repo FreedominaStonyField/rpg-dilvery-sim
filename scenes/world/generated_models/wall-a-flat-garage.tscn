@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_w8esw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyk2l"]
+resource_name = "wall_garage"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1nq5f"]
+resource_name = "wall"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8o27"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mo2te"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 0.1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAAAAQABgAFAAQABAAHAAYACAAJAAoACgALAAgA"),
+"name": "wall_garage",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD//wAAAAAAAAAAAAAAAGYmAAAAAAAAZiaEqwAAAACY2YSrAAAAAP////8AAAAA//8AAAAAAACY2QAAAAAAAGYmhKv//wAAZiYAAP//AACY2QAA//8AAJjZhKv//wAA")
+}, {
+"aabb": AABB(-0.35, 0, 0, 0.7, 0.67, 0.1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP//AAD//wAAAAAAAP////8AAAAA////////AAAAAP////8AAAAA//8AAAAAAAAAAAAAAAAAAAAA//8AAA==")
+}, {
+"aabb": AABB(-0.35, 0.67, 0, 0.7, 1e-05, 0.1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ejurr"]
+resource_name = "wall-a-flat-garage_wall-a-flat-garage"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 0, 1, 1, 0.1),
+"attribute_data": PackedByteArray("//8AAP////+Y2f//mNl6VGYmelQAAAAAAAD//2Ym//+Y2XpUmNn//2Ym//9mJnpU"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAAAAQABgAFAAQABAAHAAYACAAJAAoACgALAAgA"),
+"material": SubResource("StandardMaterial3D_iyk2l"),
+"name": "wall_garage",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAD//wAA//8AAAAAAAD//2YmAAAAAP//ZiaEqwAA//+Y2YSrAAD///////8AAP////8AAAAA//+Y2QAAAAD//2YmhKv/////ZiYAAP////+Y2QAA/////5jZhKv//////3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
+}, {
+"aabb": AABB(-0.35, 0, 0, 0.7, 0.67, 0.1),
+"attribute_data": PackedByteArray("//////9/////fzyq//88qgAAPKr/fzyq/3///wAA//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"material": SubResource("StandardMaterial3D_1nq5f"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(0.2, 2, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAP///7///wAAAAD/v/////8AAP+//////////78AAP//////vwAA//8AAP+/AAAAAAAA/78AAAAA////v/9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}, {
+"aabb": AABB(-0.35, 0.67, 0, 0.7, 1e-05, 0.1),
+"attribute_data": PackedByteArray("AADt/lEF7f5RBf//AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_q8o27"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(33.7, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mo2te")
+
+[node name="wall-a-flat-garage2" type="Node3D"]
+
+[node name="wall-a-flat-garage" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_ejurr")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_w8esw")
+surface_material_override/1 = ExtResource("1_w8esw")
+surface_material_override/2 = ExtResource("1_w8esw")

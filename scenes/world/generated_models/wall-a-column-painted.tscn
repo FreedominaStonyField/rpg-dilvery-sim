@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=4]
+
+[ext_resource type="Texture2D" path="res://assets/textures/retro-urban-kit/wall.png" id="1_qachf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ke1mb"]
+resource_name = "wall"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2haul"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jmr4v"]
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAQAAAAQABQADAAIABAAGAAEAAgAHAAUACAAGAAQACQAFAAcABAAKAAgABwALAAkADAAIAAoACQALAA0ACgAOAAwADQAPAAkADAAOAA8ADwANAAwA"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/3///wAAAAD/fwAAAAAAAP//AAAAAAAA/////wAAAAAAAP//AAAAAP//////fwAAAAAAAAAAAAD//wAA/38AAAAAAAD/fwAA////////AAAAAP///38AAP//AAD//wAAAAAAAP//AAD/fwAA//8AAAAA/////wAA/3//////AAA=")
+}, {
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAwACAAQAAwAEAAUABAAGAAUABQAHAAMACAAJAAoACwAIAAoACwAKAAwACwAMAA0ADAAOAA0ADQAPAAsA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("AAAAvgAAgD8AAAA+AAAAvgAAgD8AAAAAAAAAvgAAgD8AAAC+AAAAgAAAgD8AAAA+AAAAgAAAgD8AAAC+AAAAPgAAgD9KDIKnAAAAPgAAgD8AAAC+AAAAPgAAgD8AAAA+AAAAvgAAAAAAAAC+AAAAvgAAAAAAAAAAAAAAvgAAAAAAAAA+AAAAgAAAAAAAAAC+AAAAgAAAAAAAAAA+AAAAPgAAAABKDIKnAAAAPgAAAAAAAAA+AAAAPgAAAAAAAAC+")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pimdo"]
+resource_name = "wall-a-column-painted_wall-a-column-painted"
+_surfaces = [{
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"attribute_data": PackedByteArray("/w//f/8P//8AAP//AAD/f/8P/3//D///AAD//wAA/3//b/9//3//f/9/////b///AAD/f/8P/3//D///AAD///9//3//f////2////9v/3//f////2////9v/3//f/9//w///wAA//8AAP9//w//f/9//3//f////2////9v/38="),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwA"),
+"material": SubResource("StandardMaterial3D_ke1mb"),
+"name": "wall",
+"primitive": 3,
+"uv_scale": Vector4(2, 2, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("/3///wAA////fwAAAAD/////AAAAAP///////wAA////f/////8AgP9/AAD//wCAAAAAAP//AIAAAP////8AgP//////f/+//////wAA/7///wAAAAD/v///AAD/f/+//////////7///////3//v///AAD/f/+///8AAP///7////////8AgP//AAD//wCA/38AAP//AID/f/////8AgAAAAAD///+/AAAAAP9//78AAP///3//vwAA//////+/AAAAAP9//78AAAAAAAD/vwAA//8AAP+/AAD///9//78AAP//AAD//wAAAAAAAP///38AAAAA////f///AAD///9/////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///")
+}, {
+"aabb": AABB(-0.125, 0, -0.125, 0.25, 1, 0.25),
+"attribute_data": PackedByteArray("Rg+QQLT4N0FFD5BAefw7QUUPkEA/AEBBRQ+QQD8AQEFFD5BAefw7QUYPkEC0+DdBtweIQDsAQEEpAIBAOABAQSkAgEBy/DtBuAeIQLD4N0EqAIBArfg3QUUPkEA/AEBBRg+QQLT4N0G4B4hAsPg3QSoAgECt+DdBKQCAQHL8O0G3B4hAOwBAQSkAgEA4AEBBRg+QQLT4N0FFD5BAPwBAQQ=="),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAGAAgACAAKAAkACQALAAYACQAMAAsADQAOAA8AEAANAA8ADwARABAAEAASAA0AEAATABIA"),
+"material": SubResource("StandardMaterial3D_2haul"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAvgAAgD8AAAA+AAAAvgAAgD8AAAAAAAAAvgAAgD8AAAC+AAAAvgAAAAAAAAC+AAAAvgAAAAAAAAAAAAAAvgAAAAAAAAA+AAAAgAAAgD8AAAC+AAAAPgAAgD8AAAC+AAAAPgAAgD9KDIKnAAAAgAAAgD8AAAA+AAAAPgAAgD8AAAA+AAAAvgAAgD8AAAC+AAAAvgAAgD8AAAA+AAAAgAAAAAAAAAA+AAAAPgAAAAAAAAA+AAAAPgAAAABKDIKnAAAAgAAAAAAAAAC+AAAAPgAAAAAAAAC+AAAAvgAAAAAAAAA+AAAAvgAAAAAAAAC+/3////9/////f////3//P/9/////f////38AAP9/////fwAA/3//v/9/AAD/f////3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//f///AAD/v/9///8AAP+//3///wAA/7//fwAAAAD/P/9/AAAAAP8//38AAAAA/z//fwAAAAD/P/9/AAAAAP8//38AAAAA/z//fwAAAAD/Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jmr4v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ul50"]
+albedo_texture = ExtResource("1_qachf")
+
+[node name="wall-a-column-painted2" type="Node3D"]
+
+[node name="wall-a-column-painted" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_pimdo")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_7ul50")
+surface_material_override/1 = SubResource("StandardMaterial3D_7ul50")

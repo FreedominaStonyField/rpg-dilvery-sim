@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/truck.tres" id="1_ug5f2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ia5e6"]
+resource_name = "truck_alien"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lr5m7"]
+_surfaces = [{
+"aabb": AABB(-0.415, 0, -0.82170004, 0.83, 1.00596, 1.6434001),
+"format": 34896613377,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAQADAAQAAAAFAAMABAADAAUABQAAAAYABQAHAAQABwAFAAYAAAAIAAYAAgAJAAAAAAAJAAgACQACAAoACgALAAkADAAKAAIACQALAA0ADQALAAoADQAIAAkACgAMAA0ADgAMAAIADQAMAA4ADgAIAA0ADgACAAEACAAOAA8ADwAOAAEADwAGAAgABAAPAAEAEAAGAA8ABwAGABAADwARABAAEQAPAAQAEAARABIAEgARAAQAEgATABAABwAQABMAFAASAAQAEwASABQABwATABUAFAAVABMAFgAHABUABAAHABYAFwAVABQAFQAXABYAFAAEABgAFgAYAAQAFAAZABcAFgAXABkAGAAZABQAGQAYABYA"),
+"name": "truck_alien",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 26,
+"vertex_data": PackedByteArray("//8AAKzfAAAAAAAArN8AAAAAuBSs3wAAAAAAALwdAAAAALgUvB0AAP//AAC8HQAA/////0knAAD//7gUvB0AAP////8FSgAA//+4FKzfAAAAALgU//8AAP//uBT//wAAAAD/////AAD///////8AAAAA//8FSgAAAAD//0knAAD//4DSwBkAAAAAgNLAGQAAAACA0g8UAAD//4DSDxQAAAAAbMZqCwAA//9sxmoLAAD//7gUAAAAAP//GIgAAAAAAAC4FAAAAAAAABiIAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p24ym"]
+resource_name = "truck-green_truck-green"
+_surfaces = [{
+"aabb": AABB(-0.415, 0, -0.82170004, 0.83, 1.00596, 1.6434001),
+"attribute_data": PackedByteArray("/Jttvk+Obb5Pjme8/JtnvORzQ7zkcyerc3snq3N7Q7xHJQVn9AQFZ/QE1GOMBps/VgybP0oEnEZHJdRjqiqbP6oq1GNXA5xG5wF4SAAA1GMAABFSj2ZnvI9mhr46WIa+OlhnvLVjO6tfVTurX1VHqrVjR6pHJdRjqirUY6oqmz9WDJs/RyUFZ4wGmz/0BAVn9ATUY0oEnEZXA5xG5wF4SAAA1GMAABFStWPMs7Vjnb9fVZ2/X1XMs7VjIq1fVSKtX1U7q7VjO6uXX8uol1/Wqy5X1qsuV8uoqmbMv1RYzL9UWNO6qmbTui2c+6ctnPm+f475vn+O+6fBjfm6bpv5um6bI8DBjSPAH1+Xq+xWl6vsVkWoH19FqEoMGhtKDAAAkCUAAJAlGhs="),
+"format": 34896613399,
+"index_count": 144,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgACwAMAAgADQALAAoADAAOAAgADAAPAA4ADwAQAA4AEQANAAoAEgARAAoAEgAKABMAEwAUABIAFQAWABcAFwAYABUAGQAaABsAGwAcABkAHQAeAB8AHwAgAB0AIQAdACAAIQAgACIAIwAhACIAJAAjACIAJAAiACUAJAAlACYAJAAmACcAKAAkACcAJwApACgAKgArACwALAAtACoALgAqAC0ALQAvAC4ALgAvADAAMAAxAC4AMgAzADQANAA1ADIANgA3ADgAOAA5ADYAOgA7ADwAPAA9ADoAPgA/AEAAQABBAD4AQgBDAEQARABFAEIARgBHAEgASABJAEYA"),
+"material": SubResource("StandardMaterial3D_ia5e6"),
+"name": "truck_alien",
+"primitive": 3,
+"uv_scale": Vector4(6, 3.9755592, 0, 0),
+"vertex_count": 74,
+"vertex_data": PackedByteArray("//8AAKzfAIAAAAAArN8AgAAAuBSs3wCA//+4FKzfAID//wAArN//////AAC8Hf//AAAAALwd//8AAAAArN///wAAAACs3/+/AAAAALwd/78AALgUvB3/vwAA//9JJ/+/AAD//wVK/78AAIDSwBn/vwAAuBSs3/+/AAD//////78AALgU////vwAAgNIPFP+/AABsxmoL/78AALgUAAD/vwAAGIgAAP+/AAC4FLwd//8AAAAAvB3/////AAC8Hf////+4FLwd//8AAIDSDxT/////gNIPFP////+A0sAZ//8AAIDSwBn/////uBSs3wAA//+4FP//AAD///////8AAP////8FSgAA//8AAKzfAAD/////SScAAP//AAC8HQAA//+4FLwdAAD//4DSwBkAAP//gNIPFAAA//9sxmoLAAD//7gUAAAAAP//GIgAAAAAAAAYiAAA//8AALgUAAD/////uBQAAP////8YiAAA//8AAGzGagv/////bMZqC/////+A0g8U//8AAIDSDxT//wAA//9JJ///AACA0sAZ/////4DSwBn///////9JJ///AAC4FLwd/////7gUvB3/////uBQAAP//AAC4FAAA//////////8AgP//uBT//wCAAAC4FP//AIAAAP////8AgAAAuBT///+///+4FP///7///7gUrN//vwAAuBSs3/+/AAD//0kn////////SSf///////8FSv//AAD//wVK//8AAP//BUpU1f////8FSlTV////////VNUAAP////9U1f9/////f////3////9/////f/8//3//P/9//z//f/8//3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f/+//3//v/9//7//f/+//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/9/T/f/f////3////9/T/f/f7Pi/3+z4v9/odf/f6HX/39f0v9/DOj/fwzo/39f0v9//z//f/8//3//P/9//z//f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/X9L/f1/S/3//v/9//7+qqqqqqqqqqqqqqqqqqqqq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lr5m7")
+
+[node name="truck-green2" type="Node3D"]
+
+[node name="truck-green" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_p24ym")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_ug5f2")

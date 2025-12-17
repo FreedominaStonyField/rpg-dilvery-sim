@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/truck.tres" id="1_nje0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byeml"]
+resource_name = "truck"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qtece"]
+_surfaces = [{
+"aabb": AABB(-0.415, 0, -0.5841052, 0.83, 0.73835844, 1.1682104),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAQAEAAMABAABAAAAAgADAAUABQADAAQABQAGAAIAAgAGAAAAAAAGAAUABQAHAAAAAAAHAAQABAAHAAUA"),
+"name": "truck",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("////////AAD/////AAAAAP//AAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAD//wAA//8AAP//AAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yfmo7"]
+resource_name = "truck-grey-cargo_truck-grey-cargo"
+_surfaces = [{
+"aabb": AABB(-0.415, 0, -0.5841052, 0.83, 0.73835844, 1.1682104),
+"attribute_data": PackedByteArray("miGbPw0Amz8NAIlcmiGJXCuf+6crn1i6CZBYugmQ+6cAABobAAAAAPUbAAD1GxobmiGJXA0AiVwNAJs/miGbPwmQWLorn1i6K5/7pwmQ+6f1Gxob9RsAAAAAAAAAABob"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_byeml"),
+"name": "truck",
+"primitive": 3,
+"uv_scale": Vector4(5.423928, 3.9755592, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("////////AAD/////AAAAAP//AAAAAAAA//8AAP//AAD///////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgAAA//8AAFTV/////wAAVNX///////9U1QAA/////1TVAAAAAP///78AAAAAAAD/vwAA//8AAP+/AAD//////78AAAAAAAAAAP//AAAAAAAA/////wAAAAAAAP//AAAAAAAAAAD//6oq//8AAP//qir//wAAAACqKgAAAAAAAKoq/7//f/+//3//v/9//7//f/9/////f////3////9///+qqqqqqqqqqqqqqqqqqqqq/3////9/////f////3///////3////9/////f////3+qKlTVqipU1aoqVNWqKlTV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qtece")
+
+[node name="truck-grey-cargo2" type="Node3D"]
+
+[node name="truck-grey-cargo" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_yfmo7")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_nje0h")

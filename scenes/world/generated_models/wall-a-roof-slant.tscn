@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/roof.tres" id="1_dkby4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8lfy5"]
+resource_name = "wall_lines"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44uw4"]
+resource_name = "roof"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ox34s"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cfdlp"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAAAAIAAgAEAAMAAwAEAAUA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("/////wAAAAAAAAAAAAAAAP//AAAAAAAA////////AAD//wAA//8AAAAAAAD//wAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAAAD/////AAAAAP///////wAAAAAAAP//AAA=")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2y1jy"]
+resource_name = "wall-a-roof-slant_wall-a-roof-slant"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("VVUAAP9/qipVVaoqqioAAKoqqioAAKoqqioAAFVVAABVVaoqqiqqKg=="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACAAJAAYA"),
+"material": SubResource("StandardMaterial3D_8lfy5"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(5.999999, 3.0000005, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/////wAA//8AAAAAAAD/////AAAAAP//////////AID//wAA//8AgAAAAAD//wCA/////////7//////AAD/v///AAAAAP+///8AAP///7//f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("AAD//wAAxvH/f8bx/3///w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_44uw4"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(2, 18, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAaMv/////AABoy////////2jLAAAAAP//aMtgoz25YKM9uWCjPblgoz25")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("AABU9f8HVPX/B///AAD//w=="),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_ox34s"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(32, 24, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/78AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cfdlp")
+
+[node name="wall-a-roof-slant2" type="Node3D"]
+
+[node name="wall-a-roof-slant" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_2y1jy")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_dkby4")
+surface_material_override/1 = ExtResource("1_dkby4")
+surface_material_override/2 = ExtResource("1_dkby4")

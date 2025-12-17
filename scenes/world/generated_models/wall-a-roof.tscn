@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/roof.tres" id="1_1ba46"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydsb8"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4do34"]
+resource_name = "roof"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xquxr"]
+resource_name = "wall_lines"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_njk6t"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABAAFAAAABQAGAAAABQAHAAYA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AABl5gAA//8AAJkZAAD//wAAAAAAAAAAAAAAAAAAAAAAAGXmAAAAAAAAmRkAAA==")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAAAEAAMABQAEAAAAAAAGAAUABwAGAAAAAgAIAAAAAAAIAAcACAACAAkACgAHAAgACQALAAgACAALAAoA"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("//////9/AAD//wAA//8AAAAAAAD//wAA//8AAGXmAAD//8zM/38AAP//AACZGQAA//8AAAAAAAAAAAAAAAAAAAAA////fwAAAAAAAGXmAAAAAAAAmRkAAAAAzMz/fwAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.4, 1, 0.4, 0.8),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAAAAAAAAAAAA////fwAA//8AAP//AAD//////38AAP//AAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6mt3v"]
+resource_name = "wall-a-roof_wall-a-roof"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("AAD//wAAVPXqAFT1OghU9SQJVPUkCf//6gD//zoI//8="),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABAAFAAAABQAGAAAABQAHAAYA"),
+"material": SubResource("StandardMaterial3D_ydsb8"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(28, 24, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//VNX//wAA//9U1f//AABl5lTV//8AAJkZVNX//wAAAABU1QAAAAAAAFTVAAAAAGXm//8AAAAAmRn//1RVVFVUVVRVVFVUVVRVVFVUVVRVVFVUVf9//z//f/8/")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 0.5, 1),
+"attribute_data": PackedByteArray("qmqU26pqqer/X6nq/1+U2///VRVU9VUVVPU/Bv//PwZmVtz9VFX//1RVqepmVsvsZlbc/WZWy+xUVanqVFX//1RVqepmVsvsZlbc/VRV//9UVanqVFX//2ZW3P1mVsvs"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_4do34"),
+"name": "roof",
+"primitive": 3,
+"uv_scale": Vector4(24, 12, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("//////9//5///wAA////nwAAAAD///+fAAD///9//58AAAAAAAD/////AAAAAP////////9///8AAP///3///wAAAACZGfzFAAAAAAAA/MUAAP///3/8xQAAzMz/f/zFAAAAAGXmVBYAAMzM/39UFgAA////f1QWAAAAAP//VBb//////3/8xf//zMz/f/zF//8AAGXm/MX//wAA///8xf//////f1QW//8AAAAAVBb//wAAmRlUFv//zMz/f1QW////f////3////9/////f/9/gdr/f4Ha/3+B2v9/gdoAYwDGAGMAxgBjAMYAYwDG+kr1lfpK9ZX6SvWV+kr1lf6c/jn+nP45/pz+Of6c/jkEtQlqBLUJagS1CWoEtQlq")
+}, {
+"aabb": AABB(-0.5, 0, -0.4, 1, 0.4, 0.8),
+"attribute_data": PackedByteArray("6aOSJIuckiQ6oAAAAACSJK4DAABdB5Ik"),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUA"),
+"material": SubResource("StandardMaterial3D_xquxr"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(27.8, 2.8000011, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAAAAD/vwAA////f/+///8AAP///7///////3//v///AAAAAP+//3////9/////f////38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_njk6t")
+
+[node name="wall-a-roof2" type="Node3D"]
+
+[node name="wall-a-roof" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_6mt3v")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_1ba46")
+surface_material_override/1 = ExtResource("1_1ba46")
+surface_material_override/2 = ExtResource("1_1ba46")

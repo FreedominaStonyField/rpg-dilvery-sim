@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_mgx00"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7futq"]
+resource_name = "wall_metal"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tyhsm"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 7.219114e-16, 1, 1, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD+pE1AmAAAAvwAAAACpE1AmAAAAPwAAAACpE1AmAAAAPwAAgD+pE1Am")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_egt0l"]
+resource_name = "wall-b-flat_wall-b-flat"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, 7.219114e-16, 1, 1, 1e-05),
+"attribute_data": PackedByteArray("AABgQQAAAAAAAGBBAACAPwAAUEEAAIA/AABQQQAAAAA="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_7futq"),
+"name": "wall_metal",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAvwAAgD+pE1AmAAAAvwAAAACpE1AmAAAAPwAAAACpE1AmAAAAPwAAgD+pE1Am/////wAA/7//////AAD/v/////8AAP+//////wAA/78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tyhsm")
+
+[node name="wall-b-flat2" type="Node3D"]
+
+[node name="wall-b-flat" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_egt0l")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_mgx00")

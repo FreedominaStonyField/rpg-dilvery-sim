@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/wall.tres" id="1_qur81"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awe7i"]
+resource_name = "wall_lines"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qdwfr"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cr5s8"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwABAAAAAgAEAAAAAAAFAAMABgAEAAIAAwAFAAcAAgAIAAYABwAJAAMABgAIAAoACgAJAAcACgALAAYABwALAAoA"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/3///wAAAAD/fwAAAAAAAP//AAAAAAAA/38AAP9/AAD/////AAAAAP9/////fwAA////////AAAAAP///38AAP//AAD//wAAAAAAAP9/AAAAAAAA//8AAAAA/////wAA")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQADAAIABgAHAAgACAAJAAYACAAKAAkACgALAAkA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAD//wAA//8AAP//AAAAAAAA/38AAP9/AAAAAAAA/38AAP9/AAAAAAAA/3///wAAAAD/////AAAAAP///////wAA/3////9/AAAAAP////8AAAAA////fwAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s5hix"]
+resource_name = "wall-a-corner_wall-a-corner"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("/78AAP+//38ys/9/MrMAAP//AAD///9/Zeb/f2XmAABl5v9/mNn/f5jZAABl5gAAmZkAADKzAAAys/9/mZn/f5jZAACY2f9/zMz/f8zMAADMzP9//7//f/+/AADMzAAA"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_awe7i"),
+"name": "wall_lines",
+"primitive": 3,
+"uv_scale": Vector4(10, 2, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/3///wAA////fwAAAAD/////AAAAAP///////wAA//////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgAAAAAD///+/AAAAAP9//78AAP///3//vwAA//////+//////////7//////AAD/v///AAAAAP+///8AAP///78AAP///3///wAAAAD/f////38AAP9/////f////3////9/AAD/f/+//38AAAAA/7//f///AAD/v/9/////f/+//3////9/////f////3////9/////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f///")
+}, {
+"aabb": AABB(-0.5, 0, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("AABU9SQJVPUkCf//kgSp+gAAqfqSBP///5///22b//9tm1T1/5+p+pGkVPWRpKn6"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQADAAIABgAHAAgACAAJAAYACAAKAAkACgALAAkA"),
+"material": SubResource("StandardMaterial3D_qdwfr"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(28, 24, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP///7///wAA////v///AAAAAP+//38AAP9//78AAAAA/3//v/9/AAAAAP+//3///wAA////////AAD//////////////3////9///8AAP///////wAA////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cr5s8")
+
+[node name="wall-a-corner2" type="Node3D"]
+
+[node name="wall-a-corner" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_s5hix")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_qur81")
+surface_material_override/1 = ExtResource("1_qur81")

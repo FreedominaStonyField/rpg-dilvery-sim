@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Texture2D" path="res://assets/textures/retro-urban-kit/planks.png" id="1_cvt3a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0cyp"]
+resource_name = "planks"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_firy7"]
+_surfaces = [{
+"aabb": AABB(-0.56485593, 0, -0.28513944, 1.1297119, 0.1, 0.5702789),
+"format": 34896613377,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAgAEAAAABAACAAMABQABAAAAAQAFAAMAAAAEAAYAAwAGAAQAAAAHAAUAAwAFAAcABgAHAAAABwAGAAMACAAJAAoACwAKAAkACgAMAAgADAAKAAsADQAJAAgACQANAAsACAAMAA4ACwAOAAwACAAPAA0ACwANAA8ADgAPAAgADwAOAAsAEAARABIAEwASABEAEgAUABAAFAASABMAFQARABAAEQAVABMAEAAUABYAEwAWABQAEAAXABUAEwAVABcAFgAXABAAFwAWABMA"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("R+H/f72CAADy5P9/zD8AAPLkAADMPwAAqwMAAFEPAABH4QAAvYIAAKsD/39RDwAAAAAAAEJSAAAAAP9/QlIAAKMi//8AAAAA2BP//588AADYE/9/nzwAANzf/3///wAAoyL/fwAAAADc3/////8AAKfu/39fwwAAp+7//1/DAAB7G/9/QasAAAce/39m7gAABx4AAGbuAAD//wAAvswAAHsbAABBqwAA////f77MAABy/QAAmIkAAHL9/3+YiQAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fgm4b"]
+resource_name = "planks_planks"
+_surfaces = [{
+"aabb": AABB(-0.56485593, 0, -0.28513944, 1.1297119, 0.1, 0.5702789),
+"attribute_data": PackedByteArray("N/kFzW/yBc1v8s3KN/nNytP1PM82+TzPNvmQ+9L1kPtv8v//b/LH/Tf5x/03+f//N/k8z///PM/+/5D7N/mQ+6frkPun6zzPC+88zwvvkPtv8pD7b/I8zzb5PM82+ZD7N/kFzW/yBc1v8s3KN/nNytP1PM82+TzPNvmQ+9L1kPtv8v//b/LH/Tf5x/03+f//N/k8z///PM/+/5D7N/mQ+6frkPun6zzPC+88zwvvkPtv8pD7b/I8zzb5PM82+ZD7N/kFzW/yBc1v8s3KN/nNytP1PM82+TzPNvmQ+9L1kPtv8v//b/LH/Tf5x/03+f//N/k8z///PM/+/5D7N/mQ+6frkPun6zzPC+88zwvvkPtv8pD7b/I8zzb5PM82+ZD7"),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAhACIAIgAjACAAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAxADIAMgAzADAANAA1ADYANgA3ADQAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQgBDAEAARABFAEYARgBHAEQA"),
+"material": SubResource("StandardMaterial3D_x0cyp"),
+"name": "planks",
+"primitive": 3,
+"uv_scale": Vector4(4.223762, 6.461382, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("R+H/f72C///y5P9/zD////LkAADMP///R+EAAL2C//9H4f9/vYIdwEfhAAC9gh3AAAAAAEJSHcAAAP9/QlIdwKsDAABRD2fEqwP/f1EPZ8QAAP9/QlJnxAAAAABCUmfER+EAAL2C1dLy5AAAzD/V0qsDAABRD9XSAAAAAEJS1dKrAwAAUQ/h/PLkAADMP+H88uT/f8w/4fyrA/9/UQ/h/KsD/39RD+vX8uT/f8w/69dH4f9/vYLr1wAA/39CUuvXoyL//wAA///YE///nzz//9gT/3+fPP//oyL/fwAA//+jIv//AAAU86Mi/38AABTzp+7/f1/DFPOn7v//X8MU89zf/3///6at3N//////pq2n7v//X8Omrafu/39fw6atoyL/fwAAm+DYE/9/nzyb4Nzf/3///5vgp+7/f1/Dm+Dc3/9///8HwtgT/3+fPAfC2BP//588B8Lc3/////8Hwtzf/////6nL2BP//588qcujIv//AACpy6fu//9fw6nLexv/f0Gr//8HHv9/Zu7//wceAABm7v//exsAAEGr//97G/9/QavV/XsbAABBq9X9cv0AAJiJ1f1y/f9/mInV/f//AAC+zA7D////f77MDsNy/f9/mIkOw3L9AACYiQ7DexsAAEGrltMHHgAAZu6W0///AAC+zJbTcv0AAJiJltP//wAAvswNwAceAABm7g3ABx7/f2buDcD///9/vswNwP///3++zB3XBx7/f2buHdd7G/9/Qasd13L9/3+YiR3Xh7z/f4e8/3+HvP9/h7z/f755QIa+eUCGvnlAhr55QIb/f////3////9/////f///MVLmVjFS5lYxUuZWMVLmVk8+Tz5PPk8+Tz5PPk8+Tz6jpy2so6ctrKOnLayjpy2s//9Wsf//VrH//1ax//9WsWu5k0ZruZNGa7mTRmu5k0b/fwAA/38AAP9/AAD/fwAAtzBv4bcwb+G3MG/htzBv4ePr4+vj6+Pr4+vj6+Pr4+ti3MU4YtzFOGLcxThi3MU4ZkL/f2ZC/39mQv9/ZkL/fy1B0b4tQdG+LUHRvi1B0b7/fwAA/38AAP9/AAD/fwAAlSkq05UpKtOVKSrTlSkq03gEeAR4BHgEeAR4BHgEeARG1I4oRtSOKEbUjihG1I4o")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_firy7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8rp2"]
+albedo_texture = ExtResource("1_cvt3a")
+
+[node name="planks2" type="Node3D"]
+
+[node name="planks" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_fgm4b")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_f8rp2")

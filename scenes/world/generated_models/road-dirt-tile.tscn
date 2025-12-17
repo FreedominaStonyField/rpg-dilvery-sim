@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/dirt.tres" id="1_ji6xx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vsdpm"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p382j"]
+_surfaces = [{
+"aabb": AABB(-0.25, 0, -0.25, 0.5, 0.05, 0.5),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAgAEAAAAAAAFAAMAAwAGAAIABwAFAAAAAwAFAAcAAAAEAAcABwAGAAMABwAEAAIAAgAGAAcA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD//wAAAAD/////AAAAAP///////wAA//8AAAAAAAAAAP////8AAAAAAAAAAAAA//8AAP//AAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wb683"]
+resource_name = "road-dirt-tile_road-dirt-tile"
+_surfaces = [{
+"aabb": AABB(-0.25, 0, -0.25, 0.5, 0.05, 0.5),
+"attribute_data": PackedByteArray("SJLOif9/zon/f+aESJLmhP9/zolIks6JSJK1jv9/tY617YH/te3//2zb//9s24H//////7Xt//+17YH///+B/yPJgf8jyf//2rb//9q2gf8jyYH/bNuB/2zb//8jyf//"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_vsdpm"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(7, 26.1, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAD//wAA////////AAD/////////////AAD///////8AAAAA////v///AAD///+///8AAAAA/78AAAAAAAD/vwAA//8AAP//AAAAAAAA/////wAAAAD///////8AAP//AAAAAP///78AAAAAAAD/vwAA//8AAP+/AAD//////7////////8AgP//AAD//wCAAAAAAP//AIAAAP////8AgP////////+//////wAA/7///wAAAAD/v///AAD///+//3//v/9//7//f/+//3//vwAA/38AAP9/AAD/fwAA/3//f////3////9/////f////3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_p382j")
+
+[node name="road-dirt-tile2" type="Node3D"]
+
+[node name="road-dirt-tile" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_wb683")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_ji6xx")

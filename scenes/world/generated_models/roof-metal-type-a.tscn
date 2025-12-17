@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=4]
+
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/metal.tres" id="1_nhxoa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u53h6"]
+resource_name = "concrete"
+shading_mode = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj6r1"]
+resource_name = "roof_plates"
+shading_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a0imc"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAJkZAAD//wAAAAAAAAAAAAAAAAAAAAAAAJkZAAD//wAA//8AAP//AABl5gAAAAAAAGXmAAAAAAAA//8AAA==")
+}, {
+"aabb": AABB(-0.5685822, 0, -0.5, 1.1371644, 0.5, 1),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAABAAAAAQAEAAAAAAAFAAQABQAAAAQABQAGAAAABgAFAAAABwAAAAYAAAAHAAYAAAAHAAgAAAAJAAMACAAJAAAACgADAAkACwAJAAgACQALAAoACAAMAAsABwAAAA0ACgALAA0ADQALAAwADQACAAoAAgANAAAADQACAA4AAgANAA4ADQAPAAcADAAPAA0AEAAOAA0ADgAQAA0ADwANABAADQAPABAAEAARAA8AEQAQAA8A"),
+"name": "roof_plates",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("jvD///9/AACO8AAA//8AAHAPAAD//wAAjvAAAGXmAAD//wAA//8AAP//////fwAA//8AAAAAAACO8AAAAAAAAI7wAACZGQAAjvDMzP9/AABwDwAAZeYAAHAPzMz/fwAAcA8AAJkZAABwD////38AAAAAAAD//wAAcA8AAAAAAAAAAP///38AAAAAAAAAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jk28o"]
+resource_name = "roof-metal-type-a_roof-metal-type-a"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("OghU9SQJVPUkCf//Ogj//wAAVPXqAFT16gD//wAA//8="),
+"format": 34896613399,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQA"),
+"material": SubResource("StandardMaterial3D_u53h6"),
+"name": "concrete",
+"primitive": 3,
+"uv_scale": Vector4(28, 24, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("//8AAJkZVNX//wAAAABU1QAAAAAAAFTVAAAAAJkZVNX//wAA//9U1f//AABl5lTVAAAAAGXmVNUAAAAA//9U1VRVVFVUVVRVVFVUVVRVVFVUVVRVVFVUVVRVVFVUVVRV")
+}, {
+"aabb": AABB(-0.5685822, 0, -0.5, 1.1371644, 0.5, 1),
+"attribute_data": PackedByteArray("xGOU28RjqeqnVanqp1WU269UqeqvVJTb80jc/YpH//+KR6nq80jL7PNI3P3zSMvsikep6opH//+KR6nq80jL7PNI3P2KR///ikep6opH///zSNz980jL7KdVlNufVpTbn1ap6qdVqeqfVpTbp1WU259WqeqnVanqn1ap6p9WlNunVanqp1WU259WlNufVqnqp1WU26dVqer//+ow////Pwf//z8H/+ow6fD/P+nw6jDy7/8/8u/qMJ9WlNufVqnqp1WU26dVqer/f/+/4nH/v+Jx7bP/f+2z/3+YXhyOmF4cjqpq/3+qag=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwACAAQABAAFAAMABgAHAAgACAAJAAYACgALAAwADAANAAoADgAPABAAEAARAA4AEgATABQAFAAVABIAFgAXABgAGAAZABYAGgAbABwAHQAcABsAHgAfACAAIQAgAB8AIgAjACQAJQAkACMAJgAnACgAKAApACYAKQAoACoAKgArACkAKwAqACwALAAtACsALgAvADAAMQAwAC8AMgAzADQANAA1ADIANgA3ADgAOAA5ADYA"),
+"material": SubResource("StandardMaterial3D_nj6r1"),
+"name": "roof_plates",
+"primitive": 3,
+"uv_scale": Vector4(18.137165, 12, 0, 0),
+"vertex_count": 58,
+"vertex_data": PackedByteArray("jvD///9//5+O8AAA////n3APAAD///+fcA////9//58AAAAA////nwAA////f/+fcA8AAJkZ/MVwDwAAAAD8xXAP////f/zFcA/MzP9//MVwDwAAZeZUFnAPzMz/f1QWcA////9/VBZwDwAA//9UFo7w////f/zFjvDMzP9//MWO8AAAZeb8xY7wAAD///zFjvD///9/VBaO8AAAAABUFo7wAACZGVQWjvDMzP9/VBaO8P///3//n///////f/+f//8AAP///5+O8AAA////n///////f/8fjvD///9//x///wAA////H47wAAD///8fcA8AAP///x9wD////3//HwAAAAD///8fAAD///9//x9wD////3//n3APAAAAAP+fAAD///9//58AAAAAAAD/nwAA////f///AAAAAAAA//9wDwAAAAD//3AP////f///jvAAAAAA//+O8P///3//////AAAAAP////////9//////////3//n///AAAAAP+fjvD///9//5+O8AAAAAD/n3APAABl5v//jvAAAGXm//+O8MzM/3///3APzMz/f///cA/MzP9//5+O8MzM/3//n47wAACZGf+fcA8AAJkZ/5////9/////f////3////9/////f////38AYwDGAGMAxgBjAMYAYwDG+kr1lfpK9ZX6SvWV+kr1lf6c/jn+nP45/pz+Of6c/jkEtQlqBLUJagS1CWoEtQlq////f////3////9/////fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/9/gdr/f4Ha/3+B2v9/gdr/f4Ha/3+B2v9/gdr/f4HaAAD/fwAA/38AAP9/AAD/f3yl//98pf//fKX//3yl//8AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a0imc")
+
+[node name="roof-metal-type-a2" type="Node3D"]
+
+[node name="roof-metal-type-a" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_jk28o")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("1_nhxoa")
+surface_material_override/1 = ExtResource("1_nhxoa")
