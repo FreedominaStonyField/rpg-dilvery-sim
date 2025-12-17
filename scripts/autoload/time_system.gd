@@ -6,7 +6,7 @@ signal mugged
 signal new_morning
 
 @export var day_length: float = 180.0
-@export var curfew_ratio: float = 0.8
+@export var curfew_ratio: float = 1.0
 @export var mug_delay: float = 3.0
 
 var day_time: float = 0.0
@@ -63,8 +63,6 @@ func _advance_time(delta: float) -> void:
 	var delta_ratio := delta / day_length
 	day_time = clamp(day_time + delta_ratio, 0.0, 1.0)
 	time_changed.emit(day_time)
-	if day_time >= 1.0:
-		_trigger_mugged()
 
 func _check_curfew(delta: float) -> void:
 	if day_time >= curfew_ratio and not pending_curfew and outdoors:
