@@ -6,8 +6,7 @@ const MESSAGE_HOLD := 2.5
 @onready var money_label: Label = $MarginContainer/VBoxContainer/MoneyLabel
 @onready var carrying_label: Label = $MarginContainer/VBoxContainer/CarryingLabel
 @onready var time_bar: ProgressBar = $MarginContainer/VBoxContainer/TimeBar
-@onready var message_label: Label = $MessageLabel
-@onready var message_timer: Timer = $MessageTimer
+@onready var notification_container: VBoxContainer = $NotificationContainer
 @onready var pause_menu: Control = $PauseMenu
 @onready var resume_button: Button = $PauseMenu/Panel/VBoxContainer/ResumeButton
 @onready var menu_button: Button = $PauseMenu/Panel/VBoxContainer/MenuButton
@@ -29,12 +28,10 @@ func _ready() -> void:
 	GameState.mode_changed.connect(_on_mode_changed)
 	resume_button.pressed.connect(_on_resume_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
-	message_timer.timeout.connect(_on_message_timeout)
 	_on_money_changed(PlayerData.money)
 	_on_carrying_changed(PlayerData.carrying_item)
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
-	message_label.visible = false
 	fade_rect.visible = false
 	fade_rect.color = Color(0, 0, 0, 0)
 	transition_label.visible = false
@@ -55,17 +52,31 @@ func _on_new_morning() -> void:
 		return
 	show_message("Morning. New deliveries available.")
 
-func show_message(message: String, duration: float = 2.0) -> void:
+func show_message(message: String, duration: float = 5) -> void:
 	if in_transition:
 		return
-	message_label.text = message
-	message_label.visible = true
-	message_timer.stop()
-	message_timer.wait_time = duration
-	message_timer.start()
-
-func _on_message_timeout() -> void:
-	message_label.visible = false
+	var label = Label.new()
+	label.text = message
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	label.add_theme_color_override("font_color", Color("#ffd9a1"))
+	notification_container.add_child(label)
+	
+	label.position = Vector2(0, -20)
+	label.modulate = Color(1,1,1,0)
+	
+	var tween = create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(label, "position", Vector2(0,0), 0.3).set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(label, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE)
+	tween.set_parallel(false)
+	
+	tween.tween_interval(duration)
+	
+	tween.set_parallel(true)
+	tween.tween_property(label, "modulate:a", 0.0, 1.5).set_trans(Tween.TRANS_SINE)
+	tween.set_parallel(false)
+	
+	tween.tween_callback(label.queue_free)
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
 	pause_menu.visible = mode == GameState.Mode.PAUSED and not in_transition
@@ -87,8 +98,6 @@ func _on_sleep_sequence_requested(message: String) -> void:
 
 func _play_transition(message: String, is_mugged: bool) -> void:
 	in_transition = true
-	message_timer.stop()
-	message_label.visible = false
 	fade_rect.visible = true
 	fade_rect.color = Color(0, 0, 0, 0)
 	transition_label.visible = true
