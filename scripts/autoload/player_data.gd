@@ -1,0 +1,26 @@
+extends Node
+
+signal money_changed(amount: int)
+signal carrying_changed(item_name: String)
+
+var money: int = 0
+var carrying_item: String = ""
+
+func add_money(amount: int) -> void:
+    money += amount
+    money_changed.emit(money)
+
+func reset_money() -> void:
+    money = 0
+    money_changed.emit(money)
+
+func set_carrying(item_name: String) -> void:
+    carrying_item = item_name
+    carrying_changed.emit(carrying_item)
+
+func clear_carrying() -> void:
+    carrying_item = ""
+    carrying_changed.emit(carrying_item)
+
+func is_carrying() -> bool:
+    return carrying_item != ""
