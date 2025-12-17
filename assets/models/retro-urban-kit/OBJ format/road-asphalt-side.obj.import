@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cj1v0v8gi5dvi"
+path="res://.godot/imported/road-asphalt-side.obj-819f0ff34986ea1bb2df53a21ff90430.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road-asphalt-side.obj-819f0ff34986ea1bb2df53a21ff90430.mesh"]
+
+source_file="res://assets/models/retro-urban-kit/OBJ format/road-asphalt-side.obj"
+dest_files=["res://.godot/imported/road-asphalt-side.obj-819f0ff34986ea1bb2df53a21ff90430.mesh", "res://.godot/imported/road-asphalt-side.obj-819f0ff34986ea1bb2df53a21ff90430.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

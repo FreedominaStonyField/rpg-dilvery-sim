@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c33mrjb6fg138"
+path="res://.godot/imported/detail-dumpster-closed.obj-f8548555fc201391b73df92f96335d04.mesh"
+
+[deps]
+
+files=["res://.godot/imported/detail-dumpster-closed.obj-f8548555fc201391b73df92f96335d04.mesh"]
+
+source_file="res://assets/models/retro-urban-kit/OBJ format/detail-dumpster-closed.obj"
+dest_files=["res://.godot/imported/detail-dumpster-closed.obj-f8548555fc201391b73df92f96335d04.mesh", "res://.godot/imported/detail-dumpster-closed.obj-f8548555fc201391b73df92f96335d04.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

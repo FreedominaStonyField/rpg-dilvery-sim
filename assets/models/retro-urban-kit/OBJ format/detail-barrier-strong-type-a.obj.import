@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dxfhms5klaq4j"
+path="res://.godot/imported/detail-barrier-strong-type-a.obj-782ca33d08e4f98f393da3660e19056b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/detail-barrier-strong-type-a.obj-782ca33d08e4f98f393da3660e19056b.mesh"]
+
+source_file="res://assets/models/retro-urban-kit/OBJ format/detail-barrier-strong-type-a.obj"
+dest_files=["res://.godot/imported/detail-barrier-strong-type-a.obj-782ca33d08e4f98f393da3660e19056b.mesh", "res://.godot/imported/detail-barrier-strong-type-a.obj-782ca33d08e4f98f393da3660e19056b.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
