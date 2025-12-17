@@ -2,6 +2,7 @@ extends Node3D
 
 @export var sleep_action: String = "interact"
 @export var sleep_cost: int = 20
+@export_range(0.0, 1.0) var sleep_threshold: float = 0.75
 
 @onready var safe_area: Area3D = $SafeArea
 @onready var sleep_spot: Area3D = $SafeArea/SleepSpot
@@ -46,10 +47,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		_sleep_until_morning()
 
 func _sleep_until_morning() -> void:
+	var ratio := TimeSystem.get_time_ratio()
+	if ratio <= sleep_threshold:
+		UIEvents.show_message("It's too early to sleep.")
+		return
 	if not PlayerData.spend_money(sleep_cost):
 		UIEvents.show_message("Not enough money to sleep!")
 		return
-	GameState.set_mode(GameState.Mode.SLEEPING)
-	TimeSystem.reset_day()
-	UIEvents.show_message("Rested for %d gold." % sleep_cost)
-	GameState.set_mode(GameState.Mode.PLAYING)
+	UIEvents.show_message("Paid %d gold for a room." % sleep_cost)
+	UIEvents.request_sleep_sequence("You got a good night's sleep.")

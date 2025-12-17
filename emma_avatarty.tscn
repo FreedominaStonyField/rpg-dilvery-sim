@@ -1,0 +1,987 @@
+[gd_scene load_steps=72 format=3 uid="uid://cpvk0cplegsgh"]
+
+[ext_resource type="PackedScene" uid="uid://jxok1c6814aa" path="res://assets/models/Emma avatarty.vrm" id="1_igt2x"]
+[ext_resource type="Script" uid="uid://cpmvabl8xp50d" path="res://addons/vrm/vrm_spring_bone.gd" id="2_o47bu"]
+[ext_resource type="Script" uid="uid://do8bqskg72hx" path="res://addons/vrm/vrm_collider_group.gd" id="3_n7a0g"]
+[ext_resource type="Script" uid="uid://dykp8xet1xm5r" path="res://addons/vrm/vrm_collider.gd" id="4_6wg1e"]
+[ext_resource type="AnimationLibrary" uid="uid://b11r2pst3dfy4" path="res://assets/animations/AnimationLibrary_Godot_Standard.glb" id="5_pqs6o"]
+
+[sub_resource type="Resource" id="Resource_5q3d6"]
+resource_name = "Bust"
+script = ExtResource("2_o47bu")
+comment = "Bust"
+joint_nodes = PackedStringArray("J_Sec_L_Bust1", "J_Sec_L_Bust2", "")
+stiffness_scale = 0.75
+drag_force_scale = 0.05
+hit_radius_scale = 0.00309505546
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_0ouqm"]
+resource_name = "Bust"
+script = ExtResource("2_o47bu")
+comment = "Bust"
+joint_nodes = PackedStringArray("J_Sec_R_Bust1", "J_Sec_R_Bust2", "")
+stiffness_scale = 0.75
+drag_force_scale = 0.05
+hit_radius_scale = 0.00309505546
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_sw771"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtBack_01", "J_Sec_L_CoatSkirtBack_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_iqbac"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtFront_01", "J_Sec_L_CoatSkirtFront_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_tcvoq"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_L_CoatSkirtSide1_01", "J_Sec_L_CoatSkirtSide2_01", "J_Sec_L_CoatSkirtSide2_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_q6tbx"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtBack_01", "J_Sec_R_CoatSkirtBack_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_6rlhu"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtFront_01", "J_Sec_R_CoatSkirtFront_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_bwl7n"]
+resource_name = "TopsUpperArm"
+script = ExtResource("2_o47bu")
+comment = "TopsUpperArm"
+joint_nodes = PackedStringArray("J_Sec_R_CoatSkirtSide1_01", "J_Sec_R_CoatSkirtSide2_01", "J_Sec_R_CoatSkirtSide2_end_01", "")
+stiffness_scale = 0.737704933
+drag_force_scale = 0.0
+hit_radius_scale = 0.0113844573
+gravity_scale = 0.0
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_ufsiw"]
+resource_name = "Head"
+script = ExtResource("4_6wg1e")
+bone = "Head"
+offset = Vector3(0, 0.08572409, -0.012344269)
+tail = Vector3(0, 0.08572409, -0.012344269)
+radius = 0.08572409
+
+[sub_resource type="Resource" id="Resource_e1rck"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_ufsiw")])
+
+[sub_resource type="Resource" id="Resource_5srrl"]
+resource_name = "LeftUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftUpperArm"
+offset = Vector3(0, 0, 0.008707836)
+tail = Vector3(0, 0, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_gr02p"]
+resource_name = "LeftUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftUpperArm"
+offset = Vector3(0, 0.06530878, 0.008707836)
+tail = Vector3(0, 0.06530878, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_1w4d8"]
+resource_name = "LeftUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftUpperArm"
+offset = Vector3(0, 0.13061756, 0.008707836)
+tail = Vector3(0, 0.13061756, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_4chjn"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_5srrl"), SubResource("Resource_gr02p"), SubResource("Resource_1w4d8")])
+
+[sub_resource type="Resource" id="Resource_l52hc"]
+resource_name = "RightUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "RightUpperArm"
+offset = Vector3(0, 0, 0.008707836)
+tail = Vector3(0, 0, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_rml37"]
+resource_name = "RightUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "RightUpperArm"
+offset = Vector3(0, 0.06530878, 0.008707836)
+tail = Vector3(0, 0.06530878, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_env7x"]
+resource_name = "RightUpperArm"
+script = ExtResource("4_6wg1e")
+bone = "RightUpperArm"
+offset = Vector3(0, 0.13061756, 0.008707836)
+tail = Vector3(0, 0.13061756, 0.008707836)
+radius = 0.0435391851
+
+[sub_resource type="Resource" id="Resource_dj3lg"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_l52hc"), SubResource("Resource_rml37"), SubResource("Resource_env7x")])
+
+[sub_resource type="Resource" id="Resource_mg6j3"]
+resource_name = "LeftLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftLowerArm"
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_ogn5j"]
+resource_name = "LeftLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftLowerArm"
+offset = Vector3(0, 0.043539185, 0)
+tail = Vector3(0, 0.043539185, 0)
+radius = 0.0304774288
+
+[sub_resource type="Resource" id="Resource_kf3i6"]
+resource_name = "LeftLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftLowerArm"
+offset = Vector3(0, 0.08707837, 0)
+tail = Vector3(0, 0.08707837, 0)
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_wsj4o"]
+resource_name = "LeftLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "LeftLowerArm"
+offset = Vector3(0, 0.13061756, 0)
+tail = Vector3(0, 0.13061756, 0)
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_8lqkx"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_mg6j3"), SubResource("Resource_ogn5j"), SubResource("Resource_kf3i6"), SubResource("Resource_wsj4o")])
+
+[sub_resource type="Resource" id="Resource_px1ql"]
+resource_name = "RightLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "RightLowerArm"
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_jptbk"]
+resource_name = "RightLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "RightLowerArm"
+offset = Vector3(0, 0.043539185, 0)
+tail = Vector3(0, 0.043539185, 0)
+radius = 0.0304774288
+
+[sub_resource type="Resource" id="Resource_oh3sn"]
+resource_name = "RightLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "RightLowerArm"
+offset = Vector3(0, 0.08707837, 0)
+tail = Vector3(0, 0.08707837, 0)
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_xlii6"]
+resource_name = "RightLowerArm"
+script = ExtResource("4_6wg1e")
+bone = "RightLowerArm"
+offset = Vector3(0, 0.13061756, 0)
+tail = Vector3(0, 0.13061756, 0)
+radius = 0.02612351
+
+[sub_resource type="Resource" id="Resource_aa0ta"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_px1ql"), SubResource("Resource_jptbk"), SubResource("Resource_oh3sn"), SubResource("Resource_xlii6")])
+
+[sub_resource type="Resource" id="Resource_mg00j"]
+resource_name = "LeftHand"
+script = ExtResource("4_6wg1e")
+bone = "LeftHand"
+offset = Vector3(0, 0.015819741, 0)
+tail = Vector3(0, 0.015819741, 0)
+radius = 0.0237296131
+
+[sub_resource type="Resource" id="Resource_lrf8s"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_mg00j")])
+
+[sub_resource type="Resource" id="Resource_2i5ce"]
+resource_name = "RightHand"
+script = ExtResource("4_6wg1e")
+bone = "RightHand"
+offset = Vector3(0, 0.015819741, 0)
+tail = Vector3(0, 0.015819741, 0)
+radius = 0.0237296131
+
+[sub_resource type="Resource" id="Resource_g4jsv"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_2i5ce")])
+
+[sub_resource type="Resource" id="Resource_h78rf"]
+resource_name = "UpperChest"
+script = ExtResource("4_6wg1e")
+bone = "UpperChest"
+offset = Vector3(0, 0, 0.008707835)
+tail = Vector3(0, 0, 0.008707835)
+radius = 0.0870783553
+
+[sub_resource type="Resource" id="Resource_24mul"]
+resource_name = "UpperChest"
+script = ExtResource("4_6wg1e")
+bone = "UpperChest"
+offset = Vector3(0.043539178, 0.056600925, -0.008707835)
+tail = Vector3(0.043539178, 0.056600925, -0.008707835)
+radius = 0.0609548464
+
+[sub_resource type="Resource" id="Resource_51ydt"]
+resource_name = "UpperChest"
+script = ExtResource("4_6wg1e")
+bone = "UpperChest"
+offset = Vector3(-0.043539178, 0.056600925, -0.008707835)
+tail = Vector3(-0.043539178, 0.056600925, -0.008707835)
+radius = 0.0609548464
+
+[sub_resource type="Resource" id="Resource_ox1u7"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_h78rf"), SubResource("Resource_24mul"), SubResource("Resource_51ydt")])
+
+[sub_resource type="Resource" id="Resource_gs7qn"]
+resource_name = "Spine"
+script = ExtResource("4_6wg1e")
+bone = "Spine"
+radius = 0.104494028
+
+[sub_resource type="Resource" id="Resource_a72ww"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_gs7qn")])
+
+[sub_resource type="Resource" id="Resource_7hwql"]
+resource_name = "Neck"
+script = ExtResource("4_6wg1e")
+bone = "Neck"
+offset = Vector3(0, 0.026123503, 0.011320185)
+tail = Vector3(0, 0.026123503, 0.011320185)
+radius = 0.0435391739
+
+[sub_resource type="Resource" id="Resource_j62ii"]
+script = ExtResource("3_n7a0g")
+colliders = Array[ExtResource("4_6wg1e")]([SubResource("Resource_7hwql")])
+
+[sub_resource type="Resource" id="Resource_tqjfq"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_01", "J_Sec_Hair2_01", "J_Sec_Hair3_01", "J_Sec_Hair4_01", "")
+stiffness_scale = 0.7
+drag_force_scale = 0.4
+hit_radius_scale = 0.0111525413
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_sqytw"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_02", "J_Sec_Hair2_02", "J_Sec_Hair3_02", "J_Sec_Hair4_02", "")
+stiffness_scale = 0.7
+drag_force_scale = 0.4
+hit_radius_scale = 0.011152531
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_rggyk"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_03", "J_Sec_Hair2_03", "J_Sec_Hair3_03", "J_Sec_Hair4_03", "J_Sec_Hair5_03", "")
+stiffness_scale = 0.6
+drag_force_scale = 0.4
+hit_radius_scale = 0.01115253
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_o4w5u"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_04", "J_Sec_Hair2_04", "J_Sec_Hair3_04", "J_Sec_Hair4_04", "J_Sec_Hair5_04", "")
+stiffness_scale = 0.4
+drag_force_scale = 0.4
+hit_radius_scale = 0.011152518
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_ymj1w"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_05", "J_Sec_Hair2_05", "J_Sec_Hair3_05", "J_Sec_Hair4_05", "J_Sec_Hair5_05", "")
+stiffness_scale = 0.4
+drag_force_scale = 0.4
+hit_radius_scale = 0.011152531
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Resource" id="Resource_lwa6t"]
+resource_name = "Hair"
+script = ExtResource("2_o47bu")
+comment = "Hair"
+joint_nodes = PackedStringArray("J_Sec_Hair1_06", "J_Sec_Hair2_06", "J_Sec_Hair3_06", "J_Sec_Hair4_06", "J_Sec_Hair5_06", "")
+stiffness_scale = 0.4
+drag_force_scale = 0.4
+hit_radius_scale = 0.0111525292
+gravity_scale = 0.0
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+center_bone = "Root_"
+
+[sub_resource type="Animation" id="Animation_psiht"]
+resource_name = "neutral"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Neutral")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_sfoxo"]
+resource_name = "aa"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_A")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_xjxht"]
+resource_name = "ih"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_I")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_krq5b"]
+resource_name = "ou"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_U")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_jy3xv"]
+resource_name = "ee"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_E")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_mfnda"]
+resource_name = "oh"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_O")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_3ux0q"]
+resource_name = "blink"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_8s11l"]
+resource_name = "blinkLeft"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close_L")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_5bspu"]
+resource_name = "blinkRight"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close_R")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_6latn"]
+resource_name = "angry"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Angry")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_08e1h"]
+resource_name = "relaxed"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Fun")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_beu55"]
+resource_name = "happy"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Joy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_mdgyq"]
+resource_name = "sad"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Sorrow")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_4vldl"]
+resource_name = "Surprised"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Surprised")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.99999)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = true
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="Animation" id="Animation_25r3r"]
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1, 1, 0.7032332, 0.07391279, -0.07391279, 0.7032332)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1, 1, 0.70538425, 0.049325284, -0.049325284, 0.70538425)
+
+[sub_resource type="Animation" id="Animation_x76a4"]
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1, 1, 0.70538425, -0.049325284, 0.049325284, 0.70538425)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1, 1, 0.7032332, -0.07391279, 0.07391279, 0.7032332)
+
+[sub_resource type="Animation" id="Animation_6e2a7"]
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1, 1, 0.64278764, 0, 0, 0.76604444)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1, 1, 0.64278764, 0, 0, 0.76604444)
+
+[sub_resource type="Animation" id="Animation_m6x15"]
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(1, 1, 0.76604444, 0, 0, 0.64278764)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(1, 1, 0.76604444, 0, 0, 0.64278764)
+
+[sub_resource type="Animation" id="Animation_reilt"]
+resource_name = "RESET"
+tracks/0/type = "blend_shape"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Neutral")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0)
+tracks/1/type = "blend_shape"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_A")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0)
+tracks/2/type = "blend_shape"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_I")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0)
+tracks/3/type = "blend_shape"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_U")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0)
+tracks/4/type = "blend_shape"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_E")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0)
+tracks/5/type = "blend_shape"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%GeneralSkeleton/Face:Fcl_MTH_O")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 0)
+tracks/6/type = "blend_shape"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0)
+tracks/7/type = "blend_shape"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close_L")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0)
+tracks/8/type = "blend_shape"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("%GeneralSkeleton/Face:Fcl_EYE_Close_R")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0)
+tracks/9/type = "blend_shape"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Angry")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0)
+tracks/10/type = "blend_shape"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Fun")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, 0)
+tracks/11/type = "blend_shape"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Joy")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, 0)
+tracks/12/type = "blend_shape"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Sorrow")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = PackedFloat32Array(0, 1, 0)
+tracks/13/type = "blend_shape"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("%GeneralSkeleton/Face:Fcl_ALL_Surprised")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = PackedFloat32Array(0, 1, 0)
+tracks/14/type = "rotation_3d"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("%GeneralSkeleton:LeftEye")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+tracks/15/type = "rotation_3d"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("%GeneralSkeleton:RightEye")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = PackedFloat32Array(0, 1, 0.7071067, 0, 0, 0.7071067)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhadf"]
+_data = {
+&"RESET": SubResource("Animation_reilt"),
+&"Surprised": SubResource("Animation_4vldl"),
+&"aa": SubResource("Animation_sfoxo"),
+&"angry": SubResource("Animation_6latn"),
+&"blink": SubResource("Animation_3ux0q"),
+&"blinkLeft": SubResource("Animation_8s11l"),
+&"blinkRight": SubResource("Animation_5bspu"),
+&"ee": SubResource("Animation_jy3xv"),
+&"happy": SubResource("Animation_beu55"),
+&"ih": SubResource("Animation_xjxht"),
+&"lookDown": SubResource("Animation_m6x15"),
+&"lookLeft": SubResource("Animation_25r3r"),
+&"lookRight": SubResource("Animation_x76a4"),
+&"lookUp": SubResource("Animation_6e2a7"),
+&"neutral": SubResource("Animation_psiht"),
+&"oh": SubResource("Animation_mfnda"),
+&"ou": SubResource("Animation_krq5b"),
+&"relaxed": SubResource("Animation_08e1h"),
+&"sad": SubResource("Animation_mdgyq")
+}
+
+[node name="Emma avatarty" instance=ExtResource("1_igt2x")]
+spring_bones = Array[ExtResource("2_o47bu")]([SubResource("Resource_5q3d6"), SubResource("Resource_0ouqm"), SubResource("Resource_sw771"), SubResource("Resource_iqbac"), SubResource("Resource_tcvoq"), SubResource("Resource_q6tbx"), SubResource("Resource_6rlhu"), SubResource("Resource_bwl7n"), SubResource("Resource_tqjfq"), SubResource("Resource_sqytw"), SubResource("Resource_rggyk"), SubResource("Resource_o4w5u"), SubResource("Resource_ymj1w"), SubResource("Resource_lwa6t")])
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+collider_library = Array[ExtResource("4_6wg1e")]([SubResource("Resource_ufsiw"), SubResource("Resource_5srrl"), SubResource("Resource_gr02p"), SubResource("Resource_1w4d8"), SubResource("Resource_l52hc"), SubResource("Resource_rml37"), SubResource("Resource_env7x"), SubResource("Resource_mg6j3"), SubResource("Resource_ogn5j"), SubResource("Resource_kf3i6"), SubResource("Resource_wsj4o"), SubResource("Resource_px1ql"), SubResource("Resource_jptbk"), SubResource("Resource_oh3sn"), SubResource("Resource_xlii6"), SubResource("Resource_mg00j"), SubResource("Resource_2i5ce"), SubResource("Resource_h78rf"), SubResource("Resource_24mul"), SubResource("Resource_51ydt"), SubResource("Resource_gs7qn"), SubResource("Resource_7hwql")])
+
+[node name="GeneralSkeleton" parent="." index="0"]
+bones/1/position = Vector3(0.0032455346, 0.72293574, -0.07182131)
+bones/1/rotation = Quaternion(-0.04384848, -0.115901396, -0.0051216413, 0.99227923)
+bones/3/rotation = Quaternion(0.043872144, 0.00012522412, 0.0002657331, 0.99903715)
+bones/4/rotation = Quaternion(0.1312344, 0.0003720487, 0.00077373226, 0.991351)
+bones/9/rotation = Quaternion(-0.08765106, -0.00024943863, -0.0005254329, 0.99615115)
+bones/10/rotation = Quaternion(0.09930642, 0.094806544, 0.00591752, 0.9905125)
+bones/41/rotation = Quaternion(0.48748112, 0.5266154, 0.5263815, -0.4560275)
+bones/42/rotation = Quaternion(0.107021265, 0.83586633, -0.53832054, 0.009220531)
+bones/43/rotation = Quaternion(0.6147839, -0.37981153, 0.5422745, 0.42862844)
+bones/44/rotation = Quaternion(0.054777626, 0.41011363, -0.07020186, 0.90767723)
+bones/45/rotation = Quaternion(7.450581e-08, 0, 1.4901163e-07, 1)
+bones/46/rotation = Quaternion(-2.9802322e-07, -1.4901161e-07, -1.937151e-07, 1)
+bones/47/rotation = Quaternion(5.364418e-07, 0, 4.7683716e-07, 1)
+bones/48/rotation = Quaternion(0.24958946, -0.01676351, -0.019869667, 0.9680028)
+bones/49/rotation = Quaternion(0.23859292, -0.04902803, 0.014096647, 0.9697789)
+bones/50/rotation = Quaternion(0.15732531, -0.01714191, 0.0051175985, 0.98738486)
+bones/51/rotation = Quaternion(0.140505, -0.0066432287, -0.08007097, 0.9868145)
+bones/52/rotation = Quaternion(0.26717484, -0.035075493, 0.031973585, 0.96247864)
+bones/53/rotation = Quaternion(0.040106, -0.0018654661, -5.0915895e-07, 0.9991937)
+bones/54/rotation = Quaternion(0.25089625, -0.0089377705, -0.08844157, 0.96392393)
+bones/55/rotation = Quaternion(0.23556802, -0.01692596, 0.032159384, 0.9711782)
+bones/56/rotation = Quaternion(0.17565016, -0.018979495, -0.017409194, 0.9841157)
+bones/57/rotation = Quaternion(-0.21418668, 0.67388743, 0.21418647, 0.6738872)
+bones/58/rotation = Quaternion(0.028973866, 0.025407944, -0.00026658142, 0.9992572)
+bones/59/rotation = Quaternion(0.09024215, 0.07913473, -0.0008301139, 0.9927706)
+bones/60/rotation = Quaternion(0.5397211, -0.47448963, -0.47470158, -0.5081528)
+bones/61/rotation = Quaternion(-0.27987632, 0.81901217, -0.5008142, -0.008577926)
+bones/62/rotation = Quaternion(0.472278, 0.52577114, -0.4673196, 0.53115976)
+bones/63/rotation = Quaternion(0.13803767, -0.47168338, -0.0108429575, 0.8708289)
+bones/64/rotation = Quaternion(0.26759866, -1.2690509e-07, 0.0004743686, 0.9635304)
+bones/65/rotation = Quaternion(0.2313055, -0.0004687552, 0.00011319268, 0.972881)
+bones/66/rotation = Quaternion(0.12888786, -1.077846e-07, 1.2646226e-06, 0.9916593)
+bones/67/rotation = Quaternion(0.39449123, 0.026495645, -0.015158122, 0.9183926)
+bones/68/rotation = Quaternion(0.29627132, 0.056162655, -0.01643643, 0.9533095)
+bones/69/rotation = Quaternion(0.2282435, 0.020684227, -0.0047946116, 0.9733726)
+bones/70/rotation = Quaternion(0.27185652, 0.012853457, 0.061144337, 0.96030736)
+bones/71/rotation = Quaternion(0.38142526, 0.042867, -0.03361724, 0.9227931)
+bones/72/rotation = Quaternion(0.12874848, 0.0059883916, 3.0447129e-07, 0.9916593)
+bones/73/rotation = Quaternion(0.38587153, 0.013745567, 0.069460906, 0.9198313)
+bones/74/rotation = Quaternion(0.29402822, 0.021517124, -0.029709784, 0.95509255)
+bones/75/rotation = Quaternion(0.24386492, 0.020844273, 0.0141758695, 0.9694816)
+bones/76/rotation = Quaternion(-0.17577305, -0.6939925, -0.21019767, 0.66580415)
+bones/77/rotation = Quaternion(0.094149195, -0.059752606, -0.025827946, 0.99342763)
+bones/78/rotation = Quaternion(0.32573125, -0.16429344, -0.08263225, 0.92740434)
+bones/79/rotation = Quaternion(-0.0007918136, 0.12948692, 0.9850977, -0.1132033)
+bones/80/rotation = Quaternion(0.017362231, 0.9808161, -0.15847817, 0.11217466)
+bones/88/rotation = Quaternion(-0.095160194, 0.72594965, -0.68110096, 0.006571432)
+bones/89/rotation = Quaternion(5.411382e-08, 1, 5.960463e-08, 1.5362604e-08)
+bones/90/rotation = Quaternion(0.0008441709, -0.101356626, 0.98750186, 0.12069091)
+bones/91/rotation = Quaternion(-0.034764938, 0.9279022, -0.09663763, -0.3583994)
+bones/99/rotation = Quaternion(0.1712302, 0.6402844, -0.74880874, -0.001282856)
+bones/100/rotation = Quaternion(-2.9757981e-08, 1, 2.9802322e-08, 5.4535727e-09)
+
+[node name="Head" parent="GeneralSkeleton" index="4"]
+transform = Transform3D(0.9977342, -0.058993593, -0.032346323, 0.047692798, 0.959272, -0.27842873, 0.04745443, 0.27625522, 0.959912, 0.003582003, 1.1491952, -0.07488622)
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_dhadf"),
+&"AnimationLibrary_Godot_Standard": ExtResource("5_pqs6o")
+}
+
+[node name="secondary" parent="." index="2"]
+collider_groups = Array[ExtResource("3_n7a0g")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
+collider_library = Array[ExtResource("4_6wg1e")]([SubResource("Resource_ufsiw"), SubResource("Resource_5srrl"), SubResource("Resource_gr02p"), SubResource("Resource_1w4d8"), SubResource("Resource_l52hc"), SubResource("Resource_rml37"), SubResource("Resource_env7x"), SubResource("Resource_mg6j3"), SubResource("Resource_ogn5j"), SubResource("Resource_kf3i6"), SubResource("Resource_wsj4o"), SubResource("Resource_px1ql"), SubResource("Resource_jptbk"), SubResource("Resource_oh3sn"), SubResource("Resource_xlii6"), SubResource("Resource_mg00j"), SubResource("Resource_2i5ce"), SubResource("Resource_h78rf"), SubResource("Resource_24mul"), SubResource("Resource_51ydt"), SubResource("Resource_gs7qn"), SubResource("Resource_7hwql")])
