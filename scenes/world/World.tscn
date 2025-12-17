@@ -67,7 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.8, 4)
 collision_layer = 0
 script = ExtResource("5")
-dropoff_path = NodePath("../Dropoff")
+dropoff_paths = [NodePath("../DropoffPlaza"), NodePath("../DropoffAlley"), NodePath("../DropoffDocks"), NodePath("../DropoffMarket")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
 shape = SubResource("4")
@@ -75,15 +75,51 @@ shape = SubResource("4")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickup"]
 mesh = SubResource("3")
 
-[node name="Dropoff" type="Area3D" parent="."]
+[node name="DropoffPlaza" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.8, 10)
 collision_layer = 0
 script = ExtResource("6")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dropoff"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffPlaza"]
 shape = SubResource("6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Dropoff"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffPlaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="DropoffAlley" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.8, 12)
+collision_layer = 0
+script = ExtResource("6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffAlley"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffAlley"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="DropoffDocks" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.8, -6)
+collision_layer = 0
+script = ExtResource("6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffDocks"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffDocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="DropoffMarket" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.8, -10)
+collision_layer = 0
+script = ExtResource("6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffMarket"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffMarket"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("5")
 
