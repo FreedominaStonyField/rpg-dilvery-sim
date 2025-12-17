@@ -15,7 +15,7 @@ var outdoors: bool = true
 var inn_paused: bool = false
 var pending_curfew: bool = false
 var day_complete: bool = false
-var _mug_timer: float = 0.0
+var _mug_timer: float = 30.0
 
 func _ready() -> void:
 	day_time = 0.0
