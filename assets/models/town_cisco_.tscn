@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhtquajxkjkms"]
+
+[ext_resource type="PackedScene" uid="uid://cy3d4icmd4r1k" path="res://scenes/world/town cisco .glb" id="1_cfmqv"]
+
+[node name="town cisco " instance=ExtResource("1_cfmqv")]
+
+[node name="map cisco" parent="." index="0"]
+visible = false
