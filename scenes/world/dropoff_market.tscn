@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://75cncv4u5hv3"]
+
+[ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="1_yxavq"]
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/grass.tres" id="2_ekolx"]
+
+[sub_resource type="CylinderShape3D" id="6"]
+height = 1.2
+radius = 0.8
+
+[sub_resource type="CylinderMesh" id="5"]
+height = 1.0
+
+[node name="DropoffMarket" type="Area3D"]
+collision_layer = 0
+script = ExtResource("1_yxavq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.166287, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.8, 0.2, 1)
+text = "Market"
+uppercase = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4259276, -7.160658)
+use_collision = true
+size = Vector3(25, 3.6518555, 25)
+material = ExtResource("2_ekolx")
+
+[node name="cutoutshap" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, -12.43609, 0.5771072, -0.23120117)
+operation = 2
+size = Vector3(15.285, 2.435669, 26.571777)
+material = ExtResource("2_ekolx")
+
+[node name="cutoutshap2" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.8660254, 0.5, 8.742278e-08, 0.5, 0.8660254, 0, -7.5710346e-08, 4.371139e-08, -1, 12.56391, 0.5771072, -0.23120117)
+operation = 2
+size = Vector3(15.285, 2.435669, 26.571777)
+material = ExtResource("2_ekolx")
+
+[node name="Stall" type="CSGBox3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.86795086, 2.6393423)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10406494, 0)
+operation = 2
+size = Vector3(1, 0.50549316, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40808266, -0.040527344, 0.4003415)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4192081, -0.040527284, 0.41128683)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42782164, -0.040527403, -0.39582348)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3889739, -0.07793638, -0.40348196)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9604645e-08, -0.4159135, 0)
+size = Vector3(0.6, 0.48100585, 0.6)

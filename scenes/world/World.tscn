@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://world"]
+[gd_scene load_steps=17 format=3 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bnmtxjtl03bj3" path="res://scripts/world/DayNightCycle.gd" id="2_252at"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://scenes/ui/HUD.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://brikvljpd0sa3" path="res://scenes/world/InnInterior.tscn" id="4"]
 [ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="5"]
 [ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="6"]
+[ext_resource type="PackedScene" uid="uid://75cncv4u5hv3" path="res://scenes/world/dropoff_market.tscn" id="6_qh0kd"]
+[ext_resource type="PackedScene" uid="uid://dmkqjnygidu7y" path="res://scenes/world/inn_exterior.tscn" id="7_252at"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
 
@@ -131,29 +132,8 @@ modulate = Color(0.2, 0.4, 1, 1)
 text = "Docks"
 uppercase = true
 
-[node name="DropoffMarket" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.8559, 0.8000005, -11.714193)
-collision_layer = 0
-script = ExtResource("6")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffMarket"]
-shape = SubResource("6")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffMarket"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
-mesh = SubResource("5")
-
-[node name="Label3D" type="Label3D" parent="DropoffMarket"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
-pixel_size = 0.05
-billboard = 2
-modulate = Color(0.2, 0.8, 0.2, 1)
-text = "Market"
-uppercase = true
-
-[node name="InnInterior" parent="." instance=ExtResource("4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3478197, -8)
+[node name="DropoffMarket" parent="." instance=ExtResource("6_qh0kd")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -56.11534, 3.5000005, -13.564597)
 
 [node name="HUD" parent="." instance=ExtResource("3")]
 
@@ -163,12 +143,5 @@ use_collision = true
 size = Vector3(1000, 1, 1000)
 material = SubResource("StandardMaterial3D_252at")
 
-[node name="Ramp" type="CSGBox3D" parent="Ground"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.848045, 1.7365843, 9.592555)
-use_collision = true
-size = Vector3(6.413574, 2.496582, 5.6953125)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="Ground/Ramp"]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -1.2434082, 1.0074897, 1.600483)
-operation = 2
-size = Vector3(3.4868164, 3.2638855, 5.9658813)
+[node name="InnInterior2" parent="." instance=ExtResource("7_252at")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.480242, 0.4863807, -5.1538877)
