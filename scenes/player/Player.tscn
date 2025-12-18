@@ -403,7 +403,6 @@ mesh = SubResource("2")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0)
-spring_length = 3.5
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 current = true

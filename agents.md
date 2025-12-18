@@ -75,10 +75,9 @@ Every scene should have a script ONLY if it contains logic.
 - One active job at a time
 - Curfew:
   - If outdoors when curfew hits: start a short timer, then mug.
-  - If indoors: safe (no mugging)
+  - If in safe zone: safe (no mugging)
 - Inn:
-  - Entering inn pauses time progression
-- "Sleep" sets morning and resumes play
+- "Sleep" sets morning, saves money, and resumes play
 
 ## 8) Testing discipline
 Every change must keep these working:
@@ -90,6 +89,4 @@ Every change must keep these working:
 
 ## 9) Output format for codegen agents
 When generating code, ALWAYS output:
-1) File tree showing new/changed files
-2) Each file content in a fenced code block with correct path label
-3) Brief note on how to wire autoloads in Project Settings if needed
+1) Summery of systems and methods to test each part.
