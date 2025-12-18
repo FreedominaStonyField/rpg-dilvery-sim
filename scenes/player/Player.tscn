@@ -412,6 +412,7 @@ current = true
 root_node = NodePath("../Emma avatarty")
 anim_player = NodePath("../Emma avatarty/AnimationPlayer")
 script = ExtResource("6")
+default_blend_time = 0.0
 
 [node name="SFX" type="Node3D" parent="."]
 script = ExtResource("7")
