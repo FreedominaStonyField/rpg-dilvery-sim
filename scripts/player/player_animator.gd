@@ -5,6 +5,8 @@ signal animation_debug_event(event: Dictionary)
 @export var player: CharacterBody3D
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
 @export var model_root_path: NodePath = NodePath("../Emma avatarty")
+@export var landing_enabled: bool = true
+@export var landing_move_break_speed: float = 0.15
 
 @export_group("Animation Blending")
 @export var default_blend_time: float = 0.2
@@ -65,9 +67,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		jump_start_timer = 0.0
 		if not was_on_floor:
-			land_timer = _animation_length("Jump_Land", 0.35)
-			_travel("land", "landed")
-		if land_timer > 0.0:
+			if landing_enabled:
+				land_timer = _animation_length("Jump_Land", 0.35)
+				_travel("land", "landed")
+			else:
+				land_timer = 0.0
+		if landing_enabled and land_timer > 0.0:
+			if _ground_speed() > landing_move_break_speed:
+				land_timer = 0.0
+				_play_ground_state()
 			land_timer = max(land_timer - delta, 0.0)
 		else:
 			_play_ground_state()
@@ -77,13 +85,16 @@ func _physics_process(delta: float) -> void:
 	state_time += delta
 
 func _play_ground_state() -> void:
-	var speed := Vector2(player.velocity.x, player.velocity.z).length()
+	var speed := _ground_speed()
 	if speed < 0.1:
 		_travel("idle", "ground_move")
 	elif _is_sprinting():
 		_travel("sprint", "ground_move")
 	else:
 		_travel("walk", "ground_move")
+
+func _ground_speed() -> float:
+	return Vector2(player.velocity.x, player.velocity.z).length()
 
 func _is_sprinting() -> bool:
 	return player.has_method("is_sprinting") and player.is_sprinting()
