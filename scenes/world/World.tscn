@@ -50,6 +50,11 @@ night_angle = -171.6
 
 [node name="Player" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517014, 0)
+floor_constant_speed = true
+floor_max_angle = 0.8552113
+gravity = 9.0
+LandingCooldownDuration = 5.0
+LandingMoveSpeedMultiplier = 5.0
 
 [node name="Pickup" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.554832, 1.4478197, -8.771846)
@@ -157,3 +162,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15867412, 0)
 use_collision = true
 size = Vector3(1000, 1, 1000)
 material = SubResource("StandardMaterial3D_252at")
+
+[node name="Ramp" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.848045, 1.7365843, 9.592555)
+use_collision = true
+size = Vector3(6.413574, 2.496582, 5.6953125)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, -0.70710677, 0, 0.70710677, 0.70710677, -1.2434082, 1.0074897, 1.600483)
+operation = 2
+size = Vector3(3.4868164, 3.2638855, 5.9658813)

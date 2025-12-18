@@ -56,14 +56,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.120895386, 0, -0.3456421)
 use_collision = true
 size = Vector3(7.4602356, 1, 1)
 
+[node name="CSGBox3D2" type="CSGBox3D" parent="SafeArea/SleepSpot/MeshInstance3D/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9055836, -0.4241678, 0, 0.4241678, 0.9055836, 0.31027305, -1.1169553, 6.754892)
+size = Vector3(2.58, 0.228, 1.03)
+
 [node name="CSGBox3D" type="CSGBox3D" parent="SafeArea/SleepSpot/MeshInstance3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1783905, 1.4373474, 2.2849007)
 size = Vector3(8.041779, 5.3862915, 7.886406)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SafeArea/SleepSpot/MeshInstance3D/CSGBox3D/CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09140015, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07533264, 0)
 operation = 2
-size = Vector3(7, 4.3779907, 7)
+size = Vector3(7, 4.7114563, 7)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SafeArea/SleepSpot/MeshInstance3D/CSGBox3D/CSGBox3D/CSGBox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17279053, -0.2319107, 3.813015)

@@ -9,9 +9,17 @@ extends CharacterBody3D
 @export var rotation_smoothing: float = 10.0
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@export_group("Movement Tuning")
+@export var bDisableAirControl: bool = true
+@export_enum("Ignore Input", "Clamp Speed") var LandingCooldownMode: String = "Ignore Input"
+@export var LandingCooldownDuration: float = 0.2
+@export var LandingMoveSpeedMultiplier: float = 0.5
+
 var _sprint_time_left: float = 0.0
 var _sprint_cooldown_left: float = 0.0
 var _pitch: float = deg_to_rad(-20.0)
+var _was_on_floor: bool = false
+var _landing_cooldown_timer: float = 0.0
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
@@ -21,27 +29,46 @@ func _ready() -> void:
 	GameState.mode_changed.connect(_on_mode_changed)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_pivot.set_as_top_level(true)
+	_was_on_floor = is_on_floor()
 
 func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
 		return
 	_update_sprint(delta)
+	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
+
 	var direction := _get_move_direction()
 	var speed := _current_speed()
 	var vel := velocity
-	vel.x = direction.x * speed
-	vel.z = direction.z * speed
+
+	var just_landed := is_on_floor() and not _was_on_floor
+	if just_landed:
+		_landing_cooldown_timer = LandingCooldownDuration
 
 	if is_on_floor():
+		if _landing_cooldown_timer > 0.0:
+			if LandingCooldownMode == "Ignore Input":
+				direction = Vector3.ZERO
+			elif LandingCooldownMode == "Clamp Speed":
+				speed *= LandingMoveSpeedMultiplier
+		
+		vel.x = direction.x * speed
+		vel.z = direction.z * speed
+
 		if Input.is_action_just_pressed("jump"):
 			vel.y = jump_force
 		else:
 			vel.y = 0.0
 	else:
 		vel.y -= gravity * delta
+		if not bDisableAirControl:
+			vel.x = direction.x * speed
+			vel.z = direction.z * speed
 
 	velocity = vel
 	move_and_slide()
+	
+	_was_on_floor = is_on_floor()
 	
 	# Sync camera position and smooth rotation
 	camera_pivot.global_position = global_position
