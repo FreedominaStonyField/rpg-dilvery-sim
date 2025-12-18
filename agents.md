@@ -88,8 +88,3 @@ Every change must keep these working:
 - Curfew mug -> money resets -> morning
 - Pause toggles without breaking input
 
-## 9) Output format for codegen agents
-When generating code, ALWAYS output:
-1) File tree showing new/changed files
-2) Each file content in a fenced code block with correct path label
-3) Brief note on how to wire autoloads in Project Settings if needed

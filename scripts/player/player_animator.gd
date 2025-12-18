@@ -5,6 +5,10 @@ extends AnimationTree
 @export var model_root_path: NodePath = NodePath("../Emma avatarty")
 
 const ANIM_LIB := "AnimationLibrary_Godot_Standard"
+const NON_LOOPING_ANIMS := [
+	"Jump_Land",
+	"Jump_Start"
+]
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_player: AnimationPlayer
@@ -23,6 +27,7 @@ func _ready() -> void:
 	if animation_player == null:
 		push_warning("AnimationPlayer missing for animator.")
 		return
+	_disable_animation_loops()
 	anim_player = animation_player_path
 	tree_root = _build_state_machine()
 	active = true
@@ -37,6 +42,11 @@ func _physics_process(delta: float) -> void:
 		return
 	var on_floor := player.is_on_floor()
 	_update_model_facing()
+	
+	# Decrement timer globally so a 1-frame bounce doesn't pause/reset the landing sequence
+	if land_timer > 0.0:
+		land_timer = max(land_timer - delta, 0.0)
+
 	if not on_floor:
 		if was_on_floor:
 			jump_start_timer = _animation_length("Jump_Start", 0.2)
@@ -47,12 +57,11 @@ func _physics_process(delta: float) -> void:
 			_travel("jump_loop")
 	else:
 		jump_start_timer = 0.0
-		if not was_on_floor:
+		# Only trigger land if we aren't already in the middle of a landing sequence
+		if not was_on_floor and land_timer <= 0.0:
 			land_timer = _animation_length("Jump_Land", 0.35)
 			_travel("land")
-		if land_timer > 0.0:
-			land_timer = max(land_timer - delta, 0.0)
-		else:
+		if land_timer <= 0.0:
 			_play_ground_state()
 	was_on_floor = on_floor
 
@@ -115,7 +124,12 @@ func _resolve_anim_candidates(names: Array) -> String:
 		var candidate := _with_library(name)
 		if _has_animation(candidate):
 			return candidate
-	return animation_player.get_animation_list()[0] if animation_player.get_animation_list().size() > 0 else ""
+		if _has_animation(name):
+			return name
+	
+	var fallback := animation_player.get_animation_list()[0] if animation_player.get_animation_list().size() > 0 else ""
+	push_warning("Missing animation candidates: %s. Using fallback: %s" % [names, fallback])
+	return fallback
 
 func _has_animation(name: String) -> bool:
 	return animation_player != null and animation_player.has_animation(name)
@@ -127,6 +141,8 @@ func _animation_length(anim_key: String, default_length: float) -> float:
 	var anim_name := _with_library(anim_key)
 	if _has_animation(anim_name):
 		return animation_player.get_animation(anim_name).length
+	if _has_animation(anim_key):
+		return animation_player.get_animation(anim_key).length
 	return default_length
 
 func _update_model_facing() -> void:
@@ -142,3 +158,13 @@ func _update_model_facing() -> void:
 	var target_yaw := atan2(last_local_move.x, last_local_move.z)
 	var current_yaw := model_root.rotation.y
 	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, 0.15)
+
+func _disable_animation_loops() -> void:
+	if animation_player == null:
+		return
+	for name in NON_LOOPING_ANIMS:
+		for candidate in [_with_library(name), name]:
+			if animation_player.has_animation(candidate):
+				var anim := animation_player.get_animation(candidate)
+				if anim.loop_mode != Animation.LOOP_NONE:
+					anim.loop_mode = Animation.LOOP_NONE
