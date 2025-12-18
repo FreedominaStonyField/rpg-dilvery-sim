@@ -1,10 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://world"]
+[gd_scene load_steps=16 format=3 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bnmtxjtl03bj3" path="res://scripts/world/DayNightCycle.gd" id="2_252at"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://scenes/ui/HUD.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/world/InnInterior.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://brikvljpd0sa3" path="res://scenes/world/InnInterior.tscn" id="4"]
 [ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="5"]
 [ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="6"]
 
@@ -19,12 +19,6 @@ sky = SubResource("Sky_252at")
 ambient_light_color = Color(0.054861404, 0.08300724, 0.19070792, 1)
 tonemap_mode = 4
 
-[sub_resource type="BoxShape3D" id="2"]
-size = Vector3(40, 0.5, 40)
-
-[sub_resource type="BoxMesh" id="1"]
-size = Vector3(40, 0.5, 40)
-
 [sub_resource type="SphereShape3D" id="4"]
 radius = 0.8
 
@@ -37,6 +31,9 @@ radius = 0.8
 
 [sub_resource type="CylinderMesh" id="5"]
 height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_252at"]
+albedo_color = Color(0.18037322, 0.14028901, 0.08699743, 1)
 
 [node name="World" type="Node3D"]
 script = ExtResource("1")
@@ -51,23 +48,15 @@ script = ExtResource("2_252at")
 dawn_angle = -0.5
 night_angle = -171.6
 
-[node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
-shape = SubResource("2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("1")
-
 [node name="Player" parent="." instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517014, 0)
 
 [node name="Pickup" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.8, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.554832, 1.4478197, -8.771846)
 collision_layer = 0
 script = ExtResource("5")
-dropoff_paths = [NodePath("../DropoffPlaza"), NodePath("../DropoffAlley"), NodePath("../DropoffDocks"), NodePath("../DropoffMarket")]
+dropoff_paths = Array[NodePath]([NodePath("../DropoffPlaza"), NodePath("../DropoffAlley"), NodePath("../DropoffDocks"), NodePath("../DropoffMarket")])
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
 shape = SubResource("4")
@@ -76,9 +65,10 @@ shape = SubResource("4")
 mesh = SubResource("3")
 
 [node name="DropoffPlaza" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.8, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.333122, 0.8, 17.190155)
 collision_layer = 0
 script = ExtResource("6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffPlaza"]
 shape = SubResource("6")
@@ -87,10 +77,18 @@ shape = SubResource("6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("5")
 
+[node name="Label3D" type="Label3D" parent="DropoffPlaza"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+text = "Plaza"
+uppercase = true
+
 [node name="DropoffAlley" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.8, 12)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.8, -58.422676)
 collision_layer = 0
 script = ExtResource("6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffAlley"]
 shape = SubResource("6")
@@ -99,10 +97,19 @@ shape = SubResource("6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("5")
 
+[node name="Label3D" type="Label3D" parent="DropoffAlley"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.6, 0.6, 0.6, 1)
+text = "Alley"
+uppercase = true
+
 [node name="DropoffDocks" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0.8, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.046507, 0.8, -6.53543)
 collision_layer = 0
 script = ExtResource("6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffDocks"]
 shape = SubResource("6")
@@ -111,10 +118,19 @@ shape = SubResource("6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("5")
 
+[node name="Label3D" type="Label3D" parent="DropoffDocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Docks"
+uppercase = true
+
 [node name="DropoffMarket" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.8, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -150.8559, 0.8000005, -11.714193)
 collision_layer = 0
 script = ExtResource("6")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffMarket"]
 shape = SubResource("6")
@@ -123,7 +139,21 @@ shape = SubResource("6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("5")
 
+[node name="Label3D" type="Label3D" parent="DropoffMarket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.8, 0.2, 1)
+text = "Market"
+uppercase = true
+
 [node name="InnInterior" parent="." instance=ExtResource("4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.3478197, -8)
 
 [node name="HUD" parent="." instance=ExtResource("3")]
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15867412, 0)
+use_collision = true
+size = Vector3(1000, 1, 1000)
+material = SubResource("StandardMaterial3D_252at")

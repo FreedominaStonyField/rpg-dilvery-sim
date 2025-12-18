@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-const FADE_DURATION := 0.5
-const MESSAGE_HOLD := 2.5
+const FADE_DURATION := 1.5
+const MESSAGE_HOLD := 5.5
 
 @onready var money_label: Label = $MarginContainer/VBoxContainer/MoneyLabel
 @onready var carrying_label: Label = $MarginContainer/VBoxContainer/CarryingLabel
