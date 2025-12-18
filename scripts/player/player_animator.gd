@@ -13,6 +13,7 @@ var was_on_floor: bool = true
 var jump_start_timer: float = 0.0
 var model_root: Node3D
 var last_local_move: Vector3 = Vector3.FORWARD
+const BLEND_TIME := 0.2
 
 func _ready() -> void:
 	if player == null:
@@ -80,12 +81,34 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 	machine.add_node("jump_start", _make_animation_node(_resolve_anim_candidates(["Jump_Start", "Jump_Loop"])))
 	machine.add_node("jump_loop", _make_animation_node(_resolve_anim_candidates(["Jump_Loop", "Jump_Start", "Idle_Loop"])))
 	machine.add_node("land", _make_animation_node(_resolve_anim_candidates(["Jump_Land", "Idle_Loop"])))
+	_add_transition_pairs(machine, "idle", "walk")
+	_add_transition_pairs(machine, "walk", "sprint")
+	_add_transition(machine, "idle", "sprint")
+	_add_transition(machine, "sprint", "idle")
+	_add_transition(machine, "walk", "jump_start")
+	_add_transition(machine, "sprint", "jump_start")
+	_add_transition(machine, "idle", "jump_start")
+	_add_transition(machine, "jump_start", "jump_loop")
+	_add_transition(machine, "jump_loop", "land")
+	_add_transition(machine, "land", "idle")
+	_add_transition(machine, "land", "walk")
 	return machine
 
 func _make_animation_node(anim_name: String) -> AnimationNodeAnimation:
 	var node := AnimationNodeAnimation.new()
 	node.animation = anim_name
 	return node
+
+func _add_transition_pairs(machine: AnimationNodeStateMachine, a: String, b: String) -> void:
+	_add_transition(machine, a, b)
+	_add_transition(machine, b, a)
+
+func _add_transition(machine: AnimationNodeStateMachine, from: String, to: String) -> void:
+	if machine.has_transition(from, to):
+		return
+	var transition := AnimationNodeStateMachineTransition.new()
+	transition.xfade_time = BLEND_TIME
+	machine.add_transition(from, to, transition)
 
 func _resolve_anim_candidates(names: Array) -> String:
 	for name in names:
