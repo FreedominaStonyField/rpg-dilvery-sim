@@ -2,6 +2,7 @@ extends AnimationTree
 
 @export var player: CharacterBody3D
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
+@export var model_root_path: NodePath = NodePath("../Emma avatarty")
 
 const ANIM_LIB := "AnimationLibrary_Godot_Standard"
 
@@ -10,11 +11,14 @@ var animation_player: AnimationPlayer
 var land_timer: float = 0.0
 var was_on_floor: bool = true
 var jump_start_timer: float = 0.0
+var model_root: Node3D
+var last_local_move: Vector3 = Vector3.FORWARD
 
 func _ready() -> void:
 	if player == null:
 		player = get_parent() as CharacterBody3D
 	animation_player = get_node_or_null(animation_player_path) as AnimationPlayer
+	model_root = get_node_or_null(model_root_path) as Node3D
 	if animation_player == null:
 		push_warning("AnimationPlayer missing for animator.")
 		return
@@ -31,6 +35,7 @@ func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
 		return
 	var on_floor := player.is_on_floor()
+	_update_model_facing()
 	if not on_floor:
 		if was_on_floor:
 			jump_start_timer = _animation_length("Jump_Start", 0.2)
@@ -100,3 +105,17 @@ func _animation_length(anim_key: String, default_length: float) -> float:
 	if _has_animation(anim_name):
 		return animation_player.get_animation(anim_name).length
 	return default_length
+
+func _update_model_facing() -> void:
+	if model_root == null:
+		return
+	var move_dir := Vector3(player.velocity.x, 0.0, player.velocity.z)
+	var local_dir := player.global_transform.basis.inverse() * move_dir
+	local_dir.y = 0.0
+	if local_dir.length() > 0.05:
+		last_local_move = local_dir.normalized()
+	if last_local_move.length() < 0.01:
+		return
+	var target_yaw := atan2(last_local_move.x, last_local_move.z)
+	var current_yaw := model_root.rotation.y
+	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, 0.15)

@@ -6,6 +6,7 @@ extends CharacterBody3D
 @export var sprint_cooldown: float = 2.0
 @export var jump_force: float = 4.5
 @export var mouse_sensitivity: float = 0.001
+@export var rotation_smoothing: float = 10.0
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var _sprint_time_left: float = 0.0
@@ -19,6 +20,7 @@ func _ready() -> void:
 	add_to_group("player")
 	GameState.mode_changed.connect(_on_mode_changed)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera_pivot.set_as_top_level(true)
 
 func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
@@ -40,6 +42,10 @@ func _physics_process(delta: float) -> void:
 
 	velocity = vel
 	move_and_slide()
+	
+	# Sync camera position and smooth rotation
+	camera_pivot.global_position = global_position
+	rotation.y = lerp_angle(rotation.y, camera_pivot.rotation.y, delta * rotation_smoothing)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
@@ -49,7 +55,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_rotate_camera(mouse_event.relative)
 
 func _rotate_camera(relative: Vector2) -> void:
-	rotation.y -= relative.x * mouse_sensitivity
+	camera_pivot.rotation.y -= relative.x * mouse_sensitivity
 	_pitch = clamp(_pitch - relative.y * mouse_sensitivity, deg_to_rad(-60.0), deg_to_rad(45.0))
 	camera_pivot.rotation.x = _pitch
 
@@ -57,10 +63,10 @@ func _get_move_direction() -> Vector3:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if input_dir == Vector2.ZERO:
 		return Vector3.ZERO
-	var forward := transform.basis.z
+	var forward := camera_pivot.global_transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	var right := transform.basis.x
+	var right := camera_pivot.global_transform.basis.x
 	right.y = 0.0
 	right = right.normalized()
 	return (forward * input_dir.y + right * input_dir.x).normalized()

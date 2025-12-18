@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://cpmvabl8xp50d" path="res://addons/vrm/vrm_spring_bone.gd" id="3_c3xxp"]
 [ext_resource type="Script" uid="uid://do8bqskg72hx" path="res://addons/vrm/vrm_collider_group.gd" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://dykp8xet1xm5r" path="res://addons/vrm/vrm_collider.gd" id="5_v42im"]
-[ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="6"]
-[ext_resource type="Script" path="res://scripts/player/player_sfx.gd" id="7"]
+[ext_resource type="Script" uid="uid://cv221xfpmim5y" path="res://scripts/player/player_animator.gd" id="6"]
+[ext_resource type="Script" uid="uid://chxil5odxq2bb" path="res://scripts/player/player_sfx.gd" id="7"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.29638672
@@ -392,7 +392,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01184082, 0)
 shape = SubResource("1")
 
 [node name="Emma avatarty" parent="." instance=ExtResource("2_tpg5x")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 spring_bones = Array[ExtResource("3_c3xxp")]([SubResource("Resource_5q3d6"), SubResource("Resource_0ouqm"), SubResource("Resource_sw771"), SubResource("Resource_iqbac"), SubResource("Resource_tcvoq"), SubResource("Resource_q6tbx"), SubResource("Resource_6rlhu"), SubResource("Resource_bwl7n"), SubResource("Resource_tqjfq"), SubResource("Resource_sqytw"), SubResource("Resource_rggyk"), SubResource("Resource_o4w5u"), SubResource("Resource_ymj1w"), SubResource("Resource_lwa6t")])
 collider_groups = Array[ExtResource("4_npwbq")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
 collider_library = Array[ExtResource("5_v42im")]([SubResource("Resource_ufsiw"), SubResource("Resource_5srrl"), SubResource("Resource_gr02p"), SubResource("Resource_1w4d8"), SubResource("Resource_l52hc"), SubResource("Resource_rml37"), SubResource("Resource_env7x"), SubResource("Resource_mg6j3"), SubResource("Resource_ogn5j"), SubResource("Resource_kf3i6"), SubResource("Resource_wsj4o"), SubResource("Resource_px1ql"), SubResource("Resource_jptbk"), SubResource("Resource_oh3sn"), SubResource("Resource_xlii6"), SubResource("Resource_mg00j"), SubResource("Resource_2i5ce"), SubResource("Resource_h78rf"), SubResource("Resource_24mul"), SubResource("Resource_51ydt"), SubResource("Resource_gs7qn"), SubResource("Resource_7hwql")])
@@ -409,12 +409,11 @@ spring_length = 3.5
 current = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Emma avatarty")
 anim_player = NodePath("../Emma avatarty/AnimationPlayer")
-player = NodePath(".")
 script = ExtResource("6")
 
 [node name="SFX" type="Node3D" parent="."]
-player = NodePath(".")
 script = ExtResource("7")
 
 [node name="StepPlayer" type="AudioStreamPlayer3D" parent="SFX"]
