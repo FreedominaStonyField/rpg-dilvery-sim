@@ -12,6 +12,7 @@ const MESSAGE_HOLD := 5.5
 @onready var menu_button: Button = $PauseMenu/Panel/VBoxContainer/MenuButton
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
+@onready var ui_sfx: UiSfx = $UISfx
 
 var in_transition: bool = false
 var transition_tween: Tween
@@ -28,6 +29,8 @@ func _ready() -> void:
 	GameState.mode_changed.connect(_on_mode_changed)
 	resume_button.pressed.connect(_on_resume_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
+	ui_sfx.connect_button(resume_button)
+	ui_sfx.connect_button(menu_button, "back")
 	_on_money_changed(PlayerData.money)
 	_on_carrying_changed(PlayerData.carrying_item)
 	_on_time_changed(TimeSystem.day_time)
@@ -55,6 +58,7 @@ func _on_new_morning() -> void:
 func show_message(message: String, duration: float = 5) -> void:
 	if in_transition:
 		return
+	ui_sfx.play_notify()
 	var label = Label.new()
 	label.text = message
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD

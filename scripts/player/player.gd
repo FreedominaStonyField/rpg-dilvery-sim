@@ -83,3 +83,6 @@ func _on_mode_changed(mode: GameState.Mode) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	elif mode == GameState.Mode.PLAYING:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func is_sprinting() -> bool:
+	return _sprint_time_left > 0.0

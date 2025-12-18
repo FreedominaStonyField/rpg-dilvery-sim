@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3dmkig6ufc4s"]
+[gd_scene load_steps=3 format=3 uid="uid://d3dmkig6ufc4s"]
 
 [ext_resource type="Script" uid="uid://waih57tjssmw" path="res://scripts/ui/main_menu.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/ui_sfx.gd" id="2"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -32,3 +33,8 @@ text = "Play"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Quit"
+
+[node name="UiSfx" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UiSfx"]

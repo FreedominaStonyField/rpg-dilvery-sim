@@ -1,10 +1,12 @@
-[gd_scene load_steps=54 format=3 uid="uid://player"]
+[gd_scene load_steps=56 format=3 uid="uid://player"]
 
 [ext_resource type="Script" uid="uid://ctxjihbn644yw" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cpvk0cplegsgh" path="res://emma_avatarty.tscn" id="2_tpg5x"]
 [ext_resource type="Script" uid="uid://cpmvabl8xp50d" path="res://addons/vrm/vrm_spring_bone.gd" id="3_c3xxp"]
 [ext_resource type="Script" uid="uid://do8bqskg72hx" path="res://addons/vrm/vrm_collider_group.gd" id="4_npwbq"]
 [ext_resource type="Script" uid="uid://dykp8xet1xm5r" path="res://addons/vrm/vrm_collider.gd" id="5_v42im"]
+[ext_resource type="Script" path="res://scripts/player/player_animator.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/player/player_sfx.gd" id="7"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.29638672
@@ -405,3 +407,16 @@ spring_length = 3.5
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 current = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+anim_player = NodePath("../Emma avatarty/AnimationPlayer")
+player = NodePath(".")
+script = ExtResource("6")
+
+[node name="SFX" type="Node3D" parent="."]
+player = NodePath(".")
+script = ExtResource("7")
+
+[node name="StepPlayer" type="AudioStreamPlayer3D" parent="SFX"]
+
+[node name="OneShotPlayer" type="AudioStreamPlayer3D" parent="SFX"]

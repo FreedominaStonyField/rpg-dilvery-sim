@@ -2,6 +2,7 @@ extends Control
 
 @onready var play_button: Button = $CenterContainer/VBoxContainer/PlayButton
 @onready var quit_button: Button = $CenterContainer/VBoxContainer/QuitButton
+@onready var ui_sfx: UiSfx = $UiSfx
 
 func _ready() -> void:
     get_tree().paused = false
@@ -9,6 +10,8 @@ func _ready() -> void:
     Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
     play_button.pressed.connect(_on_play_pressed)
     quit_button.pressed.connect(_on_quit_pressed)
+    ui_sfx.connect_button(play_button, "confirm")
+    ui_sfx.connect_button(quit_button, "back")
 
 func _on_play_pressed() -> void:
     PlayerData.reset_money()
