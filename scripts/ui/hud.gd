@@ -14,11 +14,14 @@ const MESSAGE_HOLD := 5.5
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
 @onready var interact_prompt: Label = $InteractPrompt
+@onready var stamina_container: Control = $StaminaContainer
+@onready var stamina_bar: ProgressBar = $StaminaContainer/StaminaPanel/StaminaBar
 
 var in_transition: bool = false
 var transition_tween: Tween
 var package_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
+var stamina_source: Node
 
 const DAY_START_MINUTES := 6 * 60
 const DAY_END_MINUTES := 24 * 60
@@ -46,6 +49,9 @@ func _ready() -> void:
 	transition_label.visible = false
 	transition_label.modulate = Color(1, 1, 1, 0)
 	interact_prompt.visible = false
+	stamina_container.visible = false
+	_bind_player_stamina()
+	get_tree().node_added.connect(_on_node_added)
 
 func _on_money_changed(amount: int) -> void:
 	money_label.text = "$" + str(amount)
@@ -198,3 +204,28 @@ func _get_action_label(action: String) -> String:
 		if text != "":
 			return text
 	return action
+
+func _bind_player_stamina() -> void:
+	if stamina_source != null and is_instance_valid(stamina_source):
+		return
+	var player := get_tree().get_first_node_in_group("player")
+	if player == null:
+		return
+	stamina_source = player
+	if player.has_signal("stamina_changed"):
+		player.stamina_changed.connect(_on_stamina_changed)
+		if player.has_method("get_stamina_current") and player.has_method("get_stamina_max"):
+			_on_stamina_changed(
+				player.get_stamina_current(),
+				player.get_stamina_max(),
+				player.get_stamina_percent()
+			)
+
+func _on_node_added(node: Node) -> void:
+	if stamina_source == null and node.is_in_group("player"):
+		_bind_player_stamina()
+
+func _on_stamina_changed(current: float, max_value: float, percent: float) -> void:
+	stamina_bar.max_value = max_value
+	stamina_bar.value = current
+	stamina_container.visible = current < max_value - 0.01

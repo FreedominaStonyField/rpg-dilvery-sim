@@ -1,11 +1,10 @@
 extends CharacterBody3D
 
 signal landed(impact_speed: float)
+signal stamina_changed(current: float, max: float, percent: float)
 
 @export var move_speed: float = 5.0
 @export var sprint_speed: float = 9.0
-@export var sprint_duration: float = 0.6
-@export var sprint_cooldown: float = 2.0
 @export var jump_force: float = 4.5
 @export var mouse_sensitivity: float = 0.001
 @export var rotation_smoothing: float = 10.0
@@ -27,8 +26,18 @@ signal landed(impact_speed: float)
 @export var LandingCooldownDuration: float = 0.2
 @export var LandingMoveSpeedMultiplier: float = 0.5
 
-var _sprint_time_left: float = 0.0
-var _sprint_cooldown_left: float = 0.0
+@export_group("Stamina")
+@export var max_stamina: float = 100.0
+@export var stamina_drain_rate: float = 30.0
+@export var stamina_regen_rate: float = 20.0
+@export var stamina_regen_rate_exhausted: float = 12.0
+@export var stamina_resume_threshold: float = 15.0
+@export var stamina_regen_delay: float = 0.2
+
+var _stamina: float = 0.0
+var _stamina_exhausted: bool = false
+var _stamina_regen_delay_timer: float = 0.0
+var _is_sprinting: bool = false
 var _pitch: float = deg_to_rad(-20.0)
 var _was_on_floor: bool = false
 var _landing_cooldown_timer: float = 0.0
@@ -46,11 +55,13 @@ func _ready() -> void:
 	camera_pivot.spring_length = _zoom_target
 	_apply_camera_offsets()
 	_was_on_floor = is_on_floor()
+	_stamina = max_stamina
+	_emit_stamina_changed()
 
 func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
 		return
-	_update_sprint(delta)
+	_update_stamina(delta)
 	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
 
 	var direction := _get_move_direction()
@@ -147,17 +158,28 @@ func is_move_input_active() -> bool:
 	) != Vector2.ZERO
 
 func _current_speed() -> float:
-	return sprint_speed if _sprint_time_left > 0.0 else move_speed
+	return sprint_speed if _is_sprinting else move_speed
 
-func _update_sprint(delta: float) -> void:
-	if _sprint_time_left > 0.0:
-		_sprint_time_left = max(_sprint_time_left - delta, 0.0)
-		if _sprint_time_left == 0.0:
-			_sprint_cooldown_left = sprint_cooldown
-	elif _sprint_cooldown_left > 0.0:
-		_sprint_cooldown_left = max(_sprint_cooldown_left - delta, 0.0)
-	elif Input.is_action_just_pressed("sprint"):
-		_sprint_time_left = sprint_duration
+func _update_stamina(delta: float) -> void:
+	var wants_sprint := Input.is_action_pressed("sprint") and is_move_input_active()
+	var can_sprint := not _stamina_exhausted and _stamina > 0.0
+	_is_sprinting = wants_sprint and can_sprint
+
+	if _is_sprinting:
+		_stamina_regen_delay_timer = stamina_regen_delay
+		_set_stamina(_stamina - stamina_drain_rate * delta)
+		if _stamina <= 0.0:
+			_stamina = 0.0
+			_stamina_exhausted = true
+	else:
+		_stamina_regen_delay_timer = max(0.0, _stamina_regen_delay_timer - delta)
+		if _stamina < max_stamina and _stamina_regen_delay_timer <= 0.0:
+			var regen_rate := stamina_regen_rate
+			if _stamina_exhausted:
+				regen_rate = stamina_regen_rate_exhausted
+			_set_stamina(_stamina + regen_rate * delta)
+		if _stamina_exhausted and _stamina >= stamina_resume_threshold:
+			_stamina_exhausted = false
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
 	if mode == GameState.Mode.PAUSED or mode == GameState.Mode.MENU:
@@ -166,7 +188,18 @@ func _on_mode_changed(mode: GameState.Mode) -> void:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func is_sprinting() -> bool:
-	return _sprint_time_left > 0.0
+	return _is_sprinting
+
+func get_stamina_current() -> float:
+	return _stamina
+
+func get_stamina_max() -> float:
+	return max_stamina
+
+func get_stamina_percent() -> float:
+	if max_stamina <= 0.0:
+		return 0.0
+	return _stamina / max_stamina
 
 func _update_camera_zoom(delta: float) -> void:
 	if camera_zoom_smoothing <= 0.0:
@@ -180,3 +213,15 @@ func _update_camera_zoom(delta: float) -> void:
 
 func _apply_camera_offsets() -> void:
 	camera.position = camera_shoulder_offset
+
+func _set_stamina(value: float) -> void:
+	var clamped = clamp(value, 0.0, max_stamina)
+	if not is_equal_approx(clamped, _stamina):
+		_stamina = clamped
+		_emit_stamina_changed()
+
+func _emit_stamina_changed() -> void:
+	var percent := 0.0
+	if max_stamina > 0.0:
+		percent = _stamina / max_stamina
+	stamina_changed.emit(_stamina, max_stamina, percent)
