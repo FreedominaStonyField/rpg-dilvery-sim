@@ -138,6 +138,14 @@ func _get_move_direction() -> Vector3:
 	right = right.normalized()
 	return (forward * input_dir.y + right * input_dir.x).normalized()
 
+func is_move_input_active() -> bool:
+	return Input.get_vector(
+		"move_left",
+		"move_right",
+		"move_forward",
+		"move_backward"
+	) != Vector2.ZERO
+
 func _current_speed() -> float:
 	return sprint_speed if _sprint_time_left > 0.0 else move_speed
 

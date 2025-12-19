@@ -3,7 +3,6 @@ extends Control
 @export var overlay_hotkey_action: StringName = "debug_toggle_anim_overlay"
 @export var log_hotkey_action: StringName = "debug_toggle_anim_log"
 @export var max_entries: int = 200
-@export var ui_sfx_path: NodePath
 
 @onready var overlay_panel: Panel = $OverlayPanel
 @onready var overlay_info: RichTextLabel = $OverlayPanel/OverlayVBox/OverlayInfo
@@ -14,7 +13,6 @@ extends Control
 @onready var pause_button: Button = $LogPanel/LogVBox/ControlsRow/PauseButton
 @onready var clear_button: Button = $LogPanel/LogVBox/ControlsRow/ClearButton
 @onready var status_label: Label = $LogPanel/LogVBox/ControlsRow/StatusLabel
-@onready var ui_sfx: UiSfx = get_node_or_null(ui_sfx_path) as UiSfx
 
 var player: CharacterBody3D
 var animator_tree: AnimationTree
@@ -184,10 +182,6 @@ func _connect_ui() -> void:
 	type_option.item_selected.connect(func(_i: int) -> void: _refresh_log_view())
 	pause_button.pressed.connect(_toggle_logging_pause)
 	clear_button.pressed.connect(_clear_log)
-	if ui_sfx != null:
-		ui_sfx.connect_button(pause_button)
-		ui_sfx.connect_button(clear_button)
-		ui_sfx.connect_button(type_option)
 
 func _ensure_actions() -> void:
 	_ensure_action(overlay_hotkey_action, Key.KEY_F9)

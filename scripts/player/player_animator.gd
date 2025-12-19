@@ -1,3 +1,4 @@
+@tool
 extends AnimationTree
 
 signal animation_debug_event(event: Dictionary)
@@ -7,6 +8,13 @@ signal animation_debug_event(event: Dictionary)
 @export var model_root_path: NodePath = NodePath("../Emma avatarty")
 @export var landing_enabled: bool = true
 @export var landing_move_break_speed: float = 0.15
+
+var idle_animation: StringName = &""
+var walk_animation: StringName = &""
+var sprint_animation: StringName = &""
+var jump_start_animation: StringName = &""
+var jump_loop_animation: StringName = &""
+var land_animation: StringName = &""
 
 @export_group("Animation Blending")
 @export var default_blend_time: float = 0.2
@@ -48,6 +56,8 @@ func _ready() -> void:
 		playback.start("idle")
 		last_state = playback.get_current_node()
 		state_time = 0.0
+	if Engine.is_editor_hint():
+		notify_property_list_changed()
 
 func _physics_process(delta: float) -> void:
 	if animation_player == null or playback == null:
@@ -85,8 +95,7 @@ func _physics_process(delta: float) -> void:
 	state_time += delta
 
 func _play_ground_state() -> void:
-	var speed := _ground_speed()
-	if speed < 0.1:
+	if not _has_move_input():
 		_travel("idle", "ground_move")
 	elif _is_sprinting():
 		_travel("sprint", "ground_move")
@@ -95,6 +104,13 @@ func _play_ground_state() -> void:
 
 func _ground_speed() -> float:
 	return Vector2(player.velocity.x, player.velocity.z).length()
+
+func _has_move_input() -> bool:
+	if player == null:
+		return false
+	if player.has_method("is_move_input_active"):
+		return player.is_move_input_active()
+	return _ground_speed() > 0.1
 
 func _is_sprinting() -> bool:
 	return player.has_method("is_sprinting") and player.is_sprinting()
@@ -119,11 +135,9 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"idle",
 		_make_animation_node(
 			"idle",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(idle_animation, [
 				"Idle_Loop",
-				"Idle",
-				"Walk_Loop",
-                "Jog_Fwd"
+				"Idle"
 			])
 		)
 	)
@@ -131,7 +145,7 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"walk",
 		_make_animation_node(
 			"walk",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(walk_animation, [
 				"Walk_Loop",
 				"Jog_Fwd_Loop",
 				"Jog_Fwd",
@@ -143,7 +157,7 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"sprint",
 		_make_animation_node(
 			"sprint",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(sprint_animation, [
 				"Sprint_Loop",
 				"Jog_Fwd",
 				"Jog_Fwd_Loop",
@@ -155,7 +169,7 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"jump_start",
 		_make_animation_node(
 			"jump_start",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(jump_start_animation, [
 				"Jump_Start",
                 "Jump_Loop"
 			])
@@ -165,7 +179,7 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"jump_loop",
 		_make_animation_node(
 			"jump_loop",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(jump_loop_animation, [
 				"Jump_Loop",
 				"Jump_Start",
                 "Idle_Loop"
@@ -176,7 +190,7 @@ func _build_state_machine() -> AnimationNodeStateMachine:
 		"land",
 		_make_animation_node(
 			"land",
-			_resolve_anim_candidates([
+			_resolve_override_or_candidates(land_animation, [
 				"Jump_Land",
                 "Idle_Loop"
 			])
@@ -217,14 +231,92 @@ func _resolve_anim_candidates(names: Array) -> String:
 		var candidate := _with_library(name)
 		if _has_animation(candidate):
 			return candidate
+		if _has_animation(name):
+			return name
 	var anim_list := animation_player.get_animation_list()
 	return anim_list[0] if anim_list.size() > 0 else ""
+
+func _resolve_override_or_candidates(override_anim: StringName, names: Array) -> String:
+	var override_name := String(override_anim)
+	if override_name != "":
+		if _has_animation(override_name):
+			return override_name
+		var with_lib := _with_library(override_name)
+		if _has_animation(with_lib):
+			return with_lib
+	return _resolve_anim_candidates(names)
 
 func _has_animation(name: String) -> bool:
 	return animation_player != null and animation_player.has_animation(name)
 
 func _with_library(name: String) -> String:
 	return "%s/%s" % [ANIM_LIB, name]
+
+func _get_property_list() -> Array[Dictionary]:
+	var list: Array[Dictionary] = []
+	if not Engine.is_editor_hint():
+		return list
+	list.append({
+		"name": "Animation Overrides",
+		"type": TYPE_NIL,
+		"usage": PROPERTY_USAGE_GROUP
+	})
+	var anim_enum := _get_animation_enum_list()
+	var usage := PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_STORAGE
+	list.append({
+		"name": "idle_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	list.append({
+		"name": "walk_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	list.append({
+		"name": "sprint_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	list.append({
+		"name": "jump_start_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	list.append({
+		"name": "jump_loop_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	list.append({
+		"name": "land_animation",
+		"type": TYPE_STRING_NAME,
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": anim_enum,
+		"usage": usage
+	})
+	return list
+
+func _get_animation_enum_list() -> String:
+	if animation_player == null:
+		return ""
+	return ",".join(animation_player.get_animation_list())
+
+func _set_animation_player_path(value: NodePath) -> void:
+	animation_player_path = value
+	if Engine.is_editor_hint():
+		animation_player = get_node_or_null(animation_player_path) as AnimationPlayer
+		notify_property_list_changed()
 
 func _animation_length(anim_key: String, default_length: float) -> float:
 	var anim_name := _with_library(anim_key)
