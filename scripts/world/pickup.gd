@@ -3,15 +3,19 @@ extends Area3D
 @export var dropoff_paths: Array[NodePath] = []
 @export var item_name: String = "Parcel"
 @export var interact_action: String = "interact"
+@export var prompt_offset: Vector3 = Vector3(0.0, 2.0, 0.0)
+@export var prompt_player_offset: Vector3 = Vector3(0.6, 1.6, 0.0)
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var prompt_label: Label3D = _ensure_prompt_label()
 
 var available: bool = true
 var dropoffs: Array[Node3D] = []
 var last_dropoff: Node3D
 var rng := RandomNumberGenerator.new()
 var player_in_range: bool = false
+var player_ref: Node3D
 
 func _ready() -> void:
 	rng.randomize()
@@ -28,14 +32,20 @@ func _ready() -> void:
 	PlayerData.carrying_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
+func _process(_delta: float) -> void:
+	_update_prompt_position()
+
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
+		player_ref = body
 		_update_prompt()
 
 func _on_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
+		if player_ref == body:
+			player_ref = null
 		_update_prompt()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -96,5 +106,32 @@ func _try_pickup() -> void:
 	_update_prompt()
 
 func _update_prompt() -> void:
+	if prompt_label == null:
+		return
 	var can_show := player_in_range and _can_interact()
-	UIEvents.set_interact_prompt(can_show, interact_action, self)
+	prompt_label.visible = can_show
+	if can_show:
+		prompt_label.text = "Press E to pick up %s" % item_name
+		_update_prompt_position()
+
+func _update_prompt_position() -> void:
+	if prompt_label == null or player_ref == null:
+		return
+	if not prompt_label.visible:
+		return
+	prompt_label.global_position = player_ref.global_position + prompt_player_offset
+
+func _ensure_prompt_label() -> Label3D:
+	var label := get_node_or_null("InteractLabel") as Label3D
+	if label:
+		return label
+	label = Label3D.new()
+	label.name = "InteractLabel"
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.pixel_size = 0.01
+	label.position = prompt_offset
+	label.modulate = Color(1.0, 0.9, 0.6, 1.0)
+	label.uppercase = true
+	label.visible = false
+	add_child(label)
+	return label
