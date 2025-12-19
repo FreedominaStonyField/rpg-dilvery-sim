@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dykp8xet1xm5r" path="res://addons/vrm/vrm_collider.gd" id="5_v42im"]
 [ext_resource type="Script" uid="uid://cv221xfpmim5y" path="res://scripts/player/player_animator.gd" id="6"]
 [ext_resource type="Script" uid="uid://bhq4261q2lb84" path="res://scripts/player/player_sfx_controller.gd" id="7"]
-[ext_resource type="Resource" path="res://assets/audio/profiles/player_sfx_default.tres" id="8"]
+[ext_resource type="Resource" uid="uid://cqeajm3q8hhws" path="res://assets/audio/profiles/player_sfx_default.tres" id="8"]
 [ext_resource type="AudioStream" uid="uid://oqr5vvra866m" path="res://assets/audio/rpg/footstep00.ogg" id="8_7oing"]
 [ext_resource type="AudioStream" uid="uid://b8am17f0anlab" path="res://assets/audio/ui/click2.ogg" id="9_7oing"]
 
@@ -6182,11 +6182,11 @@ tracks/52/keys = PackedFloat32Array(0, 1, -4.9704674e-08, -1.0000002, -1.7881393
 tracks/53/type = "method"
 tracks/53/imported = false
 tracks/53/enabled = true
-tracks/53/path = NodePath("../SFX")
+tracks/53/path = NodePath("SFX")
 tracks/53/interp = 1
 tracks/53/loop_wrap = true
 tracks/53/keys = {
-"times": PackedFloat32Array(0.03333334, 0.53333336),
+"times": PackedFloat32Array(0.033333335, 0.500243),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -18273,29 +18273,29 @@ collider_groups = Array[ExtResource("4_npwbq")]([SubResource("Resource_e1rck"), 
 collider_library = Array[ExtResource("5_v42im")]([SubResource("Resource_ufsiw"), SubResource("Resource_5srrl"), SubResource("Resource_gr02p"), SubResource("Resource_1w4d8"), SubResource("Resource_l52hc"), SubResource("Resource_rml37"), SubResource("Resource_env7x"), SubResource("Resource_mg6j3"), SubResource("Resource_ogn5j"), SubResource("Resource_kf3i6"), SubResource("Resource_wsj4o"), SubResource("Resource_px1ql"), SubResource("Resource_jptbk"), SubResource("Resource_oh3sn"), SubResource("Resource_xlii6"), SubResource("Resource_mg00j"), SubResource("Resource_2i5ce"), SubResource("Resource_h78rf"), SubResource("Resource_24mul"), SubResource("Resource_51ydt"), SubResource("Resource_gs7qn"), SubResource("Resource_7hwql")])
 
 [node name="GeneralSkeleton" parent="Emma avatarty" index="0"]
-bones/1/position = Vector3(0.015575697, 0.6849061, -0.046755444)
-bones/1/rotation = Quaternion(0.04954631, -0.002394505, 0.048211917, 0.99760467)
-bones/3/rotation = Quaternion(0.092763975, 0.089327164, -0.027099086, 0.9913028)
-bones/4/rotation = Quaternion(0.26346815, 0.27068195, 0.0146775395, 0.9257973)
-bones/9/rotation = Quaternion(-0.17521548, -0.1858402, -0.017078929, 0.9666806)
-bones/10/rotation = Quaternion(-0.047315415, -0.18647797, 0.007366698, 0.9812915)
-bones/41/rotation = Quaternion(0.5194593, 0.4797297, 0.47976214, -0.51947075)
-bones/42/rotation = Quaternion(-0.08443306, 0.9052301, -0.41638792, 0.0071322033)
-bones/43/rotation = Quaternion(0.46251002, -0.47121596, 0.42142913, 0.6216409)
-bones/60/rotation = Quaternion(0.5, -0.49999988, -0.5, -0.5000001)
-bones/61/rotation = Quaternion(-0.14339036, 0.91362053, -0.3803869, -0.006515293)
-bones/62/rotation = Quaternion(0.30978703, 0.6478082, -0.65060747, 0.24715702)
-bones/79/rotation = Quaternion(0.00034899355, 0.35201135, 0.9346648, 0.049895637)
-bones/80/rotation = Quaternion(-5.354095e-05, 0.99942315, 0.033946276, 0.0010894028)
-bones/88/rotation = Quaternion(-0.051384754, 0.738138, -0.6726379, -0.008379242)
-bones/89/rotation = Quaternion(-5.0260322e-08, 1, 8.940697e-08, -6.7655144e-09)
-bones/90/rotation = Quaternion(0.00029679015, -0.29588512, 0.95428056, 0.042433247)
-bones/91/rotation = Quaternion(0.003972204, 0.92278546, -0.38517737, 0.009468584)
-bones/99/rotation = Quaternion(0.004037544, 0.7881303, -0.61498857, -0.024970423)
-bones/100/rotation = Quaternion(4.9704663e-08, 1, 1.7881389e-07, 1.565586e-08)
+bones/1/position = Vector3(-0.012561961, 0.63767964, -0.046777435)
+bones/1/rotation = Quaternion(0.049566537, 0.0019305839, -0.03887259, 0.99801224)
+bones/3/rotation = Quaternion(0.07799745, -0.07733283, 0.028838815, 0.99353135)
+bones/4/rotation = Quaternion(0.22419189, -0.23417881, 0.0086815655, 0.9459508)
+bones/9/rotation = Quaternion(-0.14894024, 0.15964136, 0.00011871731, 0.9758747)
+bones/10/rotation = Quaternion(-0.020063493, 0.15828645, -0.020755813, 0.9869712)
+bones/41/rotation = Quaternion(0.50029534, 0.49970418, 0.49970466, -0.5002956)
+bones/42/rotation = Quaternion(0.13478678, 0.9124618, -0.38626716, 0.0066162287)
+bones/43/rotation = Quaternion(0.28707433, -0.6047981, 0.6604682, 0.3399847)
+bones/60/rotation = Quaternion(0.52134395, -0.4776787, -0.4777144, -0.5213566)
+bones/61/rotation = Quaternion(0.08112216, 0.9011742, -0.42573586, -0.007292253)
+bones/62/rotation = Quaternion(0.48912877, 0.54102623, -0.38547975, 0.5651982)
+bones/79/rotation = Quaternion(-0.00025485986, -0.117190145, 0.9924406, -0.03644469)
+bones/80/rotation = Quaternion(-0.008135414, 0.79712695, -0.6036552, -0.011081764)
+bones/88/rotation = Quaternion(-0.008476658, 0.7432784, -0.66871583, 0.01686699)
+bones/89/rotation = Quaternion(-1.8526102e-08, 1, 8.940696e-08, 4.30945e-08)
+bones/90/rotation = Quaternion(-0.00024831865, 0.5068098, 0.86132646, -0.03550635)
+bones/91/rotation = Quaternion(-0.0067733717, 0.88358253, -0.46803984, -0.013224584)
+bones/99/rotation = Quaternion(-0.03391409, 0.7277425, -0.68442386, -0.028366128)
+bones/100/rotation = Quaternion(1.9604329e-08, 0.9993294, 0.03661675, 2.1147441e-08)
 
 [node name="Head" parent="Emma avatarty/GeneralSkeleton" index="4"]
-transform = Transform3D(1, -4.4703484e-08, -8.940697e-08, -1.4901161e-08, 0.93536556, -0.35368234, 1.4901161e-07, 0.35368228, 0.93536556, 0.0008605593, 1.0803521, 0.09331676)
+transform = Transform3D(1.0000001, -1.7052516e-06, 2.0861626e-06, 2.346933e-06, 0.93536216, -0.3536917, -1.3411045e-06, 0.35369176, 0.9353621, -0.005361204, 1.0430485, 0.07362251)
 
 [node name="AnimationPlayer" parent="Emma avatarty" index="1"]
 libraries = {
