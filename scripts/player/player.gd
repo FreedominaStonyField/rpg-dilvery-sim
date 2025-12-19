@@ -9,6 +9,16 @@ extends CharacterBody3D
 @export var rotation_smoothing: float = 10.0
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@export_group("Camera Tuning")
+@export var camera_pivot_offset: Vector3 = Vector3(0.0, 1.6, 0.0)
+@export var camera_shoulder_offset: Vector3 = Vector3(0.4, 0.2, 0.0)
+@export var camera_pitch_min: float = -60.0
+@export var camera_pitch_max: float = 45.0
+@export var camera_zoom_min: float = 1.6
+@export var camera_zoom_max: float = 5.0
+@export var camera_zoom_step: float = 0.35
+@export var camera_zoom_smoothing: float = 12.0
+
 @export_group("Movement Tuning")
 @export var bDisableAirControl: bool = true
 @export_enum("Ignore Input", "Clamp Speed") var LandingCooldownMode: String = "Ignore Input"
@@ -20,6 +30,7 @@ var _sprint_cooldown_left: float = 0.0
 var _pitch: float = deg_to_rad(-20.0)
 var _was_on_floor: bool = false
 var _landing_cooldown_timer: float = 0.0
+var _zoom_target: float = 0.0
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
@@ -29,6 +40,9 @@ func _ready() -> void:
 	GameState.mode_changed.connect(_on_mode_changed)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_pivot.set_as_top_level(true)
+	_zoom_target = clamp(camera_pivot.spring_length, camera_zoom_min, camera_zoom_max)
+	camera_pivot.spring_length = _zoom_target
+	_apply_camera_offsets()
 	_was_on_floor = is_on_floor()
 
 func _physics_process(delta: float) -> void:
@@ -71,8 +85,10 @@ func _physics_process(delta: float) -> void:
 	_was_on_floor = is_on_floor()
 	
 	# Sync camera position and smooth rotation
-	camera_pivot.global_position = global_position
+	camera_pivot.global_position = global_position + camera_pivot_offset
 	rotation.y = lerp_angle(rotation.y, camera_pivot.rotation.y, delta * rotation_smoothing)
+	_update_camera_zoom(delta)
+	_apply_camera_offsets()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
@@ -80,10 +96,29 @@ func _unhandled_input(event: InputEvent) -> void:
 	var mouse_event := event as InputEventMouseMotion
 	if mouse_event and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_rotate_camera(mouse_event.relative)
+		return
+	var wheel_event := event as InputEventMouseButton
+	if wheel_event and wheel_event.pressed:
+		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_zoom_target = clamp(
+				_zoom_target - camera_zoom_step,
+				camera_zoom_min,
+				camera_zoom_max
+			)
+		elif wheel_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_zoom_target = clamp(
+				_zoom_target + camera_zoom_step,
+				camera_zoom_min,
+				camera_zoom_max
+			)
 
 func _rotate_camera(relative: Vector2) -> void:
 	camera_pivot.rotation.y -= relative.x * mouse_sensitivity
-	_pitch = clamp(_pitch - relative.y * mouse_sensitivity, deg_to_rad(-60.0), deg_to_rad(45.0))
+	_pitch = clamp(
+		_pitch - relative.y * mouse_sensitivity,
+		deg_to_rad(camera_pitch_min),
+		deg_to_rad(camera_pitch_max)
+	)
 	camera_pivot.rotation.x = _pitch
 
 func _get_move_direction() -> Vector3:
@@ -119,3 +154,16 @@ func _on_mode_changed(mode: GameState.Mode) -> void:
 
 func is_sprinting() -> bool:
 	return _sprint_time_left > 0.0
+
+func _update_camera_zoom(delta: float) -> void:
+	if camera_zoom_smoothing <= 0.0:
+		camera_pivot.spring_length = _zoom_target
+		return
+	camera_pivot.spring_length = lerp(
+		camera_pivot.spring_length,
+		_zoom_target,
+		delta * camera_zoom_smoothing
+	)
+
+func _apply_camera_offsets() -> void:
+	camera.position = camera_shoulder_offset

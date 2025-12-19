@@ -53,11 +53,22 @@ func _on_carrying_changed(item_name: String) -> void:
 	carrying_label.text = "Carrying: %s" % (item_name if item_name != "" else "None")
 
 func _on_time_changed(day_time: float) -> void:
-	time_label.text = _format_time(day_time)
-	time_label.tooltip_text = "Day time"
+	time_label.text = "%s  Curfew %s" % [_format_time(day_time), _format_curfew_time()]
+	time_label.tooltip_text = "Day time and curfew"
 
 func _format_time(day_time: float) -> String:
 	var total_minutes := int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
+	total_minutes = clamp(total_minutes, DAY_START_MINUTES, DAY_END_MINUTES)
+	var hours := total_minutes / 60
+	var minutes := total_minutes % 60
+	return "%s:%s" % [str(hours).pad_zeros(2), str(minutes).pad_zeros(2)]
+
+func _format_curfew_time() -> String:
+	var total_minutes := int(round(lerp(
+		DAY_START_MINUTES,
+		DAY_END_MINUTES,
+		TimeSystem.curfew_ratio
+	)))
 	total_minutes = clamp(total_minutes, DAY_START_MINUTES, DAY_END_MINUTES)
 	var hours := total_minutes / 60
 	var minutes := total_minutes % 60

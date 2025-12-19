@@ -5,7 +5,7 @@ signal curfew_started
 signal mugged
 signal new_morning
 
-@export var day_length: float = 180.0
+@export var day_length: float = 900.0
 @export var curfew_ratio: float = 1.0
 @export var mug_delay: float = 3.0
 
