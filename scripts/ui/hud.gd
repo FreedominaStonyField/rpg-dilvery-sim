@@ -13,11 +13,13 @@ const MESSAGE_HOLD := 5.5
 @onready var menu_button: Button = $PauseMenu/Panel/VBoxContainer/MenuButton
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
+@onready var interact_prompt: Label = $InteractPrompt
 @onready var ui_sfx: UiSfx = $UISfx
 
 var in_transition: bool = false
 var transition_tween: Tween
 var package_pause_active: bool = false
+var interact_prompt_owner_id: int = 0
 
 const DAY_START_MINUTES := 6 * 60
 const DAY_END_MINUTES := 24 * 60
@@ -31,6 +33,7 @@ func _ready() -> void:
 	TimeSystem.mugged.connect(_on_mugged)
 	UIEvents.notify.connect(show_message)
 	UIEvents.sleep_sequence_requested.connect(_on_sleep_sequence_requested)
+	UIEvents.interact_prompt_changed.connect(_on_interact_prompt_changed)
 	GameState.mode_changed.connect(_on_mode_changed)
 	resume_button.pressed.connect(_on_resume_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
@@ -45,6 +48,7 @@ func _ready() -> void:
 	fade_rect.color = Color(0, 0, 0, 0)
 	transition_label.visible = false
 	transition_label.modulate = Color(1, 1, 1, 0)
+	interact_prompt.visible = false
 
 func _on_money_changed(amount: int) -> void:
 	money_label.text = "$" + str(amount)
@@ -179,3 +183,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		package_pause_active = next_visible
 		GameState.set_mode(GameState.Mode.PAUSED if next_visible else GameState.Mode.PLAYING)
 		get_viewport().set_input_as_handled()
+
+func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
+	if visible:
+		interact_prompt_owner_id = owner_id
+		interact_prompt.text = "Press %s to use" % _get_action_label(action)
+		interact_prompt.visible = true
+		return
+	if owner_id != 0 and owner_id != interact_prompt_owner_id:
+		return
+	interact_prompt_owner_id = 0
+	interact_prompt.visible = false
+
+func _get_action_label(action: String) -> String:
+	var events := InputMap.action_get_events(action)
+	for event in events:
+		var text := event.as_text()
+		if text != "":
+			return text
+	return action

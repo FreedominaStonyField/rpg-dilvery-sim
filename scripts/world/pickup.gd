@@ -2,6 +2,7 @@ extends Area3D
 
 @export var dropoff_paths: Array[NodePath] = []
 @export var item_name: String = "Parcel"
+@export var interact_action: String = "interact"
 
 @onready var mesh_instance: MeshInstance3D = $MeshInstance3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -10,6 +11,7 @@ var available: bool = true
 var dropoffs: Array[Node3D] = []
 var last_dropoff: Node3D
 var rng := RandomNumberGenerator.new()
+var player_in_range: bool = false
 
 func _ready() -> void:
 	rng.randomize()
@@ -20,25 +22,31 @@ func _ready() -> void:
 	if dropoffs.is_empty():
 		push_warning("Pickup missing dropoff references.")
 	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 	Jobs.job_available.connect(_on_job_available)
+	Jobs.job_started.connect(_on_job_state_changed)
+	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
-	if not available:
+	if body.is_in_group("player"):
+		player_in_range = true
+		_update_prompt()
+
+func _on_body_exited(body: Node3D) -> void:
+	if body.is_in_group("player"):
+		player_in_range = false
+		_update_prompt()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not player_in_range:
 		return
-	if not body.is_in_group("player"):
+	if not event.is_action_pressed(interact_action):
 		return
-	if Jobs.has_active_job() or PlayerData.is_carrying():
+	if not _can_interact():
 		return
-	var dropoff := _choose_dropoff()
-	if dropoff == null:
-		push_warning("Pickup missing dropoff reference.")
-		return
-	available = false
-	mesh_instance.visible = false
-	collision_shape.set_deferred("disabled", true)
-	Jobs.start_job(dropoff)
-	PlayerData.set_carrying(item_name)
-	UIEvents.show_message("Picked up delivery. Target: %s" % dropoff.name)
+	_try_pickup()
+	get_viewport().set_input_as_handled()
 
 func _choose_dropoff() -> Node3D:
 	if dropoffs.is_empty():
@@ -59,3 +67,34 @@ func _on_job_available() -> void:
 	available = true
 	mesh_instance.visible = true
 	collision_shape.set_deferred("disabled", false)
+	_update_prompt()
+
+func _on_job_state_changed(_dropoff: Node3D) -> void:
+	_update_prompt()
+
+func _on_carrying_changed(_item_name: String) -> void:
+	_update_prompt()
+
+func _can_interact() -> bool:
+	if not available:
+		return false
+	if Jobs.has_active_job() or PlayerData.is_carrying():
+		return false
+	return true
+
+func _try_pickup() -> void:
+	var dropoff := _choose_dropoff()
+	if dropoff == null:
+		push_warning("Pickup missing dropoff reference.")
+		return
+	available = false
+	mesh_instance.visible = false
+	collision_shape.set_deferred("disabled", true)
+	Jobs.start_job(dropoff)
+	PlayerData.set_carrying(item_name)
+	UIEvents.show_message("Picked up delivery. Target: %s" % dropoff.name)
+	_update_prompt()
+
+func _update_prompt() -> void:
+	var can_show := player_in_range and _can_interact()
+	UIEvents.set_interact_prompt(can_show, interact_action, self)
