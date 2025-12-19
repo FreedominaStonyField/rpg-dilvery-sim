@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_sfx_profile.gd" id="1"]
+[ext_resource type="AudioStream" path="res://assets/audio/impacts/footstep_concrete_000.ogg" id="2"]
+[ext_resource type="AudioStream" path="res://assets/audio/impacts/footstep_concrete_001.ogg" id="3"]
+[ext_resource type="AudioStream" path="res://assets/audio/impacts/footstep_concrete_002.ogg" id="4"]
+[ext_resource type="AudioStream" path="res://assets/audio/impacts/footstep_concrete_003.ogg" id="5"]
+[resource]
+script = ExtResource("1")
+footstep_walk_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
+footstep_sprint_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
+footstep_volume_db = -10.0
+landing_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
+landing_volume_db = -8.0
+landing_min_impact_speed = 2.0
+pitch_jitter = 0.05

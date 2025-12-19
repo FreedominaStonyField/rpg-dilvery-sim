@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+signal landed(impact_speed: float)
+
 @export var move_speed: float = 5.0
 @export var sprint_speed: float = 9.0
 @export var sprint_duration: float = 0.6
@@ -54,10 +56,7 @@ func _physics_process(delta: float) -> void:
 	var direction := _get_move_direction()
 	var speed := _current_speed()
 	var vel := velocity
-
-	var just_landed := is_on_floor() and not _was_on_floor
-	if just_landed:
-		_landing_cooldown_timer = LandingCooldownDuration
+	var pre_move_velocity_y := vel.y
 
 	if is_on_floor():
 		if _landing_cooldown_timer > 0.0:
@@ -81,8 +80,14 @@ func _physics_process(delta: float) -> void:
 
 	velocity = vel
 	move_and_slide()
-	
-	_was_on_floor = is_on_floor()
+
+	var on_floor := is_on_floor()
+	var just_landed := on_floor and not _was_on_floor
+	if just_landed:
+		_landing_cooldown_timer = LandingCooldownDuration
+		landed.emit(abs(min(pre_move_velocity_y, 0.0)))
+
+	_was_on_floor = on_floor
 	
 	# Sync camera position and smooth rotation
 	camera_pivot.global_position = global_position + camera_pivot_offset

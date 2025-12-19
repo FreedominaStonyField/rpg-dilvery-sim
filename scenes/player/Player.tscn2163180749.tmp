@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bhq4261q2lb84" path="res://scripts/player/player_sfx_controller.gd" id="7"]
 [ext_resource type="Resource" path="res://assets/audio/profiles/player_sfx_default.tres" id="8"]
 [ext_resource type="AudioStream" uid="uid://oqr5vvra866m" path="res://assets/audio/rpg/footstep00.ogg" id="8_7oing"]
-[ext_resource type="AudioStream" uid="uid://b8am17f0anlab" path="res://assets/audio/ui/click2.ogg" id="9_7oing"]
+[ext_resource type="AudioStream" uid="uid://djg5l8hth6jfh" path="res://assets/audio/impacts/impactSoft_medium_003.ogg" id="9_5stf6"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.29638672
@@ -18307,14 +18307,14 @@ libraries = {
 script = ExtResource("7")
 profile = ExtResource("8")
 player_path = NodePath("../..")
+footsteps_player_path = null
+landing_player_path = null
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Emma avatarty/SFX"]
 stream = ExtResource("8_7oing")
-volume_db = 64.0
 
 [node name="Landing" type="AudioStreamPlayer3D" parent="Emma avatarty/SFX"]
-stream = ExtResource("9_7oing")
-volume_db = 80.0
+stream = ExtResource("9_5stf6")
 
 [node name="secondary" parent="Emma avatarty" index="3"]
 collider_groups = Array[ExtResource("4_npwbq")]([SubResource("Resource_e1rck"), SubResource("Resource_4chjn"), SubResource("Resource_dj3lg"), SubResource("Resource_8lqkx"), SubResource("Resource_aa0ta"), SubResource("Resource_lrf8s"), SubResource("Resource_g4jsv"), SubResource("Resource_ox1u7"), SubResource("Resource_a72ww"), SubResource("Resource_j62ii")])
