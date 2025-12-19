@@ -3,28 +3,16 @@ class_name UiSfx
 
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
-const CLICK_SOUNDS := [
-	preload("res://assets/audio/ui/click_001.ogg"),
-	preload("res://assets/audio/ui/click_002.ogg"),
-	preload("res://assets/audio/ui/click_003.ogg")
-]
-const BACK_SOUNDS := [
-	preload("res://assets/audio/ui/back_001.ogg"),
-	preload("res://assets/audio/ui/back_002.ogg")
-]
-const CONFIRM_SOUNDS := [
-	preload("res://assets/audio/ui/confirmation_001.ogg"),
-	preload("res://assets/audio/ui/confirmation_002.ogg")
-]
-const NOTIFY_SOUNDS := [
-	preload("res://assets/audio/ui/bong_001.ogg"),
-	preload("res://assets/audio/ui/close_004.ogg")
-]
+@export var profile: UiSfxProfile
+
+const DEFAULT_PROFILE := preload("res://assets/audio/profiles/ui_sfx_default.tres")
 
 var rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	rng.randomize()
+	if profile == null:
+		profile = DEFAULT_PROFILE
 
 func connect_button(button: BaseButton, kind: String = "click") -> void:
 	if button == null:
@@ -34,16 +22,24 @@ func connect_button(button: BaseButton, kind: String = "click") -> void:
 	)
 
 func play_click() -> void:
-	_play_random(CLICK_SOUNDS, -8.0)
+	if profile == null:
+		return
+	_play_random(profile.click_sounds, profile.click_volume_db)
 
 func play_back() -> void:
-	_play_random(BACK_SOUNDS, -6.0)
+	if profile == null:
+		return
+	_play_random(profile.back_sounds, profile.back_volume_db)
 
 func play_confirm() -> void:
-	_play_random(CONFIRM_SOUNDS, -6.0)
+	if profile == null:
+		return
+	_play_random(profile.confirm_sounds, profile.confirm_volume_db)
 
 func play_notify() -> void:
-	_play_random(NOTIFY_SOUNDS, -10.0)
+	if profile == null:
+		return
+	_play_random(profile.notify_sounds, profile.notify_volume_db)
 
 func _play_kind(kind: String) -> void:
 	match kind:
@@ -63,6 +59,7 @@ func _play_random(pool: Array, volume_db: float = 0.0) -> void:
 		return
 	audio_player.stop()
 	audio_player.stream = pool[rng.randi_range(0, pool.size() - 1)]
-	audio_player.pitch_scale = 1.0 + rng.randf_range(-0.05, 0.05)
+	var jitter := profile.pitch_jitter if profile != null else 0.05
+	audio_player.pitch_scale = 1.0 + rng.randf_range(-jitter, jitter)
 	audio_player.volume_db = volume_db
 	audio_player.play()

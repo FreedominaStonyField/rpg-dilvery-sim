@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://player"]
+[gd_scene load_steps=57 format=3 uid="uid://player"]
 
 [ext_resource type="Script" uid="uid://ctxjihbn644yw" path="res://scripts/player/player.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cpvk0cplegsgh" path="res://emma_avatarty.tscn" id="2_tpg5x"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dykp8xet1xm5r" path="res://addons/vrm/vrm_collider.gd" id="5_v42im"]
 [ext_resource type="Script" uid="uid://cv221xfpmim5y" path="res://scripts/player/player_animator.gd" id="6"]
 [ext_resource type="Script" uid="uid://chxil5odxq2bb" path="res://scripts/player/player_sfx.gd" id="7"]
+[ext_resource type="Resource" uid="uid://dejvo7oq0gkv1" path="res://assets/audio/profiles/player_sfx_grass.tres" id="8_v42im"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.29638672
@@ -416,8 +417,10 @@ anim_player = NodePath("../Emma avatarty/AnimationPlayer")
 script = ExtResource("6")
 default_blend_time = 0.0
 
-[node name="SFX" type="Node3D" parent="."]
+[node name="SFX" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("7")
+player = NodePath("..")
+profile = ExtResource("8_v42im")
 
 [node name="StepPlayer" type="AudioStreamPlayer3D" parent="SFX"]
 volume_db = -22.444

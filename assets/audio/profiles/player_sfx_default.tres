@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="PlayerSfxProfile" load_steps=14 format=3 uid="uid://c1hakb6ncrs76"]
+
+[ext_resource type="Script" uid="uid://iorjiktxvmve" path="res://scripts/player/player_sfx_profile.gd" id="1"]
+[ext_resource type="AudioStream" uid="uid://dnx62x4n18rao" path="res://assets/audio/impacts/footstep_grass_000.ogg" id="2"]
+[ext_resource type="AudioStream" uid="uid://c35uamdt35pak" path="res://assets/audio/impacts/footstep_grass_001.ogg" id="3"]
+[ext_resource type="AudioStream" uid="uid://bmo2fwpsyn8sj" path="res://assets/audio/impacts/footstep_grass_002.ogg" id="4"]
+[ext_resource type="AudioStream" uid="uid://bhhshaouxkanx" path="res://assets/audio/impacts/footstep_grass_003.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://c51eymsupv0op" path="res://assets/audio/impacts/footstep_concrete_000.ogg" id="6"]
+[ext_resource type="AudioStream" uid="uid://ccyxguujfvc6f" path="res://assets/audio/rpg/footstep01.ogg" id="7"]
+[ext_resource type="AudioStream" uid="uid://bsbtqilax5thn" path="res://assets/audio/rpg/footstep02.ogg" id="8"]
+[ext_resource type="AudioStream" uid="uid://b2ju5g4n5akoc" path="res://assets/audio/rpg/footstep03.ogg" id="9"]
+[ext_resource type="AudioStream" uid="uid://de7dsp0suy2xr" path="res://assets/audio/impacts/footstep_carpet_000.ogg" id="10"]
+[ext_resource type="AudioStream" uid="uid://80lokl24yfmg" path="res://assets/audio/impacts/footstep_carpet_001.ogg" id="11"]
+[ext_resource type="AudioStream" uid="uid://j1le5ioefsvq" path="res://assets/audio/impacts/footstep_carpet_002.ogg" id="12"]
+[ext_resource type="AudioStream" uid="uid://cwrfo4tq1kd2t" path="res://assets/audio/rpg/cloth1.ogg" id="13"]
+[ext_resource type="AudioStream" uid="uid://dywkpwifmapro" path="res://assets/audio/rpg/cloth4.ogg" id="14"]
+
+[resource]
+script = ExtResource("1")
+footstep_grass = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
+footstep_concrete = Array[AudioStream]([ExtResource("6"), ExtResource("7"), ExtResource("8"), ExtResource("9")])
+footstep_carpet = Array[AudioStream]([ExtResource("10"), ExtResource("11"), ExtResource("12")])
+jump_sounds = Array[AudioStream]([ExtResource("13"), ExtResource("14")])
+land_sounds = Array[AudioStream]([ExtResource("6"), ExtResource("3")])
+footstep_volume_db = -12.075
+jump_volume_db = -4.0
+land_volume_db = -2.0
+footstep_pitch_jitter = 0.05
+one_shot_pitch_jitter = 0.02
+jump_pitch_scale = 1.0
+land_pitch_scale = 1.0

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PlayerSfxProfile" load_steps=14 format=3 uid="uid://dejvo7oq0gkv1"]
+
+[ext_resource type="AudioStream" uid="uid://de7dsp0suy2xr" path="res://assets/audio/impacts/footstep_carpet_000.ogg" id="1_weqnj"]
+[ext_resource type="AudioStream" uid="uid://80lokl24yfmg" path="res://assets/audio/impacts/footstep_carpet_001.ogg" id="2_x0rc7"]
+[ext_resource type="AudioStream" uid="uid://j1le5ioefsvq" path="res://assets/audio/impacts/footstep_carpet_002.ogg" id="3_l2rfe"]
+[ext_resource type="AudioStream" uid="uid://c51eymsupv0op" path="res://assets/audio/impacts/footstep_concrete_000.ogg" id="4_aj57k"]
+[ext_resource type="AudioStream" uid="uid://ccyxguujfvc6f" path="res://assets/audio/rpg/footstep01.ogg" id="5_mjf67"]
+[ext_resource type="AudioStream" uid="uid://bsbtqilax5thn" path="res://assets/audio/rpg/footstep02.ogg" id="6_bhd7k"]
+[ext_resource type="AudioStream" uid="uid://b2ju5g4n5akoc" path="res://assets/audio/rpg/footstep03.ogg" id="7_ooi4t"]
+[ext_resource type="AudioStream" uid="uid://dnx62x4n18rao" path="res://assets/audio/impacts/footstep_grass_000.ogg" id="8_kpsj4"]
+[ext_resource type="AudioStream" uid="uid://c35uamdt35pak" path="res://assets/audio/impacts/footstep_grass_001.ogg" id="9_rvw6j"]
+[ext_resource type="AudioStream" uid="uid://bmo2fwpsyn8sj" path="res://assets/audio/impacts/footstep_grass_002.ogg" id="10_gjvll"]
+[ext_resource type="AudioStream" uid="uid://bhhshaouxkanx" path="res://assets/audio/impacts/footstep_grass_003.ogg" id="11_5xqbw"]
+[ext_resource type="AudioStream" uid="uid://dywkpwifmapro" path="res://assets/audio/rpg/cloth4.ogg" id="13_utpxe"]
+[ext_resource type="Script" uid="uid://iorjiktxvmve" path="res://scripts/player/player_sfx_profile.gd" id="14_lkcv1"]
+
+[resource]
+script = ExtResource("14_lkcv1")
+footstep_grass = Array[AudioStream]([ExtResource("8_kpsj4"), ExtResource("9_rvw6j"), ExtResource("10_gjvll"), ExtResource("11_5xqbw")])
+footstep_concrete = Array[AudioStream]([ExtResource("4_aj57k"), ExtResource("5_mjf67"), ExtResource("6_bhd7k"), ExtResource("7_ooi4t")])
+footstep_carpet = Array[AudioStream]([ExtResource("1_weqnj"), ExtResource("2_x0rc7"), ExtResource("3_l2rfe")])
+jump_sounds = Array[AudioStream]([ExtResource("13_utpxe")])
+land_sounds = Array[AudioStream]([ExtResource("9_rvw6j")])
+footstep_volume_db = -12.075
