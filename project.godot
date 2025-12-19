@@ -23,6 +23,10 @@ Jobs="*res://scripts/autoload/jobs.gd"
 PlayerData="*res://scripts/autoload/player_data.gd"
 UIEvents="*res://scripts/autoload/ui_events.gd"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/prototype_mini_bundle/plugin.cfg", "res://addons/vrm/plugin.cfg")

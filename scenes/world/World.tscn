@@ -736,10 +736,10 @@ LandingCooldownDuration = 5.0
 LandingMoveSpeedMultiplier = 5.0
 
 [node name="Pickup" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.554832, 1.4478197, -8.771846)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784884, 0.5543945, 3.619691)
 collision_layer = 0
 script = ExtResource("5")
-dropoff_paths = Array[NodePath]([NodePath(""), NodePath(""), NodePath("../DropoffDocks"), NodePath("")])
+dropoff_paths = Array[NodePath]([NodePath("../DropoffDocks"), NodePath("../DropoffHouse001"), NodePath("../DropoffHouse002"), NodePath("../DropoffHouse003"), NodePath("../DropoffHouse004"), NodePath("../DropoffHouse005"), NodePath("../DropoffHouse006"), NodePath("../DropoffWarehouse"), NodePath("../DropoffWarehouse2"), NodePath("../DropoffWarehouse3"), NodePath("../DropoffDock"), NodePath("../DropoffDock2"), NodePath("../DropoffTower"), NodePath("../DropoffBarn"), NodePath("../DropoffInn"), NodePath("../town cisco /stall/Stall 1"), NodePath("../DropoffStall02"), NodePath("../DropoffStall03"), NodePath("../DropoffStall04"), NodePath("../DropoffStall05"), NodePath("../DropoffStall06")])
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
@@ -749,7 +749,7 @@ shape = SubResource("4")
 mesh = SubResource("3")
 
 [node name="DropoffDocks" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5207, 0.8, 29.798737)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.104326, 0.8, 32.346703)
 collision_layer = 0
 script = ExtResource("6")
 metadata/_edit_group_ = true
@@ -767,6 +767,405 @@ pixel_size = 0.05
 billboard = 2
 modulate = Color(0.2, 0.4, 1, 1)
 text = "Docks"
+uppercase = true
+
+[node name="DropoffHouse001" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14558554, 0.8, -17.867773)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse001"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 001"
+uppercase = true
+
+[node name="DropoffHouse002" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.885315, 0.8, -13.859518)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse002"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 002"
+uppercase = true
+
+[node name="DropoffHouse003" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.349161, 0.8, -6.8527527)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse003"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 003"
+uppercase = true
+
+[node name="DropoffHouse004" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.165258, 0.8, -1.8795242)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse004"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 004"
+uppercase = true
+
+[node name="DropoffHouse005" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.44808, 0.8, 7.811987)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse005"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 005"
+uppercase = true
+
+[node name="DropoffHouse006" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.477411, 0.8, 19.140575)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffHouse006"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffHouse006"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffHouse006"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "House 006"
+uppercase = true
+
+[node name="DropoffWarehouse" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.981064, 0.8, 26.141203)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffWarehouse"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffWarehouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffWarehouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Warehouse"
+uppercase = true
+
+[node name="DropoffWarehouse2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.868391, 0.8, 18.475355)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffWarehouse2"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffWarehouse2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffWarehouse2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Warehouse 2"
+uppercase = true
+
+[node name="DropoffWarehouse3" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.12758, 0.8, 19.250887)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffWarehouse3"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffWarehouse3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffWarehouse3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Warehouse 3"
+uppercase = true
+
+[node name="DropoffDock" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.00904, 0.8, 37.83759)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffDock"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffDock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffDock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Dock"
+uppercase = true
+
+[node name="DropoffDock2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.407518, 0.8, 46.999535)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffDock2"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffDock2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffDock2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Dock 2"
+uppercase = true
+
+[node name="DropoffTower" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.332943, 10.316933, 6.541819)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffTower"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffTower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Tower"
+uppercase = true
+
+[node name="DropoffBarn" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.362491, 0.59401274, 36.305046)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffBarn"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffBarn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffBarn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Barn"
+uppercase = true
+
+[node name="DropoffInn" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.034914, 0.8, -33.60318)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffInn"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffInn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffInn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Inn"
+uppercase = true
+
+[node name="DropoffStall02" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.778715, 0.8, -10.612591)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffStall02"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffStall02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffStall02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Stall 02"
+uppercase = true
+
+[node name="DropoffStall03" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.96889, 0.8, -15.065954)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffStall03"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffStall03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffStall03"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Stall 03"
+uppercase = true
+
+[node name="DropoffStall04" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.588617, 0.8, -13.717732)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffStall04"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffStall04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffStall04"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Stall 04"
+uppercase = true
+
+[node name="DropoffStall05" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.30182, 0.80000025, -9.476105)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffStall05"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffStall05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffStall05"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Stall 05"
+uppercase = true
+
+[node name="DropoffStall06" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.498188, 0.8, -19.071396)
+collision_layer = 0
+script = ExtResource("6")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DropoffStall06"]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DropoffStall06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="DropoffStall06"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.1662874, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.4, 1, 1)
+text = "Stall 06"
 uppercase = true
 
 [node name="HUD" parent="." instance=ExtResource("3")]
