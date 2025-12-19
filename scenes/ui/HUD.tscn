@@ -283,6 +283,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3")
+ui_sfx_path = NodePath("../UISfx")
 
 [node name="OverlayPanel" type="Panel" parent="AnimationDebug"]
 layout_mode = 0

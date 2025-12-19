@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=11 format=3]
+[gd_resource type="Resource" load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/ui_sfx_profile.gd" id="1"]
 [ext_resource type="AudioStream" path="res://assets/audio/ui/click_001.ogg" id="2"]
@@ -10,6 +10,9 @@
 [ext_resource type="AudioStream" path="res://assets/audio/ui/confirmation_002.ogg" id="8"]
 [ext_resource type="AudioStream" path="res://assets/audio/ui/bong_001.ogg" id="9"]
 [ext_resource type="AudioStream" path="res://assets/audio/ui/close_004.ogg" id="10"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover1.ogg" id="11"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover2.ogg" id="12"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover3.ogg" id="13"]
 
 [resource]
 script = ExtResource("1")
@@ -17,8 +20,12 @@ click_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResour
 back_sounds = Array[AudioStream]([ExtResource("5"), ExtResource("6")])
 confirm_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8")])
 notify_sounds = Array[AudioStream]([ExtResource("9"), ExtResource("10")])
+hover_sounds = Array[AudioStream]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+press_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
 click_volume_db = -8.0
 back_volume_db = -6.0
 confirm_volume_db = -6.0
 notify_volume_db = -10.0
+hover_volume_db = -12.0
+press_volume_db = -8.0
 pitch_jitter = 0.05

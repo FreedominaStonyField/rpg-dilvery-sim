@@ -14,10 +14,22 @@ func _ready() -> void:
 	if profile == null:
 		profile = DEFAULT_PROFILE
 
-func connect_button(button: BaseButton, kind: String = "click") -> void:
+func connect_button(button: BaseButton, kind: String = "press") -> void:
 	if button == null:
 		return
+	button.mouse_entered.connect(func() -> void:
+		if button.disabled:
+			return
+		_play_kind("hover")
+	)
+	button.focus_entered.connect(func() -> void:
+		if button.disabled:
+			return
+		_play_kind("hover")
+	)
 	button.pressed.connect(func() -> void:
+		if button.disabled:
+			return
 		_play_kind(kind)
 	)
 
@@ -41,8 +53,25 @@ func play_notify() -> void:
 		return
 	_play_random(profile.notify_sounds, profile.notify_volume_db)
 
+func play_hover() -> void:
+	if profile == null:
+		return
+	_play_random(profile.hover_sounds, profile.hover_volume_db)
+
+func play_press() -> void:
+	if profile == null:
+		return
+	if profile.press_sounds.is_empty():
+		_play_random(profile.click_sounds, profile.click_volume_db)
+		return
+	_play_random(profile.press_sounds, profile.press_volume_db)
+
 func _play_kind(kind: String) -> void:
 	match kind:
+		"hover":
+			play_hover()
+		"press":
+			play_press()
 		"back":
 			play_back()
 		"confirm":
