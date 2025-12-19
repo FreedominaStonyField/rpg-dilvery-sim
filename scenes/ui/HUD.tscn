@@ -1,9 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://hud"]
+[gd_scene load_steps=7 format=3 uid="uid://hud"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1"]
 [ext_resource type="Script" path="res://scripts/ui/ui_sfx.gd" id="2"]
 [ext_resource type="Script" path="res://scripts/ui/animation_debug_panel.gd" id="3"]
 [ext_resource type="Script" path="res://scripts/ui/job_menu.gd" id="4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
+bg_color = Color(0.05, 0.06, 0.09, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.27, 0.86, 0.96, 0.85)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
+bg_color = Color(0.12, 0.13, 0.2, 0.95)
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 1
+border_color = Color(0.27, 0.86, 0.96, 0.7)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -15,45 +35,156 @@ offset_left = 16.0
 offset_top = 16.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-custom_constants/separation = 6
+custom_constants/separation = 10
 
-[node name="MoneyLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-text = "Money: $0"
+[node name="StatusRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_constants/separation = 12
 
-[node name="CarryingLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-text = "Carrying: None"
-
-[node name="TimeBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+[node name="MoneyPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/StatusRow"]
+custom_minimum_size = Vector2(160, 0)
 size_flags_horizontal = 3
-max_value = 1.0
-step = 0.0
-value = 0.0
-percent_visible = false
 
-[node name="JobMenu" type="Panel" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(260, 0)
+[node name="MoneyMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/StatusRow/MoneyPanel"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 152.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 2
+
+[node name="MoneyTitle" type="Label" parent="MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox"]
+text = "Cash"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.78, 0.82, 0.86, 1)
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox"]
+text = "$0"
+theme_override_font_sizes/font_size = 18
+
+[node name="TimePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/StatusRow"]
+custom_minimum_size = Vector2(120, 0)
+size_flags_horizontal = 3
+
+[node name="TimeMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/StatusRow/TimePanel"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 112.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TimeVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 2
+
+[node name="TimeTitle" type="Label" parent="MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox"]
+text = "Time"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.78, 0.82, 0.86, 1)
+
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox"]
+text = "06:00"
+theme_override_font_sizes/font_size = 18
+
+[node name="PackageMenu" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -180.0
+offset_right = 240.0
+offset_bottom = 180.0
 script = ExtResource("4")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1")
 
-[node name="JobVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/JobMenu"]
+[node name="PackageMargin" type="MarginContainer" parent="PackageMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = -14.0
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PackageVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 10
+
+[node name="HeaderBar" type="PanelContainer" parent="PackageMenu/PackageMargin/PackageVBox"]
+theme_override_styles/panel = SubResource("StyleBoxFlat_2")
+
+[node name="HeaderMargin" type="MarginContainer" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 8.0
-offset_top = 8.0
+offset_top = 6.0
 offset_right = -8.0
-offset_bottom = -8.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_constants/separation = 4
 
-[node name="JobTitle" type="Label" parent="MarginContainer/VBoxContainer/JobMenu/JobVBox"]
-text = "Job"
+[node name="HeaderVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 2
 
-[node name="JobStatus" type="Label" parent="MarginContainer/VBoxContainer/JobMenu/JobVBox"]
+[node name="JournalTitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderVBox"]
+text = "COURIER JOURNAL"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
+
+[node name="JournalSubtitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderVBox"]
+text = "Inventory + Dispatch"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.54, 0.78, 0.92, 1)
+
+[node name="JobVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin/PackageVBox"]
+custom_constants/separation = 6
+
+[node name="JobTitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+text = "Package Info"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.77, 0.84, 0.9, 1)
+
+[node name="CarryingLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+text = "Carrying: None"
+
+[node name="JobStatus" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
 text = "Status: No job"
 
-[node name="DropoffLabel" type="Label" parent="MarginContainer/VBoxContainer/JobMenu/JobVBox"]
+[node name="DropoffLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
 text = "Dropoff: --"
+
+[node name="FooterHint" type="Label" parent="PackageMenu/PackageMargin/PackageVBox"]
+text = "Press TAB to close"
+horizontal_alignment = 2
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.35, 0.7, 0.82, 1)
 
 [node name="NotificationContainer" type="VBoxContainer" parent="."]
 anchors_preset = 3

@@ -1,7 +1,7 @@
 extends Panel
 
-@onready var status_label: Label = $JobVBox/JobStatus
-@onready var dropoff_label: Label = $JobVBox/DropoffLabel
+@onready var status_label: Label = $PackageMargin/PackageVBox/JobVBox/JobStatus
+@onready var dropoff_label: Label = $PackageMargin/PackageVBox/JobVBox/DropoffLabel
 
 const NO_JOB_STATUS := "Status: No job"
 const ACTIVE_STATUS := "Status: Active"

@@ -3,9 +3,10 @@ extends CanvasLayer
 const FADE_DURATION := 1.5
 const MESSAGE_HOLD := 5.5
 
-@onready var money_label: Label = $MarginContainer/VBoxContainer/MoneyLabel
-@onready var carrying_label: Label = $MarginContainer/VBoxContainer/CarryingLabel
-@onready var time_bar: ProgressBar = $MarginContainer/VBoxContainer/TimeBar
+@onready var money_label: Label = $MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox/MoneyLabel
+@onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
+@onready var carrying_label: Label = $PackageMenu/PackageMargin/PackageVBox/JobVBox/CarryingLabel
+@onready var package_menu: Control = $PackageMenu
 @onready var notification_container: VBoxContainer = $NotificationContainer
 @onready var pause_menu: Control = $PauseMenu
 @onready var resume_button: Button = $PauseMenu/Panel/VBoxContainer/ResumeButton
@@ -16,6 +17,10 @@ const MESSAGE_HOLD := 5.5
 
 var in_transition: bool = false
 var transition_tween: Tween
+var package_pause_active: bool = false
+
+const DAY_START_MINUTES := 6 * 60
+const DAY_END_MINUTES := 24 * 60
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -35,20 +40,28 @@ func _ready() -> void:
 	_on_carrying_changed(PlayerData.carrying_item)
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
+	package_menu.visible = false
 	fade_rect.visible = false
 	fade_rect.color = Color(0, 0, 0, 0)
 	transition_label.visible = false
 	transition_label.modulate = Color(1, 1, 1, 0)
 
 func _on_money_changed(amount: int) -> void:
-	money_label.text = "Money: $" + str(amount)
+	money_label.text = "$" + str(amount)
 
 func _on_carrying_changed(item_name: String) -> void:
 	carrying_label.text = "Carrying: %s" % (item_name if item_name != "" else "None")
 
 func _on_time_changed(day_time: float) -> void:
-	time_bar.value = day_time
-	time_bar.tooltip_text = "Day progress"
+	time_label.text = _format_time(day_time)
+	time_label.tooltip_text = "Day time"
+
+func _format_time(day_time: float) -> String:
+	var total_minutes := int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
+	total_minutes = clamp(total_minutes, DAY_START_MINUTES, DAY_END_MINUTES)
+	var hours := total_minutes / 60
+	var minutes := total_minutes % 60
+	return "%s:%s" % [str(hours).pad_zeros(2), str(minutes).pad_zeros(2)]
 
 func _on_new_morning() -> void:
 	if in_transition:
@@ -83,7 +96,14 @@ func show_message(message: String, duration: float = 5) -> void:
 	tween.tween_callback(label.queue_free)
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
-	pause_menu.visible = mode == GameState.Mode.PAUSED and not in_transition
+	pause_menu.visible = mode == GameState.Mode.PAUSED and not in_transition and not package_pause_active
+	if mode == GameState.Mode.PLAYING and package_pause_active:
+		package_pause_active = false
+		package_menu.visible = false
+	if mode != GameState.Mode.PLAYING and not package_pause_active:
+		package_menu.visible = false
+	if mode != GameState.Mode.PAUSED and package_pause_active:
+		package_pause_active = false
 
 func _on_resume_pressed() -> void:
 	GameState.set_mode(GameState.Mode.PLAYING)
@@ -133,3 +153,18 @@ func _finish_transition() -> void:
 	transition_label.visible = false
 	in_transition = false
 	GameState.set_mode(GameState.Mode.PLAYING)
+
+func _unhandled_input(event: InputEvent) -> void:
+	var toggle_pressed := event.is_action_pressed("toggle_package_menu")
+	if not toggle_pressed and event is InputEventKey:
+		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
+	if toggle_pressed:
+		if in_transition:
+			return
+		if not GameState.is_playing() and not package_pause_active:
+			return
+		var next_visible := not package_menu.visible
+		package_menu.visible = next_visible
+		package_pause_active = next_visible
+		GameState.set_mode(GameState.Mode.PAUSED if next_visible else GameState.Mode.PLAYING)
+		get_viewport().set_input_as_handled()
