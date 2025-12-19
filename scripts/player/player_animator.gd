@@ -6,8 +6,6 @@ signal animation_debug_event(event: Dictionary)
 @export var player: CharacterBody3D
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
 @export var model_root_path: NodePath = NodePath("../Emma avatarty")
-@export var landing_enabled: bool = true
-@export var landing_move_break_speed: float = 0.15
 
 @export_group("State Animations")
 @export var idle_anim: StringName = &""
@@ -34,7 +32,6 @@ const STATE_LAND := &"land"
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_player: AnimationPlayer
-var land_timer: float = 0.0
 var was_on_floor: bool = true
 var jump_start_timer: float = 0.0
 var model_root: Node3D
@@ -90,19 +87,7 @@ func _physics_process(delta: float) -> void:
 			_travel(STATE_JUMP_LOOP, "airborne_loop")
 	else:
 		jump_start_timer = 0.0
-		if not was_on_floor:
-			if landing_enabled:
-				land_timer = _animation_length(land_anim, 0.35)
-				_travel(STATE_LAND, "landed")
-			else:
-				land_timer = 0.0
-		if landing_enabled and land_timer > 0.0:
-			if _ground_speed() > landing_move_break_speed:
-				land_timer = 0.0
-				_play_ground_state()
-			land_timer = max(land_timer - delta, 0.0)
-		else:
-			_play_ground_state()
+		_play_ground_state()
 	was_on_floor = on_floor
 	if blend_time_left > 0.0:
 		blend_time_left = max(blend_time_left - delta, 0.0)
@@ -290,7 +275,6 @@ func get_debug_state() -> Dictionary:
 		"state": current_state,
 		"state_time": state_time,
 		"animation": _state_to_animation(current_state),
-		"land_timer": land_timer,
 		"jump_start_timer": jump_start_timer
 	}
 
