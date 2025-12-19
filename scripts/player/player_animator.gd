@@ -9,18 +9,28 @@ signal animation_debug_event(event: Dictionary)
 @export var landing_enabled: bool = true
 @export var landing_move_break_speed: float = 0.15
 
-var idle_animation: StringName = &""
-var walk_animation: StringName = &""
-var sprint_animation: StringName = &""
-var jump_start_animation: StringName = &""
-var jump_loop_animation: StringName = &""
-var land_animation: StringName = &""
+@export_group("State Animations")
+@export var idle_anim: StringName = &""
+@export var walk_anim: StringName = &""
+@export var sprint_anim: StringName = &""
+@export var jump_start_anim: StringName = &""
+@export var jump_loop_anim: StringName = &""
+@export var land_anim: StringName = &""
 
 @export_group("Animation Blending")
 @export var default_blend_time: float = 0.2
 @export var blend_overrides: Dictionary = {}
 
-const ANIM_LIB := "AnimationLibrary_Godot_Standard"
+@export_group("Facing")
+@export var enable_facing: bool = true
+@export var facing_smoothing: float = 0.15
+
+const STATE_IDLE := &"idle"
+const STATE_WALK := &"walk"
+const STATE_SPRINT := &"sprint"
+const STATE_JUMP_START := &"jump_start"
+const STATE_JUMP_LOOP := &"jump_loop"
+const STATE_LAND := &"land"
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_player: AnimationPlayer
@@ -29,13 +39,14 @@ var was_on_floor: bool = true
 var jump_start_timer: float = 0.0
 var model_root: Node3D
 var last_local_move: Vector3 = Vector3.FORWARD
-var last_state: StringName = ""
-var blend_from_state: StringName = ""
+var last_state: StringName = &""
+var blend_from_state: StringName = &""
 var blend_time_left: float = 0.0
 var current_blend_duration: float = 0.2
 var state_time: float = 0.0
 var state_anim_map: Dictionary = {}
 var debug_enabled: bool = OS.is_debug_build() or Engine.is_editor_hint()
+var _missing_anim_warnings: Dictionary = {}
 
 func _ready() -> void:
 	if player == null:
@@ -49,37 +60,40 @@ func _ready() -> void:
 	if animation_player.animation_started.is_connected(_on_animation_started) == false:
 		animation_player.animation_started.connect(_on_animation_started)
 	anim_player = animation_player_path
-	tree_root = _build_state_machine()
 	active = true
 	playback = get("parameters/playback")
 	if playback:
-		playback.start("idle")
+		playback.start(STATE_IDLE)
 		last_state = playback.get_current_node()
 		state_time = 0.0
-	if Engine.is_editor_hint():
-		notify_property_list_changed()
+	_apply_state_animations()
+	_apply_blend_times()
+	_validate_animation_mapping()
 
 func _physics_process(delta: float) -> void:
 	if animation_player == null or playback == null:
 		return
+	if Engine.is_editor_hint():
+		return
 	if not GameState.is_playing():
 		return
 	var on_floor := player.is_on_floor()
-	_update_model_facing()
+	if enable_facing:
+		_update_model_facing()
 	if not on_floor:
 		if was_on_floor:
-			jump_start_timer = _animation_length("Jump_Start", 0.2)
-			_travel("jump_start", "left_floor")
+			jump_start_timer = _animation_length(jump_start_anim, 0.2)
+			_travel(STATE_JUMP_START, "left_floor")
 		elif jump_start_timer > 0.0:
 			jump_start_timer = max(jump_start_timer - delta, 0.0)
-		elif playback.get_current_node() != "jump_loop":
-			_travel("jump_loop", "airborne_loop")
+		elif playback.get_current_node() != STATE_JUMP_LOOP:
+			_travel(STATE_JUMP_LOOP, "airborne_loop")
 	else:
 		jump_start_timer = 0.0
 		if not was_on_floor:
 			if landing_enabled:
-				land_timer = _animation_length("Jump_Land", 0.35)
-				_travel("land", "landed")
+				land_timer = _animation_length(land_anim, 0.35)
+				_travel(STATE_LAND, "landed")
 			else:
 				land_timer = 0.0
 		if landing_enabled and land_timer > 0.0:
@@ -96,11 +110,11 @@ func _physics_process(delta: float) -> void:
 
 func _play_ground_state() -> void:
 	if not _has_move_input():
-		_travel("idle", "ground_move")
+		_travel(STATE_IDLE, "ground_move")
 	elif _is_sprinting():
-		_travel("sprint", "ground_move")
+		_travel(STATE_SPRINT, "ground_move")
 	else:
-		_travel("walk", "ground_move")
+		_travel(STATE_WALK, "ground_move")
 
 func _ground_speed() -> float:
 	return Vector2(player.velocity.x, player.velocity.z).length()
@@ -129,199 +143,53 @@ func _travel(state: StringName, reason: String = "") -> void:
 		"reason": reason
 	})
 
-func _build_state_machine() -> AnimationNodeStateMachine:
-	var machine := AnimationNodeStateMachine.new()
-	machine.add_node(
-		"idle",
-		_make_animation_node(
-			"idle",
-			_resolve_override_or_candidates(idle_animation, [
-				"Idle_Loop",
-				"Idle"
-			])
-		)
-	)
-	machine.add_node(
-		"walk",
-		_make_animation_node(
-			"walk",
-			_resolve_override_or_candidates(walk_animation, [
-				"Walk_Loop",
-				"Jog_Fwd_Loop",
-				"Jog_Fwd",
-                "Idle_Loop"
-			])
-		)
-	)
-	machine.add_node(
-		"sprint",
-		_make_animation_node(
-			"sprint",
-			_resolve_override_or_candidates(sprint_animation, [
-				"Sprint_Loop",
-				"Jog_Fwd",
-				"Jog_Fwd_Loop",
-                "Walk_Loop"
-			])
-		)
-	)
-	machine.add_node(
-		"jump_start",
-		_make_animation_node(
-			"jump_start",
-			_resolve_override_or_candidates(jump_start_animation, [
-				"Jump_Start",
-                "Jump_Loop"
-			])
-		)
-	)
-	machine.add_node(
-		"jump_loop",
-		_make_animation_node(
-			"jump_loop",
-			_resolve_override_or_candidates(jump_loop_animation, [
-				"Jump_Loop",
-				"Jump_Start",
-                "Idle_Loop"
-			])
-		)
-	)
-	machine.add_node(
-		"land",
-		_make_animation_node(
-			"land",
-			_resolve_override_or_candidates(land_animation, [
-				"Jump_Land",
-                "Idle_Loop"
-			])
-		)
-	)
-	_add_transition_pairs(machine, "idle", "walk")
-	_add_transition_pairs(machine, "walk", "sprint")
-	_add_transition(machine, "idle", "sprint")
-	_add_transition(machine, "sprint", "idle")
-	_add_transition(machine, "walk", "jump_start")
-	_add_transition(machine, "sprint", "jump_start")
-	_add_transition(machine, "idle", "jump_start")
-	_add_transition(machine, "jump_start", "jump_loop")
-	_add_transition(machine, "jump_loop", "land")
-	_add_transition(machine, "land", "idle")
-	_add_transition(machine, "land", "walk")
-	return machine
-
-func _make_animation_node(state_name: String, anim_name: String) -> AnimationNodeAnimation:
-	var node := AnimationNodeAnimation.new()
-	node.animation = anim_name
-	state_anim_map[state_name] = anim_name
-	return node
-
-func _add_transition_pairs(machine: AnimationNodeStateMachine, a: String, b: String) -> void:
-	_add_transition(machine, a, b)
-	_add_transition(machine, b, a)
-
-func _add_transition(machine: AnimationNodeStateMachine, from: String, to: String) -> void:
-	if machine.has_transition(from, to):
+func _apply_state_animations() -> void:
+	var machine := _get_state_machine()
+	if machine == null:
 		return
-	var transition := AnimationNodeStateMachineTransition.new()
-	transition.xfade_time = _get_transition_time(from, to)
-	machine.add_transition(from, to, transition)
+	_set_state_animation(machine, STATE_IDLE, idle_anim)
+	_set_state_animation(machine, STATE_WALK, walk_anim)
+	_set_state_animation(machine, STATE_SPRINT, sprint_anim)
+	_set_state_animation(machine, STATE_JUMP_START, jump_start_anim)
+	_set_state_animation(machine, STATE_JUMP_LOOP, jump_loop_anim)
+	_set_state_animation(machine, STATE_LAND, land_anim)
 
-func _resolve_anim_candidates(names: Array) -> String:
-	for name in names:
-		var candidate := _with_library(name)
-		if _has_animation(candidate):
-			return candidate
-		if _has_animation(name):
-			return name
-	var anim_list := animation_player.get_animation_list()
-	return anim_list[0] if anim_list.size() > 0 else ""
+func _apply_blend_times() -> void:
+	var machine := _get_state_machine()
+	if machine == null:
+		return
+	var count := machine.get_transition_count()
+	for index in count:
+		var from_state: String = machine.get_transition_from(index)
+		var to_state: String = machine.get_transition_to(index)
+		var transition := machine.get_transition(index)
+		if transition == null:
+			continue
+		transition.xfade_time = _get_transition_time(from_state, to_state)
 
-func _resolve_override_or_candidates(override_anim: StringName, names: Array) -> String:
-	var override_name := String(override_anim)
-	if override_name != "":
-		if _has_animation(override_name):
-			return override_name
-		var with_lib := _with_library(override_name)
-		if _has_animation(with_lib):
-			return with_lib
-	return _resolve_anim_candidates(names)
+func _get_state_machine() -> AnimationNodeStateMachine:
+	var root: AnimationRootNode = tree_root
+	if root is AnimationNodeStateMachine:
+		return root as AnimationNodeStateMachine
+	return null
 
-func _has_animation(name: String) -> bool:
-	return animation_player != null and animation_player.has_animation(name)
+func _set_state_animation(
+		machine: AnimationNodeStateMachine,
+		state_name: StringName,
+		anim_name: StringName
+	) -> void:
+	if anim_name == StringName(""):
+		return
+	var node := machine.get_node(state_name)
+	if node is AnimationNodeAnimation:
+		var anim_string := String(anim_name)
+		node.animation = anim_string
+		state_anim_map[state_name] = anim_string
 
-func _with_library(name: String) -> String:
-	return "%s/%s" % [ANIM_LIB, name]
-
-func _get_property_list() -> Array[Dictionary]:
-	var list: Array[Dictionary] = []
-	if not Engine.is_editor_hint():
-		return list
-	list.append({
-		"name": "Animation Overrides",
-		"type": TYPE_NIL,
-		"usage": PROPERTY_USAGE_GROUP
-	})
-	var anim_enum := _get_animation_enum_list()
-	var usage := PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_STORAGE
-	list.append({
-		"name": "idle_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	list.append({
-		"name": "walk_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	list.append({
-		"name": "sprint_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	list.append({
-		"name": "jump_start_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	list.append({
-		"name": "jump_loop_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	list.append({
-		"name": "land_animation",
-		"type": TYPE_STRING_NAME,
-		"hint": PROPERTY_HINT_ENUM,
-		"hint_string": anim_enum,
-		"usage": usage
-	})
-	return list
-
-func _get_animation_enum_list() -> String:
-	if animation_player == null:
-		return ""
-	return ",".join(animation_player.get_animation_list())
-
-func _set_animation_player_path(value: NodePath) -> void:
-	animation_player_path = value
-	if Engine.is_editor_hint():
-		animation_player = get_node_or_null(animation_player_path) as AnimationPlayer
-		notify_property_list_changed()
-
-func _animation_length(anim_key: String, default_length: float) -> float:
-	var anim_name := _with_library(anim_key)
-	if _has_animation(anim_name):
-		return animation_player.get_animation(anim_name).length
+func _animation_length(anim_name: StringName, default_length: float) -> float:
+	var anim_string := String(anim_name)
+	if _has_animation(anim_string):
+		return animation_player.get_animation(anim_string).length
 	return default_length
 
 func _update_model_facing() -> void:
@@ -336,7 +204,7 @@ func _update_model_facing() -> void:
 		return
 	var target_yaw := atan2(last_local_move.x, last_local_move.z)
 	var current_yaw := model_root.rotation.y
-	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, 0.15)
+	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, facing_smoothing)
 
 func _start_blend(from: StringName, to: StringName) -> void:
 	if from == "":
@@ -356,6 +224,33 @@ func _get_transition_time(from: String, to: String) -> float:
 
 func _state_to_animation(state: StringName) -> String:
 	return state_anim_map.get(state, "")
+
+func _validate_animation_mapping() -> void:
+	_warn_missing_anim(STATE_IDLE, idle_anim)
+	_warn_missing_anim(STATE_WALK, walk_anim)
+	_warn_missing_anim(STATE_SPRINT, sprint_anim)
+	_warn_missing_anim(STATE_JUMP_START, jump_start_anim)
+	_warn_missing_anim(STATE_JUMP_LOOP, jump_loop_anim)
+	_warn_missing_anim(STATE_LAND, land_anim)
+
+func _warn_missing_anim(state: StringName, anim_name: StringName) -> void:
+	if anim_name == StringName(""):
+		_warn_once(state, "Animation not assigned for state '%s'." % state)
+		return
+	if not _has_animation(String(anim_name)):
+		_warn_once(
+			state,
+			"Animation '%s' missing for state '%s'." % [anim_name, state]
+		)
+
+func _warn_once(key: StringName, message: String) -> void:
+	if _missing_anim_warnings.has(key):
+		return
+	_missing_anim_warnings[key] = true
+	push_warning(message)
+
+func _has_animation(name: String) -> bool:
+	return animation_player != null and animation_player.has_animation(name)
 
 func _on_animation_started(anim_name: StringName) -> void:
 	_emit_debug_event("AnimationStarted", str(anim_name), "AnimationPlayer", {
