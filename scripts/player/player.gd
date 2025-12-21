@@ -19,6 +19,9 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export var camera_zoom_step: float = 0.35
 @export var camera_zoom_smoothing: float = 12.0
 
+@export_group("Sfx")
+@export var landing_sfx_path: NodePath = NodePath("AnimationSfx")
+
 @export_group("Movement Tuning")
 @export var bDisableAirControl: bool = true
 @export_enum("Ignore Input", "Clamp Speed") var LandingCooldownMode: String = "Ignore Input"
@@ -44,6 +47,7 @@ var _zoom_target: float = 0.0
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
+@onready var landing_sfx: AnimationSfx = get_node_or_null(landing_sfx_path) as AnimationSfx
 
 func _ready() -> void:
 	add_to_group("player")
@@ -55,6 +59,8 @@ func _ready() -> void:
 	_was_on_floor = is_on_floor()
 	_stamina = max_stamina
 	_emit_stamina_changed()
+	if landed.is_connected(_on_landed) == false:
+		landed.connect(_on_landed)
 
 func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
@@ -222,3 +228,8 @@ func _emit_stamina_changed() -> void:
 	if max_stamina > 0.0:
 		percent = _stamina / max_stamina
 	stamina_changed.emit(_stamina, max_stamina, percent)
+
+func _on_landed(impact_speed: float) -> void:
+	if landing_sfx == null:
+		return
+	landing_sfx.play_land()
