@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="PlayerSfxProfile" load_steps=6 format=3 uid="uid://cqeajm3q8hhws"]
+[gd_resource type="Resource" script_class="PlayerSfxProfile" load_steps=7 format=3 uid="uid://cqeajm3q8hhws"]
 
 [ext_resource type="Script" uid="uid://dqfqfvypv6u32" path="res://scripts/player/player_sfx_profile.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://c51eymsupv0op" path="res://assets/audio/impacts/footstep_concrete_000.ogg" id="2"]
 [ext_resource type="AudioStream" uid="uid://dsghg45d3mo8u" path="res://assets/audio/impacts/footstep_concrete_001.ogg" id="3"]
 [ext_resource type="AudioStream" uid="uid://fue2ia6qo14a" path="res://assets/audio/impacts/footstep_concrete_002.ogg" id="4"]
 [ext_resource type="AudioStream" uid="uid://duise851c7tm7" path="res://assets/audio/impacts/footstep_concrete_003.ogg" id="5"]
+[ext_resource type="AudioStream" uid="uid://bws5m8bhi722u" path="res://assets/audio/rpg/cloth3.ogg" id="5_bigym"]
 
 [resource]
 script = ExtResource("1")
 footstep_walk_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
 footstep_sprint_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4"), ExtResource("5")])
 jump_start_sounds = Array[AudioStream]([ExtResource("2")])
-jump_air_sounds = Array[AudioStream]([ExtResource("2")])
+jump_air_sounds = Array[AudioStream]([ExtResource("5_bigym")])
 landing_sounds = Array[AudioStream]([ExtResource("2")])
