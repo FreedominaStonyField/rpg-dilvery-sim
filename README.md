@@ -1,82 +1,110 @@
-# RPG Delivery Sim (Godot 4.5.1 Prototype)
+- [日本語](README.ja.md)
 
-Fast one-day prototype for a delivery RPG loop. Focus is on a single job flow,
-curfew pressure, and a clean signal-driven architecture for quick iteration.
+# VRM addon for Godot Engine
 
-## Current Gameplay Loop
+This Godot addon fully implements an importer and exporter for models with the [VRM specification](https://github.com/vrm-c/vrm-specification/tree/master/specification).
+Compatible with Godot Engine 4.0 stable or newer.
 
-- Start from Main Menu and spawn into the town.
-- Pick up a parcel from a pickup point to start a job.
-- Deliver to the dropoff before curfew Press tab to view the dropoff location.
-- If outdoors at curfew, a short timer starts, then you get mugged and lose money.
-- Enter the inn safe area to avoid curfew mugging.
-- Sleep at the inn after the sleep threshold to reset the day (costs money).
+Proudly brought to you by the [V-Sekai team](https://v-sekai.org/about).
 
-## Controls
+This package also includes a standalone full implementation of the MToon Shader for Godot Engine.
 
-- Move: WASD or Arrow Keys
-- Jump: Space
-- Sprint: Shift (stamina drains and regenerates)
-- Interact: E
-- Pause: Esc
-- Package menu: Tab (also uses the `toggle_package_menu` input action)
-- Camera: Mouse look, Mouse wheel zoom
+![Example of VRM Addon used to import two example characters](vrm_samples/screenshot/vrm_sample_screenshot.png)
 
-## Current Systems and Progress
+## What is VRM?
 
-Gameplay
-- Player movement, camera shoulder offsets, zoom, sprint stamina.
-- Pickup and dropoff areas with interact prompts and a single active job.
-- Curfew timer and mugging when outdoors after curfew.
-- Inn safe area and sleep spot to skip to morning for a fee.
+See [https://vrm.dev/en/](https://vrm.dev/en/) (English) or [https://vrm.dev/](https://vrm.dev/) (日本語)
 
-UI
-- HUD for money, time, carrying status, interact prompt, stamina, and notifications.
-- Pause menu and package menu (job status panel).
-- Transition fade for sleep and mugging.
+"VRM" is a file format for handling 3D humanoid avatar (3D model) data for VR applications.
+It is based on [glTF 2.0](https://www.khronos.org/gltf/). Anyone is free to use it.
 
-Audio / SFX
-- Player animation SFX hooks and UI SFX routing (profiles in scripts).
+## VRM Features are currently supported in Godot Engine!
 
-World
-- Town scene with pickups, dropoffs, and inn interior/exterior triggers.
+Import and export of VRM through version 1.0 is supported. Here is a feature breakdown:
 
-## Autoloads (Global State)
+* VRM 0.0 Import: ✅Implemented; will convert to VRM 1.0 compatible naming!
+* VRM 1.0 Import: ✅Implemented
+* VRM Export (`.vrm`): ✅Implemented, will export all models as VRM 1.0
+* glTF Export with VRM 1.0 extensions (`.gltf`): ✅`VRMC_node_constraint`, ✅`VRMC_materials_mtoon`
+	* ⚠️ `VRMC_springBone` not supported in non-`.vrm` standalone `.gltf` export.
+	* ⚠️ Warning: When exporting `.gltf`, a clone of the scene root node is not made by Godot.
+	  Because some export operations are destructive, the export process will corrupt some of your materials.
+	  Please save the scene first and revert after export!
 
-- `GameState`: mode switching (MENU, PLAYING, PAUSED, SLEEPING, MUGGED).
-- `TimeSystem`: day progression, curfew timer, mugging, morning reset.
-- `Jobs`: single active delivery job tracking.
-- `PlayerData`: money and carrying state.
-- `UIEvents`: HUD notifications and interact prompt bus.
+* `VRMC_materials_mtoon`: ✅Implemented
+* `VRMC_node_constraint`: ⚠️Buggy: known issues when combined with retargeting.
+* `VRMC_springBone`: ✅Implemented, but needs optimization.
+* `VRMC_materials_hdr_emissive`: ✅Implemented
+* `VRMC_vrm`: ✅Implemented
+	* `firstPerson`: ⚠️Head hiding implemented and supported as an import option (camera layers or runtime script needed)
+	* `eyeOffset`: ✅I️mplemented (`BoneAttachment3D` `"LookOffset"` on `Head`)
+	* `lookAt`: ⚠Only creates animation tracks (application must create `BlendSpace2D`)
+	* `expressions` (mood, viseme):
+		* blend shapes / binds: ✅I️mplemented (Animation tracks intended for `BlendTree` `Add2`)
+		* material color / UV offsets: ✅I️mplemented (Animation tracks intended for `BlendTree` `Add2`)
+	* `humanoid`: ✅I️mplemented (uses `%GeneralSkeleton` `SkeletonProfileHumanoid` compatible retargeting.)
+	* Metadata: ✅I️mplemented, including License information and screenshot
 
-## Scenes (Entry Points)
+## Future work
 
-- `scenes/ui/MainMenu.tscn`: start and quit.
-- `scenes/world/World.tscn`: gameplay scene.
-- `scenes/player/Player.tscn`: reusable player character.
-- `scenes/ui/HUD.tscn`: HUD and pause flow.
+* Support VRMC_vrm_animation:
+	* Not yet implemented. Intended use: humanoid AnimationLibrary import/export.
 
-## Project Structure
+## A note about SkeletonModifier3D on Godot 4.3 and later.
 
-- `scenes/`: world, player, UI.
-- `scripts/`: autoload, world, player, UI.
-- `assets/` and `audio/`: placeholders for art and sound.
+godot-vrm currently creates an internal node child of the Skeleton3D to facilitate processing the skeleton modifiers for
+VRM spring bones and node constraints.
 
-## Non-goals (Prototype Limits)
+Due to the behavior of skeleton modifier, there may be some differences.
+For example, on Godot 4.3+, `update_secondary_fixed` is no longer supported: instead, the Skeleton node determines whether to use physics or idle processing.
 
-- No combat, NPC AI, dialogue trees, saving/loading, or full inventory UI.
-- One item type, one active job at a time, no multi-job juggling.
-- No health/stamina damage systems beyond sprint stamina.
+## Head hiding settings
 
-## How to Run
+At import time, there are new scene import settings for .vrm files.
 
-Open the project in Godot 4.5.1 and run. The main scene is
-`res://scenes/ui/MainMenu.tscn`.
+For runtime usage, head hiding mode is determined by various additional data properties on the GLTFState object:
+`vrm/head_hiding_method` is an enum `vrm_constants.HeadHidingSetting` that determines the mode.
 
-## Testing Checklist
+For BothLayers and BothLayersWithShadow modes, the MeshInstance3D layers are determined by the
+`vrm/first_person_layers` and `vrm/third_person_layers` integers respectively.
 
-- Player can move, jump, sprint, and camera behaves.
-- Pick up item updates carrying state and job status.
-- Delivering increases money and sends HUD notification.
-- Curfew mugging resets money and starts a new morning.
-- Pause toggles without breaking input or camera.
+For FirstPersonOnlyWithShadow, FirstPersonOnly and ThirdPersonOnly, certain meshes are deleted or modified to make the character suitable for first person or third person usage.
+
+Shadow modes will create an additional mesh for hidden heads set to ShadowsOnly to allow the hidden head to still cast a shadow.
+Recommended if your game has a first person mode and uses lights with shadows enabled.
+
+Finally, there is an IgnoreHeadHiding mode which disables handling of the firstPerson flags and acts like an ordinary glTF import.
+
+## Note for users of Godot 3.x
+
+For VRM compatible with Godot Engine 3.2.2 or later, use the `godot3` branch of this repository.
+
+https://github.com/V-Sekai/godot-vrm
+
+## How to use
+
+Install the vrm addon folder into addons/vrm. MUST NOT BE RENAMED: This path will be referenced by generated VRM meta scripts.
+
+Install Godot-MToon-Shader into addons/Godot-MToon-Shader. MUST NOT BE RENAMED: This path is referenced by generated materials.
+
+Enable the VRM and MToon plugins in Project Settings -> Plugins -> VRM and Godot-MToon-Shader.
+
+## Credits
+
+Thanks to the [V-Sekai team](https://v-sekai.org/about) and contributors:
+
+- https://github.com/aaronfranke and [The Mirror team](https://www.themirror.space/)
+- https://github.com/fire
+- https://github.com/TokageItLab
+- https://github.com/lyuma
+- https://github.com/SaracenOne
+
+For their extensive help testing and contributing code to Godot-VRM.
+
+Special thanks to the authors of UniVRM, MToon and other VRM tooling
+
+- The VRM Consortium ( https://github.com/vrm-c )
+- https://github.com/Santarh
+- https://github.com/ousttrue
+- https://github.com/saturday06
+- https://github.com/FMS-Cat

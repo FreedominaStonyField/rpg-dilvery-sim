@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://world"]
+[gd_scene load_steps=93 format=4 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://hud" path="res://scenes/ui/HUD.tscn" id="3"]
 [ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="5"]
 [ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="6"]
-[ext_resource type="PackedScene" uid="uid://da2d8n6vjoibv" path="res://scenes/world/stall.tscn" id="8_l5ull"]
-[ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="8_yr1n6"]
+[ext_resource type="PackedScene" path="res://scenes/world/DropoffSite.tscn" id="8_16fjv"]
+[ext_resource type="PackedScene" path="res://scenes/world/stall.tscn" id="8_l5ull"]
+[ext_resource type="PackedScene" path="res://scenes/world/inn_outside.tscn" id="8_yr1n6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
 
@@ -1168,6 +1169,7 @@ uppercase = true
 
 [node name="DropoffStall06" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.498188, 0.8, -19.071396)
+visible = false
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("6")
@@ -1254,6 +1256,18 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /stall6/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_d6tky")
+
+[node name="DropoffSite" parent="town cisco /stall6" instance=ExtResource("8_16fjv")]
+transform = Transform3D(-0.9853375, 0, 0.17061575, 0, 1, 0, -0.17061575, 0, -0.9853375, -1.273304, -0.10868615, 0.267622)
+
+[node name="Label3D" parent="town cisco /stall6/DropoffSite" index="2"]
+transform = Transform3D(-0.2988576, 0, 0.9542977, 0, 1, 0, -0.9542977, 0, -0.2988576, -0.12382126, 0.44987816, 0)
+pixel_size = 0.005
+billboard = 0
+text = "Stall 6 Dropoff"
+
+[node name="SnapshotCamera" parent="town cisco /stall6/DropoffSite" index="3"]
+transform = Transform3D(-0.4548767, 0, 0.8905545, 0, 1, 0, -0.8905545, 0, -0.4548767, 1.2946262, 0, -0.7631302)
 
 [node name="house_001" type="MeshInstance3D" parent="town cisco "]
 transform = Transform3D(0.8095479, 0, 2.563225, 0, 1, 0, 0.58705395, 0, -3.5346894, 4.848878, 1.0176606, -23.86114)
@@ -1392,3 +1406,5 @@ shape = SubResource("ConvexPolygonShape3D_iqxvy")
 
 [node name="Inn" parent="town cisco " instance=ExtResource("8_yr1n6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.594933, 0, -37.12024)
+
+[editable path="town cisco /stall6/DropoffSite"]

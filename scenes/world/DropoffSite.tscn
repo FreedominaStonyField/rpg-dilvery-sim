@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=4]
+
+[ext_resource type="Script" path="res://scripts/world/DropoffSite.gd" id="1_0t6n1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8vfj3"]
+height = 2.0
+radius = 1.0
+
+[node name="DropoffSite" type="Node3D"]
+script = ExtResource("1_0t6n1")
+
+[node name="DeliveryArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeliveryArea"]
+shape = SubResource("CylinderShape3D_8vfj3")
+
+[node name="DropPoint" type="Marker3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="."]
+text = "Dropoff"
+pixel_size = 0.05
+billboard = 2
+
+[node name="SnapshotCamera" type="Camera3D" parent="."]
+current = false
