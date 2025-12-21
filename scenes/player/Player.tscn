@@ -18318,6 +18318,8 @@ graph_offset = Vector2(-217, -61)
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1")
 gravity = 10.0
+collision_layer = 2
+collision_mask = 1
 bDisableAirControl = false
 max_stamina = 1000.0
 
@@ -18407,6 +18409,8 @@ mesh = SubResource("2")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.17345524, 1.1154662, 0)
+collision_mask = 1
+exclude_parent = true
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 current = true

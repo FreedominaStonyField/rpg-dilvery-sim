@@ -732,8 +732,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517014, 0)
 floor_constant_speed = true
 floor_max_angle = 0.8552113
 gravity = 9.0
-camera_shoulder_offset = Vector3(0, 0, 0)
-camera_zoom_min = 1.0
+camera_shoulder_offset = Vector3(0.4, 0.2, 0)
+camera_zoom_min = 1.6
 LandingCooldownMode = "Clamp Speed"
 LandingCooldownDuration = 0.2
 LandingMoveSpeedMultiplier = 0.5
@@ -741,6 +741,7 @@ LandingMoveSpeedMultiplier = 0.5
 [node name="Pickup" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784884, 0.5543945, 3.619691)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("5")
 dropoff_paths = Array[NodePath]([NodePath("../DropoffDocks"), NodePath("../DropoffHouse001"), NodePath("../DropoffHouse002"), NodePath("../DropoffHouse003"), NodePath("../DropoffHouse004"), NodePath("../DropoffHouse005"), NodePath("../DropoffHouse006"), NodePath("../DropoffWarehouse"), NodePath("../DropoffWarehouse2"), NodePath("../DropoffWarehouse3"), NodePath("../DropoffDock"), NodePath("../DropoffDock2"), NodePath("../DropoffTower"), NodePath("../DropoffBarn"), NodePath("../DropoffInn"), NodePath("../town cisco /stall/Stall 1"), NodePath("../DropoffStall02"), NodePath("../DropoffStall03"), NodePath("../DropoffStall04"), NodePath("../DropoffStall05"), NodePath("../DropoffStall06")])
 metadata/_edit_group_ = true
@@ -754,6 +755,7 @@ mesh = SubResource("3")
 [node name="DropoffDocks" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.104326, 0.8, 32.346703)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -775,6 +777,7 @@ uppercase = true
 [node name="DropoffHouse001" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.14558554, 0.8, -17.867773)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -796,6 +799,7 @@ uppercase = true
 [node name="DropoffHouse002" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.885315, 0.8, -13.859518)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -817,6 +821,7 @@ uppercase = true
 [node name="DropoffHouse003" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.349161, 0.8, -6.8527527)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -838,6 +843,7 @@ uppercase = true
 [node name="DropoffHouse004" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.165258, 0.8, -1.8795242)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -859,6 +865,7 @@ uppercase = true
 [node name="DropoffHouse005" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.44808, 0.8, 7.811987)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -880,6 +887,7 @@ uppercase = true
 [node name="DropoffHouse006" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.477411, 0.8, 19.140575)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -901,6 +909,7 @@ uppercase = true
 [node name="DropoffWarehouse" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.981064, 0.8, 26.141203)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -922,6 +931,7 @@ uppercase = true
 [node name="DropoffWarehouse2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.868391, 0.8, 18.475355)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -943,6 +953,7 @@ uppercase = true
 [node name="DropoffWarehouse3" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.12758, 0.8, 19.250887)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -964,6 +975,7 @@ uppercase = true
 [node name="DropoffDock" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.00904, 0.8, 37.83759)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -985,6 +997,7 @@ uppercase = true
 [node name="DropoffDock2" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.407518, 0.8, 46.999535)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1006,6 +1019,7 @@ uppercase = true
 [node name="DropoffTower" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.332943, 10.316933, 6.541819)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1027,6 +1041,7 @@ uppercase = true
 [node name="DropoffBarn" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.362491, 0.59401274, 36.305046)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1048,6 +1063,7 @@ uppercase = true
 [node name="DropoffInn" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.034914, 0.8, -33.60318)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1069,6 +1085,7 @@ uppercase = true
 [node name="DropoffStall02" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.778715, 0.8, -10.612591)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1090,6 +1107,7 @@ uppercase = true
 [node name="DropoffStall03" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.96889, 0.8, -15.065954)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1111,6 +1129,7 @@ uppercase = true
 [node name="DropoffStall04" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.588617, 0.8, -13.717732)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1132,6 +1151,7 @@ uppercase = true
 [node name="DropoffStall05" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.30182, 0.80000025, -9.476105)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 
@@ -1153,6 +1173,7 @@ uppercase = true
 [node name="DropoffStall06" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.498188, 0.8, -19.071396)
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("6")
 metadata/_edit_group_ = true
 

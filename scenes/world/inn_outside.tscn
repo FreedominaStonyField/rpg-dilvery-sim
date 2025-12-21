@@ -151,6 +151,7 @@ shape = SubResource("ConvexPolygonShape3D_7sgj7")
 [node name="SafeArea" type="Area3D" parent="."]
 transform = Transform3D(0.9237258, 0, -0.38305426, 0, 1, 0, 0.38305426, 0, 0.9237258, -0.14080477, 1.4966346, 3.1831155)
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1525574e-07, -0.4100952, 2.0000002)
@@ -159,6 +160,7 @@ shape = SubResource("BoxShape3D_7sgj7")
 [node name="SleepSpot" type="Area3D" parent="SafeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1999999, 0.5999999)
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea/SleepSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1668396, 0.7424805, -0.10449219)

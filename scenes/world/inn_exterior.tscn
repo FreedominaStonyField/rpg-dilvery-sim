@@ -62,6 +62,7 @@ material = ExtResource("4_ft214")
 [node name="SafeArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
@@ -70,6 +71,7 @@ shape = SubResource("2")
 [node name="SleepSpot" type="Area3D" parent="SafeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1999999, 0.5999999)
 collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SafeArea/SleepSpot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1668396, 1.1424805, -0.10449219)
