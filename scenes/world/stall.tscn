@@ -51,6 +51,8 @@ shape = SubResource("ConvexPolygonShape3D_wryly")
 
 [node name="Stall 1" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4556055)
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_vafda")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stall 1"]

@@ -117,8 +117,6 @@ func _physics_process(delta: float) -> void:
 
 	_was_on_floor = on_floor
 	
-	# Smooth rotation
-	rotation.y = lerp_angle(rotation.y, camera_pivot.rotation.y, delta * rotation_smoothing)
 	_update_camera_zoom(delta)
 	_apply_camera_offsets()
 
@@ -267,3 +265,15 @@ func play_interact_animation() -> bool:
 	if animator.has_method("play_interact"):
 		return animator.play_interact()
 	return false
+
+func play_interact_and_wait_midpoint() -> bool:
+	if animator == null:
+		return true
+	if not animator.has_method("play_interact"):
+		return true
+	var started = animator.play_interact()
+	if not started:
+		return false
+	if animator.has_signal("interact_midpoint"):
+		await animator.interact_midpoint
+	return true

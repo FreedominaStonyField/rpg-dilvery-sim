@@ -49,7 +49,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not _can_interact():
 		return
-	_request_interact_animation()
+	var can_proceed := await _await_interact_midpoint()
+	if not can_proceed:
+		return
 	_try_pickup()
 	get_viewport().set_input_as_handled()
 
@@ -104,8 +106,11 @@ func _update_prompt() -> void:
 	var can_show := player_in_range and _can_interact()
 	UIEvents.set_interact_prompt(can_show, interact_action, self)
 
-func _request_interact_animation() -> void:
+func _await_interact_midpoint() -> bool:
 	if player == null:
-		return
+		return true
+	if player.has_method("play_interact_and_wait_midpoint"):
+		return await player.play_interact_and_wait_midpoint()
 	if player.has_method("play_interact_animation"):
-		player.play_interact_animation()
+		return player.play_interact_animation()
+	return true

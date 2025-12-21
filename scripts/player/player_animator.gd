@@ -4,6 +4,7 @@ extends AnimationTree
 signal animation_debug_event(event: Dictionary)
 signal interact_started()
 signal interact_finished()
+signal interact_midpoint()
 
 @export var player: CharacterBody3D
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
@@ -27,6 +28,7 @@ signal interact_finished()
 
 @export_group("Interact")
 @export var interact_anim: StringName = &"AnimationLibrary_Godot_Standard/Interact"
+@export_range(0.0, 1.0, 0.05) var interact_midpoint_ratio: float = 0.5
 
 const STATE_IDLE := &"idle"
 const STATE_WALK := &"walk"
@@ -50,6 +52,7 @@ var state_anim_map: Dictionary = {}
 var debug_enabled: bool = OS.is_debug_build() or Engine.is_editor_hint()
 var _missing_anim_warnings: Dictionary = {}
 var _interact_active: bool = false
+var _interact_mid_timer: SceneTreeTimer
 
 func _ready() -> void:
 	if player == null:
@@ -331,6 +334,7 @@ func play_interact() -> bool:
 	_interact_active = true
 	active = false
 	animation_player.play(anim_name)
+	_schedule_interact_midpoint(_animation_length(interact_anim, 0.0))
 	if player != null and player.has_method("set_movement_locked"):
 		player.set_movement_locked(true)
 	interact_started.emit()
@@ -347,3 +351,25 @@ func _end_interact() -> void:
 	if player != null and player.has_method("set_movement_locked"):
 		player.set_movement_locked(false)
 	interact_finished.emit()
+
+func _schedule_interact_midpoint(anim_length: float) -> void:
+	var ratio = clamp(interact_midpoint_ratio, 0.0, 1.0)
+	if anim_length <= 0.0:
+		_emit_interact_midpoint()
+		return
+	var time = anim_length * ratio
+	if time <= 0.0:
+		_emit_interact_midpoint()
+		return
+	if not is_inside_tree():
+		return
+	_interact_mid_timer = get_tree().create_timer(time)
+	_interact_mid_timer.timeout.connect(_on_interact_midpoint_timeout)
+
+func _on_interact_midpoint_timeout() -> void:
+	if not _interact_active:
+		return
+	_emit_interact_midpoint()
+
+func _emit_interact_midpoint() -> void:
+	interact_midpoint.emit()
