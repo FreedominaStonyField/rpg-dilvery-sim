@@ -6958,6 +6958,20 @@ tracks/52/path = NodePath("%GeneralSkeleton:RightToes")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, -7.603102e-08, -0.97341746, -0.22903854, -3.6824467e-08, 0.033333335, 1, 3.4908002e-08, -0.98538494, -0.17034295, -1.996213e-09, 0.06666667, 1, 2.7988142e-08, -0.9982058, -0.059876442, 1.6278397e-08, 0.1, 1, 6.700176e-08, -1, -8.940697e-08, -1.600057e-09, 0.13333334, 1, -0.00051533454, -0.9999999, -0.00045982003, -2.3006578e-07, 0.16666667, 1, -0.0017446565, -0.99999726, -0.0015577078, -2.715271e-06, 0.2, 1, -0.0032115993, -0.9999908, -0.0028724968, -9.270036e-06, 0.23333333, 1, -0.004440883, -0.99998236, -0.0039776266, -1.768372e-05, 0.33333334, 1, -0.0039737415, -0.99998593, -0.003557235, -1.418218e-05, 0.36666667, 1, -0.0030056725, -0.99999195, -0.0026875138, -8.08225e-06, 0.4, 1, -0.0019507094, -0.99999666, -0.0017420352, -3.394438e-06, 0.43333334, 1, -0.000982534, -0.99999917, -0.0008764267, -9.024516e-07, 0.5, 1, -1.4966453e-08, -1, -8.940697e-08, -3.3189615e-08, 1.2666667, 1, 7.447727e-08, -1, -2.9802322e-08, -8.89035e-09)
+tracks/53/type = "method"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("../AnimationSfx")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_land"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_8nn5r"]
 resource_name = "Jump_Start"
@@ -7333,6 +7347,20 @@ tracks/52/path = NodePath("%GeneralSkeleton:RightToes")
 tracks/52/interp = 1
 tracks/52/loop_wrap = true
 tracks/52/keys = PackedFloat32Array(0, 1, 6.700176e-08, -1, -8.940697e-08, -1.600057e-09)
+tracks/53/type = "method"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("../AnimationSfx")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_jump_start"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_kvwax"]
 resource_name = "PickUp_Table"
@@ -18315,11 +18343,6 @@ animation = &"AnimationLibrary_Godot_Standard/Jump_Start"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pn6s4"]
 animation = &"AnimationLibrary_Godot_Standard/Jump_Land"
-use_custom_timeline = true
-timeline_length = 0.315
-stretch_time_scale = true
-start_offset = 0.17999999999999972
-loop_mode = 0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7oing"]
 animation = &"AnimationLibrary_Godot_Standard/Sprint"
@@ -18378,7 +18401,7 @@ states/sprint/position = Vector2(49, 227)
 states/walk/node = SubResource("AnimationNodeAnimation_5stf6")
 states/walk/position = Vector2(-116, 359)
 transitions = ["idle", "sprint", SubResource("AnimationNodeStateMachineTransition_180ig"), "sprint", "idle", SubResource("AnimationNodeStateMachineTransition_20koh"), "sprint", "jump_start", SubResource("AnimationNodeStateMachineTransition_ov1oi"), "idle", "jump_start", SubResource("AnimationNodeStateMachineTransition_rn7t0"), "jump_start", "jump_loop", SubResource("AnimationNodeStateMachineTransition_8qjgm"), "jump_loop", "land", SubResource("AnimationNodeStateMachineTransition_ejd4k"), "land", "idle", SubResource("AnimationNodeStateMachineTransition_2xrq6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_pi3ps"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_kswpp"), "walk", "jump_start", SubResource("AnimationNodeStateMachineTransition_v5i4m"), "walk", "sprint", SubResource("AnimationNodeStateMachineTransition_p1lr0"), "sprint", "walk", SubResource("AnimationNodeStateMachineTransition_ro0t8")]
-graph_offset = Vector2(-217, -61)
+graph_offset = Vector2(-273, 168)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -18483,7 +18506,6 @@ script = ExtResource("8")
 profile = ExtResource("9")
 
 [node name="AnimationTree" type="AnimationTree" parent="." node_paths=PackedStringArray("player")]
-active = false
 root_node = NodePath("../Emma avatarty")
 tree_root = SubResource("AnimationNodeStateMachine_8nn5r")
 anim_player = NodePath("../Emma avatarty/AnimationPlayer")
