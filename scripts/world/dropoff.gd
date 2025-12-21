@@ -2,11 +2,14 @@ extends Area3D
 
 @export var reward: int = 20
 @export var interact_action: String = "interact"
+@export var dropoff_site_path: NodePath
 
 var player_in_range: bool = false
 var player: CharacterBody3D
+var dropoff_site: DropoffSite
 
 func _ready() -> void:
+	_resolve_dropoff_site()
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	Jobs.job_started.connect(_on_job_state_changed)
@@ -44,7 +47,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _can_interact() -> bool:
 	if not Jobs.has_active_job():
 		return false
-	if Jobs.current_dropoff != self:
+	if not _matches_current_dropoff():
 		return false
 	if not PlayerData.is_carrying():
 		return false
@@ -75,3 +78,16 @@ func _await_interact_midpoint() -> bool:
 	if player.has_method("play_interact_animation"):
 		return player.play_interact_animation()
 	return true
+
+func _resolve_dropoff_site() -> void:
+	var site: DropoffSite = null
+	if dropoff_site_path != NodePath():
+		site = get_node_or_null(dropoff_site_path) as DropoffSite
+	elif get_parent() is DropoffSite:
+		site = get_parent() as DropoffSite
+	dropoff_site = site
+
+func _matches_current_dropoff() -> bool:
+	if dropoff_site != null:
+		return Jobs.current_dropoff == dropoff_site
+	return Jobs.current_dropoff == self
