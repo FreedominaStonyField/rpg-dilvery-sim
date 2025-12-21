@@ -18407,6 +18407,7 @@ graph_offset = Vector2(-273, 168)
 collision_layer = 2
 script = ExtResource("1")
 gravity = 10.0
+camera_zoom_min = 0.68
 bDisableAirControl = false
 max_stamina = 1000.0
 
