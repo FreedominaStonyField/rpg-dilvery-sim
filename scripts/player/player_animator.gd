@@ -2,6 +2,8 @@
 extends AnimationTree
 
 signal animation_debug_event(event: Dictionary)
+signal interact_started()
+signal interact_finished()
 
 @export var player: CharacterBody3D
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
@@ -22,6 +24,9 @@ signal animation_debug_event(event: Dictionary)
 @export_group("Facing")
 @export var enable_facing: bool = true
 @export var facing_smoothing: float = 0.15
+
+@export_group("Interact")
+@export var interact_anim: StringName = &"AnimationLibrary_Godot_Standard/Interact"
 
 const STATE_IDLE := &"idle"
 const STATE_WALK := &"walk"
@@ -44,6 +49,7 @@ var state_time: float = 0.0
 var state_anim_map: Dictionary = {}
 var debug_enabled: bool = OS.is_debug_build() or Engine.is_editor_hint()
 var _missing_anim_warnings: Dictionary = {}
+var _interact_active: bool = false
 
 func _ready() -> void:
 	if player == null:
@@ -56,6 +62,8 @@ func _ready() -> void:
 		return
 	if animation_player.animation_started.is_connected(_on_animation_started) == false:
 		animation_player.animation_started.connect(_on_animation_started)
+	if animation_player.animation_finished.is_connected(_on_animation_finished) == false:
+		animation_player.animation_finished.connect(_on_animation_finished)
 	anim_player = animation_player_path
 	active = true
 	playback = get("parameters/playback")
@@ -73,6 +81,9 @@ func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	if not GameState.is_playing():
+		return
+	if _interact_active:
+		state_time += delta
 		return
 	var on_floor := player.is_on_floor()
 	if enable_facing:
@@ -217,6 +228,7 @@ func _validate_animation_mapping() -> void:
 	_warn_missing_anim(STATE_JUMP_START, jump_start_anim)
 	_warn_missing_anim(STATE_JUMP_LOOP, jump_loop_anim)
 	_warn_missing_anim(STATE_LAND, land_anim)
+	_warn_missing_anim(&"interact", interact_anim)
 
 func _warn_missing_anim(state: StringName, anim_name: StringName) -> void:
 	if anim_name == StringName(""):
@@ -241,6 +253,10 @@ func _on_animation_started(anim_name: StringName) -> void:
 	_emit_debug_event("AnimationStarted", str(anim_name), "AnimationPlayer", {
 		"state": playback.get_current_node() if playback else "",
 	})
+
+func _on_animation_finished(anim_name: StringName) -> void:
+	if _interact_active and anim_name == interact_anim:
+		_end_interact()
 
 func _emit_debug_event(
 		event_type: String,
@@ -300,3 +316,34 @@ func get_blend_snapshot() -> Array[Dictionary]:
 			"weight": current_weight
 		})
 	return blends
+
+func play_interact() -> bool:
+	if _interact_active:
+		return false
+	if animation_player == null:
+		return false
+	var anim_name := String(interact_anim)
+	if anim_name == "":
+		return false
+	if not _has_animation(anim_name):
+		_warn_once(&"interact", "Animation '%s' missing for interact." % anim_name)
+		return false
+	_interact_active = true
+	active = false
+	animation_player.play(anim_name)
+	if player != null and player.has_method("set_movement_locked"):
+		player.set_movement_locked(true)
+	interact_started.emit()
+	return true
+
+func is_interacting() -> bool:
+	return _interact_active
+
+func _end_interact() -> void:
+	_interact_active = false
+	active = true
+	if playback != null and playback.get_current_node() == "":
+		playback.start(STATE_IDLE)
+	if player != null and player.has_method("set_movement_locked"):
+		player.set_movement_locked(false)
+	interact_finished.emit()

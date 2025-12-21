@@ -22,6 +22,9 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export_group("Sfx")
 @export var landing_sfx_path: NodePath = NodePath("AnimationSfx")
 
+@export_group("Animation")
+@export var animator_path: NodePath = NodePath("AnimationTree")
+
 @export_group("Movement Tuning")
 @export var bDisableAirControl: bool = true
 @export_enum("Ignore Input", "Clamp Speed") var LandingCooldownMode: String = "Ignore Input"
@@ -44,10 +47,12 @@ var _pitch: float = deg_to_rad(-20.0)
 var _was_on_floor: bool = false
 var _landing_cooldown_timer: float = 0.0
 var _zoom_target: float = 0.0
+var _movement_locked: bool = false
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
 @onready var landing_sfx: AnimationSfx = get_node_or_null(landing_sfx_path) as AnimationSfx
+@onready var animator: Node = get_node_or_null(animator_path)
 
 func _ready() -> void:
 	add_to_group("player")
@@ -72,6 +77,7 @@ func _physics_process(delta: float) -> void:
 	var speed := _current_speed()
 	var vel := velocity
 	var pre_move_velocity_y := vel.y
+	var allow_input := not _movement_locked
 
 	if is_on_floor():
 		if _landing_cooldown_timer > 0.0:
@@ -80,16 +86,23 @@ func _physics_process(delta: float) -> void:
 			elif LandingCooldownMode == "Clamp Speed":
 				speed *= LandingMoveSpeedMultiplier
 		
-		vel.x = direction.x * speed
-		vel.z = direction.z * speed
+		if not allow_input:
+			vel.x = 0.0
+			vel.z = 0.0
+		else:
+			vel.x = direction.x * speed
+			vel.z = direction.z * speed
 
-		if Input.is_action_just_pressed("jump"):
+		if allow_input and Input.is_action_just_pressed("jump"):
 			vel.y = jump_force
 		else:
 			vel.y = 0.0
 	else:
 		vel.y -= gravity * delta
-		if not bDisableAirControl:
+		if not allow_input:
+			vel.x = 0.0
+			vel.z = 0.0
+		elif not bDisableAirControl:
 			vel.x = direction.x * speed
 			vel.z = direction.z * speed
 
@@ -153,6 +166,8 @@ func _get_move_direction() -> Vector3:
 	return (forward * input_dir.y + right * input_dir.x).normalized()
 
 func is_move_input_active() -> bool:
+	if _movement_locked:
+		return false
 	return Input.get_vector(
 		"move_left",
 		"move_right",
@@ -233,3 +248,22 @@ func _on_landed(impact_speed: float) -> void:
 	if landing_sfx == null:
 		return
 	landing_sfx.play_land()
+
+func set_movement_locked(locked: bool) -> void:
+	if _movement_locked == locked:
+		return
+	_movement_locked = locked
+	if locked:
+		_is_sprinting = false
+		velocity.x = 0.0
+		velocity.z = 0.0
+
+func is_movement_locked() -> bool:
+	return _movement_locked
+
+func play_interact_animation() -> bool:
+	if animator == null:
+		return false
+	if animator.has_method("play_interact"):
+		return animator.play_interact()
+	return false

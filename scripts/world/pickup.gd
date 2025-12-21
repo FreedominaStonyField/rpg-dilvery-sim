@@ -12,6 +12,7 @@ var dropoffs: Array[Node3D] = []
 var last_dropoff: Node3D
 var rng := RandomNumberGenerator.new()
 var player_in_range: bool = false
+var player: CharacterBody3D
 
 func _ready() -> void:
 	rng.randomize()
@@ -31,11 +32,14 @@ func _ready() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
+		player = body as CharacterBody3D
 		_update_prompt()
 
 func _on_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
+		if player == body:
+			player = null
 		_update_prompt()
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -45,6 +49,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if not _can_interact():
 		return
+	_request_interact_animation()
 	_try_pickup()
 	get_viewport().set_input_as_handled()
 
@@ -98,3 +103,9 @@ func _try_pickup() -> void:
 func _update_prompt() -> void:
 	var can_show := player_in_range and _can_interact()
 	UIEvents.set_interact_prompt(can_show, interact_action, self)
+
+func _request_interact_animation() -> void:
+	if player == null:
+		return
+	if player.has_method("play_interact_animation"):
+		player.play_interact_animation()
