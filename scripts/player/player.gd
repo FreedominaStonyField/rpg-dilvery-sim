@@ -11,7 +11,6 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export_group("Camera Tuning")
-@export var camera_pivot_offset: Vector3 = Vector3(0.0, 1.6, 0.0)
 @export var camera_shoulder_offset: Vector3 = Vector3(0.4, 0.2, 0.0)
 @export var camera_pitch_min: float = -60.0
 @export var camera_pitch_max: float = 45.0
@@ -50,7 +49,6 @@ func _ready() -> void:
 	add_to_group("player")
 	GameState.mode_changed.connect(_on_mode_changed)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	camera_pivot.set_as_top_level(true)
 	_zoom_target = clamp(camera_pivot.spring_length, camera_zoom_min, camera_zoom_max)
 	camera_pivot.spring_length = _zoom_target
 	_apply_camera_offsets()
@@ -100,8 +98,7 @@ func _physics_process(delta: float) -> void:
 
 	_was_on_floor = on_floor
 	
-	# Sync camera position and smooth rotation
-	camera_pivot.global_position = global_position + camera_pivot_offset
+	# Smooth rotation
 	rotation.y = lerp_angle(rotation.y, camera_pivot.rotation.y, delta * rotation_smoothing)
 	_update_camera_zoom(delta)
 	_apply_camera_offsets()
