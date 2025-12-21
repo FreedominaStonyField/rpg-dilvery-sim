@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://hud"]
+[gd_scene load_steps=9 format=3 uid="uid://hud"]
 
 [ext_resource type="Script" uid="uid://bd6omb5gcqci7" path="res://scripts/ui/hud.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/UiSfxRouter.tscn" id="2"]
 [ext_resource type="Script" uid="uid://ctijmi6y2hewv" path="res://scripts/ui/animation_debug_panel.gd" id="3"]
 [ext_resource type="Script" uid="uid://cahqsmi7qafl1" path="res://scripts/ui/job_menu.gd" id="4"]
 
@@ -42,6 +43,8 @@ corner_radius_bottom_left = 6
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
+
+[node name="UiSfxRouter" parent="." instance=ExtResource("2")]
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = 16.0
