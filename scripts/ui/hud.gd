@@ -22,6 +22,7 @@ var transition_tween: Tween
 var package_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
 var stamina_source: Node
+var package_flash_timer: SceneTreeTimer
 
 const DAY_START_MINUTES := 6 * 60
 const DAY_END_MINUTES := 24 * 60
@@ -37,6 +38,8 @@ func _ready() -> void:
 	UIEvents.sleep_sequence_requested.connect(_on_sleep_sequence_requested)
 	UIEvents.interact_prompt_changed.connect(_on_interact_prompt_changed)
 	GameState.mode_changed.connect(_on_mode_changed)
+	Jobs.job_started.connect(_on_job_started)
+	Jobs.job_completed.connect(_on_job_completed)
 	resume_button.pressed.connect(_on_resume_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	_on_money_changed(PlayerData.money)
@@ -85,6 +88,13 @@ func _on_new_morning() -> void:
 	if in_transition:
 		return
 	show_message("Morning. New deliveries available.")
+
+func _on_job_started(_dropoff: Node3D) -> void:
+	_flash_package_menu(2.25)
+
+func _on_job_completed() -> void:
+	_flash_package_menu(2.0)
+	show_message("Delivery complete!")
 
 func show_message(message: String, duration: float = 5) -> void:
 	if in_transition:
@@ -229,3 +239,19 @@ func _on_stamina_changed(current: float, max_value: float, percent: float) -> vo
 	stamina_bar.max_value = max_value
 	stamina_bar.value = current
 	stamina_container.visible = current < max_value - 0.01
+
+func _flash_package_menu(duration: float) -> void:
+	if in_transition or package_pause_active:
+		return
+	if package_flash_timer:
+		package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
+		package_flash_timer = null
+	package_menu.visible = true
+	package_flash_timer = get_tree().create_timer(duration)
+	package_flash_timer.timeout.connect(_on_package_flash_timeout)
+
+func _on_package_flash_timeout() -> void:
+	package_flash_timer = null
+	if package_pause_active or in_transition:
+		return
+	package_menu.visible = false

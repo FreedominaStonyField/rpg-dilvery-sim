@@ -171,7 +171,19 @@ text = "Status: No job"
 
 [node name="DropoffLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
 layout_mode = 2
-text = "Dropoff: --"
+text = "Location: --"
+
+[node name="SnapshotRect" type="TextureRect" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+
+[node name="HintLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+text = "Hint: --"
 
 [node name="FooterHint" type="Label" parent="PackageMenu/PackageMargin/PackageVBox"]
 layout_mode = 2

@@ -99,7 +99,6 @@ func _try_pickup() -> void:
     collision_shape.set_deferred("disabled", true)
     Jobs.start_job(dropoff)
     PlayerData.set_carrying(item_name)
-    UIEvents.show_message("Picked up delivery. Target: %s" % dropoff.name)
     _update_prompt()
 
 func _update_prompt() -> void:

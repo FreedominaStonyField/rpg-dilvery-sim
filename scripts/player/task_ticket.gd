@@ -27,7 +27,7 @@ func get_details() -> Dictionary:
 
 func _on_job_started(dropoff: Node3D) -> void:
     dropoff_ref = dropoff
-    recipient_name = dropoff.name
+    recipient_name = _get_dropoff_display_name(dropoff)
     if PlayerData.is_carrying():
         item_name = PlayerData.carrying_item
     _emit_update()
@@ -53,3 +53,10 @@ func _clear_ticket() -> void:
     recipient_name = ""
     dropoff_ref = null
     ticket_cleared.emit()
+
+func _get_dropoff_display_name(dropoff: Node3D) -> String:
+    if dropoff is DropoffSite:
+        var site := dropoff as DropoffSite
+        if site.display_name != "":
+            return site.display_name
+    return dropoff.name

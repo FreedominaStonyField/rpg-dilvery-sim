@@ -23,6 +23,12 @@ tonemap_mode = 4
 [sub_resource type="SphereShape3D" id="4"]
 radius = 0.8
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_kill_plane"]
+size = Vector3(200, 2, 200)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tower_blocker"]
+size = Vector3(4, 4, 4)
+
 [sub_resource type="SphereMesh" id="3"]
 radius = 0.4
 
@@ -742,6 +748,14 @@ mesh = SubResource("3")
 
 [node name="HUD" parent="." instance=ExtResource("3")]
 
+[node name="KillPlane" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillPlane"]
+shape = SubResource("BoxShape3D_kill_plane")
+
 [node name="town cisco " type="Node3D" parent="."]
 
 [node name="Cube" type="MeshInstance3D" parent="town cisco "]
@@ -807,18 +821,16 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /stall6/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_d6tky")
 
-[node name="DropoffSite" parent="town cisco /stall6" instance=ExtResource("8_16fjv")]
+[node name="Stall 6" parent="town cisco /stall6" instance=ExtResource("8_16fjv")]
 transform = Transform3D(-0.9853375, 0, 0.17061575, 0, 1, 0, -0.17061575, 0, -0.9853375, -1.273304, -0.10868615, 0.267622)
-site_id = &"Stall06"
-display_name = "Vendor 06"
 
-[node name="Label3D" parent="town cisco /stall6/DropoffSite" index="2"]
+[node name="Label3D" parent="town cisco /stall6/Stall 6" index="2"]
 transform = Transform3D(-0.2988576, 0, 0.9542977, 0, 1, 0, -0.9542977, 0, -0.2988576, -0.12382126, 0.44987816, 0)
 pixel_size = 0.005
 billboard = 0
 text = "Stall 6 Dropoff"
 
-[node name="SnapshotCamera" parent="town cisco /stall6/DropoffSite" index="3"]
+[node name="SnapshotCamera" parent="town cisco /stall6/Stall 6" index="3"]
 transform = Transform3D(-0.4548767, 0, 0.8905545, 0, 1, 0, -0.8905545, 0, -0.4548767, 1.2946262, 0, -0.7631302)
 
 [node name="house_001" type="MeshInstance3D" parent="town cisco "]
@@ -926,6 +938,12 @@ size = Vector3(2.2776184, 0.3071289, 0.7216797)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /Tower/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_qh0kd")
 
+[node name="RampBlocker" type="StaticBody3D" parent="town cisco /Tower"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /Tower/RampBlocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+shape = SubResource("BoxShape3D_tower_blocker")
+
 [node name="Barn" type="MeshInstance3D" parent="town cisco "]
 transform = Transform3D(2.993572, 0, -1.559407, 0, 3.3753853, 0, 1.559407, 0, 2.993572, 10.643894, 0.021888733, 40.349297)
 mesh = SubResource("ArrayMesh_te33m")
@@ -959,4 +977,4 @@ shape = SubResource("ConvexPolygonShape3D_iqxvy")
 [node name="Inn" parent="town cisco " instance=ExtResource("8_yr1n6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.594933, 0, -37.12024)
 
-[editable path="town cisco /stall6/DropoffSite"]
+[editable path="town cisco /stall6/Stall 6"]

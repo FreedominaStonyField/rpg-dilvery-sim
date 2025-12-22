@@ -148,7 +148,7 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_013/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_7sgj7")
 
-[node name="SafeArea" type="Area3D" parent="."]
+[node name="SafeArea" type="Area3D" parent="." groups=["safe_respawn"]]
 transform = Transform3D(0.9237258, 0, -0.38305426, 0, 1, 0, 0.38305426, 0, 0.9237258, -0.14080477, 1.4966346, 3.1831155)
 collision_layer = 0
 collision_mask = 2
@@ -174,3 +174,6 @@ text = "Sleep Area"
 transform = Transform3D(0.36708567, 0, 0.9301871, 0, 1, 0, -0.9301871, 0, 0.36708567, 0.25800526, 0.7549504, 2.127806)
 text = "Safe Area
 "
+
+[node name="RespawnPoint" type="Marker3D" parent="SafeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
