@@ -7,6 +7,8 @@ const MESSAGE_HOLD := 5.5
 @onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
 @onready var carrying_label: Label = $PackageMenu/PackageMargin/PackageVBox/JobVBox/CarryingLabel
 @onready var package_menu: Control = $PackageMenu
+@onready var package_fade_timer: Timer = $PackageFadeTimer
+@onready var completion_audio: AudioStreamPlayer = $PackageMenu/CompletionAudioPlayer
 @onready var notification_container: VBoxContainer = $NotificationContainer
 @onready var pause_menu: Control = $PauseMenu
 @onready var resume_button: Button = $PauseMenu/Panel/VBoxContainer/ResumeButton
@@ -23,6 +25,7 @@ var package_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
 var stamina_source: Node
 var package_flash_timer: SceneTreeTimer
+var package_fade_tween: Tween
 
 const DAY_START_MINUTES := 6 * 60
 const DAY_END_MINUTES := 24 * 60
@@ -92,8 +95,9 @@ func _on_new_morning() -> void:
 func _on_job_started(_dropoff: Node3D) -> void:
 	_flash_package_menu(2.25)
 
-func _on_job_completed() -> void:
-	_flash_package_menu(2.0)
+func _on_job_completed(job: JobRecord) -> void:
+	_play_completion_sfx(job)
+	_flash_package_menu(2.0, job)
 	show_message("Delivery complete!")
 
 func show_message(message: String, duration: float = 5) -> void:
@@ -127,8 +131,12 @@ func _on_mode_changed(mode: GameState.Mode) -> void:
 	if mode == GameState.Mode.PLAYING and package_pause_active:
 		package_pause_active = false
 		package_menu.visible = false
+		package_menu.modulate = Color(1, 1, 1, 1)
 	if mode != GameState.Mode.PLAYING and not package_pause_active:
 		package_menu.visible = false
+		package_menu.modulate = Color(1, 1, 1, 1)
+		if package_menu.has_method("clear_override"):
+			package_menu.call("clear_override")
 	if mode != GameState.Mode.PAUSED and package_pause_active:
 		package_pause_active = false
 
@@ -167,7 +175,7 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 		if is_mugged:
 			PlayerData.reset_money()
 			PlayerData.clear_carrying()
-			Jobs.cancel_job()
+			Jobs.clear_active_job()
 		TimeSystem.start_new_day()
 	)
 	transition_tween.tween_interval(MESSAGE_HOLD)
@@ -181,7 +189,7 @@ func _finish_transition() -> void:
 	in_transition = false
 	GameState.set_mode(GameState.Mode.PLAYING)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	var toggle_pressed := event.is_action_pressed("toggle_package_menu")
 	if not toggle_pressed and event is InputEventKey:
 		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
@@ -191,8 +199,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not GameState.is_playing() and not package_pause_active:
 			return
 		var next_visible := not package_menu.visible
+		if package_flash_timer:
+			package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
+			package_flash_timer = null
 		package_menu.visible = next_visible
 		package_pause_active = next_visible
+		if package_fade_tween:
+			package_fade_tween.kill()
+			package_fade_tween = null
+		package_menu.modulate = Color(1, 1, 1, 1)
+		if package_menu.has_method("clear_override"):
+			package_menu.call("clear_override")
 		GameState.set_mode(GameState.Mode.PAUSED if next_visible else GameState.Mode.PLAYING)
 		get_viewport().set_input_as_handled()
 
@@ -240,13 +257,21 @@ func _on_stamina_changed(current: float, max_value: float, percent: float) -> vo
 	stamina_bar.value = current
 	stamina_container.visible = current < max_value - 0.01
 
-func _flash_package_menu(duration: float) -> void:
+func _flash_package_menu(duration: float, completed_job: JobRecord = null) -> void:
 	if in_transition or package_pause_active:
 		return
 	if package_flash_timer:
 		package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
 		package_flash_timer = null
+	if package_fade_tween:
+		package_fade_tween.kill()
+		package_fade_tween = null
 	package_menu.visible = true
+	package_menu.modulate = Color(1, 1, 1, 1)
+	if completed_job != null and package_menu.has_method("show_completed_job"):
+		package_menu.call("show_completed_job", completed_job)
+	elif package_menu.has_method("clear_override"):
+		package_menu.call("clear_override")
 	package_flash_timer = get_tree().create_timer(duration)
 	package_flash_timer.timeout.connect(_on_package_flash_timeout)
 
@@ -254,4 +279,31 @@ func _on_package_flash_timeout() -> void:
 	package_flash_timer = null
 	if package_pause_active or in_transition:
 		return
+	var fade_duration := 1.5
+	if package_fade_timer != null:
+		fade_duration = package_fade_timer.wait_time
+	package_fade_tween = create_tween()
+	package_fade_tween.tween_property(
+		package_menu,
+		"modulate:a",
+		0.0,
+		fade_duration
+	).set_trans(Tween.TRANS_SINE)
+	package_fade_tween.tween_callback(_on_package_fade_finished)
+
+func _on_package_fade_finished() -> void:
+	if package_pause_active or in_transition:
+		return
 	package_menu.visible = false
+	package_menu.modulate = Color(1, 1, 1, 1)
+	if package_menu.has_method("clear_override"):
+		package_menu.call("clear_override")
+	package_fade_tween = null
+
+func _play_completion_sfx(job: JobRecord) -> void:
+	if completion_audio == null or job == null:
+		return
+	if job.completion_sfx == null:
+		return
+	completion_audio.stream = job.completion_sfx
+	completion_audio.play()

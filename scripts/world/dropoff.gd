@@ -14,7 +14,6 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.job_completed.connect(_on_job_state_changed)
-	Jobs.job_cancelled.connect(_on_job_state_changed)
 	PlayerData.carrying_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
@@ -60,7 +59,7 @@ func _deliver() -> void:
 	UIEvents.show_message("Delivered! +$%d" % reward)
 	_update_prompt()
 
-func _on_job_state_changed(_dropoff: Node3D = null) -> void:
+func _on_job_state_changed(_payload = null) -> void:
 	_update_prompt()
 
 func _on_carrying_changed(_item_name: String) -> void:

@@ -12,7 +12,6 @@ var dropoff_ref: Node3D = null
 func _ready() -> void:
     Jobs.job_started.connect(_on_job_started)
     Jobs.job_completed.connect(_on_job_finished)
-    Jobs.job_cancelled.connect(_on_job_finished)
     PlayerData.carrying_changed.connect(_on_carrying_changed)
 
 func has_ticket() -> bool:
@@ -39,7 +38,7 @@ func _on_carrying_changed(carrying: String) -> void:
         return
     _emit_update()
 
-func _on_job_finished() -> void:
+func _on_job_finished(_job: JobRecord = null) -> void:
     _clear_ticket()
 
 func _emit_update() -> void:
