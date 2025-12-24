@@ -30,18 +30,8 @@ func _on_body_exited(body: Node3D) -> void:
 			player = null
 		_update_prompt()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not player_in_range:
-		return
-	if not event.is_action_pressed(interact_action):
-		return
-	if not _can_interact():
-		return
-	var can_proceed := await _await_interact_midpoint()
-	if not can_proceed:
-		return
-	_deliver()
-	get_viewport().set_input_as_handled()
+func _exit_tree() -> void:
+	UIEvents.unregister_interaction(self)
 
 func _can_interact() -> bool:
 	if not Jobs.has_active_job():
@@ -67,7 +57,33 @@ func _on_carrying_changed(_item_name: String) -> void:
 
 func _update_prompt() -> void:
 	var can_show := player_in_range and _can_interact()
-	UIEvents.set_interact_prompt(can_show, interact_action, self)
+	if can_show:
+		UIEvents.register_interaction(self)
+	else:
+		UIEvents.unregister_interaction(self)
+
+func get_interaction_label() -> String:
+	if dropoff_site != null and dropoff_site.display_name != "":
+		return "Deliver to %s" % dropoff_site.display_name
+	if dropoff_site != null:
+		return "Deliver to %s" % dropoff_site.name
+	return "Deliver package"
+
+func get_interaction_action() -> String:
+	return interact_action
+
+func can_interact() -> bool:
+	return _can_interact()
+
+func perform_interaction() -> void:
+	if not player_in_range:
+		return
+	if not _can_interact():
+		return
+	var can_proceed := await _await_interact_midpoint()
+	if not can_proceed:
+		return
+	_deliver()
 
 func _await_interact_midpoint() -> bool:
 	if player == null:

@@ -16,6 +16,9 @@ const MESSAGE_HOLD := 5.5
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
 @onready var interact_prompt: Label = $InteractPrompt
+@onready var interaction_panel: Panel = $InteractionPanel
+@onready var interaction_list: ItemList = $InteractionPanel/PanelMargin/InteractionVBox/InteractionList
+@onready var interaction_hint: Label = $InteractionPanel/PanelMargin/InteractionVBox/InteractionHint
 @onready var stamina_container: Control = $StaminaContainer
 @onready var stamina_bar: ProgressBar = $StaminaContainer/StaminaPanel/StaminaBar
 
@@ -26,6 +29,8 @@ var interact_prompt_owner_id: int = 0
 var stamina_source: Node
 var package_flash_timer: SceneTreeTimer
 var package_fade_tween: Tween
+var interaction_entries: Array[Node] = []
+var interaction_selected_index: int = -1
 
 const DAY_START_MINUTES := 6 * 60
 const DAY_END_MINUTES := 24 * 60
@@ -40,11 +45,14 @@ func _ready() -> void:
 	UIEvents.notify.connect(show_message)
 	UIEvents.sleep_sequence_requested.connect(_on_sleep_sequence_requested)
 	UIEvents.interact_prompt_changed.connect(_on_interact_prompt_changed)
+	UIEvents.interaction_registered.connect(_on_interaction_registered)
+	UIEvents.interaction_unregistered.connect(_on_interaction_unregistered)
 	GameState.mode_changed.connect(_on_mode_changed)
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_completed)
 	resume_button.pressed.connect(_on_resume_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
+	interaction_list.item_selected.connect(_on_interaction_item_selected)
 	_on_money_changed(PlayerData.money)
 	_on_carrying_changed(PlayerData.carrying_item)
 	_on_time_changed(TimeSystem.day_time)
@@ -55,6 +63,7 @@ func _ready() -> void:
 	transition_label.visible = false
 	transition_label.modulate = Color(1, 1, 1, 0)
 	interact_prompt.visible = false
+	interaction_panel.visible = false
 	stamina_container.visible = false
 	_bind_player_stamina()
 	get_tree().node_added.connect(_on_node_added)
@@ -139,6 +148,7 @@ func _on_mode_changed(mode: GameState.Mode) -> void:
 			package_menu.call("clear_override")
 	if mode != GameState.Mode.PAUSED and package_pause_active:
 		package_pause_active = false
+	_update_interaction_visibility()
 
 func _on_resume_pressed() -> void:
 	GameState.set_mode(GameState.Mode.PLAYING)
@@ -214,6 +224,8 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
+	if not interaction_entries.is_empty():
+		return
 	if visible:
 		interact_prompt_owner_id = owner_id
 		interact_prompt.text = "Press %s to use" % _get_action_label(action)
@@ -231,6 +243,44 @@ func _get_action_label(action: String) -> String:
 		if text != "":
 			return text
 	return action
+
+func _unhandled_input(event: InputEvent) -> void:
+	if interaction_entries.is_empty():
+		return
+	if in_transition or package_pause_active or not GameState.is_playing():
+		return
+	var wheel_event := event as InputEventMouseButton
+	if wheel_event and wheel_event.pressed:
+		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_select_interaction_index(interaction_selected_index - 1)
+			get_viewport().set_input_as_handled()
+			return
+		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_select_interaction_index(interaction_selected_index + 1)
+			get_viewport().set_input_as_handled()
+			return
+	var key_event := event as InputEventKey
+	if key_event and key_event.pressed and not key_event.echo:
+		if key_event.keycode == Key.KEY_UP:
+			_select_interaction_index(interaction_selected_index - 1)
+			get_viewport().set_input_as_handled()
+			return
+		if key_event.keycode == Key.KEY_DOWN:
+			_select_interaction_index(interaction_selected_index + 1)
+			get_viewport().set_input_as_handled()
+			return
+		if key_event.keycode == Key.KEY_PAGEUP:
+			_select_interaction_index(interaction_selected_index - 3)
+			get_viewport().set_input_as_handled()
+			return
+		if key_event.keycode == Key.KEY_PAGEDOWN:
+			_select_interaction_index(interaction_selected_index + 3)
+			get_viewport().set_input_as_handled()
+			return
+	var action := _get_selected_interaction_action()
+	if action != "" and event.is_action_pressed(action):
+		await _trigger_selected_interaction()
+		get_viewport().set_input_as_handled()
 
 func _bind_player_stamina() -> void:
 	if stamina_source != null and is_instance_valid(stamina_source):
@@ -307,3 +357,117 @@ func _play_completion_sfx(job: JobRecord) -> void:
 		return
 	completion_audio.stream = job.completion_sfx
 	completion_audio.play()
+
+func _on_interaction_registered(node: Node) -> void:
+	if node == null or not is_instance_valid(node):
+		return
+	if interaction_entries.has(node):
+		return
+	interaction_entries.append(node)
+	_refresh_interaction_menu()
+
+func _on_interaction_unregistered(node: Node) -> void:
+	if interaction_entries.has(node):
+		interaction_entries.erase(node)
+		_refresh_interaction_menu()
+
+func _on_interaction_item_selected(index: int) -> void:
+	interaction_selected_index = index
+	_update_interaction_hint()
+
+func _refresh_interaction_menu() -> void:
+	_prune_invalid_interactions()
+	var previous: Node = _get_selected_interaction()
+	interaction_list.clear()
+	for node in interaction_entries:
+		interaction_list.add_item(_get_interaction_label(node))
+	if previous != null:
+		var new_index := interaction_entries.find(previous)
+		if new_index != -1:
+			interaction_selected_index = new_index
+	if interaction_entries.is_empty():
+		interaction_selected_index = -1
+	_update_interaction_visibility()
+	if interaction_entries.is_empty():
+		return
+	if interaction_selected_index < 0:
+		interaction_selected_index = 0
+	interaction_selected_index = clamp(interaction_selected_index, 0, interaction_entries.size() - 1)
+	interaction_list.select(interaction_selected_index)
+	if interaction_list.has_method("ensure_current_is_visible"):
+		interaction_list.ensure_current_is_visible()
+	_update_interaction_hint()
+
+func _update_interaction_visibility() -> void:
+	var should_show := GameState.is_playing() and not package_pause_active and not in_transition
+	should_show = should_show and not interaction_entries.is_empty()
+	interaction_panel.visible = should_show
+	if should_show:
+		interact_prompt.visible = false
+
+func _update_interaction_hint() -> void:
+	var action := _get_selected_interaction_action()
+	if action == "":
+		interaction_hint.text = "Press key to interact"
+		return
+	interaction_hint.text = "Press %s to interact" % _get_action_label(action)
+
+func _select_interaction_index(index: int) -> void:
+	if interaction_entries.is_empty():
+		return
+	var size := interaction_entries.size()
+	var clamped := index
+	if clamped < 0:
+		clamped = size - 1
+	elif clamped >= size:
+		clamped = 0
+	interaction_selected_index = clamped
+	interaction_list.select(interaction_selected_index)
+	if interaction_list.has_method("ensure_current_is_visible"):
+		interaction_list.ensure_current_is_visible()
+	_update_interaction_hint()
+
+func _get_selected_interaction() -> Node:
+	if interaction_selected_index < 0 or interaction_selected_index >= interaction_entries.size():
+		return null
+	var node := interaction_entries[interaction_selected_index]
+	if node == null or not is_instance_valid(node):
+		return null
+	return node
+
+func _get_selected_interaction_action() -> String:
+	var node := _get_selected_interaction()
+	return _get_interaction_action(node)
+
+func _get_interaction_label(node: Node) -> String:
+	if node == null or not is_instance_valid(node):
+		return "Interact"
+	if node.has_method("get_interaction_label"):
+		return node.call("get_interaction_label")
+	return node.name
+
+func _get_interaction_action(node: Node) -> String:
+	if node == null or not is_instance_valid(node):
+		return ""
+	if node.has_method("get_interaction_action"):
+		return node.call("get_interaction_action")
+	return "interact"
+
+func _trigger_selected_interaction() -> void:
+	var node := _get_selected_interaction()
+	if node == null:
+		return
+	if node.has_method("can_interact"):
+		var can_interact: bool = node.call("can_interact")
+		if not can_interact:
+			return
+	if node.has_method("perform_interaction"):
+		var result = node.call("perform_interaction")
+		if result != null:
+			await result
+
+func _prune_invalid_interactions() -> void:
+	for i in range(interaction_entries.size() - 1, -1, -1):
+		var node := interaction_entries[i]
+		if node == null or not is_instance_valid(node):
+			interaction_entries.remove_at(i)

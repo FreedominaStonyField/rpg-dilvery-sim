@@ -26,23 +26,23 @@ func _on_safe_exited(body: Node3D) -> void:
 		return
 	TimeSystem.set_outdoors(true)
 	can_sleep = false
+	_update_interaction()
 
 func _on_sleep_entered(body: Node3D) -> void:
 	if not body.is_in_group("player"):
 		return
 	can_sleep = true
 	UIEvents.show_message("Press E to sleep until morning.")
+	_update_interaction()
 
 func _on_sleep_exited(body: Node3D) -> void:
 	if not body.is_in_group("player"):
 		return
 	can_sleep = false
+	_update_interaction()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not can_sleep:
-		return
-	if event.is_action_pressed(sleep_action):
-		_sleep_until_morning()
+func _exit_tree() -> void:
+	UIEvents.unregister_interaction(self)
 
 func _sleep_until_morning() -> void:
 	var ratio := TimeSystem.get_time_ratio()
@@ -54,3 +54,23 @@ func _sleep_until_morning() -> void:
 		return
 	UIEvents.show_message("Paid %d gold for a room." % sleep_cost)
 	UIEvents.request_sleep_sequence("You got a good night's sleep.")
+
+func _update_interaction() -> void:
+	if can_sleep:
+		UIEvents.register_interaction(self)
+	else:
+		UIEvents.unregister_interaction(self)
+
+func get_interaction_label() -> String:
+	return "Sleep until morning ($%d)" % sleep_cost
+
+func get_interaction_action() -> String:
+	return sleep_action
+
+func can_interact() -> bool:
+	return can_sleep
+
+func perform_interaction() -> void:
+	if not can_sleep:
+		return
+	_sleep_until_morning()

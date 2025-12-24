@@ -563,11 +563,38 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("5")
 metadata/_edit_group_ = true
+item_name = "Package"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
 shape = SubResource("4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Pickup"]
+mesh = SubResource("3")
+
+[node name="PickupParsal" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2784884, 0.5543945, 3.419691)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5")
+item_name = "Parsal"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupParsal"]
+shape = SubResource("4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PickupParsal"]
+mesh = SubResource("3")
+
+[node name="PickupLetter" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6584885, 0.5543945, 3.739691)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5")
+item_name = "Letter"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupLetter"]
+shape = SubResource("4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PickupLetter"]
 mesh = SubResource("3")
 
 [node name="HUD" parent="." instance=ExtResource("3")]
