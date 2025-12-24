@@ -8,6 +8,7 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Curfew system with mugging if outside the safe zone
 - Inn for sleeping to advance time
 - Courier journal shows completed jobs with snapshot + hint history
+- Dropoff snapshots use SubViewport capture sized to the player viewport
 
 ## Non-Goals
 - No combat, NPC AI, or dialogue trees
@@ -41,6 +42,7 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
   - `Jobs`: single active delivery job
   - `PlayerData`: money and carrying state
   - `UIEvents`: HUD event bus
+- Job completion data is stored as `JobRecord` resources for reuse in UI/history.
 
 ## Key Scenes
 - `scenes/ui/MainMenu.tscn`: main menu entry
@@ -61,6 +63,7 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Safe zone prevents mugging
 - Sleeping sets morning, saves money, resumes play
 - Job completion pops up the journal entry, fades out, and can play per-dropoff audio
+- Dropoff 3D labels use `display_name` when set
 
 ## Testing Checklist
 - Player can move and camera behaves
@@ -69,3 +72,4 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Curfew mug resets money and advances to morning
 - Pause toggles without breaking input
 - Completed job appears in journal list with snapshot/hint
+- Snapshot shows the correct dropoff view and matches scene lighting/sky
