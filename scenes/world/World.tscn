@@ -560,8 +560,6 @@ night_angle = -171.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517014, 0)
 floor_constant_speed = true
 floor_max_angle = 0.8552113
-move_speed = 0.84
-sprint_speed = 5.0
 LandingCooldownMode = "Clamp Speed"
 
 [node name="Pickup" type="Area3D" parent="."]

@@ -376,6 +376,10 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Resume"
 
+[node name="SaveButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Save Slot"
+
 [node name="MenuButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
@@ -448,7 +452,7 @@ grow_vertical = 2
 
 [node name="OverlayTitle" type="Label" parent="AnimationDebug/OverlayPanel/OverlayVBox"]
 layout_mode = 2
-text = "Anim Debug (F9)"
+text = "Anim Debug (F8)"
 
 [node name="OverlayInfo" type="RichTextLabel" parent="AnimationDebug/OverlayPanel/OverlayVBox"]
 layout_mode = 2

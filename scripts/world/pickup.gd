@@ -9,9 +9,12 @@ extends Area3D
 var available: bool = true
 var dropoffs: Array[Node3D] = []
 var last_dropoff: Node3D
-var rng := RandomNumberGenerator.new()
+var rng = RandomNumberGenerator.new()
 var player_in_range: bool = false
 var player: CharacterBody3D
+
+func _enter_tree() -> void:
+	add_to_group("saveable")
 
 func _ready() -> void:
 	rng.randomize()
@@ -47,9 +50,9 @@ func _choose_dropoff() -> Node3D:
 	if dropoffs.size() == 1:
 		last_dropoff = dropoffs[0]
 		return last_dropoff
-	var dropoff := dropoffs[rng.randi_range(0, dropoffs.size() - 1)]
+	var dropoff = dropoffs[rng.randi_range(0, dropoffs.size() - 1)]
 	if last_dropoff != null and dropoffs.size() > 1:
-		var tries := 0
+		var tries = 0
 		while dropoff == last_dropoff and tries < 3:
 			dropoff = dropoffs[rng.randi_range(0, dropoffs.size() - 1)]
 			tries += 1
@@ -80,7 +83,7 @@ func _try_pickup() -> void:
 	if dropoffs.is_empty():
 		Jobs.assert_dropoffs_available()
 		return
-	var dropoff := _choose_dropoff()
+	var dropoff = _choose_dropoff()
 	if dropoff == null:
 		push_warning("Pickup missing dropoff reference.")
 		return
@@ -92,7 +95,7 @@ func _try_pickup() -> void:
 	_update_prompt()
 
 func _update_prompt() -> void:
-	var can_show := player_in_range and _can_interact()
+	var can_show = player_in_range and _can_interact()
 	if can_show:
 		UIEvents.register_interaction(self)
 	else:
@@ -112,7 +115,7 @@ func perform_interaction() -> void:
 		return
 	if not _can_interact():
 		return
-	var can_proceed := await _await_interact_midpoint()
+	var can_proceed = await _await_interact_midpoint()
 	if not can_proceed:
 		return
 	_try_pickup()
@@ -130,3 +133,17 @@ func _refresh_dropoffs_from_jobs() -> void:
 	dropoffs.clear()
 	for site in Jobs.get_dropoff_sites():
 		dropoffs.append(site)
+
+func get_save_id() -> String:
+	return str(get_path())
+
+func to_dict() -> Dictionary:
+	return {
+		"available": available
+	}
+
+func from_dict(data: Dictionary) -> void:
+	available = bool(data.get("available", true))
+	mesh_instance.visible = available
+	collision_shape.set_deferred("disabled", not available)
+	_update_prompt()

@@ -48,10 +48,10 @@ func _bind_safe_respawn_areas() -> void:
 		_set_respawn_from_inn()
 
 func _set_respawn_from_inn() -> void:
-	var inn := get_node_or_null("town cisco /Inn") as Node3D
+	var inn = get_node_or_null("town cisco /Inn") as Node3D
 	if inn == null:
 		return
-	var respawn_marker := inn.get_node_or_null("SafeArea/RespawnPoint") as Node3D
+	var respawn_marker = inn.get_node_or_null("SafeArea/RespawnPoint") as Node3D
 	if respawn_marker:
 		respawn_transform = respawn_marker.global_transform
 		last_safe_transform = respawn_transform
@@ -62,7 +62,7 @@ func _set_respawn_from_inn() -> void:
 func _on_safe_respawn_entered(body: Node3D, area: Area3D) -> void:
 	if not body.is_in_group("player"):
 		return
-	var marker := area.get_node_or_null("RespawnPoint") as Node3D
+	var marker = area.get_node_or_null("RespawnPoint") as Node3D
 	if marker:
 		last_safe_transform = marker.global_transform
 		return
@@ -78,7 +78,7 @@ func _respawn_player(message: String) -> void:
 		_bind_player()
 	if player == null:
 		return
-	var target := last_safe_transform
+	var target = last_safe_transform
 	if target == Transform3D():
 		_set_respawn_from_inn()
 		target = respawn_transform

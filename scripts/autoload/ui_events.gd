@@ -13,7 +13,7 @@ func request_sleep_sequence(message: String = "You got a good night's sleep.") -
 	sleep_sequence_requested.emit(message)
 
 func set_interact_prompt(visible: bool, action: String = "interact", owner: Node = null) -> void:
-	var owner_id := 0
+	var owner_id = 0
 	if owner != null:
 		owner_id = owner.get_instance_id()
 	interact_prompt_changed.emit(visible, action, owner_id)

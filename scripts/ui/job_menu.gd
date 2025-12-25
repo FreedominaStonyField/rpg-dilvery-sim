@@ -6,11 +6,11 @@ extends Panel
 @onready var hint_label: Label = $PackageMargin/PackageVBox/JobVBox/HintLabel
 @onready var completed_list: ItemList = $PackageMargin/PackageVBox/CompletedSection/CompletedList
 
-const NO_JOB_STATUS := "Status: No job"
-const ACTIVE_STATUS := "Status: Active"
-const COMPLETED_STATUS := "Status: Completed"
-const AVAILABLE_STATUS := "Status: Job available"
-const DROP_OFF_NONE := "Location: --"
+const NO_JOB_STATUS = "Status: No job"
+const ACTIVE_STATUS = "Status: Active"
+const COMPLETED_STATUS = "Status: Completed"
+const AVAILABLE_STATUS = "Status: Job available"
+const DROP_OFF_NONE = "Location: --"
 
 var override_job: JobRecord
 
@@ -19,6 +19,7 @@ func _ready() -> void:
     Jobs.job_completed.connect(_on_job_completed)
     Jobs.job_available.connect(_on_job_available)
     Jobs.job_snapshot_ready.connect(_on_job_snapshot_ready)
+    Jobs.jobs_restored.connect(_on_jobs_restored)
     _configure_snapshot_rect()
     _refresh()
     _refresh_completed_list()
@@ -69,17 +70,17 @@ func _on_job_available() -> void:
 
 func _get_dropoff_display_name(dropoff: Node3D) -> String:
     if dropoff is DropoffSite:
-        var site := dropoff as DropoffSite
+        var site = dropoff as DropoffSite
         if site.display_name != "":
             return site.display_name
     return dropoff.name
 
 func _get_dropoff_hint_text(dropoff: Node3D) -> String:
     if dropoff is DropoffSite:
-        var site := dropoff as DropoffSite
+        var site = dropoff as DropoffSite
         if site.hint_text != "":
             return "Hint: %s" % site.hint_text
-    var hint_text := Jobs.get_active_hint_text()
+    var hint_text = Jobs.get_active_hint_text()
     if hint_text != "":
         return "Hint: %s" % hint_text
     return "Hint: --"
@@ -89,6 +90,10 @@ func _on_job_snapshot_ready(snapshot: Texture2D) -> void:
         return
     snapshot_rect.texture = snapshot
     snapshot_rect.visible = snapshot != null
+
+func _on_jobs_restored() -> void:
+    _refresh()
+    _refresh_completed_list()
 
 func _configure_snapshot_rect() -> void:
     snapshot_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
@@ -108,10 +113,10 @@ func clear_override() -> void:
 func _refresh_completed_list() -> void:
     completed_list.clear()
     for job in Jobs.get_completed_jobs():
-        var label := "%s" % _get_job_display_name(job)
-        var icon := job.snapshot
+        var label = "%s" % _get_job_display_name(job)
+        var icon = job.snapshot
         completed_list.add_item(label, icon)
-        var index := completed_list.get_item_count() - 1
+        var index = completed_list.get_item_count() - 1
         completed_list.set_item_tooltip(index, _get_job_hint_text(job))
         completed_list.set_item_metadata(index, job)
 

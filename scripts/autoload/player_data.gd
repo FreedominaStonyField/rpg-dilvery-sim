@@ -31,3 +31,15 @@ func clear_carrying() -> void:
 
 func is_carrying() -> bool:
 	return carrying_item != ""
+
+func to_dict() -> Dictionary:
+	return {
+		"money": money,
+		"carrying_item": carrying_item
+	}
+
+func from_dict(data: Dictionary) -> void:
+	money = int(data.get("money", money))
+	carrying_item = str(data.get("carrying_item", carrying_item))
+	money_changed.emit(money)
+	carrying_changed.emit(carrying_item)

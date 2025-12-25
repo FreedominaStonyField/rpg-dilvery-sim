@@ -55,7 +55,7 @@ func _clear_ticket() -> void:
 
 func _get_dropoff_display_name(dropoff: Node3D) -> String:
     if dropoff is DropoffSite:
-        var site := dropoff as DropoffSite
+        var site = dropoff as DropoffSite
         if site.display_name != "":
             return site.display_name
     return dropoff.name

@@ -22,6 +22,7 @@ TimeSystem="*res://scripts/autoload/time_system.gd"
 Jobs="*res://scripts/autoload/jobs.gd"
 PlayerData="*res://scripts/autoload/player_data.gd"
 UIEvents="*res://scripts/autoload/ui_events.gd"
+SaveSystem="*res://scripts/autoload/save_system.gd"
 
 [display]
 

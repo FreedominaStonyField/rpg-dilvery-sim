@@ -6,7 +6,7 @@ class_name AnimationSfx
 @export var pool_size: int = 3
 @export var allow_expand: bool = true
 
-var _rng := RandomNumberGenerator.new()
+var _rng = RandomNumberGenerator.new()
 var _pool: Array[AudioStreamPlayer3D] = []
 
 func _ready() -> void:
@@ -77,13 +77,13 @@ func _play_from_profile(
 	) -> void:
 	if profile == null or sounds.is_empty():
 		return
-	var stream := _pick_random_stream(sounds)
+	var stream = _pick_random_stream(sounds)
 	if stream == null:
 		return
-	var final_volume := volume_db + base_volume_db
+	var final_volume = volume_db + base_volume_db
 	if volume_jitter_db > 0.0:
 		final_volume += _rng.randf_range(-volume_jitter_db, volume_jitter_db)
-	var final_pitch := pitch_scale * base_pitch_scale
+	var final_pitch = pitch_scale * base_pitch_scale
 	if pitch_jitter > 0.0:
 		final_pitch *= 1.0 + _rng.randf_range(-pitch_jitter, pitch_jitter)
 	final_pitch = max(final_pitch, 0.01)
@@ -92,7 +92,7 @@ func _play_from_profile(
 func _pick_random_stream(sounds: Array[AudioStream]) -> AudioStream:
 	if sounds.is_empty():
 		return null
-	var index := _rng.randi_range(0, sounds.size() - 1)
+	var index = _rng.randi_range(0, sounds.size() - 1)
 	return sounds[index]
 
 func _play_stream_with_settings(
@@ -102,7 +102,7 @@ func _play_stream_with_settings(
 	) -> void:
 	if sound == null:
 		return
-	var player := _get_available_player()
+	var player = _get_available_player()
 	_apply_template_settings(player)
 	player.stream = sound
 	player.volume_db = volume_db_override
@@ -113,7 +113,7 @@ func _build_pool() -> void:
 	_pool.clear()
 	_pool.append(self)
 	for index in range(pool_size):
-		var player := AudioStreamPlayer3D.new()
+		var player = AudioStreamPlayer3D.new()
 		player.name = "SfxInstance_%d" % (index + 1)
 		add_child(player)
 		_pool.append(player)
@@ -123,7 +123,7 @@ func _get_available_player() -> AudioStreamPlayer3D:
 		if player.playing == false:
 			return player
 	if allow_expand:
-		var player := AudioStreamPlayer3D.new()
+		var player = AudioStreamPlayer3D.new()
 		player.name = "SfxInstance_%d" % (_pool.size() + 1)
 		add_child(player)
 		_pool.append(player)

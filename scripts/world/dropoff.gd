@@ -56,7 +56,7 @@ func _on_carrying_changed(_item_name: String) -> void:
 	_update_prompt()
 
 func _update_prompt() -> void:
-	var can_show := player_in_range and _can_interact()
+	var can_show = player_in_range and _can_interact()
 	if can_show:
 		UIEvents.register_interaction(self)
 	else:
@@ -80,7 +80,7 @@ func perform_interaction() -> void:
 		return
 	if not _can_interact():
 		return
-	var can_proceed := await _await_interact_midpoint()
+	var can_proceed = await _await_interact_midpoint()
 	if not can_proceed:
 		return
 	_deliver()

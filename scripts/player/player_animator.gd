@@ -30,12 +30,12 @@ signal interact_midpoint()
 @export var interact_anim: StringName = &"AnimationLibrary_Godot_Standard/Interact"
 @export_range(0.0, 1.0, 0.05) var interact_midpoint_ratio: float = 0.5
 
-const STATE_IDLE := &"idle"
-const STATE_WALK := &"walk"
-const STATE_SPRINT := &"sprint"
-const STATE_JUMP_START := &"jump_start"
-const STATE_JUMP_LOOP := &"jump_loop"
-const STATE_LAND := &"land"
+const STATE_IDLE = &"idle"
+const STATE_WALK = &"walk"
+const STATE_SPRINT = &"sprint"
+const STATE_JUMP_START = &"jump_start"
+const STATE_JUMP_LOOP = &"jump_loop"
+const STATE_LAND = &"land"
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_player: AnimationPlayer
@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	if _interact_active:
 		state_time += delta
 		return
-	var on_floor := player.is_on_floor()
+	var on_floor = player.is_on_floor()
 	if enable_facing:
 		_update_model_facing()
 	if not on_floor:
@@ -131,7 +131,7 @@ func _is_sprinting() -> bool:
 func _travel(state: StringName, reason: String = "") -> void:
 	if playback == null or playback.get_current_node() == state:
 		return
-	var previous_state := playback.get_current_node()
+	var previous_state = playback.get_current_node()
 	_start_blend(previous_state, state)
 	playback.travel(state)
 	last_state = state
@@ -143,7 +143,7 @@ func _travel(state: StringName, reason: String = "") -> void:
 	})
 
 func _apply_state_animations() -> void:
-	var machine := _get_state_machine()
+	var machine = _get_state_machine()
 	if machine == null:
 		return
 	_set_state_animation(machine, STATE_IDLE, idle_anim)
@@ -154,14 +154,14 @@ func _apply_state_animations() -> void:
 	_set_state_animation(machine, STATE_LAND, land_anim)
 
 func _apply_blend_times() -> void:
-	var machine := _get_state_machine()
+	var machine = _get_state_machine()
 	if machine == null:
 		return
-	var count := machine.get_transition_count()
+	var count = machine.get_transition_count()
 	for index in count:
 		var from_state: String = machine.get_transition_from(index)
 		var to_state: String = machine.get_transition_to(index)
-		var transition := machine.get_transition(index)
+		var transition = machine.get_transition(index)
 		if transition == null:
 			continue
 		transition.xfade_time = _get_transition_time(from_state, to_state)
@@ -179,14 +179,14 @@ func _set_state_animation(
 	) -> void:
 	if anim_name == StringName(""):
 		return
-	var node := machine.get_node(state_name)
+	var node = machine.get_node(state_name)
 	if node is AnimationNodeAnimation:
-		var anim_string := String(anim_name)
+		var anim_string = String(anim_name)
 		node.animation = anim_string
 		state_anim_map[state_name] = anim_string
 
 func _animation_length(anim_name: StringName, default_length: float) -> float:
-	var anim_string := String(anim_name)
+	var anim_string = String(anim_name)
 	if _has_animation(anim_string):
 		return animation_player.get_animation(anim_string).length
 	return default_length
@@ -194,15 +194,15 @@ func _animation_length(anim_name: StringName, default_length: float) -> float:
 func _update_model_facing() -> void:
 	if model_root == null:
 		return
-	var move_dir := Vector3(player.velocity.x, 0.0, player.velocity.z)
-	var local_dir := player.global_transform.basis.inverse() * move_dir
+	var move_dir = Vector3(player.velocity.x, 0.0, player.velocity.z)
+	var local_dir = player.global_transform.basis.inverse() * move_dir
 	local_dir.y = 0.0
 	if local_dir.length() > 0.05:
 		last_local_move = local_dir.normalized()
 	if last_local_move.length() < 0.01:
 		return
-	var target_yaw := atan2(last_local_move.x, last_local_move.z)
-	var current_yaw := model_root.rotation.y
+	var target_yaw = atan2(last_local_move.x, last_local_move.z)
+	var current_yaw = model_root.rotation.y
 	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, facing_smoothing)
 
 func _start_blend(from: StringName, to: StringName) -> void:
@@ -211,12 +211,12 @@ func _start_blend(from: StringName, to: StringName) -> void:
 		blend_time_left = 0.0
 		return
 	blend_from_state = from
-	var time := _get_transition_time(str(from), str(to))
+	var time = _get_transition_time(str(from), str(to))
 	blend_time_left = time
 	current_blend_duration = time
 
 func _get_transition_time(from: String, to: String) -> float:
-	var key := "%s>%s" % [from, to]
+	var key = "%s>%s" % [from, to]
 	if blend_overrides.has(key):
 		return blend_overrides[key]
 	return default_blend_time
@@ -300,7 +300,7 @@ func get_debug_state() -> Dictionary:
 func get_blend_snapshot() -> Array[Dictionary]:
 	var blends: Array[Dictionary] = []
 	if blend_from_state != "":
-		var div := current_blend_duration if current_blend_duration > 0.0 else 1.0
+		var div = current_blend_duration if current_blend_duration > 0.0 else 1.0
 		var from_weight: float = clamp(blend_time_left / div, 0.0, 1.0)
 		blends.append({
 			"state": blend_from_state,
@@ -311,7 +311,7 @@ func get_blend_snapshot() -> Array[Dictionary]:
 	if current_state != "":
 		var current_weight: float = 1.0
 		if blend_from_state != "":
-			var div := current_blend_duration if current_blend_duration > 0.0 else 1.0
+			var div = current_blend_duration if current_blend_duration > 0.0 else 1.0
 			current_weight = 1.0 - clamp(blend_time_left / div, 0.0, 1.0)
 		blends.append({
 			"state": current_state,
@@ -325,7 +325,7 @@ func play_interact() -> bool:
 		return false
 	if animation_player == null:
 		return false
-	var anim_name := String(interact_anim)
+	var anim_name = String(interact_anim)
 	if anim_name == "":
 		return false
 	if not _has_animation(anim_name):

@@ -74,11 +74,11 @@ func _physics_process(delta: float) -> void:
 	_update_stamina(delta)
 	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
 
-	var direction := _get_move_direction()
-	var speed := _current_speed()
-	var vel := velocity
-	var pre_move_velocity_y := vel.y
-	var allow_input := not _movement_locked
+	var direction = _get_move_direction()
+	var speed = _current_speed()
+	var vel = velocity
+	var pre_move_velocity_y = vel.y
+	var allow_input = not _movement_locked
 
 	if is_on_floor():
 		if _landing_cooldown_timer > 0.0:
@@ -110,8 +110,8 @@ func _physics_process(delta: float) -> void:
 	velocity = vel
 	move_and_slide()
 
-	var on_floor := is_on_floor()
-	var just_landed := on_floor and not _was_on_floor
+	var on_floor = is_on_floor()
+	var just_landed = on_floor and not _was_on_floor
 	if just_landed:
 		_landing_cooldown_timer = LandingCooldownDuration
 		landed.emit(abs(min(pre_move_velocity_y, 0.0)))
@@ -124,11 +124,11 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
 		return
-	var mouse_event := event as InputEventMouseMotion
+	var mouse_event = event as InputEventMouseMotion
 	if mouse_event and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_rotate_camera(mouse_event.relative)
 		return
-	var wheel_event := event as InputEventMouseButton
+	var wheel_event = event as InputEventMouseButton
 	if wheel_event and wheel_event.pressed:
 		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_zoom_target = clamp(
@@ -153,13 +153,13 @@ func _rotate_camera(relative: Vector2) -> void:
 	camera_pivot.rotation.x = _pitch
 
 func _get_move_direction() -> Vector3:
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	if input_dir == Vector2.ZERO:
 		return Vector3.ZERO
-	var forward := camera_pivot.global_transform.basis.z
+	var forward = camera_pivot.global_transform.basis.z
 	forward.y = 0.0
 	forward = forward.normalized()
-	var right := camera_pivot.global_transform.basis.x
+	var right = camera_pivot.global_transform.basis.x
 	right.y = 0.0
 	right = right.normalized()
 	return (forward * input_dir.y + right * input_dir.x).normalized()
@@ -178,10 +178,10 @@ func _current_speed() -> float:
 	return sprint_speed if _is_sprinting else move_speed
 
 func _update_stamina(delta: float) -> void:
-	var wants_sprint := Input.is_action_pressed("sprint") and is_move_input_active()
+	var wants_sprint = Input.is_action_pressed("sprint") and is_move_input_active()
 	if _sprint_release_required and not Input.is_action_pressed("sprint"):
 		_sprint_release_required = false
-	var can_sprint := (
+	var can_sprint = (
 		not _stamina_exhausted
 		and _stamina > 0.0
 		and not _sprint_release_required
@@ -198,7 +198,7 @@ func _update_stamina(delta: float) -> void:
 	else:
 		_stamina_regen_delay_timer = max(0.0, _stamina_regen_delay_timer - delta)
 		if _stamina < max_stamina and _stamina_regen_delay_timer <= 0.0:
-			var regen_rate := stamina_regen_rate
+			var regen_rate = stamina_regen_rate
 			if _stamina_exhausted:
 				regen_rate = stamina_regen_rate_exhausted
 			_set_stamina(_stamina + regen_rate * delta)
@@ -245,7 +245,7 @@ func _set_stamina(value: float) -> void:
 		_emit_stamina_changed()
 
 func _emit_stamina_changed() -> void:
-	var percent := 0.0
+	var percent = 0.0
 	if max_stamina > 0.0:
 		percent = _stamina / max_stamina
 	stamina_changed.emit(_stamina, max_stamina, percent)
@@ -285,3 +285,42 @@ func play_interact_and_wait_midpoint() -> bool:
 	if animator.has_signal("interact_midpoint"):
 		await animator.interact_midpoint
 	return true
+
+func get_save_data() -> Dictionary:
+	return {
+		"position": _vec3_to_array(global_position),
+		"rotation": _vec3_to_array(global_rotation),
+		"velocity": _vec3_to_array(velocity),
+		"camera": {
+			"pivot_rotation": _vec3_to_array(camera_pivot.rotation),
+			"spring_length": camera_pivot.spring_length
+		}
+	}
+
+func apply_save_data(data: Dictionary) -> void:
+	if data.is_empty():
+		return
+	var pos_array = data.get("position", [])
+	var rot_array = data.get("rotation", [])
+	if pos_array.size() == 3 and rot_array.size() == 3:
+		global_position = _array_to_vec3(pos_array)
+		global_rotation = _array_to_vec3(rot_array)
+	var vel_array = data.get("velocity", [])
+	velocity = _array_to_vec3(vel_array)
+	var camera_data = data.get("camera", {})
+	if typeof(camera_data) == TYPE_DICTIONARY:
+		var pivot_array = camera_data.get("pivot_rotation", [])
+		if pivot_array.size() == 3:
+			camera_pivot.rotation = _array_to_vec3(pivot_array)
+			_pitch = camera_pivot.rotation.x
+		var zoom = float(camera_data.get("spring_length", camera_pivot.spring_length))
+		_zoom_target = clamp(zoom, camera_zoom_min, camera_zoom_max)
+		camera_pivot.spring_length = _zoom_target
+
+func _vec3_to_array(value: Vector3) -> Array:
+	return [value.x, value.y, value.z]
+
+func _array_to_vec3(value: Array) -> Vector3:
+	if value.size() != 3:
+		return Vector3.ZERO
+	return Vector3(float(value[0]), float(value[1]), float(value[2]))

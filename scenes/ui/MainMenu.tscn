@@ -134,9 +134,31 @@ theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
 theme_override_colors/font_hover_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
 theme_override_colors/font_pressed_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
 
+[node name="LoadLabel" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+text = "LOAD SLOT"
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(1, 0.843137, 0, 0.7)
+
+[node name="SlotList" type="ItemList" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 140)
+size_flags_vertical = 3
+
+[node name="LoadBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+text = "LOAD SELECTED"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_hover_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+theme_override_colors/font_pressed_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+
 [node name="Disclaimer" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
-text = "No Save System."
+text = "Slots auto-numbered."
 theme_override_font_sizes/font_size = 12
 theme_override_colors/font_color = Color(1, 0.843137, 0, 0.7)
 

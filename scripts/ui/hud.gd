@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-const FADE_DURATION := 1.5
-const MESSAGE_HOLD := 5.5
+const FADE_DURATION = 1.5
+const MESSAGE_HOLD = 5.5
 
 @onready var money_label: Label = $MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox/MoneyLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
@@ -12,6 +12,7 @@ const MESSAGE_HOLD := 5.5
 @onready var notification_container: VBoxContainer = $NotificationContainer
 @onready var pause_menu: Control = $PauseMenu
 @onready var resume_button: Button = $PauseMenu/Panel/VBoxContainer/ResumeButton
+@onready var save_button: Button = $PauseMenu/Panel/VBoxContainer/SaveButton
 @onready var menu_button: Button = $PauseMenu/Panel/VBoxContainer/MenuButton
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
@@ -32,8 +33,8 @@ var package_fade_tween: Tween
 var interaction_entries: Array[Node] = []
 var interaction_selected_index: int = -1
 
-const DAY_START_MINUTES := 6 * 60
-const DAY_END_MINUTES := 24 * 60
+const DAY_START_MINUTES = 6 * 60
+const DAY_END_MINUTES = 24 * 60
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -51,6 +52,7 @@ func _ready() -> void:
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_completed)
 	resume_button.pressed.connect(_on_resume_pressed)
+	save_button.pressed.connect(_on_save_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	interaction_list.item_selected.connect(_on_interaction_item_selected)
 	_on_money_changed(PlayerData.money)
@@ -79,21 +81,21 @@ func _on_time_changed(day_time: float) -> void:
 	time_label.tooltip_text = "Day time and curfew"
 
 func _format_time(day_time: float) -> String:
-	var total_minutes := int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
+	var total_minutes = int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
 	total_minutes = clamp(total_minutes, DAY_START_MINUTES, DAY_END_MINUTES)
-	var hours := total_minutes / 60
-	var minutes := total_minutes % 60
+	var hours = total_minutes / 60
+	var minutes = total_minutes % 60
 	return "%s:%s" % [str(hours).pad_zeros(2), str(minutes).pad_zeros(2)]
 
 func _format_curfew_time() -> String:
-	var total_minutes := int(round(lerp(
+	var total_minutes = int(round(lerp(
 		DAY_START_MINUTES,
 		DAY_END_MINUTES,
 		TimeSystem.curfew_ratio
 	)))
 	total_minutes = clamp(total_minutes, DAY_START_MINUTES, DAY_END_MINUTES)
-	var hours := total_minutes / 60
-	var minutes := total_minutes % 60
+	var hours = total_minutes / 60
+	var minutes = total_minutes % 60
 	return "%s:%s" % [str(hours).pad_zeros(2), str(minutes).pad_zeros(2)]
 
 func _on_new_morning() -> void:
@@ -108,6 +110,7 @@ func _on_job_completed(job: JobRecord) -> void:
 	_play_completion_sfx(job)
 	_flash_package_menu(2.0, job)
 	show_message("Delivery complete!")
+	SaveSystem.save_autojob()
 
 func show_message(message: String, duration: float = 5) -> void:
 	if in_transition:
@@ -159,6 +162,11 @@ func _on_menu_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
 
+func _on_save_pressed() -> void:
+	var slot_name = SaveSystem.save_new_slot()
+	if slot_name != "":
+		show_message("Saved %s" % slot_name)
+
 func _on_mugged() -> void:
 	_play_transition("You were mugged! Money lost.", true)
 
@@ -174,9 +182,11 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 	transition_label.modulate = Color(1, 1, 1, 0)
 	if transition_tween:
 		transition_tween.kill()
-	var target_mode := GameState.Mode.SLEEPING
+	var target_mode = GameState.Mode.SLEEPING
 	if is_mugged:
 		target_mode = GameState.Mode.MUGGED
+	else:
+		SaveSystem.save_autosleep()
 	GameState.set_mode(target_mode)
 	transition_tween = create_tween()
 	transition_tween.tween_property(fade_rect, "color:a", 1.0, FADE_DURATION)
@@ -200,7 +210,7 @@ func _finish_transition() -> void:
 	GameState.set_mode(GameState.Mode.PLAYING)
 
 func _input(event: InputEvent) -> void:
-	var toggle_pressed := event.is_action_pressed("toggle_package_menu")
+	var toggle_pressed = event.is_action_pressed("toggle_package_menu")
 	if not toggle_pressed and event is InputEventKey:
 		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
 	if toggle_pressed:
@@ -208,7 +218,7 @@ func _input(event: InputEvent) -> void:
 			return
 		if not GameState.is_playing() and not package_pause_active:
 			return
-		var next_visible := not package_menu.visible
+		var next_visible = not package_menu.visible
 		if package_flash_timer:
 			package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
 			package_flash_timer = null
@@ -237,9 +247,9 @@ func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -
 	interact_prompt.visible = false
 
 func _get_action_label(action: String) -> String:
-	var events := InputMap.action_get_events(action)
+	var events = InputMap.action_get_events(action)
 	for event in events:
-		var text := event.as_text()
+		var text = event.as_text()
 		if text != "":
 			return text
 	return action
@@ -249,7 +259,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if in_transition or package_pause_active or not GameState.is_playing():
 		return
-	var wheel_event := event as InputEventMouseButton
+	var wheel_event = event as InputEventMouseButton
 	if wheel_event and wheel_event.pressed:
 		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_select_interaction_index(interaction_selected_index - 1)
@@ -259,7 +269,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_select_interaction_index(interaction_selected_index + 1)
 			get_viewport().set_input_as_handled()
 			return
-	var key_event := event as InputEventKey
+	var key_event = event as InputEventKey
 	if key_event and key_event.pressed and not key_event.echo:
 		if key_event.keycode == Key.KEY_UP:
 			_select_interaction_index(interaction_selected_index - 1)
@@ -277,7 +287,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_select_interaction_index(interaction_selected_index + 3)
 			get_viewport().set_input_as_handled()
 			return
-	var action := _get_selected_interaction_action()
+	var action = _get_selected_interaction_action()
 	if action != "" and event.is_action_pressed(action):
 		await _trigger_selected_interaction()
 		get_viewport().set_input_as_handled()
@@ -285,7 +295,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _bind_player_stamina() -> void:
 	if stamina_source != null and is_instance_valid(stamina_source):
 		return
-	var player := get_tree().get_first_node_in_group("player")
+	var player = get_tree().get_first_node_in_group("player")
 	if player == null:
 		return
 	stamina_source = player
@@ -329,7 +339,7 @@ func _on_package_flash_timeout() -> void:
 	package_flash_timer = null
 	if package_pause_active or in_transition:
 		return
-	var fade_duration := 1.5
+	var fade_duration = 1.5
 	if package_fade_timer != null:
 		fade_duration = package_fade_timer.wait_time
 	package_fade_tween = create_tween()
@@ -382,7 +392,7 @@ func _refresh_interaction_menu() -> void:
 	for node in interaction_entries:
 		interaction_list.add_item(_get_interaction_label(node))
 	if previous != null:
-		var new_index := interaction_entries.find(previous)
+		var new_index = interaction_entries.find(previous)
 		if new_index != -1:
 			interaction_selected_index = new_index
 	if interaction_entries.is_empty():
@@ -399,14 +409,14 @@ func _refresh_interaction_menu() -> void:
 	_update_interaction_hint()
 
 func _update_interaction_visibility() -> void:
-	var should_show := GameState.is_playing() and not package_pause_active and not in_transition
+	var should_show = GameState.is_playing() and not package_pause_active and not in_transition
 	should_show = should_show and not interaction_entries.is_empty()
 	interaction_panel.visible = should_show
 	if should_show:
 		interact_prompt.visible = false
 
 func _update_interaction_hint() -> void:
-	var action := _get_selected_interaction_action()
+	var action = _get_selected_interaction_action()
 	if action == "":
 		interaction_hint.text = "Press key to interact"
 		return
@@ -415,8 +425,8 @@ func _update_interaction_hint() -> void:
 func _select_interaction_index(index: int) -> void:
 	if interaction_entries.is_empty():
 		return
-	var size := interaction_entries.size()
-	var clamped := index
+	var size = interaction_entries.size()
+	var clamped = index
 	if clamped < 0:
 		clamped = size - 1
 	elif clamped >= size:
@@ -430,13 +440,13 @@ func _select_interaction_index(index: int) -> void:
 func _get_selected_interaction() -> Node:
 	if interaction_selected_index < 0 or interaction_selected_index >= interaction_entries.size():
 		return null
-	var node := interaction_entries[interaction_selected_index]
+	var node = interaction_entries[interaction_selected_index]
 	if node == null or not is_instance_valid(node):
 		return null
 	return node
 
 func _get_selected_interaction_action() -> String:
-	var node := _get_selected_interaction()
+	var node = _get_selected_interaction()
 	return _get_interaction_action(node)
 
 func _get_interaction_label(node: Node) -> String:
@@ -454,7 +464,7 @@ func _get_interaction_action(node: Node) -> String:
 	return "interact"
 
 func _trigger_selected_interaction() -> void:
-	var node := _get_selected_interaction()
+	var node = _get_selected_interaction()
 	if node == null:
 		return
 	if node.has_method("can_interact"):
@@ -462,12 +472,10 @@ func _trigger_selected_interaction() -> void:
 		if not can_interact:
 			return
 	if node.has_method("perform_interaction"):
-		var result = node.call("perform_interaction")
-		if result != null:
-			await result
+		await node.perform_interaction()
 
 func _prune_invalid_interactions() -> void:
 	for i in range(interaction_entries.size() - 1, -1, -1):
-		var node := interaction_entries[i]
+		var node = interaction_entries[i]
 		if node == null or not is_instance_valid(node):
 			interaction_entries.remove_at(i)

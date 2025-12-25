@@ -45,7 +45,7 @@ func _exit_tree() -> void:
 	UIEvents.unregister_interaction(self)
 
 func _sleep_until_morning() -> void:
-	var ratio := TimeSystem.get_time_ratio()
+	var ratio = TimeSystem.get_time_ratio()
 	if ratio <= sleep_threshold:
 		UIEvents.show_message("It's too early to sleep.")
 		return
@@ -74,3 +74,4 @@ func perform_interaction() -> void:
 	if not can_sleep:
 		return
 	_sleep_until_morning()
+	await get_tree().process_frame

@@ -51,11 +51,11 @@ func capture_snapshot() -> Texture2D:
 	if snapshot_viewport_camera == null:
 		push_warning("DropoffSite '%s' missing snapshot viewport camera." % name)
 		return null
-	var main_viewport := get_viewport()
+	var main_viewport = get_viewport()
 	snapshot_viewport.world_3d = main_viewport.world_3d
 	snapshot_viewport.size = main_viewport.size
 	_copy_camera_settings(snapshot_camera, snapshot_viewport_camera)
-	var main_camera := main_viewport.get_camera_3d()
+	var main_camera = main_viewport.get_camera_3d()
 	if main_camera != null:
 		snapshot_viewport_camera.environment = main_camera.environment
 		snapshot_viewport_camera.attributes = main_camera.attributes
@@ -66,10 +66,10 @@ func capture_snapshot() -> Texture2D:
 	snapshot_viewport_camera.global_transform = snapshot_camera.global_transform
 	snapshot_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	await RenderingServer.frame_post_draw
-	var viewport_texture := snapshot_viewport.get_texture()
+	var viewport_texture = snapshot_viewport.get_texture()
 	if viewport_texture == null:
 		return null
-	var image := viewport_texture.get_image()
+	var image = viewport_texture.get_image()
 	if image == null or image.is_empty():
 		return null
 	_snapshot_texture = ImageTexture.create_from_image(image)
@@ -100,7 +100,7 @@ func _on_job_state_changed(_payload = null) -> void:
 func _update_label_visibility() -> void:
 	if label_3d == null:
 		return
-	var should_show := _player_in_label_range
+	var should_show = _player_in_label_range
 	if Jobs.has_active_job():
 		should_show = should_show and Jobs.current_dropoff == self
 	label_3d.visible = should_show
