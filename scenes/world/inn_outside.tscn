@@ -117,6 +117,7 @@ size = Vector3(1.8169556, 2.084961, 1.2089844)
 
 [node name="Inn" type="Node3D"]
 script = ExtResource("1_ua573")
+sleep_cost = 1000
 
 [node name="Cube_010" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.168398, 0, -1.3500578, 0, 1, 0, 1.6255554, 0, 3.4619422, -1.1202755, 0.8684208, -1.2041168)
@@ -167,12 +168,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1668396, 0.7424805, -0.1044
 shape = SubResource("BoxShape3D_ftmaf")
 
 [node name="Label3D" type="Label3D" parent="SafeArea/SleepSpot"]
-transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0, 0.50267637, 0)
-text = "Sleep Area"
+transform = Transform3D(1.0000001, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1.0000001, -0.22382033, 1.3360876, -0.539737)
+text = "Hayworth Tavern"
 
 [node name="Label3D" type="Label3D" parent="SafeArea"]
 transform = Transform3D(0.36708567, 0, 0.9301871, 0, 1, 0, -0.9301871, 0, 0.36708567, 0.25800526, 0.7549504, 2.127806)
-text = "Safe Area
+text = "
 "
 
 [node name="RespawnPoint" type="Marker3D" parent="SafeArea"]

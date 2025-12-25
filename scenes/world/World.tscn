@@ -560,11 +560,12 @@ night_angle = -171.6
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2517014, 0)
 floor_constant_speed = true
 floor_max_angle = 0.8552113
-gravity = 9.0
+move_speed = 0.84
+sprint_speed = 5.0
 LandingCooldownMode = "Clamp Speed"
 
 [node name="Pickup" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784884, 0.5543945, 3.619691)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4384825, 0.5543946, 2.1514664)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5")
@@ -578,11 +579,12 @@ shape = SubResource("4")
 mesh = SubResource("3")
 
 [node name="PickupParsal" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2784884, 0.5543945, 3.419691)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.406558, 0.5543945, 3.5835485)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5")
 item_name = "Parsal"
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupParsal"]
 shape = SubResource("4")
@@ -591,11 +593,12 @@ shape = SubResource("4")
 mesh = SubResource("3")
 
 [node name="PickupLetter" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6584885, 0.5543945, 3.739691)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0392675, 0.5543945, 3.6683574)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5")
 item_name = "Letter"
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupLetter"]
 shape = SubResource("4")
