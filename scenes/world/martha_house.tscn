@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://brsfp5ycyo6sq"]
+
+[ext_resource type="PackedScene" uid="uid://goy0ebqfhb08" path="res://scenes/world/house_006.tscn" id="1_d0llq"]
+[ext_resource type="Material" uid="uid://dyx4l6ea0am6f" path="res://addons/prototype_mini_bundle/M_prototype_green.tres" id="2_g5g0g"]
+[ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="2_i1jcp"]
+
+[node name="MarthaHouse" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1_d0llq")]
+transform = Transform3D(1, -1.509958e-07, 0, 1.509958e-07, 1, 0, 0, 0, -4.3662515, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_g5g0g")
+
+[node name="DropoffSite" parent="." instance=ExtResource("2_i1jcp")]
+transform = Transform3D(0.9999976, 0, -0.0021641701, 0, 1, 0, 0.0021641701, 0, 0.9999976, 0.49688768, 0.5896075, 4.5174103)
+
+[node name="SnapshotCamera" parent="DropoffSite" index="4"]
+transform = Transform3D(1, 0.00034013286, -0.00016658986, -0.0003620871, 0.9875734, -0.15715802, 0.00011106511, 0.15715823, 0.9875734, 0.008839786, -0.36314654, 4.0848255)
+fov = 60.0
+
+[editable path="Model"]
+[editable path="DropoffSite"]

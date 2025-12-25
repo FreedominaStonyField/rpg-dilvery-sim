@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbpyrpxy7o04o"]
+
+[ext_resource type="PackedScene" uid="uid://b7phy5qsgajuc" path="res://scenes/world/stall_6.tscn" id="1_3yy7g"]
+
+[node name="Storestall" type="Node3D"]
+
+[node name="stall6" parent="." instance=ExtResource("1_3yy7g")]
+transform = Transform3D(-0.98533773, 0, -0.17061579, 0, 1, 0, 0.17061579, 0, -0.98533773, -34.603912, 0.90868616, -18.781036)

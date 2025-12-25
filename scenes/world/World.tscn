@@ -1,16 +1,17 @@
-[gd_scene load_steps=75 format=4 uid="uid://world"]
+[gd_scene load_steps=77 format=4 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bnmtxjtl03bj3" path="res://scripts/world/DayNightCycle.gd" id="2_252at"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://scenes/ui/HUD.tscn" id="3"]
 [ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://b7phy5qsgajuc" path="res://scenes/world/stall_6.tscn" id="7_ckp8c"]
-[ext_resource type="PackedScene" uid="uid://goy0ebqfhb08" path="res://scenes/world/house_006.tscn" id="8_8xm5o"]
+[ext_resource type="Texture2D" uid="uid://b3xhwuohkvmt8" path="res://assets/textures/retro-urban-kit/dirt.png" id="6_8xm5o"]
+[ext_resource type="PackedScene" uid="uid://dbpyrpxy7o04o" path="res://scenes/world/storestall.tscn" id="8_fe1rh"]
 [ext_resource type="PackedScene" uid="uid://da2d8n6vjoibv" path="res://scenes/world/stall.tscn" id="8_l5ull"]
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="8_yr1n6"]
 [ext_resource type="PackedScene" uid="uid://dhvlvrd7qpo6v" path="res://scenes/world/dock.tscn" id="9_fe1rh"]
-[ext_resource type="PackedScene" uid="uid://dnndekou66t6u" path="res://scenes/world/wherehouse_3.tscn" id="11_400s5"]
+[ext_resource type="PackedScene" uid="uid://brsfp5ycyo6sq" path="res://scenes/world/martha_house.tscn" id="9_wryly"]
+[ext_resource type="PackedScene" uid="uid://ci2fsjibag7l" path="res://scenes/world/wherehouse.tscn" id="11_400s5"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="12_ckp8c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
@@ -66,6 +67,11 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dffu4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0duuj"]
+albedo_texture = ExtResource("6_8xm5o")
+uv1_scale = Vector3(25, 25, 25)
+uv1_triplanar = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_l5ull"]
 points = PackedVector3Array(1, 1, 1, 1, 1, -1, 0.83281124, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, 0.83418167, -1, 1, -0.12509787, 1, 0.7744714, -1, -1, -1, -1, 1, 0.11315584, -0.12509787, -1, 0.7723179, -0.6125685, 1, 0.54326546, -0.6164839, -1, 0.5413078, -1, -1, 0.11530936)
@@ -562,8 +568,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4784884, 0.5543945, 3.6196
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5")
-metadata/_edit_group_ = true
 item_name = "Package"
+metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pickup"]
 shape = SubResource("4")
@@ -613,6 +619,7 @@ shape = SubResource("BoxShape3D_kill_plane")
 transform = Transform3D(55.79633, 0, 0, 0, 0.10985, 0, 0, 0, 55.79633, 0, -0.115837395, 0)
 mesh = SubResource("ArrayMesh_wbmnc")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_0duuj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="town cisco /Cube"]
 
@@ -662,8 +669,7 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /stall5/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_juaju")
 
-[node name="stall6" parent="town cisco " instance=ExtResource("7_ckp8c")]
-transform = Transform3D(-0.98533773, 0, -0.17061579, 0, 1, 0, 0.17061579, 0, -0.98533773, -34.603912, 0.90868616, -18.781036)
+[node name="Storestall" parent="town cisco " instance=ExtResource("8_fe1rh")]
 
 [node name="house_001" type="MeshInstance3D" parent="town cisco "]
 transform = Transform3D(0.8095479, 0, 2.563225, 0, 1, 0, 0.58705395, 0, -3.5346894, 4.848878, 1.0176606, -23.86114)
@@ -715,8 +721,8 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /house_005/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_8xm5o")
 
-[node name="house_006" parent="town cisco " instance=ExtResource("8_8xm5o")]
-transform = Transform3D(0.52023035, 4.5479982e-08, 3.728892, -8.742278e-08, 1, 0, 0.85402596, 7.466132e-08, -2.2714565, 24.962221, 1.0176604, 9.172567)
+[node name="MarthaHouse" parent="town cisco " instance=ExtResource("9_wryly")]
+transform = Transform3D(0.49999997, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, 0.49999997, 26.208496, 1, 5.3258533)
 
 [node name="wherehouse" type="MeshInstance3D" parent="town cisco "]
 transform = Transform3D(3.418618, 0, -1.4474117, 0, 1, 0, 2.3499804, 0, 2.1056125, -22.908417, 0.87799686, 23.972301)
@@ -761,8 +767,7 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /wherehouse2/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_iehkj")
 
-[node name="wherehouse3" parent="town cisco " instance=ExtResource("11_400s5")]
-transform = Transform3D(-1.5839162, 0, -2.3615377, 0, 1, 0, 3.8341315, 0, -0.9755736, -31.514624, 0.87799686, 17.776955)
+[node name="Warehouse1" parent="town cisco " instance=ExtResource("11_400s5")]
 
 [node name="Inn" parent="town cisco " instance=ExtResource("8_yr1n6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.594933, 0, -37.12024)

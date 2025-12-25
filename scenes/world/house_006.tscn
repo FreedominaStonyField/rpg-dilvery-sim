@@ -1,6 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://goy0ebqfhb08"]
-
-[ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="1_d7c4w"]
+[gd_scene load_steps=5 format=4 uid="uid://goy0ebqfhb08"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_020fi"]
 
@@ -40,7 +38,7 @@ shadow_mesh = SubResource("ArrayMesh_66k3v")
 points = PackedVector3Array(-1, -1, -1.0000589, -1, -1, 1.0000001, -1, 0.7358105, -1.0860237, 2.5264313, -1, -1.0000589, 2.5264313, -1, 1.0000001, -1, 2.4720986, 1.0000001, 2.5264313, 0.7358105, -1.0860237, -1, 2.4720986, -1.0860237, 2.5264313, 2.4720986, 1.0000001, 0.76321566, 3.8784156, 1.0000001, 2.5264313, 2.4720986, -1.0860237, 0.76321566, 3.8784156, -1.0860237)
 
 [node name="house_006" type="MeshInstance3D"]
-transform = Transform3D(0.52023035, 4.5479982e-08, 3.728892, -8.742278e-08, 1, 0, 0.85402596, 7.466132e-08, -2.2714565, 0, 0, 0)
+transform = Transform3D(1, -8.742278e-08, 0, 8.742278e-08, 1, 0, 0, 0, -4.3662515, 0, 0, 0)
 mesh = SubResource("ArrayMesh_h7mlp")
 skeleton = NodePath("")
 
@@ -48,21 +46,3 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_fe1rh")
-
-[node name="house_006" parent="." instance=ExtResource("1_d7c4w")]
-transform = Transform3D(1, 0, 1.1920929e-07, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-display_name = "Little Martha's House"
-
-[node name="DeliveryArea" parent="house_006" index="0"]
-transform = Transform3D(1, 0, 1.1920929e-07, 2.1316282e-14, 1, -4.2632564e-14, 0, 0, 1, -1.9991399, -4.4104712e-07, 0.47348624)
-
-[node name="Label3D" parent="house_006" index="2"]
-transform = Transform3D(-1.1920929e-07, -8.742282e-08, 1.0000001, -8.742275e-08, 1, 8.742275e-08, -1, -8.742277e-08, -5.9604645e-08, -1.5316546, -1.3390157e-07, 0.32794023)
-
-[node name="LabelAreaShape" parent="house_006/LabelArea" index="0"]
-transform = Transform3D(1, 0, 1.1920929e-07, 1.4210855e-14, 1, -2.842171e-14, 0, 0, 1, -2.0299196, -1.7746122e-07, 0.17260273)
-
-[node name="SnapshotCamera" parent="house_006" index="4"]
-transform = Transform3D(0.2645614, -7.7516866e-08, 0.8922027, -1.4314033e-08, 1, 7.799882e-08, -0.33681396, -1.2611256e-08, -0.27017123, 6.3057985, 1.5049447e-06, -0.16038042)
-
-[editable path="house_006"]
