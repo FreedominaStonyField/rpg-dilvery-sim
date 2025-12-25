@@ -5,15 +5,15 @@ const MESSAGE_HOLD = 5.5
 
 @onready var money_label: Label = $MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox/MoneyLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
-@onready var carrying_label: Label = $PackageMenu/PackageMargin/PackageVBox/JobVBox/CarryingLabel
-@onready var package_menu: Control = $PackageMenu
+@onready var carrying_label: Label = $PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid/CarryingValue
+@onready var package_menu: Control = $PackageCenter/PackageMenu
 @onready var package_fade_timer: Timer = $PackageFadeTimer
-@onready var completion_audio: AudioStreamPlayer = $PackageMenu/CompletionAudioPlayer
+@onready var completion_audio: AudioStreamPlayer = $PackageCenter/PackageMenu/CompletionAudioPlayer
 @onready var notification_container: VBoxContainer = $NotificationContainer
 @onready var pause_menu: Control = $PauseMenu
-@onready var resume_button: Button = $PauseMenu/Panel/VBoxContainer/ResumeButton
-@onready var save_button: Button = $PauseMenu/Panel/VBoxContainer/SaveButton
-@onready var menu_button: Button = $PauseMenu/Panel/VBoxContainer/MenuButton
+@onready var resume_button: Button = $PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox/ResumeButton
+@onready var save_button: Button = $PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox/SaveButton
+@onready var menu_button: Button = $PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox/MenuButton
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
 @onready var transition_label: Label = $TransitionLayer/TransitionLabel
 @onready var interact_prompt: Label = $InteractPrompt
@@ -74,7 +74,8 @@ func _on_money_changed(amount: int) -> void:
 	money_label.text = "$" + str(amount)
 
 func _on_carrying_changed(item_name: String) -> void:
-	carrying_label.text = "Carrying: %s" % (item_name if item_name != "" else "None")
+	var display_name = item_name.to_upper() if item_name != "" else "NONE"
+	carrying_label.text = display_name
 
 func _on_time_changed(day_time: float) -> void:
 	time_label.text = "%s  Curfew %s" % [_format_time(day_time), _format_curfew_time()]

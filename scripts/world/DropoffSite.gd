@@ -1,3 +1,4 @@
+@tool
 extends Node3D
 
 class_name DropoffSite
@@ -27,11 +28,7 @@ func _exit_tree() -> void:
 	remove_from_group("dropoff_sites")
 
 func _ready() -> void:
-	if site_id == &"":
-		site_id = StringName(name)
-		push_warning(
-			"DropoffSite '%s' missing site_id. Defaulting to node name." % name
-		)
+	_ensure_site_id()
 	if label_3d != null:
 		label_3d.visible = false
 		_update_label_text()
@@ -41,6 +38,37 @@ func _ready() -> void:
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.job_completed.connect(_on_job_state_changed)
 	_update_label_visibility()
+
+func _ensure_site_id() -> void:
+	if site_id != &"":
+		return
+	site_id = _generate_site_id()
+	if not Engine.is_editor_hint():
+		push_warning(
+			"DropoffSite '%s' generated a runtime site_id. Save the scene to persist it."
+			% name
+		)
+
+func _generate_site_id() -> StringName:
+	var bytes := PackedByteArray()
+	var crypto := Crypto.new()
+	bytes = crypto.generate_random_bytes(16)
+	if bytes.size() != 16:
+		var rng := RandomNumberGenerator.new()
+		rng.randomize()
+		for i in range(16):
+			bytes.append(rng.randi_range(0, 255))
+	bytes[6] = (bytes[6] & 0x0f) | 0x40
+	bytes[8] = (bytes[8] & 0x3f) | 0x80
+	var hex := bytes.hex_encode()
+	var uuid = "%s-%s-%s-%s-%s" % [
+		hex.substr(0, 8),
+		hex.substr(8, 4),
+		hex.substr(12, 4),
+		hex.substr(16, 4),
+		hex.substr(20, 12)
+	]
+	return StringName(uuid)
 
 func capture_snapshot() -> Texture2D:
 	if not snapshot_enabled:

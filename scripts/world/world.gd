@@ -19,8 +19,6 @@ func _ready() -> void:
 	_bind_safe_respawn_areas()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
-		GameState.toggle_pause()
 	if event.is_action_pressed("unstuck") and GameState.is_playing():
 		_respawn_player("Unstuck used. Returning to the inn.")
 

@@ -4,52 +4,75 @@
 [ext_resource type="PackedScene" uid="uid://world" path="res://scenes/world/World.tscn" id="2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
-bg_color = Color(0.0666667, 0.0666667, 0.0666667, 0.95)
+bg_color = Color(0.12, 0.12, 0.12, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(1, 0.843137, 0, 1)
-content_margin_left = 14
-content_margin_right = 14
+border_color = Color(0.9, 0.9, 0.9, 1)
+content_margin_left = 16
+content_margin_right = 16
 content_margin_top = 8
 content_margin_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
-bg_color = Color(1, 0.843137, 0, 1)
+bg_color = Color(0.247, 0.953, 1, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(1, 0.843137, 0, 1)
-content_margin_left = 14
-content_margin_right = 14
+border_color = Color(0.247, 0.953, 1, 1)
+content_margin_left = 16
+content_margin_right = 16
 content_margin_top = 8
 content_margin_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
-bg_color = Color(0.831373, 0.701961, 0, 1)
+bg_color = Color(0.18, 0.78, 0.85, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(1, 0.843137, 0, 1)
-content_margin_left = 14
-content_margin_right = 14
+border_color = Color(0.247, 0.953, 1, 1)
+content_margin_left = 16
+content_margin_right = 16
 content_margin_top = 8
 content_margin_bottom = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_warning"]
-bg_color = Color(0.0666667, 0.0666667, 0.0666667, 0.95)
+bg_color = Color(0.08, 0.08, 0.08, 1)
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
-border_color = Color(0.85, 0.2, 0.2, 1)
+border_color = Color(0.247, 0.953, 1, 1)
 content_margin_left = 12
 content_margin_right = 12
 content_margin_top = 10
 content_margin_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 12
+content_margin_bottom = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_panel"]
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_selected"]
+bg_color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -98,19 +121,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
-theme_override_constants/separation = 12
+theme_override_constants/separation = 16
 
 [node name="Title" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
 text = "RPG DELIVERY SIM"
-theme_override_font_sizes/font_size = 36
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="Version" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
 text = "PROTO_BUILD_4.5.1"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 0.7)
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 
 [node name="StartBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
@@ -119,9 +142,9 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_hover_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
-theme_override_colors/font_pressed_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="QuitBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
@@ -130,20 +153,25 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_hover_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
-theme_override_colors/font_pressed_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="LoadLabel" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
 text = "LOAD SLOT"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 0.7)
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 
 [node name="SlotList" type="ItemList" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 140)
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_list_panel")
+theme_override_styles/selected = SubResource("StyleBoxFlat_list_selected")
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_selected_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 16
 
 [node name="LoadBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
@@ -152,15 +180,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
 theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
-theme_override_colors/font_hover_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
-theme_override_colors/font_pressed_color = Color(0.0666667, 0.0666667, 0.0666667, 1)
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="Disclaimer" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
 layout_mode = 2
-text = "Slots auto-numbered."
+text = "SLOTS AUTO-NUMBERED."
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(1, 0.843137, 0, 0.7)
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 
 [node name="Spacer" type="Control" parent="UI_Layer/LayoutRoot/Split"]
 layout_mode = 2
@@ -172,7 +200,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
-self_modulate = Color(1, 1, 1, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="InfoList" type="VBoxContainer" parent="UI_Layer/LayoutRoot/Split/InfoColumn"]
 layout_mode = 2
@@ -182,7 +210,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 text = "OPERATOR CONTROLS"
 theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ControlsGrid" type="GridContainer" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList"]
 layout_mode = 2
@@ -194,11 +222,11 @@ theme_override_constants/v_separation = 10
 layout_mode = 2
 text = "WASD"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionMove" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Move"
+text = "MOVE"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
@@ -206,11 +234,11 @@ theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 2
 text = "SHIFT"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionSprint" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Sprint"
+text = "SPRINT"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
@@ -218,11 +246,11 @@ theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 2
 text = "SPACE"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionJump" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Jump"
+text = "JUMP"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
@@ -230,11 +258,11 @@ theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 2
 text = "E"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionInteract" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Interact / Pickup"
+text = "INTERACT / PICKUP"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
@@ -242,11 +270,11 @@ theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 2
 text = "TAB"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionMenu" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Package Menu"
+text = "JOURNAL"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 
@@ -254,11 +282,11 @@ theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 layout_mode = 2
 text = "U"
 theme_override_font_sizes/font_size = 14
-theme_override_colors/font_color = Color(1, 0.843137, 0, 1)
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 
 [node name="ActionUnstuck" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
 layout_mode = 2
-text = "Unstuck"
+text = "UNSTUCK"
 theme_override_font_sizes/font_size = 14
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 

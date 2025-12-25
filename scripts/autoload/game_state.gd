@@ -8,7 +8,14 @@ var mode: Mode = Mode.MENU
 var last_mode: Mode = Mode.MENU
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	set_process_unhandled_input(true)
 	_ensure_input_actions()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		toggle_pause()
+		get_viewport().set_input_as_handled()
 
 func set_mode(next_mode: Mode) -> void:
 	if mode == next_mode:

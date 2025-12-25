@@ -90,6 +90,7 @@ func _capture_snapshot_for_dropoff(site: DropoffSite) -> void:
 		return
 	if active_job != null:
 		active_job.snapshot = snapshot
+		active_job.cache_snapshot()
 	job_snapshot_ready.emit(snapshot)
 
 func _start_snapshot_capture(site: DropoffSite) -> void:
@@ -166,11 +167,8 @@ func _resolve_dropoff_by_site_id(site_id: String) -> Node3D:
 
 func _serialize_job_record(record: JobRecord) -> Dictionary:
 	var snapshot_data = ""
-	if record.snapshot != null:
-		var image = record.snapshot.get_image()
-		if image != null:
-			var buffer = image.save_png_to_buffer()
-			snapshot_data = Marshalls.raw_to_base64(buffer)
+	if record.snapshot_jpg_b64 != "":
+		snapshot_data = record.snapshot_jpg_b64
 	var sfx_path = ""
 	if record.completion_sfx != null and record.completion_sfx.resource_path != "":
 		sfx_path = record.completion_sfx.resource_path
@@ -179,7 +177,7 @@ func _serialize_job_record(record: JobRecord) -> Dictionary:
 		"display_name": record.display_name,
 		"hint_text": record.hint_text,
 		"completion_sfx_path": sfx_path,
-		"snapshot_png": snapshot_data
+		"snapshot_jpg": snapshot_data
 	}
 
 func _deserialize_job_record(data: Dictionary) -> JobRecord:
@@ -190,10 +188,18 @@ func _deserialize_job_record(data: Dictionary) -> JobRecord:
 	var sfx_path = str(data.get("completion_sfx_path", ""))
 	if sfx_path != "":
 		record.completion_sfx = load(sfx_path) as AudioStream
-	var snapshot_data = str(data.get("snapshot_png", ""))
+	var snapshot_data = str(data.get("snapshot_jpg", ""))
+	if snapshot_data == "":
+		snapshot_data = str(data.get("snapshot_png", ""))
 	if snapshot_data != "":
 		var buffer = Marshalls.base64_to_raw(snapshot_data)
 		var image = Image.new()
-		if image.load_png_from_buffer(buffer) == OK:
+		var result = image.load_jpg_from_buffer(buffer)
+		if result != OK:
+			result = image.load_png_from_buffer(buffer)
+		if result == OK:
 			record.snapshot = ImageTexture.create_from_image(image)
+			record.snapshot_jpg_b64 = str(data.get("snapshot_jpg", ""))
+			if record.snapshot_jpg_b64 == "":
+				record.cache_snapshot()
 	return record

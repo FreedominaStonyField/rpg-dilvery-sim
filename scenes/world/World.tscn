@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=4 uid="uid://world"]
+[gd_scene load_steps=79 format=4 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://brsfp5ycyo6sq" path="res://scenes/world/martha_house.tscn" id="9_wryly"]
 [ext_resource type="PackedScene" uid="uid://ci2fsjibag7l" path="res://scenes/world/wherehouse.tscn" id="11_400s5"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="12_ckp8c"]
+[ext_resource type="PackedScene" path="res://scenes/world/generated_models/planks.tscn" id="14_wryly"]
+[ext_resource type="PackedScene" path="res://scenes/world/generated_models/truck-green.tscn" id="15_400s5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
 
@@ -775,3 +777,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.594933, 0, -37.12024)
 
 [node name="tower1_0" parent="." instance=ExtResource("12_ckp8c")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -42.777706, -0.00024008006, 6.333186)
+
+[node name="planks2" parent="." instance=ExtResource("14_wryly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6417271, -0.0059873983, 1.1738938)
+
+[node name="truck-green2" parent="." instance=ExtResource("15_400s5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5447112, 0.40167353, 0.6254908)

@@ -204,6 +204,7 @@ func _apply_save_data(data: Dictionary, path: String) -> void:
 		get_tree().paused = bool(game_state_data.get("tree_paused", false))
 	else:
 		get_tree().paused = GameState.mode == GameState.Mode.PAUSED
+	_ensure_unpaused_after_load()
 	_loading = false
 	load_completed.emit(path)
 
@@ -277,6 +278,12 @@ func _read_save_meta(file_name: String) -> Dictionary:
 		return {}
 	var meta = (result as Dictionary).get("meta", {})
 	return meta if typeof(meta) == TYPE_DICTIONARY else {}
+
+func _ensure_unpaused_after_load() -> void:
+	if GameState.mode == GameState.Mode.PAUSED:
+		GameState.set_mode(GameState.Mode.PLAYING)
+	if get_tree().paused:
+		get_tree().paused = false
 
 func _vec3_to_array(value: Vector3) -> Array:
 	return [value.x, value.y, value.z]

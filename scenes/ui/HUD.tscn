@@ -6,52 +6,110 @@
 [ext_resource type="Script" uid="uid://cahqsmi7qafl1" path="res://scripts/ui/job_menu.gd" id="4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
-bg_color = Color(0.05, 0.06, 0.09, 0.92)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.27, 0.86, 0.96, 0.85)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2"]
-bg_color = Color(0.12, 0.13, 0.2, 0.95)
-border_width_bottom = 1
-border_color = Color(0.27, 0.86, 0.96, 0.7)
+bg_color = Color(0.12, 0.12, 0.12, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3"]
-bg_color = Color(0.05, 0.07, 0.05, 0.9)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.35, 0.9, 0.4, 0.9)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4"]
-bg_color = Color(0.25, 0.95, 0.42, 0.95)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+bg_color = Color(0.247, 0.953, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5"]
-bg_color = Color(0.09, 0.1, 0.14, 0.92)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.92, 0.76, 0.35, 0.9)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6"]
+bg_color = Color(0.12, 0.12, 0.12, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 10
+content_margin_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7"]
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
+content_margin_left = 12
+content_margin_right = 12
+content_margin_top = 10
+content_margin_bottom = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+bg_color = Color(0.12, 0.12, 0.12, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+content_margin_left = 16
+content_margin_right = 16
+content_margin_top = 8
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.247, 0.953, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
+content_margin_left = 16
+content_margin_right = 16
+content_margin_top = 8
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+bg_color = Color(0.18, 0.78, 0.85, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
+content_margin_left = 16
+content_margin_right = 16
+content_margin_top = 8
+content_margin_bottom = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_panel"]
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_selected"]
+bg_color = Color(0.95, 0.95, 0.95, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1")
@@ -112,113 +170,213 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "06:00"
 
-[node name="PackageMenu" type="Panel" parent="."]
+[node name="PackageCenter" type="CenterContainer" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="PackageMenu" type="PanelContainer" parent="PackageCenter"]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -522.0
-offset_top = -214.0
-offset_right = -42.0
-offset_bottom = 146.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_1")
 script = ExtResource("4")
 
-[node name="CompletionAudioPlayer" type="AudioStreamPlayer" parent="PackageMenu"]
+[node name="CompletionAudioPlayer" type="AudioStreamPlayer" parent="PackageCenter/PackageMenu"]
 
-[node name="PackageMargin" type="MarginContainer" parent="PackageMenu"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 14.0
-offset_right = -14.0
-offset_bottom = -14.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PackageVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin"]
+[node name="PackageMargin" type="MarginContainer" parent="PackageCenter/PackageMenu"]
 layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="HeaderBar" type="PanelContainer" parent="PackageMenu/PackageMargin/PackageVBox"]
+[node name="PackageVBox" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin"]
 layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderBar" type="PanelContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 56)
 theme_override_styles/panel = SubResource("StyleBoxFlat_2")
 
-[node name="HeaderMargin" type="MarginContainer" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar"]
+[node name="HeaderMargin" type="MarginContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar"]
 layout_mode = 2
 
-[node name="HeaderVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin"]
+[node name="HeaderRow" type="HBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin"]
 layout_mode = 2
+theme_override_constants/separation = 12
 
-[node name="JournalTitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderVBox"]
+[node name="HeaderLeft" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderRow"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.95, 1, 1)
-theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 3
+
+[node name="JournalTitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderRow/HeaderLeft"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 22
 text = "COURIER JOURNAL"
 
-[node name="JournalSubtitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderVBox"]
+[node name="JournalSubtitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderRow/HeaderLeft"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.54, 0.78, 0.92, 1)
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 theme_override_font_sizes/font_size = 12
-text = "Inventory + Dispatch"
+text = "INVENTORY + DISPATCH LOG"
 
-[node name="JobVBox" type="VBoxContainer" parent="PackageMenu/PackageMargin/PackageVBox"]
+[node name="CloseHint" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "TAB TO CLOSE"
+horizontal_alignment = 2
+
+[node name="InfoBlock" type="PanelContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6")
+
+[node name="InfoMargin" type="MarginContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock"]
 layout_mode = 2
 
-[node name="JobTitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+[node name="InfoVBox" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.77, 0.84, 0.9, 1)
+theme_override_constants/separation = 10
+
+[node name="PackageInfoTitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "PACKAGE INFO"
+
+[node name="InfoGrid" type="GridContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox"]
+layout_mode = 2
+columns = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 8
+
+[node name="CarryingLabel" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "CARRYING"
+
+[node name="CarryingValue" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "NONE"
+
+[node name="StatusLabel" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "STATUS"
+
+[node name="StatusValue" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "NO ACTIVE JOB"
+
+[node name="LocationLabel" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "LOCATION"
+
+[node name="LocationValue" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "--"
+
+[node name="NoteLabel" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "NOTE"
+
+[node name="NoteValue" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "Package Info"
+text = "--"
 
-[node name="CarryingLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+[node name="NoActiveBlock" type="PanelContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox"]
 layout_mode = 2
-text = "Carrying: None"
+theme_override_styles/panel = SubResource("StyleBoxFlat_7")
 
-[node name="JobStatus" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+[node name="NoActiveMargin" type="MarginContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/NoActiveBlock"]
 layout_mode = 2
-text = "Status: No job"
 
-[node name="DropoffLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+[node name="NoActiveVBox" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/NoActiveBlock/NoActiveMargin"]
 layout_mode = 2
-text = "Location: --"
 
-[node name="SnapshotRect" type="TextureRect" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
-custom_minimum_size = Vector2(256, 256)
+[node name="NoActiveTitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/NoActiveBlock/NoActiveMargin/NoActiveVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "NO ACTIVE JOB"
+
+[node name="NoActiveSubtitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/NoActiveBlock/NoActiveMargin/NoActiveVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 12
+text = "Pick up a dispatch request to begin."
+
+[node name="SnapshotBlock" type="PanelContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6")
+
+[node name="SnapshotMargin" type="MarginContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/SnapshotBlock"]
+layout_mode = 2
+
+[node name="SnapshotVBox" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/SnapshotBlock/SnapshotMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SnapshotTitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/SnapshotBlock/SnapshotMargin/SnapshotVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "SNAPSHOT"
+
+[node name="SnapshotRect" type="TextureRect" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/SnapshotBlock/SnapshotMargin/SnapshotVBox"]
+custom_minimum_size = Vector2(240, 180)
 layout_mode = 2
 expand_mode = 4
 stretch_mode = 5
 
-[node name="HintLabel" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/JobVBox"]
+[node name="CompletedBlock" type="PanelContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.85, 0.95, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6")
+
+[node name="CompletedMargin" type="MarginContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/CompletedBlock"]
+layout_mode = 2
+
+[node name="CompletedVBox" type="VBoxContainer" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/CompletedBlock/CompletedMargin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="CompletedTitle" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/CompletedBlock/CompletedMargin/CompletedVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
 theme_override_font_sizes/font_size = 12
-text = "Hint: --"
+text = "COMPLETED JOBS"
 
-[node name="CompletedSection" type="VBoxContainer" parent="PackageMenu/PackageMargin/PackageVBox"]
+[node name="CompletedList" type="ItemList" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/CompletedBlock/CompletedMargin/CompletedVBox"]
 layout_mode = 2
+custom_minimum_size = Vector2(0, 140)
+fixed_icon_size = Vector2i(40, 40)
+theme_override_styles/panel = SubResource("StyleBoxFlat_list_panel")
+theme_override_styles/selected = SubResource("StyleBoxFlat_list_selected")
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_selected_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 16
 
-[node name="CompletedTitle" type="Label" parent="PackageMenu/PackageMargin/PackageVBox/CompletedSection"]
+[node name="CompletedEmpty" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/CompletedBlock/CompletedMargin/CompletedVBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.65, 0.9, 0.82, 1)
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 theme_override_font_sizes/font_size = 12
-text = "Completed Jobs"
-
-[node name="CompletedList" type="ItemList" parent="PackageMenu/PackageMargin/PackageVBox/CompletedSection"]
-layout_mode = 2
-custom_minimum_size = Vector2(0, 96)
-fixed_icon_size = Vector2i(48, 48)
-
-[node name="FooterHint" type="Label" parent="PackageMenu/PackageMargin/PackageVBox"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.7, 0.82, 1)
-theme_override_font_sizes/font_size = 11
-text = "Press TAB to close"
-horizontal_alignment = 2
+text = "NO COMPLETED JOBS\nDeliveries will be logged here."
 
 [node name="NotificationContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -335,54 +493,78 @@ show_percentage = false
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -100.0
-offset_right = 120.0
-offset_bottom = 100.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="Panel" type="Panel" parent="PauseMenu"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -100.0
-offset_right = 120.0
-offset_bottom = 100.0
+[node name="PauseCenter" type="CenterContainer" parent="PauseMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -60.0
-offset_right = 70.0
-offset_bottom = 60.0
-
-[node name="PauseLabel" type="Label" parent="PauseMenu/Panel/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="PauseMenu/PauseCenter"]
 layout_mode = 2
-text = "Paused"
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6")
+
+[node name="PauseMargin" type="MarginContainer" parent="PauseMenu/PauseCenter/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 14
+
+[node name="PauseVBox" type="VBoxContainer" parent="PauseMenu/PauseCenter/Panel/PauseMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PauseLabel" type="Label" parent="PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox"]
+layout_mode = 2
+text = "PAUSED"
+theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+[node name="PauseHint" type="Label" parent="PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox"]
 layout_mode = 2
-text = "Resume"
+text = "PRESS ESC TO RESUME"
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+horizontal_alignment = 1
 
-[node name="SaveButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox"]
 layout_mode = 2
-text = "Save Slot"
+text = "RESUME"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
 
-[node name="MenuButton" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+[node name="SaveButton" type="Button" parent="PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox"]
 layout_mode = 2
-text = "Main Menu"
+text = "SAVE SLOT"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="MenuButton" type="Button" parent="PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox"]
+layout_mode = 2
+text = "MAIN MENU"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
 
 [node name="TransitionLayer" type="Control" parent="."]
 layout_mode = 3
