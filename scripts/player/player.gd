@@ -43,6 +43,7 @@ var _stamina: float = 0.0
 var _stamina_exhausted: bool = false
 var _stamina_regen_delay_timer: float = 0.0
 var _is_sprinting: bool = false
+var _sprint_release_required: bool = false
 var _pitch: float = deg_to_rad(-20.0)
 var _was_on_floor: bool = false
 var _landing_cooldown_timer: float = 0.0
@@ -178,7 +179,13 @@ func _current_speed() -> float:
 
 func _update_stamina(delta: float) -> void:
 	var wants_sprint := Input.is_action_pressed("sprint") and is_move_input_active()
-	var can_sprint := not _stamina_exhausted and _stamina > 0.0
+	if _sprint_release_required and not Input.is_action_pressed("sprint"):
+		_sprint_release_required = false
+	var can_sprint := (
+		not _stamina_exhausted
+		and _stamina > 0.0
+		and not _sprint_release_required
+	)
 	_is_sprinting = wants_sprint and can_sprint
 
 	if _is_sprinting:
@@ -187,6 +194,7 @@ func _update_stamina(delta: float) -> void:
 		if _stamina <= 0.0:
 			_stamina = 0.0
 			_stamina_exhausted = true
+			_sprint_release_required = true
 	else:
 		_stamina_regen_delay_timer = max(0.0, _stamina_regen_delay_timer - delta)
 		if _stamina < max_stamina and _stamina_regen_delay_timer <= 0.0:
