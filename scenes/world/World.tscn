@@ -738,10 +738,10 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_6mhxi")
 
 [node name="dock" parent="town cisco " instance=ExtResource("9_fe1rh")]
-transform = Transform3D(1.3347318, 0, -6.6379623, 0, 0.31788146, 0, 1.104865, 0, 8.018989, -35.88293, 0.035137057, 35.72107)
+transform = Transform3D(1.3347318, 0, -6.6379623, 0, 0.31788146, 0, 1.104865, 0, 8.018989, -35.88293, 0.0603441, 35.72107)
 
 [node name="dock2" type="MeshInstance3D" parent="town cisco "]
-transform = Transform3D(1.4237823, 0, -5.932606, 0, 0.31788146, 0, 0.9874609, 0, 8.554, -23.980865, 0.035137057, 44.36047)
+transform = Transform3D(1.4237823, 0, -5.932606, 0, 0.31788146, 0, 0.9874609, 0, 8.554, -23.980865, 0.0603441, 44.36047)
 mesh = SubResource("ArrayMesh_7ktg6")
 skeleton = NodePath("")
 
@@ -783,3 +783,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6417271, -0.0059873983, 1.
 
 [node name="truck-green2" parent="." instance=ExtResource("15_400s5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5447112, 0.40167353, 0.6254908)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30834508, 1.3228439)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16067538, 0.8228439)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37790057, 1.3228439)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D/CSGBox3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16067538, 0.8228439)
+use_collision = true
