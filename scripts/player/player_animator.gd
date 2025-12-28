@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	if _interact_active:
 		state_time += delta
 		return
-	var on_floor = player.is_on_floor()
+	var on_floor = _is_player_grounded()
 	if enable_facing:
 		_update_model_facing()
 	if not on_floor:
@@ -124,6 +124,13 @@ func _has_move_input() -> bool:
 	if player.has_method("is_move_input_active"):
 		return player.is_move_input_active()
 	return _ground_speed() > 0.1
+
+func _is_player_grounded() -> bool:
+	if player == null:
+		return false
+	if player.has_method("is_grounded"):
+		return player.is_grounded()
+	return player.is_on_floor()
 
 func _is_sprinting() -> bool:
 	return player.has_method("is_sprinting") and player.is_sprinting()

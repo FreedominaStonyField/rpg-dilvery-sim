@@ -35,6 +35,7 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export var step_height: float = 0.5
 @export var step_forward_distance: float = 0.3
 @export var step_up_duration: float = 0.08
+@export var ground_grace_time: float = 0.1
 @export var step_check_path: NodePath = NodePath("StepCheck")
 
 @export_group("Stamina")
@@ -56,10 +57,8 @@ var _landing_cooldown_timer: float = 0.0
 var _zoom_target: float = 0.0
 var _movement_locked: bool = false
 var _step_up_active: bool = false
-var _step_up_timer: float = 0.0
-var _step_up_start: Vector3 = Vector3.ZERO
-var _step_up_mid: Vector3 = Vector3.ZERO
-var _step_up_target: Vector3 = Vector3.ZERO
+var _step_up_target_y: float = 0.0
+var _ground_grace_timer: float = 0.0
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
@@ -75,22 +74,22 @@ func _ready() -> void:
 	camera_pivot.spring_length = _zoom_target
 	_apply_camera_offsets()
 	_was_on_floor = is_on_floor()
+	_ground_grace_timer = ground_grace_time
 	_stamina = max_stamina
 	_emit_stamina_changed()
 	if landed.is_connected(_on_landed) == false:
 		landed.connect(_on_landed)
+	_sync_step_check()
 
 func _physics_process(delta: float) -> void:
 	if not GameState.is_playing():
 		return
 	_update_stamina(delta)
 	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
-	if _step_up_active:
-		_update_step_up(delta)
-		_was_on_floor = is_on_floor()
-		_update_camera_zoom(delta)
-		_apply_camera_offsets()
-		return
+	if is_on_floor():
+		_ground_grace_timer = ground_grace_time
+	else:
+		_ground_grace_timer = max(0.0, _ground_grace_timer - delta)
 
 	var direction = _get_move_direction()
 	var speed = _current_speed()
@@ -128,6 +127,7 @@ func _physics_process(delta: float) -> void:
 	velocity = vel
 	move_and_slide()
 	_handle_step_up(direction)
+	_update_step_up(delta)
 
 	var on_floor = is_on_floor()
 	var just_landed = on_floor and not _was_on_floor
@@ -154,6 +154,7 @@ func _handle_step_up(move_dir: Vector3) -> void:
 	var flat_dir = Vector3(move_dir.x, 0.0, move_dir.z)
 	if flat_dir == Vector3.ZERO:
 		return
+	_sync_step_check()
 	step_check.force_shapecast_update()
 	if step_check.is_colliding():
 		return
@@ -177,33 +178,53 @@ func _handle_step_up(move_dir: Vector3) -> void:
 		return
 	var target_transform = global_transform
 	global_transform = original_transform
-	_step_up_start = original_transform.origin
-	_step_up_mid = Vector3(_step_up_start.x, target_transform.origin.y, _step_up_start.z)
-	_step_up_target = target_transform.origin
-	_step_up_timer = 0.0
+	_step_up_target_y = target_transform.origin.y
 	_step_up_active = true
 	velocity = Vector3.ZERO
 
 func _update_step_up(delta: float) -> void:
-	if step_up_duration <= 0.0:
-		global_position = _step_up_target
-		_step_up_active = false
-		velocity = Vector3.ZERO
+	if not _step_up_active:
 		return
-	_step_up_timer += delta
-	var t = clamp(_step_up_timer / step_up_duration, 0.0, 1.0)
-	var desired: Vector3
-	if t < 0.5:
-		desired = _step_up_start.lerp(_step_up_mid, t * 2.0)
-	else:
-		desired = _step_up_mid.lerp(_step_up_target, (t - 0.5) * 2.0)
-	var delta_move = desired - global_position
-	if delta_move.length() > 0.0001:
-		move_and_collide(delta_move)
-	velocity = delta_move / max(delta, 0.0001)
-	if t >= 1.0:
+	if step_up_duration <= 0.0:
+		global_position.y = _step_up_target_y
 		_step_up_active = false
 		velocity.y = 0.0
+		return
+	var remaining = _step_up_target_y - global_position.y
+	if remaining <= 0.001:
+		_step_up_active = false
+		velocity.y = 0.0
+		return
+	var speed = step_height / step_up_duration
+	var step = min(remaining, speed * delta)
+	var hit = move_and_collide(Vector3(0.0, step, 0.0))
+	if hit != null:
+		_step_up_active = false
+		velocity.y = 0.0
+		return
+	velocity.y = step / max(delta, 0.0001)
+
+func _sync_step_check() -> void:
+	if step_check == null:
+		return
+	step_check.position.y = step_height
+	step_check.target_position = Vector3(
+		0.0,
+		0.0,
+		-max(0.1, step_forward_distance * 2.0)
+	)
+	var shape = step_check.shape
+	if shape is CylinderShape3D:
+		var cylinder = shape as CylinderShape3D
+		cylinder.height = max(0.05, step_height)
+	elif shape is BoxShape3D:
+		var box = shape as BoxShape3D
+		var size = box.size
+		size.y = max(0.05, step_height)
+		box.size = size
+
+func is_grounded() -> bool:
+	return is_on_floor() or _step_up_active or _ground_grace_timer > 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
