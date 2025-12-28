@@ -750,6 +750,11 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="town cisco /dock2/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_hon07")
 
+[node name="CSGBox3D" type="CSGBox3D" parent="town cisco /dock2"]
+transform = Transform3D(1.0000001, 0, 2.3841858e-07, 0, 1, 0, 0, 0, 1.0000002, 0.07987499, 0.041363448, -1.0292833)
+use_collision = true
+size = Vector3(1.8270264, 0.50006104, 0.02798462)
+
 [node name="Barn" type="MeshInstance3D" parent="town cisco "]
 transform = Transform3D(2.993572, 0, -1.559407, 0, 3.3753853, 0, 1.559407, 0, 2.993572, 10.643894, 0.021888733, 40.349297)
 mesh = SubResource("ArrayMesh_te33m")

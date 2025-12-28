@@ -31,6 +31,11 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export var LandingCooldownDuration: float = 0.2
 @export var LandingMoveSpeedMultiplier: float = 0.5
 
+@export_group("Step Up")
+@export var step_height: float = 0.5
+@export var step_forward_distance: float = 0.3
+@export var step_check_path: NodePath = NodePath("StepCheck")
+
 @export_group("Stamina")
 @export var max_stamina: float = 100.0
 @export var stamina_drain_rate: float = 30.0
@@ -54,6 +59,7 @@ var _movement_locked: bool = false
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
 @onready var landing_sfx: AnimationSfx = get_node_or_null(landing_sfx_path) as AnimationSfx
 @onready var animator: Node = get_node_or_null(animator_path)
+@onready var step_check: ShapeCast3D = get_node_or_null(step_check_path) as ShapeCast3D
 
 func _ready() -> void:
 	add_to_group("player")
@@ -109,6 +115,7 @@ func _physics_process(delta: float) -> void:
 
 	velocity = vel
 	move_and_slide()
+	_handle_step_up(direction)
 
 	var on_floor = is_on_floor()
 	var just_landed = on_floor and not _was_on_floor
@@ -120,6 +127,41 @@ func _physics_process(delta: float) -> void:
 	
 	_update_camera_zoom(delta)
 	_apply_camera_offsets()
+
+func _handle_step_up(move_dir: Vector3) -> void:
+	if step_check == null:
+		return
+	if not is_on_floor():
+		return
+	if not is_on_wall():
+		return
+	if step_height <= 0.0 or step_forward_distance <= 0.0:
+		return
+	var flat_dir = Vector3(move_dir.x, 0.0, move_dir.z)
+	if flat_dir == Vector3.ZERO:
+		return
+	step_check.force_shapecast_update()
+	if step_check.is_colliding():
+		return
+
+	var original_transform = global_transform
+	var up_offset = Vector3.UP * step_height
+	if move_and_collide(up_offset, true) != null:
+		return
+
+	flat_dir = flat_dir.normalized()
+	var forward_offset = flat_dir * step_forward_distance
+	global_transform = original_transform.translated(up_offset)
+	if move_and_collide(forward_offset, true) != null:
+		global_transform = original_transform
+		return
+
+	global_transform = original_transform.translated(up_offset + forward_offset)
+	var down_collision = move_and_collide(Vector3.DOWN * step_height)
+	if down_collision == null:
+		global_transform = original_transform
+		return
+	velocity.y = 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
