@@ -34,6 +34,7 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export_group("Step Up")
 @export var step_height: float = 0.5
 @export var step_forward_distance: float = 0.3
+@export var step_up_duration: float = 0.08
 @export var step_check_path: NodePath = NodePath("StepCheck")
 
 @export_group("Stamina")
@@ -54,6 +55,11 @@ var _was_on_floor: bool = false
 var _landing_cooldown_timer: float = 0.0
 var _zoom_target: float = 0.0
 var _movement_locked: bool = false
+var _step_up_active: bool = false
+var _step_up_timer: float = 0.0
+var _step_up_start: Vector3 = Vector3.ZERO
+var _step_up_mid: Vector3 = Vector3.ZERO
+var _step_up_target: Vector3 = Vector3.ZERO
 
 @onready var camera_pivot: SpringArm3D = $SpringArm3D
 @onready var camera: Camera3D = $SpringArm3D/Camera3D
@@ -79,6 +85,12 @@ func _physics_process(delta: float) -> void:
 		return
 	_update_stamina(delta)
 	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
+	if _step_up_active:
+		_update_step_up(delta)
+		_was_on_floor = is_on_floor()
+		_update_camera_zoom(delta)
+		_apply_camera_offsets()
+		return
 
 	var direction = _get_move_direction()
 	var speed = _current_speed()
@@ -129,6 +141,8 @@ func _physics_process(delta: float) -> void:
 	_apply_camera_offsets()
 
 func _handle_step_up(move_dir: Vector3) -> void:
+	if _step_up_active:
+		return
 	if step_check == null:
 		return
 	if not is_on_floor():
@@ -161,7 +175,35 @@ func _handle_step_up(move_dir: Vector3) -> void:
 	if down_collision == null:
 		global_transform = original_transform
 		return
-	velocity.y = 0.0
+	var target_transform = global_transform
+	global_transform = original_transform
+	_step_up_start = original_transform.origin
+	_step_up_mid = Vector3(_step_up_start.x, target_transform.origin.y, _step_up_start.z)
+	_step_up_target = target_transform.origin
+	_step_up_timer = 0.0
+	_step_up_active = true
+	velocity = Vector3.ZERO
+
+func _update_step_up(delta: float) -> void:
+	if step_up_duration <= 0.0:
+		global_position = _step_up_target
+		_step_up_active = false
+		velocity = Vector3.ZERO
+		return
+	_step_up_timer += delta
+	var t = clamp(_step_up_timer / step_up_duration, 0.0, 1.0)
+	var desired: Vector3
+	if t < 0.5:
+		desired = _step_up_start.lerp(_step_up_mid, t * 2.0)
+	else:
+		desired = _step_up_mid.lerp(_step_up_target, (t - 0.5) * 2.0)
+	var delta_move = desired - global_position
+	if delta_move.length() > 0.0001:
+		move_and_collide(delta_move)
+	velocity = delta_move / max(delta, 0.0001)
+	if t >= 1.0:
+		_step_up_active = false
+		velocity.y = 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not GameState.is_playing():
