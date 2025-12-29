@@ -1,0 +1,43 @@
+[gd_resource type="Resource" load_steps=22 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_sfx_profile.gd" id="1"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/click_001.ogg" id="2"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/click_002.ogg" id="3"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/click_003.ogg" id="4"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/back_001.ogg" id="5"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/back_002.ogg" id="6"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/confirmation_001.ogg" id="7"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/confirmation_002.ogg" id="8"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/bong_001.ogg" id="9"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/close_004.ogg" id="10"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover1.ogg" id="11"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover2.ogg" id="12"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/rollover3.ogg" id="13"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/select_001.ogg" id="14"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/select_002.ogg" id="15"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/select_003.ogg" id="16"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/select_004.ogg" id="17"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/toggle_001.ogg" id="18"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/toggle_002.ogg" id="19"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/toggle_003.ogg" id="20"]
+[ext_resource type="AudioStream" path="res://assets/audio/ui/toggle_004.ogg" id="21"]
+
+[resource]
+script = ExtResource("1")
+click_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+back_sounds = Array[AudioStream]([ExtResource("5"), ExtResource("6")])
+confirm_sounds = Array[AudioStream]([ExtResource("7"), ExtResource("8")])
+notify_sounds = Array[AudioStream]([ExtResource("9"), ExtResource("10")])
+hover_sounds = Array[AudioStream]([ExtResource("11"), ExtResource("12"), ExtResource("13")])
+press_sounds = Array[AudioStream]([ExtResource("2"), ExtResource("3"), ExtResource("4")])
+select_sounds = Array[AudioStream]([ExtResource("14"), ExtResource("15"), ExtResource("16"), ExtResource("17")])
+toggle_sounds = Array[AudioStream]([ExtResource("18"), ExtResource("19"), ExtResource("20"), ExtResource("21")])
+click_volume_db = -8.0
+back_volume_db = -6.0
+confirm_volume_db = -6.0
+notify_volume_db = -10.0
+hover_volume_db = -12.0
+press_volume_db = -8.0
+select_volume_db = -10.0
+toggle_volume_db = -8.0
+pitch_jitter = 0.05

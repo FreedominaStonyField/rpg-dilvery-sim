@@ -1,0 +1,352 @@
+[gd_scene load_steps=29 format=4 uid="uid://75cncv4u5hv3"]
+
+[ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="1_yxavq"]
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/grass.tres" id="2_ekolx"]
+
+[sub_resource type="CylinderShape3D" id="6"]
+height = 1.2
+radius = 0.8
+
+[sub_resource type="CylinderMesh" id="5"]
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3e0u"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_um27k"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ekolx"]
+resource_name = "town cisco _Cube_012"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_p3e0u"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_um27k")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5jjxi"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3u6wd"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eyoec"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_thpqc"]
+resource_name = "town cisco _Cube_030"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_3u6wd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_eyoec")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tuaep"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v1g8m"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jxv0f"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4v7rm"]
+resource_name = "town cisco _Cube_031"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_v1g8m"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jxv0f")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_84137"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu522"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p1rey"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_01e2m"]
+resource_name = "town cisco _Cube_032"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_uu522"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_p1rey")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jsrm2"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3pus2"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yj3ju"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d2pr1"]
+resource_name = "town cisco _Cube_033"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_3pus2"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yj3ju")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jnf82"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ha1nd"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u2hij"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_507xi"]
+resource_name = "town cisco _Cube_034"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ha1nd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u2hij")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qnmnp"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[node name="DropoffMarket" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_yxavq")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+mesh = SubResource("5")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.166287, 0)
+pixel_size = 0.05
+billboard = 2
+modulate = Color(0.2, 0.8, 0.2, 1)
+text = "Market"
+uppercase = true
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4259276, -7.160658)
+use_collision = true
+size = Vector3(25, 3.6518555, 25)
+material = ExtResource("2_ekolx")
+
+[node name="cutoutshap" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(0.8660254, -0.5, 0, 0.5, 0.8660254, 0, 0, 0, 1, -12.43609, 0.5771072, -0.23120117)
+operation = 2
+size = Vector3(15.285, 2.435669, 26.571777)
+material = ExtResource("2_ekolx")
+
+[node name="cutoutshap2" type="CSGBox3D" parent="Ground"]
+transform = Transform3D(-0.8660254, 0.5, 8.742278e-08, 0.5, 0.8660254, 0, -7.5710346e-08, 4.371139e-08, -1, 12.56391, 0.5771072, -0.23120117)
+operation = 2
+size = Vector3(15.285, 2.435669, 26.571777)
+material = ExtResource("2_ekolx")
+
+[node name="Stall" type="CSGBox3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.86795086, 2.6393423)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10406494, 0)
+operation = 2
+size = Vector3(1, 0.50549316, 1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40808266, -0.040527344, 0.4003415)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4192081, -0.040527284, 0.41128683)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42782164, -0.040527403, -0.39582348)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3889739, -0.07793638, -0.40348196)
+operation = 2
+size = Vector3(0.13964844, 0.9189453, 0.14929199)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Stall/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9604645e-08, -0.4159135, 0)
+size = Vector3(0.6, 0.48100585, 0.6)
+
+[node name="Cube_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.246489, 0.9086858, -5.4923553)
+mesh = SubResource("ArrayMesh_ekolx")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_002"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_002/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_5jjxi")
+
+[node name="Cube_018" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9418477, 0, 0.33604008, 0, 1, 0, -0.33604008, 0, 0.9418477, -24.16526, 0.9086858, -10.618885)
+mesh = SubResource("ArrayMesh_thpqc")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_018"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_018/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_tuaep")
+
+[node name="Cube_003" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.9418477, 0, 0.33604008, 0, 1, 0, -0.33604008, 0, 0.9418477, -26.13985, 0.9086859, -15.072248)
+mesh = SubResource("ArrayMesh_4v7rm")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_003"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_003/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_84137")
+
+[node name="Cube_004" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.9733354, 0, -0.22938652, 0, 1, 0, 0.22938652, 0, -0.9733354, -33.249302, 0.9086859, -12.908525)
+mesh = SubResource("ArrayMesh_01e2m")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_004"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_004/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_jsrm2")
+
+[node name="Cube_005" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.8628061, 0, -0.5055351, 0, 1, 0, 0.5055351, 0, -0.8628061, -31.986485, 0.9086859, -6.896508)
+mesh = SubResource("ArrayMesh_d2pr1")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_005"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_005/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_jnf82")
+
+[node name="Cube_008" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.98533773, 0, -0.17061579, 0, 1, 0, 0.17061579, 0, -0.98533773, -34.596546, 0.9086859, -18.78733)
+mesh = SubResource("ArrayMesh_507xi")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_008"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_008/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_qnmnp")

@@ -6,7 +6,7 @@ extends DirectionalLight3D
 @export_range(0.0, 2.0) var min_energy: float = 0.1
 
 func _process(_delta: float) -> void:
-	var ratio := TimeSystem.get_time_ratio()
+	var ratio = TimeSystem.get_time_ratio()
 	_update_rotation(ratio)
 	_update_energy(ratio)
 

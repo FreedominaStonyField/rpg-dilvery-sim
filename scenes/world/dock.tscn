@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=4 uid="uid://dhvlvrd7qpo6v"]
+
+[ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="1_tehei"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_25dix"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_03d7c"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nid8k"]
+resource_name = "town cisco _Cube_018"
+_surfaces = [{
+"aabb": AABB(-1, -1, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_25dix"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAP//AABU1QAA/////1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAP//////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AAP//AAD///////8AAP//AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_03d7c")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xclow"]
+points = PackedVector3Array(1, 1, 1, 1, 1, -1, -1, 1, 1, 1, -1, 1, 1, -1, -1, -1, 1, -1, -1, -1, 1, -1, -1, -1)
+
+[node name="dock" type="MeshInstance3D"]
+transform = Transform3D(1.3347318, 0, -6.637963, 0, 0.31788146, 0, 1.104865, 0, 8.018989, 0, 0, 0)
+mesh = SubResource("ArrayMesh_nid8k")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_xclow")
+
+[node name="DropoffSite" parent="." instance=ExtResource("1_tehei")]
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000001, 0, 4.01877, 0)
+display_name = "Dock 1"
+
+[editable path="DropoffSite"]

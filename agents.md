@@ -12,6 +12,8 @@ This repo is a fast prototype. Code must be consistent and easy to extend tomorr
 ## 2) High-level architecture
 Use small single-responsibility scripts and communicate with **signals**.
 Global state lives in **autoload singletons** only.
+Favor node composition over inheritance: build behavior from sibling/child nodes
+and small helper scripts instead of deep class trees.
 
 ### Autoloads (Singletons)
 - `GameState`: controls current mode (MENU, PLAYING, PAUSED, SLEEPING, MUGGED)
@@ -45,9 +47,15 @@ Every scene should have a script ONLY if it contains logic.
 - Use `PascalCase` for classes and node names.
 - Prefer `@onready var` for node refs.
 - Prefer exported node paths for configurable references.
+- Prefer composition: add nodes for behavior (e.g., `Area3D`, `Timer`, `RayCast3D`)
+  instead of inheriting new base classes.
+- Keep scripts focused on one concern and wire them together via signals.
+- Example: `PickupTrigger.tscn` with `Area3D` + `CollisionShape3D` + `AudioStreamPlayer3D`
+  and a `PickupTrigger.gd` script that emits `picked_up`, while a separate `CarryState.gd`
+  listens and updates `PlayerData`.
 
 ### Required formatting
-- 4 spaces indentation (no tabs)
+- Tabs for indentation (GDScript tab indents)
 - Max line length ~100
 - One class per file
 - No giant "manager god scripts"
@@ -75,10 +83,9 @@ Every scene should have a script ONLY if it contains logic.
 - One active job at a time
 - Curfew:
   - If outdoors when curfew hits: start a short timer, then mug.
-  - If indoors: safe (no mugging)
+  - If in safe zone: safe (no mugging)
 - Inn:
-  - Entering inn pauses time progression
-- "Sleep" sets morning and resumes play
+- "Sleep" sets morning, saves money, and resumes play
 
 ## 8) Testing discipline
 Every change must keep these working:
@@ -88,3 +95,6 @@ Every change must keep these working:
 - Curfew mug -> money resets -> morning
 - Pause toggles without breaking input
 
+## 9) Output format for codegen agents
+When generating code, ALWAYS output:
+1) Summary of systems and methods to test each part.

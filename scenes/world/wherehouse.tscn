@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci2fsjibag7l"]
+
+[ext_resource type="PackedScene" uid="uid://dnndekou66t6u" path="res://scenes/world/wherehouse_3.tscn" id="1_snuej"]
+
+[node name="Warehouse1" type="Node3D"]
+
+[node name="wherehouse3" parent="." instance=ExtResource("1_snuej")]
+transform = Transform3D(-1.5839162, 0, -2.3615377, 0, 1, 0, 3.8341315, 0, -0.9755736, -31.514624, 0.87799686, 17.776955)
