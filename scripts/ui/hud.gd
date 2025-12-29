@@ -22,12 +22,14 @@ const MESSAGE_HOLD = 5.5
 @onready var interaction_hint: Label = $InteractionPanel/PanelMargin/InteractionVBox/InteractionHint
 @onready var stamina_container: Control = $StaminaContainer
 @onready var stamina_bar: ProgressBar = $StaminaContainer/StaminaPanel/StaminaBar
+@onready var speed_label: Label = $SpeedContainer/SpeedPanel/SpeedMargin/SpeedLabel
 
 var in_transition: bool = false
 var transition_tween: Tween
 var package_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
 var stamina_source: Node
+var speed_source: Node
 var package_flash_timer: SceneTreeTimer
 var package_fade_tween: Tween
 var interaction_entries: Array[Node] = []
@@ -68,7 +70,11 @@ func _ready() -> void:
 	interaction_panel.visible = false
 	stamina_container.visible = false
 	_bind_player_stamina()
+	_bind_player_speed()
 	get_tree().node_added.connect(_on_node_added)
+
+func _process(_delta: float) -> void:
+	_update_speed_label()
 
 func _on_money_changed(amount: int) -> void:
 	money_label.text = "$" + str(amount)
@@ -312,11 +318,34 @@ func _bind_player_stamina() -> void:
 func _on_node_added(node: Node) -> void:
 	if stamina_source == null and node.is_in_group("player"):
 		_bind_player_stamina()
+	if speed_source == null and node.is_in_group("player"):
+		_bind_player_speed()
+
+func _bind_player_speed() -> void:
+	if speed_source != null and is_instance_valid(speed_source):
+		return
+	var player = get_tree().get_first_node_in_group("player")
+	if player == null:
+		return
+	speed_source = player
+	_update_speed_label()
 
 func _on_stamina_changed(current: float, max_value: float, percent: float) -> void:
 	stamina_bar.max_value = max_value
 	stamina_bar.value = current
 	stamina_container.visible = current < max_value - 0.01
+
+func _update_speed_label() -> void:
+	if speed_source == null or not is_instance_valid(speed_source):
+		speed_label.text = "Speed 0 m/min"
+		return
+	var body := speed_source as CharacterBody3D
+	if body == null:
+		speed_label.text = "Speed 0 m/min"
+		return
+	var horizontal_speed = Vector2(body.velocity.x, body.velocity.z).length()
+	var meters_per_minute = horizontal_speed * 60.0
+	speed_label.text = "Speed %s m/min" % str(int(round(meters_per_minute)))
 
 func _flash_package_menu(duration: float, completed_job: JobRecord = null) -> void:
 	if in_transition or package_pause_active:

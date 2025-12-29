@@ -490,6 +490,42 @@ theme_override_styles/background = SubResource("StyleBoxFlat_3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4")
 show_percentage = false
 
+[node name="SpeedContainer" type="Control" parent="."]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -56.0
+offset_right = 196.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SpeedPanel" type="Panel" parent="SpeedContainer"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3")
+
+[node name="SpeedMargin" type="MarginContainer" parent="SpeedContainer/SpeedPanel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeedLabel" type="Label" parent="SpeedContainer/SpeedPanel/SpeedMargin"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Speed 0 m/min"
+
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3

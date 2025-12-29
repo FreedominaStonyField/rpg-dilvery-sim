@@ -117,7 +117,7 @@ size = Vector3(1.8169556, 2.084961, 1.2089844)
 
 [node name="Inn" type="Node3D"]
 script = ExtResource("1_ua573")
-sleep_cost = 1000
+sleep_cost = 700
 
 [node name="Cube_010" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.168398, 0, -1.3500578, 0, 1, 0, 1.6255554, 0, 3.4619422, -1.1202755, 0.8684208, -1.2041168)

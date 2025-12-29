@@ -36,6 +36,8 @@ signal stamina_changed(current: float, max: float, percent: float)
 @export var step_forward_distance: float = 0.3
 @export var step_up_duration: float = 0.08
 @export var ground_grace_time: float = 0.1
+@export var step_down_grace_time: float = 0.12
+@export var step_down_max_fall_speed: float = 2.5
 @export var step_check_path: NodePath = NodePath("StepCheck")
 
 @export_group("Stamina")
@@ -86,10 +88,6 @@ func _physics_process(delta: float) -> void:
 		return
 	_update_stamina(delta)
 	_landing_cooldown_timer = max(0.0, _landing_cooldown_timer - delta)
-	if is_on_floor():
-		_ground_grace_timer = ground_grace_time
-	else:
-		_ground_grace_timer = max(0.0, _ground_grace_timer - delta)
 
 	var direction = _get_move_direction()
 	var speed = _current_speed()
@@ -134,6 +132,13 @@ func _physics_process(delta: float) -> void:
 	if just_landed:
 		_landing_cooldown_timer = LandingCooldownDuration
 		landed.emit(abs(min(pre_move_velocity_y, 0.0)))
+
+	if on_floor:
+		_ground_grace_timer = ground_grace_time
+	elif _was_on_floor and velocity.y <= 0.0 and abs(velocity.y) <= step_down_max_fall_speed:
+		_ground_grace_timer = max(_ground_grace_timer, step_down_grace_time)
+	else:
+		_ground_grace_timer = max(0.0, _ground_grace_timer - delta)
 
 	_was_on_floor = on_floor
 	
