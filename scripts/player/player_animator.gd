@@ -58,6 +58,7 @@ var debug_enabled: bool = OS.is_debug_build() or Engine.is_editor_hint()
 var _missing_anim_warnings: Dictionary = {}
 var _interact_active: bool = false
 var _interact_mid_timer: SceneTreeTimer
+var land_timer: float = 0.0
 
 func _ready() -> void:
 	if player == null:
@@ -101,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	if _interact_active:
 		state_time += delta
 		return
-	var on_floor = _is_player_grounded()
+	#var on_floor = _is_player_grounded()
 	if enable_facing:
 		_update_model_facing()
 	if not on_floor:
@@ -205,9 +206,12 @@ func _set_state_animation(
 	) -> void:
 	if anim_name == StringName(""):
 		return
-	var transition := AnimationNodeStateMachineTransition.new()
-	transition.xfade_time = BLEND_TIME
-	machine.add_transition(from, to, transition)
+	var node = machine.get_node(state_name)
+	if node is AnimationNodeAnimation:
+		var anim_string := String(anim_name)
+		var resolved := _resolve_anim_candidates([anim_string, _with_library(anim_string)])
+		node.animation = resolved
+		state_anim_map[state_name] = resolved
 
 func _resolve_anim_candidates(names: Array) -> String:
 	for name in names:
@@ -226,20 +230,14 @@ func _has_animation(name: String) -> bool:
 
 func _with_library(name: String) -> String:
 	return "%s/%s" % [ANIM_LIB, name]
-	var node = machine.get_node(state_name)
-	if node is AnimationNodeAnimation:
-		var anim_string = String(anim_name)
-		node.animation = anim_string
-		state_anim_map[state_name] = anim_string
 
-func _animation_length(anim_key: String, default_length: float) -> float:
-	var anim_name := _with_library(anim_key)
+func _animation_length(anim_key: StringName, default_length: float) -> float:
+	var anim_string := String(anim_key)
+	if anim_string == "":
+		return default_length
+	var anim_name := _with_library(anim_string)
 	if _has_animation(anim_name):
 		return animation_player.get_animation(anim_name).length
-	if _has_animation(anim_key):
-		return animation_player.get_animation(anim_key).length
-func _animation_length(anim_name: StringName, default_length: float) -> float:
-	var anim_string = String(anim_name)
 	if _has_animation(anim_string):
 		return animation_player.get_animation(anim_string).length
 	return default_length
@@ -256,7 +254,7 @@ func _update_model_facing() -> void:
 		return
 	var target_yaw := atan2(last_local_move.x, last_local_move.z)
 	var current_yaw := model_root.rotation.y
-	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, 0.15)
+	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, facing_smoothing)
 
 func _disable_animation_loops() -> void:
 	if animation_player == null:
@@ -267,9 +265,6 @@ func _disable_animation_loops() -> void:
 				var anim := animation_player.get_animation(candidate)
 				if anim.loop_mode != Animation.LOOP_NONE:
 					anim.loop_mode = Animation.LOOP_NONE
-	var target_yaw = atan2(last_local_move.x, last_local_move.z)
-	var current_yaw = model_root.rotation.y
-	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, facing_smoothing)
 
 func _start_blend(from: StringName, to: StringName) -> void:
 	if from == "":
@@ -314,9 +309,6 @@ func _warn_once(key: StringName, message: String) -> void:
 		return
 	_missing_anim_warnings[key] = true
 	push_warning(message)
-
-func _has_animation(name: String) -> bool:
-	return animation_player != null and animation_player.has_animation(name)
 
 func _on_animation_started(anim_name: StringName) -> void:
 	_emit_debug_event("AnimationStarted", str(anim_name), "AnimationPlayer", {
