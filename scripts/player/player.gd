@@ -289,31 +289,12 @@ func _current_speed() -> float:
 
 func _update_stamina(delta: float) -> void:
 	var wants_sprint = Input.is_action_pressed("sprint") and is_move_input_active()
-	if _sprint_release_required and not Input.is_action_pressed("sprint"):
-		_sprint_release_required = false
-	var can_sprint = (
-		not _stamina_exhausted
-		and _stamina > 0.0
-		and not _sprint_release_required
-	)
-	_is_sprinting = wants_sprint and can_sprint
-
-	if _is_sprinting:
-		_stamina_regen_delay_timer = stamina_regen_delay
-		_set_stamina(_stamina - stamina_drain_rate * delta)
-		if _stamina <= 0.0:
-			_stamina = 0.0
-			_stamina_exhausted = true
-			_sprint_release_required = true
-	else:
-		_stamina_regen_delay_timer = max(0.0, _stamina_regen_delay_timer - delta)
-		if _stamina < max_stamina and _stamina_regen_delay_timer <= 0.0:
-			var regen_rate = stamina_regen_rate
-			if _stamina_exhausted:
-				regen_rate = stamina_regen_rate_exhausted
-			_set_stamina(_stamina + regen_rate * delta)
-		if _stamina_exhausted and _stamina >= stamina_resume_threshold:
-			_stamina_exhausted = false
+	_is_sprinting = wants_sprint
+	if not is_equal_approx(_stamina, max_stamina):
+		_set_stamina(max_stamina)
+	_stamina_exhausted = false
+	_sprint_release_required = false
+	_stamina_regen_delay_timer = 0.0
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
 	if mode == GameState.Mode.PAUSED or mode == GameState.Mode.MENU:
