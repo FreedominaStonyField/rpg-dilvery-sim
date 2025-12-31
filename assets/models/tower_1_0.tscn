@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="2_h2d6i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ablov"]
+cull_mode = 2
 albedo_texture = ExtResource("2_8hr34")
 metallic = 0.42
 metallic_specular = 0.19
@@ -47,6 +48,7 @@ shape = SubResource("ConcavePolygonShape3D_ablov")
 
 [node name="DropoffSite" parent="." index="3" instance=ExtResource("2_h2d6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5241275, 32.506718, 0.21010947)
+site_id = &"ec816ac9-7aa7-4c5b-94b9-db9bd8f9fd58"
 display_name = "Wisper Tower"
 hint_text = "Look up!"
 
@@ -55,11 +57,13 @@ transform = Transform3D(-0.12308187, 0, -0.99239653, 0, 1, 0, 0.99239653, 0, -0.
 
 [node name="Label3D" parent="DropoffSite" index="2"]
 transform = Transform3D(-0.0009948451, 0, -0.9999995, 0, 1, 0, 0.9999995, 0, -0.0009948451, -0.15880775, 2.6839676, 0)
+visible = false
+text = "Wisper Tower"
 
 [node name="LabelArea" parent="DropoffSite" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8340659, 0, 0)
 
 [node name="SnapshotCamera" parent="DropoffSite" index="4"]
-transform = Transform3D(0.94422704, -0.15676734, 0.2895847, 0, 0.8794077, 0.4760694, -0.32929516, -0.44951758, 0.83036053, -0.7149358, 2.1130638, -0.06465495)
+transform = Transform3D(0.6578092, 0.35856813, -0.66235644, 4.2563193e-09, 0.87940776, 0.47606936, 0.7531847, -0.3131628, 0.5784825, -5.3601165, 3.1130638, 1.9353449)
 
 [editable path="DropoffSite"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://bqrk1wsxh50a"]
+[gd_scene load_steps=17 format=4 uid="uid://bqrk1wsxh50a"]
 
 [ext_resource type="Script" uid="uid://dg8oskfg6ije2" path="res://scripts/world/inn_interior.gd" id="1_ua573"]
+[ext_resource type="Material" uid="uid://ickkffutwcvo" path="res://demo/assets/materials/M_crystal_red.tres" id="2_7sgj7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn1hl"]
 
@@ -123,6 +124,7 @@ sleep_cost = 700
 transform = Transform3D(4.168398, 0, -1.3500578, 0, 1, 0, 1.6255554, 0, 3.4619422, -1.1202755, 0.8684208, -1.2041168)
 mesh = SubResource("ArrayMesh_m5bm6")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_010"]
 
@@ -133,6 +135,7 @@ shape = SubResource("ConvexPolygonShape3D_wej8i")
 transform = Transform3D(4.4024334, 0, -1.4258573, 0, 1, 0, 1.7168226, 0, 3.6563137, -1.1202755, 2.799323, -1.2041168)
 mesh = SubResource("ArrayMesh_oay35")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_011"]
 
@@ -143,6 +146,7 @@ shape = SubResource("ConvexPolygonShape3D_ua573")
 transform = Transform3D(0.93166363, 0, -0.9655416, 0, 1, 0, 0.363322, 0, 2.4759305, 3.909873, 0.91373426, 0.9686718)
 mesh = SubResource("ArrayMesh_h4gy8")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_013"]
 

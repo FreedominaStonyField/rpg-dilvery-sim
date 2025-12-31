@@ -3,7 +3,7 @@ extends Area3D
 @export var item_name: String = "Parcel"
 @export var interact_action: String = "interact"
 
-@onready var mesh_instance: MeshInstance3D = $MeshInstance3D
+@onready var mesh_instance = $MeshInstance3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 var available: bool = true
