@@ -356,7 +356,7 @@ size = Vector3(3, 3, 5)
 material = ExtResource("1_cl1x4")
 
 [node name="Building54" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -95.96837, 5.4820304, 76.415665)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -95.96837, 1.53185, 76.415665)
 use_collision = true
 size = Vector3(3, 3, 5)
 material = ExtResource("1_cl1x4")
@@ -376,6 +376,14 @@ material = ExtResource("1_cl1x4")
 [node name="DropoffSite" parent="MainRoad/Building7" instance=ExtResource("8_8iuey")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
 site_id = &"018e7879-b5ff-444b-939d-6467fd129456"
+display_name = "CornerStore"
+
+[node name="Label3D" parent="MainRoad/Building7/DropoffSite" index="2"]
+visible = false
+text = "CornerStore"
+
+[node name="SnapshotCamera" parent="MainRoad/Building7/DropoffSite" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building10" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -35.418007, 2.8820305, -18.084328)
@@ -933,5 +941,6 @@ material = ExtResource("1_cl1x4")
 [node name="Inn" parent="MainRoad" instance=ExtResource("1_0klpl")]
 transform = Transform3D(-0.86602545, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, -0.86602545, -24.24871, 0.16342956, -14)
 
+[editable path="MainRoad/Building7/DropoffSite"]
 [editable path="MainRoad/Building22/DropoffSite"]
 [editable path="MainRoad/Building28/DropoffSite"]

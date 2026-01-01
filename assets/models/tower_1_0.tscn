@@ -52,6 +52,9 @@ site_id = &"ec816ac9-7aa7-4c5b-94b9-db9bd8f9fd58"
 display_name = "Wisper Tower"
 hint_text = "Look up!"
 
+[node name="DeliveryArea" parent="DropoffSite" index="0"]
+reward = 250
+
 [node name="DropPoint" parent="DropoffSite" index="1"]
 transform = Transform3D(-0.12308187, 0, -0.99239653, 0, 1, 0, 0.99239653, 0, -0.12308187, 0, 0, 0)
 

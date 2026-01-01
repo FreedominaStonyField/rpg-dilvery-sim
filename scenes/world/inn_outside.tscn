@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=4 uid="uid://bqrk1wsxh50a"]
+[gd_scene load_steps=18 format=4 uid="uid://bqrk1wsxh50a"]
 
 [ext_resource type="Script" uid="uid://dg8oskfg6ije2" path="res://scripts/world/inn_interior.gd" id="1_ua573"]
 [ext_resource type="Material" uid="uid://ickkffutwcvo" path="res://demo/assets/materials/M_crystal_red.tres" id="2_7sgj7"]
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/planks.tres" id="3_ftmaf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn1hl"]
 
@@ -182,3 +183,8 @@ text = "
 
 [node name="RespawnPoint" type="Marker3D" parent="SafeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9282265, 0, -0.37201598, 0, 1, 0, 0.37201598, 0, 0.9282265, 0.051757604, 0.66932607, 2.8559813)
+size = Vector3(1, 1.5477295, 1)
+material = ExtResource("3_ftmaf")
