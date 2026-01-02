@@ -7,6 +7,8 @@ class_name JobRecord
 @export var hint_text: String = ""
 @export var snapshot: Texture2D
 @export var completion_sfx: AudioStream
+@export var reward: int = 0
+@export var distance_m: float = 0.0
 
 var snapshot_jpg_b64: String = ""
 

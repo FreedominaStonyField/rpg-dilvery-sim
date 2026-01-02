@@ -50,6 +50,7 @@ func _ready() -> void:
 	UIEvents.interact_prompt_changed.connect(_on_interact_prompt_changed)
 	UIEvents.interaction_registered.connect(_on_interaction_registered)
 	UIEvents.interaction_unregistered.connect(_on_interaction_unregistered)
+	UIEvents.package_menu_requested.connect(_on_package_menu_requested)
 	GameState.mode_changed.connect(_on_mode_changed)
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_completed)
@@ -221,23 +222,7 @@ func _input(event: InputEvent) -> void:
 	if not toggle_pressed and event is InputEventKey:
 		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
 	if toggle_pressed:
-		if in_transition:
-			return
-		if not GameState.is_playing() and not package_pause_active:
-			return
-		var next_visible = not package_menu.visible
-		if package_flash_timer:
-			package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
-			package_flash_timer = null
-		package_menu.visible = next_visible
-		package_pause_active = next_visible
-		if package_fade_tween:
-			package_fade_tween.kill()
-			package_fade_tween = null
-		package_menu.modulate = Color(1, 1, 1, 1)
-		if package_menu.has_method("clear_override"):
-			package_menu.call("clear_override")
-		GameState.set_mode(GameState.Mode.PAUSED if next_visible else GameState.Mode.PLAYING)
+		_set_package_menu_visible(not package_menu.visible)
 		get_viewport().set_input_as_handled()
 
 func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
@@ -389,6 +374,27 @@ func _on_package_fade_finished() -> void:
 	if package_menu.has_method("clear_override"):
 		package_menu.call("clear_override")
 	package_fade_tween = null
+
+func _on_package_menu_requested(visible: bool) -> void:
+	_set_package_menu_visible(visible)
+
+func _set_package_menu_visible(visible: bool) -> void:
+	if in_transition:
+		return
+	if visible and not GameState.is_playing() and not package_pause_active:
+		return
+	if package_flash_timer:
+		package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
+		package_flash_timer = null
+	if package_fade_tween:
+		package_fade_tween.kill()
+		package_fade_tween = null
+	package_menu.visible = visible
+	package_pause_active = visible
+	package_menu.modulate = Color(1, 1, 1, 1)
+	if package_menu.has_method("clear_override"):
+		package_menu.call("clear_override")
+	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
 
 func _play_completion_sfx(job: JobRecord) -> void:
 	if completion_audio == null or job == null:

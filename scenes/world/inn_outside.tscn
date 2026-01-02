@@ -185,6 +185,6 @@ text = "
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(0.9282265, 0, -0.37201598, 0, 1, 0, 0.37201598, 0, 0.9282265, 0.051757604, 0.66932607, 2.8559813)
-size = Vector3(1, 1.5477295, 1)
+transform = Transform3D(0.9282265, 0, -0.37201598, 0, 1, 0, 0.37201598, 0, 0.9282265, -0.111158326, 0.66932607, 3.262477)
+size = Vector3(1, 1.5477295, 0.12414551)
 material = ExtResource("3_ftmaf")

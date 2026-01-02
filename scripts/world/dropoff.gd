@@ -44,9 +44,12 @@ func _can_interact() -> bool:
 
 func _deliver() -> void:
 	PlayerData.clear_carrying()
-	PlayerData.add_money(reward)
+	var reward_amount = Jobs.get_active_reward()
+	if reward_amount <= 0:
+		reward_amount = reward
+	PlayerData.add_money(reward_amount)
 	Jobs.complete_job()
-	UIEvents.show_message("Delivered! +$%d" % reward)
+	UIEvents.show_message("Delivered! +$%d" % reward_amount)
 	_update_prompt()
 
 func _on_job_state_changed(_payload = null) -> void:

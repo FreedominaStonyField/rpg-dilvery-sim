@@ -7,9 +7,6 @@ extends Area3D
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 var available: bool = true
-var dropoffs: Array[Node3D] = []
-var last_dropoff: Node3D
-var rng = RandomNumberGenerator.new()
 var player_in_range: bool = false
 var player: CharacterBody3D
 
@@ -17,14 +14,11 @@ func _enter_tree() -> void:
 	add_to_group("saveable")
 
 func _ready() -> void:
-	rng.randomize()
-	_refresh_dropoffs_from_jobs()
-	if dropoffs.is_empty():
-		push_warning("Pickup has no dropoff sites found.")
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	Jobs.job_available.connect(_on_job_available)
 	Jobs.job_started.connect(_on_job_state_changed)
+	Jobs.pickup_consumed.connect(_on_pickup_consumed)
 	PlayerData.carrying_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
@@ -32,6 +26,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true
 		player = body as CharacterBody3D
+		_refresh_offers_if_possible()
 		_update_prompt()
 
 func _on_body_exited(body: Node3D) -> void:
@@ -39,36 +34,32 @@ func _on_body_exited(body: Node3D) -> void:
 		player_in_range = false
 		if player == body:
 			player = null
+		Jobs.clear_offer_pickup(self)
 		_update_prompt()
 
 func _exit_tree() -> void:
 	UIEvents.unregister_interaction(self)
 
-func _choose_dropoff() -> Node3D:
-	if dropoffs.is_empty():
-		return null
-	if dropoffs.size() == 1:
-		last_dropoff = dropoffs[0]
-		return last_dropoff
-	var dropoff = dropoffs[rng.randi_range(0, dropoffs.size() - 1)]
-	if last_dropoff != null and dropoffs.size() > 1:
-		var tries = 0
-		while dropoff == last_dropoff and tries < 3:
-			dropoff = dropoffs[rng.randi_range(0, dropoffs.size() - 1)]
-			tries += 1
-	last_dropoff = dropoff
-	return dropoff
-
 func _on_job_available() -> void:
 	available = true
 	mesh_instance.visible = true
 	collision_shape.set_deferred("disabled", false)
+	_refresh_offers_if_possible()
 	_update_prompt()
 
 func _on_job_state_changed(_dropoff: Node3D) -> void:
 	_update_prompt()
 
 func _on_carrying_changed(_item_name: String) -> void:
+	_update_prompt()
+
+func _on_pickup_consumed(pickup: Node3D) -> void:
+	if pickup != self:
+		return
+	available = false
+	mesh_instance.visible = false
+	collision_shape.set_deferred("disabled", true)
+	PlayerData.set_carrying(item_name)
 	_update_prompt()
 
 func _can_interact() -> bool:
@@ -78,22 +69,6 @@ func _can_interact() -> bool:
 		return false
 	return true
 
-func _try_pickup() -> void:
-	_refresh_dropoffs_from_jobs()
-	if dropoffs.is_empty():
-		Jobs.assert_dropoffs_available()
-		return
-	var dropoff = _choose_dropoff()
-	if dropoff == null:
-		push_warning("Pickup missing dropoff reference.")
-		return
-	available = false
-	mesh_instance.visible = false
-	collision_shape.set_deferred("disabled", true)
-	Jobs.start_job(dropoff)
-	PlayerData.set_carrying(item_name)
-	_update_prompt()
-
 func _update_prompt() -> void:
 	var can_show = player_in_range and _can_interact()
 	if can_show:
@@ -102,7 +77,7 @@ func _update_prompt() -> void:
 		UIEvents.unregister_interaction(self)
 
 func get_interaction_label() -> String:
-	return "Pick up %s" % item_name
+	return "Browse dispatch offers"
 
 func get_interaction_action() -> String:
 	return interact_action
@@ -118,7 +93,13 @@ func perform_interaction() -> void:
 	var can_proceed = await _await_interact_midpoint()
 	if not can_proceed:
 		return
-	_try_pickup()
+	_refresh_offers_if_possible()
+	UIEvents.request_package_menu(true)
+
+func _refresh_offers_if_possible() -> void:
+	if not _can_interact():
+		return
+	Jobs.refresh_job_offers(self)
 
 func _await_interact_midpoint() -> bool:
 	if player == null:
@@ -128,11 +109,6 @@ func _await_interact_midpoint() -> bool:
 	if player.has_method("play_interact_animation"):
 		return player.play_interact_animation()
 	return true
-
-func _refresh_dropoffs_from_jobs() -> void:
-	dropoffs.clear()
-	for site in Jobs.get_dropoff_sites():
-		dropoffs.append(site)
 
 func get_save_id() -> String:
 	return str(get_path())
