@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dm2gg6vvo7lfl"]
+[gd_scene load_steps=24 format=3 uid="uid://dm2gg6vvo7lfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="1_0klpl"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="1_1xcyt"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="8_8iuey"]
 [ext_resource type="PackedScene" uid="uid://bdejavnfqhbmg" path="res://scenes/world/pickup.tscn" id="8_teyvk"]
 [ext_resource type="Material" uid="uid://cso4f2iyuxpmc" path="res://demo/assets/materials/M_crystal_purple.tres" id="8_x326c"]
+[ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://addons/prototype_mini_bundle/prop_cube.tscn" id="12_o3pm5"]
+[ext_resource type="PackedScene" uid="uid://c5hkhu8upxsf7" path="res://addons/prototype_mini_bundle/prop_cylinder.tscn" id="13_2pyq1"]
+[ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/prototype_mini_bundle/prop_torus.tscn" id="14_2djtc"]
+[ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://addons/prototype_mini_bundle/prop_prism.tscn" id="15_m5pti"]
 
 [sub_resource type="Gradient" id="Gradient_1xcyt"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -96,7 +100,7 @@ size = Vector3(2, 1.2, 2.1000001)
 material = ExtResource("1_cl1x4")
 
 [node name="tower1_0" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -150.58891, -6.0914917, 97.99999)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -26.588913, -6.0914917, 86.99999)
 
 [node name="MainRoad" type="Node3D" parent="."]
 
@@ -5893,6 +5897,152 @@ material = ExtResource("1_cl1x4")
 
 [node name="Inn" parent="MainRoad" instance=ExtResource("1_0klpl")]
 transform = Transform3D(-0.86602545, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, -0.86602545, -24.24871, 0.16342956, -14)
+
+[node name="PropCube" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.926445, 0.5318503, -28.393095)
+
+[node name="PropCube12" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.926445, 0.5318503, -28.393095)
+
+[node name="PropCube13" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.926445, 0.5318503, -28.393095)
+
+[node name="PropCube14" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.926445, 0.5318503, -28.393095)
+
+[node name="PropCube15" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.926445, 0.5318503, -28.393095)
+
+[node name="PropCube16" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.926445, 0.5318503, -28.393095)
+
+[node name="PropCube17" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.926445, 0.5318503, -28.393095)
+
+[node name="PropCube18" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.926445, 0.5318503, -28.393095)
+
+[node name="PropCylinder" parent="." instance=ExtResource("13_2pyq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.926445, 0.5318503, -30.393097)
+skeleton = NodePath("../PropPrism")
+
+[node name="PropCylinder2" parent="." instance=ExtResource("13_2pyq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.926445, -0.46814972, -22.393097)
+skeleton = NodePath("../PropPrism")
+
+[node name="PropCylinder3" parent="." instance=ExtResource("13_2pyq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.926445, 0.5318503, -22.393097)
+skeleton = NodePath("../PropPrism")
+
+[node name="PropCylinder4" parent="." instance=ExtResource("13_2pyq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.926445, 1.0318501, -22.393097)
+skeleton = NodePath("../PropPrism")
+
+[node name="PropTorus" parent="PropCylinder4" instance=ExtResource("14_2djtc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, -1, 8.5)
+
+[node name="PropPrism" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.926445, 0.5318503, -37.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism2" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.926445, 0.5318503, -38.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism3" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.926445, 0.5318503, -39.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism4" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -17.926445, 0.5318503, -40.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism5" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -32.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism10" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -31.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism6" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -33.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism7" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -34.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism8" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -35.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropPrism9" parent="." instance=ExtResource("15_m5pti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.926445, 0.5318503, -36.393097)
+skeleton = NodePath("../PropCube22")
+
+[node name="PropCube22" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.926445, 0.5318503, -33.393097)
+
+[node name="PropCube19" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.926445, 0.5318503, -28.393095)
+
+[node name="PropCube20" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.926445, 0.5318503, -28.393095)
+
+[node name="PropCube21" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.926445, 0.5318503, -28.393095)
+
+[node name="PropCube2" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.126446, 0.5318503, -17.493095)
+
+[node name="PropCube3" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.5318503, -22.493095)
+
+[node name="PropCube4" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.5318503, -21.493095)
+
+[node name="PropCube5" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.5318503, -20.493095)
+
+[node name="PropCube6" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.5318503, -17.493095)
+
+[node name="PropCube7" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.5318503, -18.493095)
+
+[node name="PropCube8" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -18.493095)
+
+[node name="PropCube24" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 2.6318502, -19.493095)
+
+[node name="PropCube29" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 0.63185024, -25.493095)
+
+[node name="PropCube9" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -20.493095)
+
+[node name="PropCube23" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.426445, 2.5318503, -22.993095)
+
+[node name="PropCube25" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.426445, 0.5318503, -22.693094)
+
+[node name="PropCube26" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.426445, 1.5318503, -22.693094)
+
+[node name="PropCube27" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.426445, 2.5318503, -22.693094)
+
+[node name="PropCube28" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.426445, 3.5318503, -22.693094)
+
+[node name="PropCube10" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -21.493095)
+
+[node name="PropCube11" parent="." instance=ExtResource("12_o3pm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -22.493095)
 
 [editable path="MainRoad/Building7/DropoffSite"]
 [editable path="MainRoad/Building22/DropoffSite"]

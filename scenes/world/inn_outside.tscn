@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dg8oskfg6ije2" path="res://scripts/world/inn_interior.gd" id="1_ua573"]
 [ext_resource type="Material" uid="uid://ickkffutwcvo" path="res://demo/assets/materials/M_crystal_red.tres" id="2_7sgj7"]
-[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/planks.tres" id="3_ftmaf"]
+[ext_resource type="Material" uid="uid://dyk425xkp5jyl" path="res://assets/materials/retro-urban-kit/planks.tres" id="3_ftmaf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn1hl"]
 
