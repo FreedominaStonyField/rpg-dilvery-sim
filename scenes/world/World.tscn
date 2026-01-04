@@ -34,7 +34,7 @@ dawn_angle = -0.5
 night_angle = -171.6
 
 [node name="Player" parent="." instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.69684, 33.525993, -6.424218)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.95549, 0.039629526, -22.473682)
 floor_constant_speed = true
 floor_max_angle = 0.8552113
 LandingCooldownMode = "Clamp Speed"

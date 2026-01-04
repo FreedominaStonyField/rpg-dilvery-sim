@@ -98,18 +98,6 @@ material = ExtResource("1_cl1x4")
 [node name="tower1_0" parent="Building1" instance=ExtResource("1_1xcyt")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -150.58891, -6.0914917, 97.99999)
 
-[node name="tower1_1" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 16.411072, -6.0914917, 76.99999)
-
-[node name="tower1_2" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 178.41106, -6.0914917, -85.24951)
-
-[node name="tower1_3" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 156.41106, -6.0914917, 138.23154)
-
-[node name="tower1_4" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -130.58891, -6.0914917, -38.826183)
-
 [node name="MainRoad" type="Node3D" parent="."]
 
 [node name="Block2" type="CSGBox3D" parent="MainRoad"]
@@ -1367,9 +1355,9 @@ size = Vector3(7, 6, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
+transform = Transform3D(0.99999917, 0, -2.842171e-14, 0, 1, 0, 2.842171e-14, 0, 0.99999917, 1.932991, 1.5776747, 13.477722)
 use_collision = true
-size = Vector3(7, 4, 6)
+size = Vector3(7, 3, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block19"]
@@ -1999,10 +1987,10 @@ size = Vector3(5, 12, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Block22" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 71.465096, -0.045824938, 11.561821)
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 76.465096, -0.045824938, 11.561821)
 use_collision = true
 collision_mask = 3
-size = Vector3(35, 0.15535009, 56)
+size = Vector3(35, 0.15535009, 66)
 material = SubResource("StandardMaterial3D_o3pm5")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block22"]
@@ -2120,7 +2108,7 @@ size = Vector3(7, 4, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block22"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -22.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
 material = ExtResource("1_cl1x4")
@@ -2289,10 +2277,10 @@ size = Vector3(5, 12, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Block24" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 112.46509, -0.045824938, -38.438175)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 112.46509, -0.045824938, -37.938175)
 use_collision = true
 collision_mask = 3
-size = Vector3(35, 0.15535009, 56)
+size = Vector3(35, 0.15535009, 57)
 material = SubResource("StandardMaterial3D_o3pm5")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block24"]
@@ -3014,10 +3002,10 @@ size = Vector3(5, 12, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Block29" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -38.61292, -0.045824938, -127.81651)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -37.11292, -0.045824938, -129.31651)
 use_collision = true
 collision_mask = 3
-size = Vector3(35, 0.15535009, 56)
+size = Vector3(38, 0.15535009, 59)
 material = SubResource("StandardMaterial3D_o3pm5")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block29"]
@@ -5633,22 +5621,22 @@ use_collision = true
 size = Vector3(7, 0.8, 3)
 material = ExtResource("1_cl1x4")
 
-[node name="Building28" type="CSGBox3D" parent="MainRoad"]
+[node name="MikasDrugstore" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -52.09906, 6.8820305, -3.1172395)
 use_collision = true
 size = Vector3(8, 14, 6)
 material = ExtResource("1_cl1x4")
 
-[node name="DropoffSite" parent="MainRoad/Building28" instance=ExtResource("8_8iuey")]
+[node name="ShadyRoofDropoff" parent="MainRoad/MikasDrugstore" instance=ExtResource("8_8iuey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.40031528, -6)
 site_id = &"2f64be94-11d5-40dc-8d59-9a86816be1c8"
 display_name = "Shady Roof"
 
-[node name="Label3D" parent="MainRoad/Building28/DropoffSite" index="2"]
+[node name="Label3D" parent="MainRoad/MikasDrugstore/ShadyRoofDropoff" index="2"]
 visible = false
 text = "Shady Roof"
 
-[node name="SnapshotCamera" parent="MainRoad/Building28/DropoffSite" index="4"]
+[node name="SnapshotCamera" parent="MainRoad/MikasDrugstore/ShadyRoofDropoff" index="4"]
 transform = Transform3D(-0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, -0.70710677, 1.2727922, -0.4, 1.2727922)
 
 [node name="Building29" type="CSGBox3D" parent="MainRoad"]
@@ -5682,9 +5670,9 @@ size = Vector3(5.965332, 6, 5)
 material = ExtResource("1_cl1x4")
 
 [node name="Building34" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -3.1172395)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 1.3820305, -9.617239)
 use_collision = true
-size = Vector3(5, 6, 6)
+size = Vector3(5, 3, 10)
 material = ExtResource("1_cl1x4")
 
 [node name="Building35" type="CSGBox3D" parent="MainRoad"]
@@ -5778,9 +5766,9 @@ size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -137.46826, 2.8820305, 37.011833)
+transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -133.76028, 2.8820305, 31.385359)
 use_collision = true
-size = Vector3(5.965332, 6, 5)
+size = Vector3(15, 6, 5)
 material = ExtResource("1_cl1x4")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad"]
@@ -5908,4 +5896,4 @@ transform = Transform3D(-0.86602545, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, -0.
 
 [editable path="MainRoad/Building7/DropoffSite"]
 [editable path="MainRoad/Building22/DropoffSite"]
-[editable path="MainRoad/Building28/DropoffSite"]
+[editable path="MainRoad/MikasDrugstore/ShadyRoofDropoff"]
