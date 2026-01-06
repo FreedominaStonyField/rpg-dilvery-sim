@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://world"]
+[gd_scene load_steps=11 format=3 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bnmtxjtl03bj3" path="res://scripts/world/DayNightCycle.gd" id="2_252at"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://scenes/ui/HUD.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://scenes/world/ItemGiver.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dm2gg6vvo7lfl" path="res://town_bata_1.tscn" id="9_yr1n6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i1jm3"]
@@ -38,6 +39,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.95549, 0.039629526, -22.4
 floor_constant_speed = true
 floor_max_angle = 0.8552113
 LandingCooldownMode = "Clamp Speed"
+
+[node name="ItemGiver" parent="." instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.0, 0.6, -21.0)
 
 [node name="HUD" parent="." instance=ExtResource("3")]
 

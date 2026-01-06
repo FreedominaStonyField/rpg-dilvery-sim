@@ -118,7 +118,7 @@ func refresh_job_offers(pickup: Node3D) -> void:
 	if has_active_job():
 		_clear_job_offers()
 		return
-	if PlayerData.is_carrying():
+	if InventorySystem.has_delivery_item():
 		_clear_job_offers()
 		return
 	offer_pickup = pickup

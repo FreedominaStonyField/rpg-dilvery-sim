@@ -2,12 +2,14 @@
 
 This repo is a fast prototype. Code must be consistent and easy to extend tomorrow.
 
-## 1) Non-goals (Do NOT build)
+## 1) Current scope (Not hard limits)
+These describe the current prototype state, not permanent feature limits.
+If a task requests expanding beyond this list, update the list as part of the change.
 - No combat, no NPC AI, no dialogue trees
-- No saving/loading
-- No full inventory UI (HUD only)
-- No health/stamina/fall damage system today
-- No multi-job juggling today
+- No saving/loading system beyond current save hooks
+- Inventory is HUD-only (no full menu yet)
+- No health/stamina/fall damage system yet
+- No multi-job juggling yet
 
 ## 2) High-level architecture
 Use small single-responsibility scripts and communicate with **signals**.

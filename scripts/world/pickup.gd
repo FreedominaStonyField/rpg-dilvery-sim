@@ -1,6 +1,7 @@
 extends Area3D
 
 @export var item_name: String = "Parcel"
+@export var item_description: String = "Delivery parcel."
 @export var interact_action: String = "interact"
 
 @onready var mesh_instance = $MeshInstance3D
@@ -19,7 +20,7 @@ func _ready() -> void:
 	Jobs.job_available.connect(_on_job_available)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.pickup_consumed.connect(_on_pickup_consumed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
@@ -59,13 +60,13 @@ func _on_pickup_consumed(pickup: Node3D) -> void:
 	available = false
 	mesh_instance.visible = false
 	collision_shape.set_deferred("disabled", true)
-	PlayerData.set_carrying(item_name)
+	InventorySystem.add_delivery_item(item_name, item_description)
 	_update_prompt()
 
 func _can_interact() -> bool:
 	if not available:
 		return false
-	if Jobs.has_active_job() or PlayerData.is_carrying():
+	if Jobs.has_active_job() or InventorySystem.has_delivery_item():
 		return false
 	return true
 

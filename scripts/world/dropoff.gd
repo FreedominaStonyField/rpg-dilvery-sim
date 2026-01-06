@@ -14,7 +14,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.job_completed.connect(_on_job_state_changed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
@@ -38,12 +38,12 @@ func _can_interact() -> bool:
 		return false
 	if not _matches_current_dropoff():
 		return false
-	if not PlayerData.is_carrying():
+	if not InventorySystem.has_delivery_item():
 		return false
 	return true
 
 func _deliver() -> void:
-	PlayerData.clear_carrying()
+	InventorySystem.consume_delivery_item()
 	var reward_amount = Jobs.get_active_reward()
 	if reward_amount <= 0:
 		reward_amount = reward

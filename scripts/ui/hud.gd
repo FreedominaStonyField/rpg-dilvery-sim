@@ -7,6 +7,7 @@ const MESSAGE_HOLD = 5.5
 @onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
 @onready var carrying_label: Label = $PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid/CarryingValue
 @onready var package_menu: Control = $PackageCenter/PackageMenu
+@onready var inventory_menu: Control = $InventoryCenter/InventoryMenu
 @onready var package_fade_timer: Timer = $PackageFadeTimer
 @onready var completion_audio: AudioStreamPlayer = $PackageCenter/PackageMenu/CompletionAudioPlayer
 @onready var notification_container: VBoxContainer = $NotificationContainer
@@ -27,6 +28,7 @@ const MESSAGE_HOLD = 5.5
 var in_transition: bool = false
 var transition_tween: Tween
 var package_pause_active: bool = false
+var inventory_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
 var stamina_source: Node
 var speed_source: Node
@@ -41,7 +43,7 @@ const DAY_END_MINUTES = 24 * 60
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	PlayerData.money_changed.connect(_on_money_changed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
 	TimeSystem.time_changed.connect(_on_time_changed)
 	TimeSystem.new_morning.connect(_on_new_morning)
 	TimeSystem.mugged.connect(_on_mugged)
@@ -51,6 +53,7 @@ func _ready() -> void:
 	UIEvents.interaction_registered.connect(_on_interaction_registered)
 	UIEvents.interaction_unregistered.connect(_on_interaction_unregistered)
 	UIEvents.package_menu_requested.connect(_on_package_menu_requested)
+	UIEvents.inventory_menu_requested.connect(_on_inventory_menu_requested)
 	GameState.mode_changed.connect(_on_mode_changed)
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_completed)
@@ -59,10 +62,11 @@ func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_pressed)
 	interaction_list.item_selected.connect(_on_interaction_item_selected)
 	_on_money_changed(PlayerData.money)
-	_on_carrying_changed(PlayerData.carrying_item)
+	_on_carrying_changed(InventorySystem.get_delivery_item_name())
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
 	package_menu.visible = false
+	inventory_menu.visible = false
 	fade_rect.visible = false
 	fade_rect.color = Color(0, 0, 0, 0)
 	transition_label.visible = false
@@ -147,18 +151,30 @@ func show_message(message: String, duration: float = 5) -> void:
 	tween.tween_callback(label.queue_free)
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
-	pause_menu.visible = mode == GameState.Mode.PAUSED and not in_transition and not package_pause_active
+	pause_menu.visible = (
+		mode == GameState.Mode.PAUSED
+		and not in_transition
+		and not package_pause_active
+		and not inventory_pause_active
+	)
 	if mode == GameState.Mode.PLAYING and package_pause_active:
 		package_pause_active = false
 		package_menu.visible = false
 		package_menu.modulate = Color(1, 1, 1, 1)
+	if mode == GameState.Mode.PLAYING and inventory_pause_active:
+		inventory_pause_active = false
+		inventory_menu.visible = false
 	if mode != GameState.Mode.PLAYING and not package_pause_active:
 		package_menu.visible = false
 		package_menu.modulate = Color(1, 1, 1, 1)
 		if package_menu.has_method("clear_override"):
 			package_menu.call("clear_override")
+	if mode != GameState.Mode.PLAYING and not inventory_pause_active:
+		inventory_menu.visible = false
 	if mode != GameState.Mode.PAUSED and package_pause_active:
 		package_pause_active = false
+	if mode != GameState.Mode.PAUSED and inventory_pause_active:
+		inventory_pause_active = false
 	_update_interaction_visibility()
 
 func _on_resume_pressed() -> void:
@@ -202,7 +218,7 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 	transition_tween.tween_callback(func() -> void:
 		if is_mugged:
 			PlayerData.reset_money()
-			PlayerData.clear_carrying()
+			InventorySystem.clear_delivery_item()
 			Jobs.clear_active_job()
 		TimeSystem.start_new_day()
 	)
@@ -223,6 +239,13 @@ func _input(event: InputEvent) -> void:
 		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
 	if toggle_pressed:
 		_set_package_menu_visible(not package_menu.visible)
+		get_viewport().set_input_as_handled()
+		return
+	var inventory_pressed = event.is_action_pressed("toggle_inventory_menu")
+	if not inventory_pressed and event is InputEventKey:
+		inventory_pressed = event.pressed and event.keycode == Key.KEY_I
+	if inventory_pressed:
+		_set_inventory_menu_visible(not inventory_menu.visible)
 		get_viewport().set_input_as_handled()
 
 func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
@@ -249,7 +272,7 @@ func _get_action_label(action: String) -> String:
 func _unhandled_input(event: InputEvent) -> void:
 	if interaction_entries.is_empty():
 		return
-	if in_transition or package_pause_active or not GameState.is_playing():
+	if in_transition or package_pause_active or inventory_pause_active or not GameState.is_playing():
 		return
 	var wheel_event = event as InputEventMouseButton
 	if wheel_event and wheel_event.pressed:
@@ -383,6 +406,8 @@ func _set_package_menu_visible(visible: bool) -> void:
 		return
 	if visible and not GameState.is_playing() and not package_pause_active:
 		return
+	if visible and inventory_pause_active:
+		_set_inventory_menu_visible(false)
 	if package_flash_timer:
 		package_flash_timer.timeout.disconnect(_on_package_flash_timeout)
 		package_flash_timer = null
@@ -394,6 +419,22 @@ func _set_package_menu_visible(visible: bool) -> void:
 	package_menu.modulate = Color(1, 1, 1, 1)
 	if package_menu.has_method("clear_override"):
 		package_menu.call("clear_override")
+	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
+
+func _on_inventory_menu_requested(visible: bool) -> void:
+	_set_inventory_menu_visible(visible)
+
+func _set_inventory_menu_visible(visible: bool) -> void:
+	if in_transition:
+		return
+	if visible and not GameState.is_playing() and not inventory_pause_active:
+		return
+	if visible and package_pause_active:
+		_set_package_menu_visible(false)
+	inventory_menu.visible = visible
+	inventory_pause_active = visible
+	if inventory_menu.has_method("focus_default") and visible:
+		inventory_menu.call("focus_default")
 	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
 
 func _play_completion_sfx(job: JobRecord) -> void:
@@ -445,7 +486,9 @@ func _refresh_interaction_menu() -> void:
 	_update_interaction_hint()
 
 func _update_interaction_visibility() -> void:
-	var should_show = GameState.is_playing() and not package_pause_active and not in_transition
+	var should_show = GameState.is_playing()
+	should_show = should_show and not package_pause_active and not inventory_pause_active
+	should_show = should_show and not in_transition
 	should_show = should_show and not interaction_entries.is_empty()
 	interaction_panel.visible = should_show
 	if should_show:

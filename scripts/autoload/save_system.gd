@@ -158,7 +158,8 @@ func _build_autoload_payload() -> Dictionary:
 		"game_state": GameState.to_dict(),
 		"time_system": TimeSystem.to_dict(),
 		"jobs": Jobs.to_dict(),
-		"player_data": PlayerData.to_dict()
+		"player_data": PlayerData.to_dict(),
+		"inventory_system": InventorySystem.to_dict()
 	}
 
 func _build_player_payload() -> Dictionary:
@@ -192,6 +193,7 @@ func _apply_save_data(data: Dictionary, path: String) -> void:
 	playtime_seconds = float(meta.get("playtime_seconds", playtime_seconds))
 	var autoloads = data.get("autoloads", {})
 	PlayerData.from_dict(autoloads.get("player_data", {}))
+	InventorySystem.from_dict(autoloads.get("inventory_system", {}))
 	TimeSystem.from_dict(autoloads.get("time_system", {}))
 	Jobs.from_dict(autoloads.get("jobs", {}))
 	var player_payload = data.get("player", {})
