@@ -12,12 +12,7 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Inventory menu is lightweight (view + discard) and pauses play
 - Save hooks run on sleep and job completion
 
-## Non-Goals
-- No combat, NPC AI, or dialogue trees
-- No full save/load slot management beyond current hooks
-- No equipment, crafting, or item progression systems
-- No health or fall damage systems
-- No multi-job juggling
+
 
 ## Requirements
 - Godot Engine 4.5.1
