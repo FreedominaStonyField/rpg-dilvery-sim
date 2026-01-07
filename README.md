@@ -66,14 +66,6 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
   - `autoload/`, `ui/`, `world/`, `player/`
 - `assets/`, `audio/`
 
-## Prototype Gameplay Rules
-- One active job at a time
-- Curfew: if outside, short timer then mugged
-- Safe zone prevents mugging
-- Sleeping sets morning, saves money, resumes play
-- Job completion pops up the journal entry, fades out, and can play per-dropoff audio
-- Dropoff 3D labels use `display_name` when set
-
 ## Testing Checklist
 - Player can move and camera behaves
 - Pickup updates carrying state
