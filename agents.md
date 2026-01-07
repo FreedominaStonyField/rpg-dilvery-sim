@@ -7,8 +7,9 @@ These describe the current prototype state, not permanent feature limits.
 If a task requests expanding beyond this list, update the list as part of the change.
 - No combat, no NPC AI, no dialogue trees
 - No saving/loading system beyond current save hooks
-- Inventory is HUD-only (no full menu yet)
-- No health/stamina/fall damage system yet
+- Inventory is lightweight (view + discard only)
+- Stamina is a HUD placeholder (no exhaustion penalties yet)
+- No health/fall damage system yet
 - No multi-job juggling yet
 
 ## 2) High-level architecture
@@ -22,7 +23,9 @@ and small helper scripts instead of deep class trees.
 - `TimeSystem`: day progression + curfew events
 - `Jobs`: manages the single active delivery job
 - `PlayerData`: money + carrying state
+- `InventorySystem`: delivery item tracking + simple inventory list
 - `UIEvents`: one-line event bus for HUD notifications (optional but recommended)
+- `SaveSystem`: save hooks for sleep and job completion
 
 No other singleton globals.
 
@@ -89,7 +92,16 @@ Every scene should have a script ONLY if it contains logic.
 - Inn:
 - "Sleep" sets morning, saves money, and resumes play
 
-## 8) Testing discipline
+## 8) Current systems and intended use
+- `GameState` gates input; menus pause play and show the mouse cursor.
+- `TimeSystem` controls day time, curfew, and morning reset.
+- `Jobs` builds offers at pickups, tracks the active job, and emits snapshots.
+- `PlayerData` owns money and notifies HUD updates.
+- `InventorySystem` owns the delivery item plus a simple inventory list.
+- `UIEvents` is the UI event bus for prompts, menus, and notifications.
+- `SaveSystem` performs auto-save hooks on sleep and job completion.
+
+## 9) Testing discipline
 Every change must keep these working:
 - Player can move + camera behaves
 - Pick up item -> carrying state updates
@@ -97,6 +109,6 @@ Every change must keep these working:
 - Curfew mug -> money resets -> morning
 - Pause toggles without breaking input
 
-## 9) Output format for codegen agents
+## 10) Output format for codegen agents
 When generating code, ALWAYS output:
 1) Summary of systems and methods to test each part.

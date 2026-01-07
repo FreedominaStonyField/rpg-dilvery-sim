@@ -38,17 +38,15 @@ func _can_interact() -> bool:
 		return false
 	if not _matches_current_dropoff():
 		return false
-	if not InventorySystem.has_delivery_item():
+	if not _has_matching_delivery_item():
 		return false
 	return true
 
 func _deliver() -> void:
-	InventorySystem.consume_delivery_item()
-	var reward_amount = Jobs.get_active_reward()
+	var reward_amount = Jobs.complete_active_job_for_dropoff(_get_dropoff_node())
 	if reward_amount <= 0:
 		reward_amount = reward
-	PlayerData.add_money(reward_amount)
-	Jobs.complete_job()
+		PlayerData.add_money(reward_amount)
 	UIEvents.show_message("Delivered! +$%d" % reward_amount)
 	_update_prompt()
 
@@ -109,3 +107,22 @@ func _matches_current_dropoff() -> bool:
 	if dropoff_site != null:
 		return Jobs.current_dropoff == dropoff_site
 	return Jobs.current_dropoff == self
+
+func _has_matching_delivery_item() -> bool:
+	var item = Jobs.get_active_delivery_item()
+	if item.is_empty():
+		return false
+	var meta = item.get("meta", {})
+	if typeof(meta) != TYPE_DICTIONARY:
+		return false
+	return str(meta.get("dropoff_site_id", "")) == _get_dropoff_site_id()
+
+func _get_dropoff_site_id() -> String:
+	if dropoff_site != null and dropoff_site is DropoffSite:
+		return String((dropoff_site as DropoffSite).site_id)
+	if dropoff_site != null:
+		return dropoff_site.name
+	return name
+
+func _get_dropoff_node() -> Node3D:
+	return dropoff_site if dropoff_site != null else self

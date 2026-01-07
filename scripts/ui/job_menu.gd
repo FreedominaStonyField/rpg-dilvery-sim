@@ -29,10 +29,47 @@ func _ready() -> void:
 	Jobs.job_offers_updated.connect(_on_job_offers_updated)
 	Jobs.jobs_restored.connect(_on_jobs_restored)
 	offers_list.item_activated.connect(_on_offer_activated)
+	mouse_filter = Control.MOUSE_FILTER_STOP
+	offers_list.focus_mode = Control.FOCUS_ALL
+	offers_list.mouse_filter = Control.MOUSE_FILTER_STOP
+	completed_list.mouse_filter = Control.MOUSE_FILTER_STOP
 	_configure_snapshot_rect()
 	_refresh()
 	_refresh_completed_list()
 	_refresh_offers()
+
+func focus_default() -> void:
+	if offers_list.get_item_count() > 0:
+		offers_list.grab_focus()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not visible:
+		return
+	var wheel_event := event as InputEventMouseButton
+	if wheel_event and wheel_event.pressed:
+		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_move_offer_selection(-1)
+			get_viewport().set_input_as_handled()
+			return
+		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_move_offer_selection(1)
+			get_viewport().set_input_as_handled()
+			return
+	if event.is_action_pressed("move_forward") or event.is_action_pressed("ui_up"):
+		_move_offer_selection(-1)
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("move_backward") or event.is_action_pressed("ui_down"):
+		_move_offer_selection(1)
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("ui_accept"):
+		_activate_selected_offer()
+		get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("ui_cancel"):
+		UIEvents.request_package_menu(false)
+		get_viewport().set_input_as_handled()
 
 func _refresh() -> void:
 	if override_job != null:
@@ -170,6 +207,23 @@ func _on_offer_activated(index: int) -> void:
 
 func _on_job_offers_updated() -> void:
 	_refresh_offers()
+
+func _move_offer_selection(delta: int) -> void:
+	if offers_list.get_item_count() == 0:
+		return
+	var selected = offers_list.get_selected_items()
+	var index = selected[0] if selected.size() > 0 else 0
+	index = clamp(index + delta, 0, offers_list.get_item_count() - 1)
+	offers_list.select(index)
+	if offers_list.has_method("ensure_current_is_visible"):
+		offers_list.ensure_current_is_visible()
+
+func _activate_selected_offer() -> void:
+	if offers_list.get_item_count() == 0:
+		return
+	var selected = offers_list.get_selected_items()
+	var index = selected[0] if selected.size() > 0 else 0
+	_on_offer_activated(index)
 
 func _get_job_display_name(job: JobRecord) -> String:
 	if job == null:

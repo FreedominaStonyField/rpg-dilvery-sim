@@ -141,8 +141,7 @@ func _build_save_payload(tag: String) -> Dictionary:
 
 func _build_meta(tag: String) -> Dictionary:
 	var active_name = ""
-	if Jobs.active_job != null:
-		active_name = Jobs.active_job.display_name
+	active_name = Jobs.get_active_job_display_name()
 	return {
 		"tag": tag,
 		"timestamp": Time.get_datetime_string_from_system(),

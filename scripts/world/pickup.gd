@@ -60,7 +60,6 @@ func _on_pickup_consumed(pickup: Node3D) -> void:
 	available = false
 	mesh_instance.visible = false
 	collision_shape.set_deferred("disabled", true)
-	InventorySystem.add_delivery_item(item_name, item_description)
 	_update_prompt()
 
 func _can_interact() -> bool:

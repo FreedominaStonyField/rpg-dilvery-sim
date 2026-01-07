@@ -75,6 +75,9 @@ func _on_item_activated(_index: int) -> void:
 func _on_discard_pressed() -> void:
 	if selected_item_id == "":
 		return
+	if not InventorySystem.can_discard(selected_item_id):
+		UIEvents.show_message("You can't discard delivery items.")
+		return
 	InventorySystem.discard_item(selected_item_id)
 	UIEvents.show_message("Discarded item.")
 

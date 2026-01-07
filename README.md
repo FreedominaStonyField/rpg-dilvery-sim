@@ -7,14 +7,16 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - One item type and one active job at a time
 - Curfew system with mugging if outside the safe zone
 - Inn for sleeping to advance time
-- Courier journal shows completed jobs with snapshot + hint history
+- Courier journal shows active job, offers, and completed jobs with snapshots
 - Dropoff snapshots use SubViewport capture sized to the player viewport
+- Inventory menu is lightweight (view + discard) and pauses play
+- Save hooks run on sleep and job completion
 
 ## Non-Goals
 - No combat, NPC AI, or dialogue trees
-- No save/load system
-- No full inventory UI (HUD only)
-- No health, stamina, or fall damage
+- No full save/load slot management beyond current hooks
+- No equipment, crafting, or item progression systems
+- No health or fall damage systems
 - No multi-job juggling
 
 ## Requirements
@@ -30,7 +32,8 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Jump: Space
 - Interact: E
 - Pause: Esc
-- Package menu: Tab
+- Package menu (Courier Journal): Tab
+- Inventory menu: I
 - Unstuck: U
 
 ## Architecture Notes
@@ -41,8 +44,19 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
   - `TimeSystem`: day progression and curfew events
   - `Jobs`: single active delivery job
   - `PlayerData`: money and carrying state
+  - `InventorySystem`: delivery item tracking + simple inventory list
   - `UIEvents`: HUD event bus
+  - `SaveSystem`: auto-save hooks for sleep and jobs
 - Job completion data is stored as `JobRecord` resources for reuse in UI/history.
+
+## Systems and Intended Use
+- `GameState`: gate input and UI; menus pause play and set mouse visible.
+- `TimeSystem`: advances day time, fires curfew events, and resets on sleep.
+- `Jobs`: builds job offers, starts the active job, tracks completion snapshots.
+- `PlayerData`: stores money and emits change signals for HUD updates.
+- `InventorySystem`: stores the delivery item and simple inventory list (discardable only).
+- `UIEvents`: central UI message bus for prompts, menu toggles, and notifications.
+- `SaveSystem`: saves current money/job state on sleep and job completion.
 
 ## Key Scenes
 - `scenes/ui/MainMenu.tscn`: main menu entry

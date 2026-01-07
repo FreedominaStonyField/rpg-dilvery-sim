@@ -42,6 +42,9 @@ const DAY_END_MINUTES = 24 * 60
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	package_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	inventory_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	PlayerData.money_changed.connect(_on_money_changed)
 	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
 	TimeSystem.time_changed.connect(_on_time_changed)
@@ -419,6 +422,10 @@ func _set_package_menu_visible(visible: bool) -> void:
 	package_menu.modulate = Color(1, 1, 1, 1)
 	if package_menu.has_method("clear_override"):
 		package_menu.call("clear_override")
+	if visible and package_menu.has_method("focus_default"):
+		package_menu.call("focus_default")
+	if visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
 
 func _on_inventory_menu_requested(visible: bool) -> void:
@@ -435,6 +442,8 @@ func _set_inventory_menu_visible(visible: bool) -> void:
 	inventory_pause_active = visible
 	if inventory_menu.has_method("focus_default") and visible:
 		inventory_menu.call("focus_default")
+	if visible:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
 
 func _play_completion_sfx(job: JobRecord) -> void:
