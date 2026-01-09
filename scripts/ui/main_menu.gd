@@ -17,6 +17,8 @@ func _ready() -> void:
 	_refresh_slot_list()
 
 func _on_start_pressed() -> void:
+	Jobs.clear_active_job()
+	PlayerData.clear_carrying()
 	GameState.set_mode(GameState.Mode.PLAYING)
 	get_tree().change_scene_to_file("res://scenes/world/World.tscn")
 
