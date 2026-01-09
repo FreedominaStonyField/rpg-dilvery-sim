@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dm2gg6vvo7lfl"]
+[gd_scene load_steps=27 format=3 uid="uid://dm2gg6vvo7lfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="1_0klpl"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="1_1xcyt"]
@@ -11,8 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="8_8iuey"]
 [ext_resource type="PackedScene" uid="uid://bdejavnfqhbmg" path="res://scenes/world/pickup.tscn" id="8_teyvk"]
 [ext_resource type="Material" uid="uid://cso4f2iyuxpmc" path="res://demo/assets/materials/M_crystal_purple.tres" id="8_x326c"]
+[ext_resource type="Material" uid="uid://d0hyi5n6ng25w" path="res://demo/assets/materials/M_rock23_black_tp.tres" id="11_m5pti"]
+[ext_resource type="Material" uid="uid://bsuvtf06hoayt" path="res://assets/materials/retro-urban-kit/metal.tres" id="12_jc0h0"]
 [ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://addons/prototype_mini_bundle/prop_cube.tscn" id="12_o3pm5"]
 [ext_resource type="PackedScene" uid="uid://c5hkhu8upxsf7" path="res://addons/prototype_mini_bundle/prop_cylinder.tscn" id="13_2pyq1"]
+[ext_resource type="Material" uid="uid://dfd2g23p4e26" path="res://assets/materials/retro-urban-kit/dirt.tres" id="13_jc0h0"]
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/prototype_mini_bundle/prop_torus.tscn" id="14_2djtc"]
 [ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://addons/prototype_mini_bundle/prop_prism.tscn" id="15_m5pti"]
 
@@ -5094,6 +5097,18 @@ use_collision = true
 size = Vector3(7, 5, 6)
 material = ExtResource("1_cl1x4")
 
+[node name="MoonlitAlleyDropoff" parent="MainRoad/Building15" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
+site_id = &"3fcfab1d-7ef4-492f-8f1a-a67613ef5dbb"
+display_name = "Moonlit Alley"
+
+[node name="Label3D" parent="MainRoad/Building15/MoonlitAlleyDropoff" index="2"]
+visible = false
+text = "Moonlit Alley"
+
+[node name="SnapshotCamera" parent="MainRoad/Building15/MoonlitAlleyDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+
 [node name="Building16" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -8.131206, 2.4820304, -20.186563)
 use_collision = true
@@ -5117,6 +5132,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -22.26207, 
 use_collision = true
 size = Vector3(13, 0.5, 19)
 material = ExtResource("5_x326c")
+
+[node name="HarborsEndDropoff" parent="MainRoad/Building18" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, 1.4, 4.103241)
+site_id = &"d33ca587-35ce-4a72-8316-9bc0e1c6cd76"
+display_name = "Harbors End"
+
+[node name="Label3D" parent="MainRoad/Building18/HarborsEndDropoff" index="2"]
+visible = false
+text = "Harbors End"
+
+[node name="SnapshotCamera" parent="MainRoad/Building18/HarborsEndDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building117" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -27.76207, 0.1320304, 3.0155787)
@@ -5155,6 +5182,18 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -34.518005, 6.0820303, 20.915668)
 use_collision = true
 size = Vector3(3, 3, 4)
+
+[node name="AshenAtriumDropoff" parent="MainRoad/Building50" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 117.30344, -4.9434824, 21.446386)
+site_id = &"32624ac2-4764-4af4-b863-3bc7f6169c16"
+display_name = "Ashen Atrium"
+
+[node name="Label3D" parent="MainRoad/Building50/AshenAtriumDropoff" index="2"]
+visible = false
+text = "Ashen Atrium"
+
+[node name="SnapshotCamera" parent="MainRoad/Building50/AshenAtriumDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building51" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -75.66626, 1.53185, 20.415668)
@@ -5253,7 +5292,7 @@ size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="DropoffSite" parent="MainRoad/Building7" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
+transform = Transform3D(0.9659258, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.9659258, 37.62935, -2.4, -2.9678268)
 site_id = &"018e7879-b5ff-444b-939d-6467fd129456"
 display_name = "CornerStore"
 
@@ -5270,6 +5309,18 @@ use_collision = true
 size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
 
+[node name="GildedLanternDropoff" parent="MainRoad/Building10" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 109.75424, -1.6, 8.345882)
+site_id = &"05a592a1-3618-4322-81da-46b80304668d"
+display_name = "Gilded Lantern"
+
+[node name="Label3D" parent="MainRoad/Building10/GildedLanternDropoff" index="2"]
+visible = false
+text = "Gilded Lantern"
+
+[node name="SnapshotCamera" parent="MainRoad/Building10/GildedLanternDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+
 [node name="Building11" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -35.635242, 2.8820305, -10.458412)
 use_collision = true
@@ -5281,6 +5332,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -35.418007,
 use_collision = true
 size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
+
+[node name="RustyKettleDropoff" parent="MainRoad/Building12" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
+site_id = &"bc4ea780-1f35-4640-8a4e-ce173b816f3f"
+display_name = "Rusty Kettle"
+
+[node name="Label3D" parent="MainRoad/Building12/RustyKettleDropoff" index="2"]
+visible = false
+text = "Rusty Kettle"
+
+[node name="SnapshotCamera" parent="MainRoad/Building12/RustyKettleDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building13" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -35.418007, 2.8820305, 4.1920214)
@@ -5330,11 +5393,59 @@ use_collision = true
 size = Vector3(7, 5, 8)
 material = ExtResource("1_cl1x4")
 
+[node name="BlueThistleDropoff" parent="MainRoad/Building60" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
+site_id = &"d538775a-5799-435a-900f-057978e4875d"
+display_name = "Blue Thistle"
+
+[node name="Label3D" parent="MainRoad/Building60/BlueThistleDropoff" index="2"]
+visible = false
+text = "Blue Thistle"
+
+[node name="SnapshotCamera" parent="MainRoad/Building60/BlueThistleDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+
 [node name="Building61" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -21.418007, 6.0318503, -42.935356)
 use_collision = true
 size = Vector3(5, 12, 6)
 material = ExtResource("1_cl1x4")
+
+[node name="waypoint" type="CSGBox3D" parent="MainRoad"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -8.418008, 10.98203, -28.235357)
+use_collision = true
+size = Vector3(2, 12, 2)
+material = ExtResource("3_cl1x4")
+
+[node name="waypoint2" type="CSGBox3D" parent="MainRoad"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 62.581985, 10.53185, -1.2353591)
+use_collision = true
+size = Vector3(2, 9, 2)
+material = ExtResource("11_m5pti")
+
+[node name="waypoint2" type="CSGBox3D" parent="MainRoad/waypoint2"]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -14.418007, -6.000001, -88.235344)
+use_collision = true
+size = Vector3(2, 9, 2)
+material = ExtResource("11_m5pti")
+
+[node name="waypoint3" type="CSGBox3D" parent="MainRoad"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 128.58197, 10.53185, 82.76463)
+use_collision = true
+size = Vector3(2, 9, 2)
+material = ExtResource("12_jc0h0")
+
+[node name="waypoint4" type="CSGBox3D" parent="MainRoad"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 165.3999, 9.53185, -66.96483)
+use_collision = true
+size = Vector3(2, 7, 17)
+material = ExtResource("12_jc0h0")
+
+[node name="waypoint5" type="CSGBox3D" parent="MainRoad"]
+transform = Transform3D(0.25881904, 0, -0.96592575, 0, 1, 0, 0.96592575, 0, 0.25881904, -171.83212, 16.031849, -130.46483)
+use_collision = true
+size = Vector3(1, 20, 4)
+material = ExtResource("13_jc0h0")
 
 [node name="Building62" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -5.281205, 2.4820304, -89.7649)
@@ -5371,6 +5482,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -58.036873,
 use_collision = true
 size = Vector3(7, 5, 8)
 material = ExtResource("1_cl1x4")
+
+[node name="BrassHarborDropoff" parent="MainRoad/Building67" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.49999997, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, 0.49999997, -4.248868, -1.6, 4.603241)
+site_id = &"7ef63220-6a28-49d7-b223-df4d13718ddd"
+display_name = "Brass Harbor"
+
+[node name="Label3D" parent="MainRoad/Building67/BrassHarborDropoff" index="2"]
+visible = false
+text = "Brass Harbor"
+
+[node name="SnapshotCamera" parent="MainRoad/Building67/BrassHarborDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building68" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -65.92895, 2.8820305, -42.935356)
@@ -5413,6 +5536,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 25.133297, 
 use_collision = true
 size = Vector3(7, 5, 8)
 material = ExtResource("1_cl1x4")
+
+[node name="CinderGateDropoff" parent="MainRoad/Building74" instance=ExtResource("8_8iuey")]
+transform = Transform3D(-0.9659257, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, -0.9659257, -4.3828425, -1.6, 2.3711903)
+site_id = &"38e4432d-249f-40e8-82e3-22a1409dd3cc"
+display_name = "Cinder Gate"
+
+[node name="Label3D" parent="MainRoad/Building74/CinderGateDropoff" index="2"]
+visible = false
+text = "Cinder Gate"
+
+[node name="SnapshotCamera" parent="MainRoad/Building74/CinderGateDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building75" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 17.241222, 3.03185, -42.935356)
@@ -5510,6 +5645,18 @@ use_collision = true
 size = Vector3(7, 5, 6)
 material = ExtResource("1_cl1x4")
 
+[node name="WhisperedCourtDropoff" parent="MainRoad/Building90" instance=ExtResource("8_8iuey")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3.3828428, -1.6, 4.103241)
+site_id = &"d9a6e582-c1fc-4e13-b057-317bad960a64"
+display_name = "Whispered Court"
+
+[node name="Label3D" parent="MainRoad/Building90/WhisperedCourtDropoff" index="2"]
+visible = false
+text = "Whispered Court"
+
+[node name="SnapshotCamera" parent="MainRoad/Building90/WhisperedCourtDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+
 [node name="Building91" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 6.2412243, 3.03185, 38.709984)
 use_collision = true
@@ -5577,7 +5724,7 @@ size = Vector3(5, 7.5, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="DropoffSite" parent="MainRoad/Building22" instance=ExtResource("8_8iuey")]
-transform = Transform3D(-0.13317323, 0, 0.99109286, 0, 1, 0, -0.99109286, 0, -0.13317323, 2.8918605, -2.1273015, 1.9409904)
+transform = Transform3D(-0.6108778, 0, 0.791725, 0, 1, 0, -0.791725, 0, -0.6108778, 135.28381, -2.9273014, -100.35387)
 site_id = &"34f9c9b4-fa1d-4924-9121-6b072cecd64f"
 display_name = "Backbone ally"
 
@@ -5600,6 +5747,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -76.666275,
 use_collision = true
 size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
+
+[node name="CopperFinchDropoff" parent="MainRoad/Building24" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.49999997, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, 0.49999997, -3.523035, -1.9000001, 3.2604208)
+site_id = &"a180c4ba-9bee-4f02-93fe-f6169b135a6d"
+display_name = "Copper Finch"
+
+[node name="Label3D" parent="MainRoad/Building24/CopperFinchDropoff" index="2"]
+visible = false
+text = "Copper Finch"
+
+[node name="SnapshotCamera" parent="MainRoad/Building24/CopperFinchDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building25" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -73.666275, 2.8820305, -25.913876)
@@ -5655,6 +5814,18 @@ use_collision = true
 size = Vector3(23, 6, 7.6)
 material = ExtResource("1_cl1x4")
 
+[node name="WakingOwlDropoff" parent="MainRoad/Building30" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.8660253, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, 0.8660253, -3.3828428, -1.9000001, 8.345881)
+site_id = &"c46e4da2-a7bc-4526-8e19-6bfaf7c1c318"
+display_name = "Waking Owl"
+
+[node name="Label3D" parent="MainRoad/Building30/WakingOwlDropoff" index="2"]
+visible = false
+text = "Waking Owl"
+
+[node name="SnapshotCamera" parent="MainRoad/Building30/WakingOwlDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+
 [node name="Building31" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -55.59906, 2.1320305, -25.613876)
 use_collision = true
@@ -5672,6 +5843,18 @@ transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.988
 use_collision = true
 size = Vector3(5.965332, 6, 5)
 material = ExtResource("1_cl1x4")
+
+[node name="SaltwindStoopDropoff" parent="MainRoad/Building33" instance=ExtResource("8_8iuey")]
+transform = Transform3D(-0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, -0.8660253, -43.990536, -1.5999985, -107.523674)
+site_id = &"66f719e1-a132-4789-bb86-5e80c877fc1d"
+display_name = "Saltwind Stoop"
+
+[node name="Label3D" parent="MainRoad/Building33/SaltwindStoopDropoff" index="2"]
+visible = false
+text = "Saltwind Stoop"
+
+[node name="SnapshotCamera" parent="MainRoad/Building33/SaltwindStoopDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building34" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 1.3820305, -9.617239)
@@ -5720,6 +5903,18 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 
 use_collision = true
 size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
+
+[node name="SunkenStepsDropoff" parent="MainRoad/Building41" instance=ExtResource("8_8iuey")]
+transform = Transform3D(0.258819, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.258819, -2.6063857, -1.6, 10.726021)
+site_id = &"ce0b9833-5197-4b47-8020-6a3908f82d2e"
+display_name = "Sunken Steps"
+
+[node name="Label3D" parent="MainRoad/Building41/SunkenStepsDropoff" index="2"]
+visible = false
+text = "Sunken Steps"
+
+[node name="SnapshotCamera" parent="MainRoad/Building41/SunkenStepsDropoff" index="4"]
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
 
 [node name="Building42" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 67.19202)
@@ -6044,6 +6239,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -21.49
 [node name="PropCube11" parent="." instance=ExtResource("12_o3pm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -22.493095)
 
+[editable path="MainRoad/Building15/MoonlitAlleyDropoff"]
+[editable path="MainRoad/Building18/HarborsEndDropoff"]
+[editable path="MainRoad/Building50/AshenAtriumDropoff"]
 [editable path="MainRoad/Building7/DropoffSite"]
+[editable path="MainRoad/Building10/GildedLanternDropoff"]
+[editable path="MainRoad/Building12/RustyKettleDropoff"]
+[editable path="MainRoad/Building60/BlueThistleDropoff"]
+[editable path="MainRoad/Building67/BrassHarborDropoff"]
+[editable path="MainRoad/Building74/CinderGateDropoff"]
+[editable path="MainRoad/Building90/WhisperedCourtDropoff"]
 [editable path="MainRoad/Building22/DropoffSite"]
+[editable path="MainRoad/Building24/CopperFinchDropoff"]
 [editable path="MainRoad/MikasDrugstore/ShadyRoofDropoff"]
+[editable path="MainRoad/Building30/WakingOwlDropoff"]
+[editable path="MainRoad/Building33/SaltwindStoopDropoff"]
+[editable path="MainRoad/Building41/SunkenStepsDropoff"]

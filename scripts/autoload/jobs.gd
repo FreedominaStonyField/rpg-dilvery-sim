@@ -12,10 +12,10 @@ const DELIVERY_ITEM_NAME = "Package"
 
 var current_dropoff: Node3D
 @export var offer_count: int = 3
-@export var base_reward: int = 12
-@export var reward_per_meter: float = 0.4
-@export var min_reward: int = 8
-@export var max_reward: int = 120
+@export var base_reward: int = 90
+@export var reward_per_meter: float = 0.6
+@export var min_reward: int = 80
+@export var max_reward: int = 160
 @export var default_completion_sfx: AudioStream = preload("res://assets/audio/ui/bong_001.ogg")
 var completed_jobs: Array[JobRecord] = []
 var last_completed_job: JobRecord

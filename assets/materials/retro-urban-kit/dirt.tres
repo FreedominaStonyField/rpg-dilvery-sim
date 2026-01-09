@@ -1,6 +1,7 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfd2g23p4e26"]
 
-[ext_resource type="Texture2D" path="res://assets/textures/retro-urban-kit/dirt.png" id="1_ng2pk"]
+[ext_resource type="Texture2D" uid="uid://b3xhwuohkvmt8" path="res://assets/textures/retro-urban-kit/dirt.png" id="1_ng2pk"]
 
 [resource]
 albedo_texture = ExtResource("1_ng2pk")
+uv1_triplanar = true
