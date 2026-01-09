@@ -14,7 +14,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.job_completed.connect(_on_job_state_changed)
-	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
+	PlayerData.carrying_changed.connect(_on_carrying_changed)
 	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
@@ -38,7 +38,7 @@ func _can_interact() -> bool:
 		return false
 	if not _matches_current_dropoff():
 		return false
-	if not _has_matching_delivery_item():
+	if not PlayerData.is_carrying():
 		return false
 	return true
 
@@ -107,22 +107,6 @@ func _matches_current_dropoff() -> bool:
 	if dropoff_site != null:
 		return Jobs.current_dropoff == dropoff_site
 	return Jobs.current_dropoff == self
-
-func _has_matching_delivery_item() -> bool:
-	var item = Jobs.get_active_delivery_item()
-	if item.is_empty():
-		return false
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		return false
-	return str(meta.get("dropoff_site_id", "")) == _get_dropoff_site_id()
-
-func _get_dropoff_site_id() -> String:
-	if dropoff_site != null and dropoff_site is DropoffSite:
-		return String((dropoff_site as DropoffSite).site_id)
-	if dropoff_site != null:
-		return dropoff_site.name
-	return name
 
 func _get_dropoff_node() -> Node3D:
 	return dropoff_site if dropoff_site != null else self

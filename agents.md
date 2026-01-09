@@ -7,7 +7,7 @@ These describe the current prototype state, not permanent feature limits.
 If a task requests expanding beyond this list, update the list as part of the change.
 - No combat, no NPC AI, no dialogue trees
 - No saving/loading system beyond current save hooks
-- Inventory is lightweight (view + discard only)
+- No inventory system yet (rebuild planned)
 - Stamina is a HUD placeholder (no exhaustion penalties yet)
 - No health/fall damage system yet
 - No multi-job juggling yet
@@ -23,7 +23,6 @@ and small helper scripts instead of deep class trees.
 - `TimeSystem`: day progression + curfew events
 - `Jobs`: manages the single active delivery job
 - `PlayerData`: money + carrying state
-- `InventorySystem`: delivery item tracking + simple inventory list
 - `UIEvents`: one-line event bus for HUD notifications (optional but recommended)
 - `SaveSystem`: save hooks for sleep and job completion
 
@@ -97,7 +96,6 @@ Every scene should have a script ONLY if it contains logic.
 - `TimeSystem` controls day time, curfew, and morning reset.
 - `Jobs` builds offers at pickups, tracks the active job, and emits snapshots.
 - `PlayerData` owns money and notifies HUD updates.
-- `InventorySystem` owns the delivery item plus a simple inventory list.
 - `UIEvents` is the UI event bus for prompts, menus, and notifications.
 - `SaveSystem` performs auto-save hooks on sleep and job completion.
 

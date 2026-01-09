@@ -9,7 +9,7 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Inn for sleeping to advance time
 - Courier journal shows active job, offers, and completed jobs with snapshots
 - Dropoff snapshots use SubViewport capture sized to the player viewport
-- Inventory menu is lightweight (view + discard) and pauses play
+- No inventory system yet (rebuild planned)
 - Save hooks run on sleep and job completion
 
 
@@ -28,7 +28,6 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - Interact: E
 - Pause: Esc
 - Package menu (Courier Journal): Tab
-- Inventory menu: I
 - Unstuck: U
 
 ## Architecture Notes
@@ -39,7 +38,6 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
   - `TimeSystem`: day progression and curfew events
   - `Jobs`: single active delivery job
   - `PlayerData`: money and carrying state
-  - `InventorySystem`: delivery item tracking + simple inventory list
   - `UIEvents`: HUD event bus
   - `SaveSystem`: auto-save hooks for sleep and jobs
 - Job completion data is stored as `JobRecord` resources for reuse in UI/history.
@@ -49,7 +47,6 @@ Keep changes small, signal-driven, and easy to extend tomorrow.
 - `TimeSystem`: advances day time, fires curfew events, and resets on sleep.
 - `Jobs`: builds job offers, starts the active job, tracks completion snapshots.
 - `PlayerData`: stores money and emits change signals for HUD updates.
-- `InventorySystem`: stores the delivery item and simple inventory list (discardable only).
 - `UIEvents`: central UI message bus for prompts, menu toggles, and notifications.
 - `SaveSystem`: saves current money/job state on sleep and job completion.
 

@@ -12,7 +12,7 @@ var dropoff_ref: Node3D = null
 func _ready() -> void:
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_finished)
-	InventorySystem.delivery_item_changed.connect(_on_carrying_changed)
+	PlayerData.carrying_changed.connect(_on_carrying_changed)
 
 func has_ticket() -> bool:
 	return item_name != "" and recipient_name != ""
@@ -27,8 +27,8 @@ func get_details() -> Dictionary:
 func _on_job_started(dropoff: Node3D) -> void:
 	dropoff_ref = dropoff
 	recipient_name = _get_dropoff_display_name(dropoff)
-	if InventorySystem.has_delivery_item():
-		item_name = InventorySystem.get_delivery_item_name()
+	if PlayerData.is_carrying():
+		item_name = PlayerData.carrying_item
 	_emit_update()
 
 func _on_carrying_changed(carrying: String) -> void:

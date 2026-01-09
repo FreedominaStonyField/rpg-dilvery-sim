@@ -6,7 +6,6 @@ signal interact_prompt_changed(visible: bool, action: String, owner_id: int)
 signal interaction_registered(node: Node)
 signal interaction_unregistered(node: Node)
 signal package_menu_requested(visible: bool)
-signal inventory_menu_requested(visible: bool)
 
 func show_message(message: String, duration: float = 2.0) -> void:
 	notify.emit(message, duration)
@@ -32,6 +31,3 @@ func unregister_interaction(node: Node) -> void:
 
 func request_package_menu(visible: bool) -> void:
 	package_menu_requested.emit(visible)
-
-func request_inventory_menu(visible: bool) -> void:
-	inventory_menu_requested.emit(visible)

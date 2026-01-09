@@ -8,6 +8,8 @@ signal job_offers_updated
 signal pickup_consumed(pickup: Node3D)
 signal jobs_restored
 
+const DELIVERY_ITEM_NAME = "Package"
+
 var current_dropoff: Node3D
 @export var offer_count: int = 3
 @export var base_reward: int = 12
@@ -21,6 +23,7 @@ var job_offers: Array[Dictionary] = []
 var offer_pickup: Node3D
 var offer_generation: int = 0
 var rng := RandomNumberGenerator.new()
+var active_record: JobRecord
 
 func _ready() -> void:
 	rng.randomize()
@@ -29,7 +32,7 @@ func start_job(dropoff: Node3D, record: JobRecord = null) -> void:
 	if has_active_job():
 		return
 	current_dropoff = dropoff
-	var active_record = record if record != null else _build_job_record(dropoff)
+	active_record = record if record != null else _build_job_record(dropoff)
 	if active_record.reward <= 0:
 		var distance_m = 0.0
 		if offer_pickup != null:
@@ -41,13 +44,13 @@ func start_job(dropoff: Node3D, record: JobRecord = null) -> void:
 		var site = dropoff as DropoffSite
 		if site.snapshot_enabled and active_record.snapshot == null:
 			call_deferred("_start_snapshot_capture", site)
-	_add_delivery_item_from_record(active_record, dropoff)
+	_set_carrying_state(true)
 	job_started.emit(dropoff)
 
 func complete_job() -> int:
 	if not has_active_job():
 		return 0
-	var completed_record = _build_active_job_record()
+	var completed_record = active_record
 	var reward_amount = 0
 	if completed_record != null:
 		reward_amount = completed_record.reward
@@ -56,8 +59,7 @@ func complete_job() -> int:
 		completed_jobs.append(completed_record)
 		last_completed_job = completed_record
 		job_completed.emit(completed_record)
-	_remove_active_delivery_item()
-	current_dropoff = null
+	_clear_active_job_state()
 	job_available.emit()
 	_clear_job_offers()
 	return reward_amount
@@ -65,41 +67,25 @@ func complete_job() -> int:
 func clear_active_job() -> void:
 	if not has_active_job():
 		return
-	_remove_active_delivery_item()
-	current_dropoff = null
+	_clear_active_job_state()
 	job_available.emit()
 	_clear_job_offers()
 
 func has_active_job() -> bool:
-	var item = get_active_delivery_item()
-	if item.is_empty():
-		return false
-	var dropoff = _resolve_dropoff_for_item(item)
-	return dropoff != null
+	return current_dropoff != null and active_record != null
 
 func get_active_reward() -> int:
-	var item = get_active_delivery_item()
-	if item.is_empty():
+	if active_record == null:
 		return 0
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		return 0
-	return int(meta.get("reward", 0))
+	return active_record.reward
 
 func get_active_hint_text() -> String:
-	var item = get_active_delivery_item()
-	if item.is_empty():
+	if active_record == null:
 		return ""
-	var meta = item.get("meta", {})
-	if typeof(meta) == TYPE_DICTIONARY and str(meta.get("hint_text", "")) != "":
-		return str(meta.get("hint_text", ""))
-	return ""
+	return active_record.hint_text
 
 func get_active_snapshot() -> Texture2D:
-	var record = _build_active_job_record()
-	if record != null:
-		return record.snapshot
-	return null
+	return active_record.snapshot if active_record != null else null
 
 func get_completed_jobs() -> Array[JobRecord]:
 	return completed_jobs
@@ -108,10 +94,9 @@ func get_last_completed_job() -> JobRecord:
 	return last_completed_job
 
 func get_active_job_display_name() -> String:
-	var record = _build_active_job_record()
-	if record != null and record.display_name != "":
-		return record.display_name
-	return ""
+	if active_record == null:
+		return ""
+	return active_record.display_name
 
 func get_dropoff_sites() -> Array[DropoffSite]:
 	var sites: Array[DropoffSite] = []
@@ -136,9 +121,6 @@ func refresh_job_offers(pickup: Node3D) -> void:
 		_clear_job_offers()
 		return
 	if has_active_job():
-		_clear_job_offers()
-		return
-	if InventorySystem.has_delivery_item():
 		_clear_job_offers()
 		return
 	offer_pickup = pickup
@@ -167,8 +149,6 @@ func refresh_job_offers(pickup: Node3D) -> void:
 
 func accept_job_offer(index: int) -> bool:
 	if has_active_job():
-		return false
-	if InventorySystem.has_delivery_item():
 		return false
 	if index < 0 or index >= job_offers.size():
 		return false
@@ -206,10 +186,9 @@ func _capture_snapshot_for_dropoff(site: DropoffSite) -> void:
 		return
 	if not has_active_job() or current_dropoff != site:
 		return
-	var item = get_active_delivery_item()
-	if item.is_empty():
+	if active_record == null:
 		return
-	_update_delivery_item_snapshot(item, snapshot)
+	_set_record_snapshot(active_record, snapshot)
 	job_snapshot_ready.emit(snapshot)
 
 func _start_snapshot_capture(site: DropoffSite) -> void:
@@ -228,6 +207,8 @@ func _build_job_record(dropoff: Node3D, reward_amount: int = 0, distance_m: floa
 			record.display_name = site.display_name
 		record.hint_text = site.hint_text
 		record.completion_sfx = site.completion_sfx if site.completion_sfx != null else default_completion_sfx
+	elif dropoff != null:
+		record.site_id = StringName(dropoff.name)
 	return record
 
 func _calculate_reward(distance_m: float) -> int:
@@ -262,8 +243,12 @@ func to_dict() -> Dictionary:
 	var completed: Array = []
 	for job in completed_jobs:
 		completed.append(_serialize_job_record(job))
+	var active = {}
+	if active_record != null:
+		active = _serialize_job_record(active_record)
 	return {
-		"completed_jobs": completed
+		"completed_jobs": completed,
+		"active_job": active
 	}
 
 func from_dict(data: Dictionary) -> void:
@@ -274,18 +259,8 @@ func from_dict(data: Dictionary) -> void:
 			if typeof(entry) == TYPE_DICTIONARY:
 				completed_jobs.append(_deserialize_job_record(entry))
 	last_completed_job = completed_jobs.back() if not completed_jobs.is_empty() else null
-	_migrate_active_job_if_needed(data)
-	_sync_active_from_inventory(true)
+	_restore_active_job(data.get("active_job", {}), true)
 	jobs_restored.emit()
-
-func _get_current_site_id() -> String:
-	var item = get_active_delivery_item()
-	if item.is_empty():
-		return ""
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		return ""
-	return str(meta.get("dropoff_site_id", ""))
 
 func _resolve_dropoff_by_site_id(site_id: String) -> Node3D:
 	if site_id == "":
@@ -341,146 +316,52 @@ func _deserialize_job_record(data: Dictionary) -> JobRecord:
 				record.cache_snapshot()
 	return record
 
-func get_active_delivery_item() -> Dictionary:
-	var items = InventorySystem.get_items_with_tag(InventorySystem.DELIVERY_TAG)
-	return items[0] if not items.is_empty() else {}
-
 func complete_active_job_for_dropoff(dropoff: Node3D) -> int:
-	var item = get_active_delivery_item()
-	if item.is_empty():
+	if not has_active_job():
 		return 0
-	var item_dropoff = _resolve_dropoff_for_item(item)
-	if item_dropoff != dropoff:
+	if current_dropoff != dropoff:
 		return 0
 	return complete_job()
 
-func _build_active_job_record() -> JobRecord:
-	var item = get_active_delivery_item()
-	if item.is_empty():
-		return null
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		return null
-	var record = JobRecord.new()
-	record.site_id = StringName(str(meta.get("dropoff_site_id", "")))
-	record.display_name = str(meta.get("dropoff_name", ""))
-	record.hint_text = str(meta.get("hint_text", ""))
-	record.reward = int(meta.get("reward", 0))
-	record.distance_m = float(meta.get("distance_m", 0.0))
-	var sfx_path = str(meta.get("completion_sfx_path", ""))
-	if sfx_path != "":
-		record.completion_sfx = load(sfx_path) as AudioStream
-	_apply_snapshot_from_meta(record, meta)
-	return record
-
-func _apply_snapshot_from_meta(record: JobRecord, meta: Dictionary) -> void:
-	var snapshot_data = str(meta.get("snapshot_jpg", ""))
-	if snapshot_data == "":
-		return
-	var buffer = Marshalls.base64_to_raw(snapshot_data)
-	var image = Image.new()
-	var result = image.load_jpg_from_buffer(buffer)
-	if result != OK:
-		result = image.load_png_from_buffer(buffer)
-	if result == OK:
-		record.snapshot = ImageTexture.create_from_image(image)
-		record.snapshot_jpg_b64 = snapshot_data
-
-func _update_delivery_item_snapshot(item: Dictionary, snapshot: Texture2D) -> void:
-	if snapshot == null:
-		return
-	var image = snapshot.get_image()
-	if image == null:
-		return
-	var buffer = image.save_jpg_to_buffer(0.8)
-	var snapshot_b64 = Marshalls.raw_to_base64(buffer)
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		meta = {}
-	meta["snapshot_jpg"] = snapshot_b64
-	item["meta"] = meta
-
-func _add_delivery_item_from_record(record: JobRecord, dropoff: Node3D) -> void:
-	var job_id = str(Time.get_ticks_usec())
-	var site_id = _get_dropoff_site_id(dropoff)
-	var dropoff_name = _get_dropoff_display_name(dropoff)
-	var description = "Deliver to %s." % dropoff_name
-	var snapshot_jpg = ""
-	if record.snapshot_jpg_b64 != "":
-		snapshot_jpg = record.snapshot_jpg_b64
-	var sfx_path = ""
-	if record.completion_sfx != null and record.completion_sfx.resource_path != "":
-		sfx_path = record.completion_sfx.resource_path
-	InventorySystem.add_item({
-		"id": InventorySystem.DELIVERY_ITEM_PREFIX + job_id,
-		"name": "Package",
-		"description": description,
-		"quantity": 1,
-		"tags": [InventorySystem.JOB_TAG, InventorySystem.DELIVERY_TAG],
-		"meta": {
-			"job_id": job_id,
-			"dropoff_site_id": site_id,
-			"dropoff_name": dropoff_name,
-			"reward": record.reward,
-			"distance_m": record.distance_m,
-			"hint_text": record.hint_text,
-			"completion_sfx_path": sfx_path,
-			"snapshot_jpg": snapshot_jpg,
-			"state": "ACTIVE"
-		}
-	})
-
-func _resolve_dropoff_for_item(item: Dictionary) -> Node3D:
-	var meta = item.get("meta", {})
-	if typeof(meta) != TYPE_DICTIONARY:
-		return null
-	var site_id = str(meta.get("dropoff_site_id", ""))
-	return _resolve_dropoff_by_site_id(site_id)
-
-func _get_dropoff_display_name(dropoff: Node3D) -> String:
-	if dropoff is DropoffSite:
-		var site = dropoff as DropoffSite
-		if site.display_name != "":
-			return site.display_name
-	return dropoff.name
-
-func _get_dropoff_site_id(dropoff: Node3D) -> String:
-	if dropoff is DropoffSite:
-		return String((dropoff as DropoffSite).site_id)
-	return dropoff.name
-
-func _remove_active_delivery_item() -> void:
-	var item = get_active_delivery_item()
-	if item.is_empty():
-		return
-	var item_id = str(item.get("id", ""))
-	if item_id == "":
-		return
-	InventorySystem.discard_item(item_id)
-
-func _sync_active_from_inventory(emit_signal: bool) -> void:
-	var item = get_active_delivery_item()
-	if item.is_empty():
-		current_dropoff = null
+func _restore_active_job(data: Dictionary, emit_signal: bool) -> void:
+	active_record = null
+	current_dropoff = null
+	if typeof(data) != TYPE_DICTIONARY or (data as Dictionary).is_empty():
+		_set_carrying_state(false)
 		if emit_signal:
 			job_available.emit()
 		return
-	var dropoff = _resolve_dropoff_for_item(item)
+	var record = _deserialize_job_record(data as Dictionary)
+	if record == null:
+		_set_carrying_state(false)
+		if emit_signal:
+			job_available.emit()
+		return
+	var dropoff = _resolve_dropoff_by_site_id(str(record.site_id))
+	if dropoff == null:
+		_set_carrying_state(false)
+		if emit_signal:
+			job_available.emit()
+		return
+	active_record = record
 	current_dropoff = dropoff
-	if emit_signal and dropoff != null:
+	_set_carrying_state(true)
+	if emit_signal:
 		job_started.emit(dropoff)
 
-func _migrate_active_job_if_needed(data: Dictionary) -> void:
-	if InventorySystem.has_delivery_item():
+func _clear_active_job_state() -> void:
+	active_record = null
+	current_dropoff = null
+	_set_carrying_state(false)
+
+func _set_carrying_state(active: bool) -> void:
+	if active:
+		PlayerData.set_carrying(DELIVERY_ITEM_NAME)
 		return
-	var active_data = data.get("active_job", {})
-	if typeof(active_data) != TYPE_DICTIONARY or (active_data as Dictionary).is_empty():
+	PlayerData.clear_carrying()
+
+func _set_record_snapshot(record: JobRecord, snapshot: Texture2D) -> void:
+	if record == null or snapshot == null:
 		return
-	var record = _deserialize_job_record(active_data as Dictionary)
-	if record == null:
-		return
-	var site_id = str((active_data as Dictionary).get("site_id", ""))
-	var dropoff = _resolve_dropoff_by_site_id(site_id)
-	if dropoff == null:
-		return
-	_add_delivery_item_from_record(record, dropoff)
+	record.snapshot = snapshot
+	record.cache_snapshot()

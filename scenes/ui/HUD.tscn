@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/UiSfxRouter.tscn" id="2"]
 [ext_resource type="Script" uid="uid://ctijmi6y2hewv" path="res://scripts/ui/animation_debug_panel.gd" id="3"]
 [ext_resource type="Script" uid="uid://cahqsmi7qafl1" path="res://scripts/ui/job_menu.gd" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/ui/InventoryMenu.tscn" id="5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1"]
 bg_color = Color(0.08, 0.08, 0.08, 1)
@@ -224,7 +223,7 @@ text = "COURIER JOURNAL"
 layout_mode = 2
 theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 theme_override_font_sizes/font_size = 12
-text = "INVENTORY + DISPATCH LOG"
+text = "DISPATCH LOG"
 
 [node name="CloseHint" type="Label" parent="PackageCenter/PackageMenu/PackageMargin/PackageVBox/HeaderBar/HeaderMargin/HeaderRow"]
 layout_mode = 2
@@ -418,14 +417,6 @@ autowrap_mode = 3
 theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
 theme_override_font_sizes/font_size = 12
 text = "NO COMPLETED JOBS\nDeliveries will be logged here."
-
-[node name="InventoryCenter" type="CenterContainer" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="InventoryMenu" parent="InventoryCenter" instance=ExtResource("5")]
 
 [node name="NotificationContainer" type="VBoxContainer" parent="."]
 visible = false
