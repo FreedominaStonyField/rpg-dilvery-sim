@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://dm2gg6vvo7lfl"]
+[gd_scene load_steps=30 format=3 uid="uid://dm2gg6vvo7lfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="1_0klpl"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="1_1xcyt"]
+[ext_resource type="Texture2D" uid="uid://bobe34iddv46g" path="res://assets/textures/retro-urban-kit/asphalt.png" id="1_28aop"]
 [ext_resource type="Material" uid="uid://brj2jayoo0l0d" path="res://addons/prototype_mini_bundle/M_prototype_blue.tres" id="1_cl1x4"]
+[ext_resource type="Texture2D" uid="uid://c307hdmos4gtm" path="res://demo/assets/textures/rock023_nrm_rgh.png" id="2_kya01"]
 [ext_resource type="Texture2D" uid="uid://gh0otyh4xcj5" path="res://addons/prototype_mini_bundle/prototype_light.png" id="2_nn78r"]
 [ext_resource type="Material" uid="uid://dyx4l6ea0am6f" path="res://addons/prototype_mini_bundle/M_prototype_green.tres" id="3_cl1x4"]
 [ext_resource type="Material" uid="uid://7to3kb1tisdd" path="res://addons/prototype_mini_bundle/M_prototype_orange.tres" id="4_8iuey"]
@@ -59,7 +61,6 @@ _shader_parameters = {
 &"noise_texture": SubResource("NoiseTexture2D_jr4hu"),
 &"projection_threshold": 0.8
 }
-show_checkered = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1di2j"]
 transparency = 4
@@ -79,8 +80,19 @@ last_lod = 0
 last_shadow_lod = 0
 lod0_range = 128.0
 
+[sub_resource type="Terrain3DTextureAsset" id="Terrain3DTextureAsset_vqkgs"]
+name = "asphalt"
+albedo_texture = ExtResource("1_28aop")
+normal_texture = ExtResource("2_kya01")
+normal_depth = 2.0
+roughness = 0.238
+uv_scale = 1.993
+detiling_rotation = 0.218
+detiling_shift = 0.152
+
 [sub_resource type="Terrain3DAssets" id="Terrain3DAssets_cl1x4"]
 mesh_list = Array[Terrain3DMeshAsset]([SubResource("Terrain3DMeshAsset_nn78r")])
+texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_vqkgs")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o3pm5"]
 albedo_texture = ExtResource("2_nn78r")
@@ -92,7 +104,6 @@ uv1_triplanar = true
 data_directory = "res://data/terrain3d/TownBata"
 material = SubResource("Terrain3DMaterial_vi75p")
 assets = SubResource("Terrain3DAssets_cl1x4")
-show_checkered = true
 top_level = true
 metadata/_edit_lock_ = true
 

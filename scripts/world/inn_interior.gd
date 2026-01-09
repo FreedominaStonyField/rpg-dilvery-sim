@@ -10,6 +10,7 @@ extends Node3D
 var can_sleep: bool = false
 
 func _ready() -> void:
+	add_to_group("inns")
 	safe_area.body_entered.connect(_on_safe_entered)
 	safe_area.body_exited.connect(_on_safe_exited)
 	sleep_spot.body_entered.connect(_on_sleep_entered)

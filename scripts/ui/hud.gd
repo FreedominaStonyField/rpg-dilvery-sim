@@ -34,9 +34,11 @@ var package_flash_timer: SceneTreeTimer
 var package_fade_tween: Tween
 var interaction_entries: Array[Node] = []
 var interaction_selected_index: int = -1
+var inn_checkin_ratio: float = -1.0
 
 const DAY_START_MINUTES = 6 * 60
 const DAY_END_MINUTES = 24 * 60
+const INN_CHECKIN_FALLBACK = 0.75
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -74,6 +76,7 @@ func _ready() -> void:
 	stamina_container.visible = false
 	_bind_player_stamina()
 	_bind_player_speed()
+	_refresh_inn_checkin_ratio()
 	get_tree().node_added.connect(_on_node_added)
 
 func _process(_delta: float) -> void:
@@ -87,8 +90,12 @@ func _on_carrying_changed(item_name: String) -> void:
 	carrying_label.text = display_name
 
 func _on_time_changed(day_time: float) -> void:
-	time_label.text = "%s  Curfew %s" % [_format_time(day_time), _format_curfew_time()]
-	time_label.tooltip_text = "Day time and curfew"
+	time_label.text = "%s  Curfew %s  Inn %s" % [
+		_format_time(day_time),
+		_format_curfew_time(),
+		_format_inn_checkin_time()
+	]
+	time_label.tooltip_text = "Day time, curfew, and inn check-in"
 
 func _format_time(day_time: float) -> String:
 	var total_minutes = int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
@@ -107,6 +114,10 @@ func _format_curfew_time() -> String:
 	var hours = total_minutes / 60
 	var minutes = total_minutes % 60
 	return "%s:%s" % [str(hours).pad_zeros(2), str(minutes).pad_zeros(2)]
+
+func _format_inn_checkin_time() -> String:
+	var ratio = inn_checkin_ratio if inn_checkin_ratio >= 0.0 else INN_CHECKIN_FALLBACK
+	return _format_time(ratio)
 
 func _on_new_morning() -> void:
 	if in_transition:
@@ -312,6 +323,16 @@ func _on_node_added(node: Node) -> void:
 		_bind_player_stamina()
 	if speed_source == null and node.is_in_group("player"):
 		_bind_player_speed()
+	if inn_checkin_ratio < 0.0 and node.is_in_group("inns"):
+		_refresh_inn_checkin_ratio()
+
+func _refresh_inn_checkin_ratio() -> void:
+	var inn = get_tree().get_first_node_in_group("inns")
+	if inn == null:
+		return
+	var threshold = inn.get("sleep_threshold")
+	if typeof(threshold) == TYPE_FLOAT:
+		inn_checkin_ratio = clamp(float(threshold), 0.0, 1.0)
 
 func _bind_player_speed() -> void:
 	if speed_source != null and is_instance_valid(speed_source):
