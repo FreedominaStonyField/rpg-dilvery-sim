@@ -1,82 +1,76 @@
-# RPG Delivery Sim (Godot 4.5.1 Prototype)
+# RPG Dilvery Sim (Prototype)
 
-Fast one-day prototype for a delivery RPG loop. Focus is on a single job flow,
-curfew pressure, and a clean signal-driven architecture for quick iteration.
+A fast Godot 4.5.1 prototype for a delivery-focused RPG loop.
+Keep changes small, signal-driven, and easy to extend tomorrow.
 
-## Current Gameplay Loop
+## Scope (One-Day Prototype)
+- One item type and one active job at a time
+- Curfew system with mugging if outside the safe zone
+- Inn for sleeping to advance time
+- Courier journal shows active job, offers, and completed jobs with snapshots
+- Dropoff snapshots use SubViewport capture sized to the player viewport
+- Inventory menu is lightweight (view + discard) and pauses play
+- Save hooks run on sleep and job completion
 
-- Start from Main Menu and spawn into the town.
-- Pick up a parcel from a pickup point to start a job.
-- Deliver to the dropoff before curfew Press tab to view the dropoff location.
-- If outdoors at curfew, a short timer starts, then you get mugged and lose money.
-- Enter the inn safe area to avoid curfew mugging.
-- Sleep at the inn after the sleep threshold to reset the day (costs money).
+
+
+## Requirements
+- Godot Engine 4.5.1
+
+## Quick Start
+1. Open `project.godot` in Godot 4.5.1.
+2. Run the project (main scene is `scenes/ui/MainMenu.tscn`).
 
 ## Controls
-
-- Move: WASD or Arrow Keys
+- Move: WASD or arrow keys
+- Sprint: Shift
 - Jump: Space
-- Sprint: Shift (stamina drains and regenerates)
 - Interact: E
 - Pause: Esc
-- Package menu: Tab (also uses the `toggle_package_menu` input action)
-- Camera: Mouse look, Mouse wheel zoom
+- Package menu (Courier Journal): Tab
+- Inventory menu: I
+- Unstuck: U
 
-## Current Systems and Progress
+## Architecture Notes
+- Single-responsibility scripts in `scripts/`.
+- Cross-node communication uses signals.
+- Global state lives only in autoloads:
+  - `GameState`: mode state (MENU, PLAYING, PAUSED, SLEEPING, MUGGED)
+  - `TimeSystem`: day progression and curfew events
+  - `Jobs`: single active delivery job
+  - `PlayerData`: money and carrying state
+  - `InventorySystem`: delivery item tracking + simple inventory list
+  - `UIEvents`: HUD event bus
+  - `SaveSystem`: auto-save hooks for sleep and jobs
+- Job completion data is stored as `JobRecord` resources for reuse in UI/history.
 
-Gameplay
-- Player movement, camera shoulder offsets, zoom, sprint stamina.
-- Pickup and dropoff areas with interact prompts and a single active job.
-- Curfew timer and mugging when outdoors after curfew.
-- Inn safe area and sleep spot to skip to morning for a fee.
+## Systems and Intended Use
+- `GameState`: gate input and UI; menus pause play and set mouse visible.
+- `TimeSystem`: advances day time, fires curfew events, and resets on sleep.
+- `Jobs`: builds job offers, starts the active job, tracks completion snapshots.
+- `PlayerData`: stores money and emits change signals for HUD updates.
+- `InventorySystem`: stores the delivery item and simple inventory list (discardable only).
+- `UIEvents`: central UI message bus for prompts, menu toggles, and notifications.
+- `SaveSystem`: saves current money/job state on sleep and job completion.
 
-UI
-- HUD for money, time, carrying status, interact prompt, stamina, and notifications.
-- Pause menu and package menu (job status panel).
-- Transition fade for sleep and mugging.
+## Key Scenes
+- `scenes/ui/MainMenu.tscn`: main menu entry
+- `scenes/ui/HUD.tscn`: HUD and notifications
+- `scenes/world/World.tscn`: world, pickups, dropoffs, inn triggers
+- `scenes/player/Player.tscn`: player character (CharacterBody3D + SpringArm3D + Camera3D)
 
-Audio / SFX
-- Player animation SFX hooks and UI SFX routing (profiles in scripts).
-
-World
-- Town scene with pickups, dropoffs, and inn interior/exterior triggers.
-
-## Autoloads (Global State)
-
-- `GameState`: mode switching (MENU, PLAYING, PAUSED, SLEEPING, MUGGED).
-- `TimeSystem`: day progression, curfew timer, mugging, morning reset.
-- `Jobs`: single active delivery job tracking.
-- `PlayerData`: money and carrying state.
-- `UIEvents`: HUD notifications and interact prompt bus.
-
-## Scenes (Entry Points)
-
-- `scenes/ui/MainMenu.tscn`: start and quit.
-- `scenes/world/World.tscn`: gameplay scene.
-- `scenes/player/Player.tscn`: reusable player character.
-- `scenes/ui/HUD.tscn`: HUD and pause flow.
-
-## Project Structure
-
-- `scenes/`: world, player, UI.
-- `scripts/`: autoload, world, player, UI.
-- `assets/` and `audio/`: placeholders for art and sound.
-
-## Non-goals (Prototype Limits)
-
-- No combat, NPC AI, dialogue trees, saving/loading, or full inventory UI.
-- One item type, one active job at a time, no multi-job juggling.
-- No health/stamina damage systems beyond sprint stamina.
-
-## How to Run
-
-Open the project in Godot 4.5.1 and run. The main scene is
-`res://scenes/ui/MainMenu.tscn`.
+## Project Layout
+- `scenes/`
+  - `ui/`, `world/`, `player/`
+- `scripts/`
+  - `autoload/`, `ui/`, `world/`, `player/`
+- `assets/`, `audio/`
 
 ## Testing Checklist
-
-- Player can move, jump, sprint, and camera behaves.
-- Pick up item updates carrying state and job status.
-- Delivering increases money and sends HUD notification.
-- Curfew mugging resets money and starts a new morning.
-- Pause toggles without breaking input or camera.
+- Player can move and camera behaves
+- Pickup updates carrying state
+- Deliver increases money and HUD notifies
+- Curfew mug resets money and advances to morning
+- Pause toggles without breaking input
+- Completed job appears in journal list with snapshot/hint
+- Snapshot shows the correct dropoff view and matches scene lighting/sky

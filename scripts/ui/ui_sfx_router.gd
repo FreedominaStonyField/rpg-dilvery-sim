@@ -1,14 +1,14 @@
 extends Node
 class_name UiSfxRouter
 
-const META_BOUND := &"ui_sfx_bound"
-const META_SKIP := &"ui_sfx_skip"
-const META_OVERRIDE := &"ui_sfx_override"
-const META_OVERRIDE_HOVER := &"ui_sfx_override_hover"
-const META_OVERRIDE_PRESS := &"ui_sfx_override_press"
-const META_OVERRIDE_TOGGLE := &"ui_sfx_override_toggle"
-const META_OVERRIDE_SELECT := &"ui_sfx_override_select"
-const META_OVERRIDE_CONFIRM := &"ui_sfx_override_confirm"
+const META_BOUND = &"ui_sfx_bound"
+const META_SKIP = &"ui_sfx_skip"
+const META_OVERRIDE = &"ui_sfx_override"
+const META_OVERRIDE_HOVER = &"ui_sfx_override_hover"
+const META_OVERRIDE_PRESS = &"ui_sfx_override_press"
+const META_OVERRIDE_TOGGLE = &"ui_sfx_override_toggle"
+const META_OVERRIDE_SELECT = &"ui_sfx_override_select"
+const META_OVERRIDE_CONFIRM = &"ui_sfx_override_confirm"
 
 @export var profile: UiSfxProfile = preload("res://assets/audio/profiles/ui_sfx_default.tres")
 @export var scan_root_path: NodePath = NodePath("..")
@@ -115,8 +115,8 @@ func _play_event(
 	volume_db: float,
 	override_key: String
 ) -> void:
-	var override_stream := _resolve_override(control, override_key)
-	var stream := override_stream if override_stream != null else _pick_sound(sounds)
+	var override_stream = _resolve_override(control, override_key)
+	var stream = override_stream if override_stream != null else _pick_sound(sounds)
 	if stream == null:
 		return
 	player.stream = stream
@@ -150,16 +150,16 @@ func _is_interactive(control: Control) -> bool:
 	)
 
 func _resolve_override(control: Control, event_key: String) -> AudioStream:
-	var override := _resolve_meta_override(control, event_key)
+	var override = _resolve_meta_override(control, event_key)
 	if override != null:
 		return override
-	var child_override := _resolve_child_override(control, event_key)
+	var child_override = _resolve_child_override(control, event_key)
 	if child_override != null:
 		return child_override
 	return null
 
 func _resolve_meta_override(control: Control, event_key: String) -> AudioStream:
-	var keys := [META_OVERRIDE]
+	var keys = [META_OVERRIDE]
 	match event_key:
 		"hover":
 			keys.append(META_OVERRIDE_HOVER)

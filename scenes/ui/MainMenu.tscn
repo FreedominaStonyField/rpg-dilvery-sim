@@ -1,37 +1,305 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3dmkig6ufc4s"]
+[gd_scene load_steps=10 format=3 uid="uid://d3dmkig6ufc4s"]
 
 [ext_resource type="Script" uid="uid://waih57tjssmw" path="res://scripts/ui/main_menu.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/ui/UiSfxRouter.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://world" path="res://scenes/world/World.tscn" id="2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.12, 0.12, 0.12, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.18, 0.78, 0.85, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.247, 0.953, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_panel"]
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_list_selected"]
+bg_color = Color(0.95, 0.95, 0.95, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.1, 0.1, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.9, 0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_warning"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.08, 0.08, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.247, 0.953, 1, 1)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
 
-[node name="UiSfxRouter" parent="." instance=ExtResource("2")]
+[node name="Background3D" type="Node3D" parent="."]
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
+[node name="World" parent="Background3D" instance=ExtResource("2")]
+process_mode = 4
+
+[node name="MenuCamera" type="Camera3D" parent="Background3D"]
+transform = Transform3D(-0.8660254, -0.12940954, 0.48296297, 0, 0.9659258, 0.25881904, -0.50000006, 0.22414386, -0.83651626, -12, 6.5, -22)
+current = true
+
+[node name="UI_Layer" type="CanvasLayer" parent="."]
+
+[node name="LayoutRoot" type="MarginContainer" parent="UI_Layer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="Split" type="HBoxContainer" parent="UI_Layer/LayoutRoot"]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="MenuColumn" type="VBoxContainer" parent="UI_Layer/LayoutRoot/Split"]
 layout_mode = 2
-text = "Delivery Prototype"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 40
+text = "RPG DELIVERY SIM"
+
+[node name="Version" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 14
+text = "PROTO_BUILD_4.5.1"
+
+[node name="StartBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "START SHIFT"
+
+[node name="QuitBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "QUIT"
+
+[node name="LoadLabel" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 14
+text = "LOAD SLOT"
+
+[node name="SlotList" type="ItemList" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_selected_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/panel = SubResource("StyleBoxFlat_list_panel")
+theme_override_styles/selected = SubResource("StyleBoxFlat_list_selected")
+
+[node name="LoadBtn" type="Button" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.05, 0.05, 0.05, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "LOAD SELECTED"
+
+[node name="Disclaimer" type="Label" parent="UI_Layer/LayoutRoot/Split/MenuColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 12
+text = "SLOTS AUTO-NUMBERED."
+
+[node name="Spacer" type="Control" parent="UI_Layer/LayoutRoot/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="InfoColumn" type="PanelContainer" parent="UI_Layer/LayoutRoot/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="InfoList" type="VBoxContainer" parent="UI_Layer/LayoutRoot/Split/InfoColumn"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "OPERATOR CONTROLS"
+
+[node name="ControlsGrid" type="GridContainer" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList"]
+layout_mode = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="KeyWASD" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "WASD"
+
+[node name="ActionMove" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "MOVE"
+
+[node name="KeyShift" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "SHIFT"
+
+[node name="ActionSprint" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "SPRINT"
+
+[node name="KeySpace" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "SPACE"
+
+[node name="ActionJump" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "JUMP"
+
+[node name="KeyE" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "E"
+
+[node name="ActionInteract" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "INTERACT / PICKUP"
+
+[node name="KeyTab" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "TAB"
+
+[node name="ActionMenu" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "JOURNAL"
+
+[node name="KeyU" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "U"
+
+[node name="ActionUnstuck" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/ControlsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 14
+text = "UNSTUCK"
+
+[node name="OperatorHint" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "Find Parsals and drop them of to the listed location to earn money. to spend the night at the Tavern.
+Use the drop-off site photos for hints."
 horizontal_alignment = 1
+autowrap_mode = 3
 
-[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="WarningBox" type="PanelContainer" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Play"
+theme_override_styles/panel = SubResource("StyleBoxFlat_warning")
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="WarningText" type="Label" parent="UI_Layer/LayoutRoot/Split/InfoColumn/InfoList/WarningBox"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Quit"
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "CURFEW AT 22:00. OUTSIDE AFTER HOURS = MUGGED."
+autowrap_mode = 3

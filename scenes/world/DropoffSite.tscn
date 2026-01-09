@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://yj1mr0leicd3"]
+
+[ext_resource type="Script" uid="uid://bxdsxo06e5asc" path="res://scripts/world/DropoffSite.gd" id="1_0t6n1"]
+[ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="2_6v0v1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8vfj3"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3o7xk"]
+radius = 3.106698
+
+[node name="DropoffSite" type="Node3D"]
+script = ExtResource("1_0t6n1")
+snapshot_enabled = true
+
+[node name="DeliveryArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_6v0v1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeliveryArea"]
+shape = SubResource("CylinderShape3D_8vfj3")
+
+[node name="DropPoint" type="Marker3D" parent="."]
+
+[node name="Label3D" type="Label3D" parent="."]
+text = "Dropoff"
+
+[node name="LabelArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="LabelAreaShape" type="CollisionShape3D" parent="LabelArea"]
+shape = SubResource("SphereShape3D_3o7xk")
+
+[node name="SnapshotCamera" type="Camera3D" parent="."]
+
+[node name="SnapshotViewport" type="SubViewport" parent="."]
+transparent_bg = false
+size = Vector2i(256, 256)
+
+[node name="SnapshotViewportCamera" type="Camera3D" parent="SnapshotViewport"]

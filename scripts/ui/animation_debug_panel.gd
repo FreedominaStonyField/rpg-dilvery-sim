@@ -60,32 +60,32 @@ func _find_player() -> void:
 				animator_tree.animation_debug_event.connect(_on_animation_event)
 
 func _update_overlay(delta: float) -> void:
-	var velocity := player.velocity
+	var velocity = player.velocity
 	var accel :Vector3 = (velocity - last_velocity) / max(delta, 0.0001)
 	last_velocity = velocity
-	var planar_speed := Vector2(velocity.x, velocity.z).length()
-	var is_falling := not player.is_on_floor() and velocity.y < -0.1
-	var movement_mode := _movement_mode(velocity, planar_speed, is_falling)
-	var anim_state := {}
+	var planar_speed = Vector2(velocity.x, velocity.z).length()
+	var is_falling = not player.is_on_floor() and velocity.y < -0.1
+	var movement_mode = _movement_mode(velocity, planar_speed, is_falling)
+	var anim_state = {}
 	if animator_tree != null and animator_tree.has_method("get_debug_state"):
 		anim_state = animator_tree.get_debug_state()
-	var blends := []
+	var blends = []
 	if animator_tree != null and animator_tree.has_method("get_blend_snapshot"):
 		blends = animator_tree.get_blend_snapshot()
 	var blend_lines: Array[String] = []
 	for blend in blends:
-		var state_name := str(blend.get("state", ""))
-		var anim_name := str(blend.get("animation", ""))
-		var weight := float(blend.get("weight", 0.0))
+		var state_name = str(blend.get("state", ""))
+		var anim_name = str(blend.get("animation", ""))
+		var weight = float(blend.get("weight", 0.0))
 		blend_lines.append(" - %s (%.2f) [%s]" % [state_name, weight, anim_name])
 	if blend_lines.is_empty():
 		blend_lines.append(" - None")
-	var state_name := str(anim_state.get("state", ""))
-	var state_time := float(anim_state.get("state_time", 0.0))
-	var anim_name := str(anim_state.get("animation", ""))
-	var land_timer := float(anim_state.get("land_timer", 0.0))
-	var jump_timer := float(anim_state.get("jump_start_timer", 0.0))
-	var overlay_text := "Movement Mode: %s | Game Mode: %s\n"
+	var state_name = str(anim_state.get("state", ""))
+	var state_time = float(anim_state.get("state_time", 0.0))
+	var anim_name = str(anim_state.get("animation", ""))
+	var land_timer = float(anim_state.get("land_timer", 0.0))
+	var jump_timer = float(anim_state.get("jump_start_timer", 0.0))
+	var overlay_text = "Movement Mode: %s | Game Mode: %s\n"
 	overlay_text += "Grounded: %s | IsFalling: %s | Jump Count: n/a\n"
 	overlay_text += "Velocity: (%.2f, %.2f, %.2f) | Accel: (%.2f, %.2f, %.2f)\n"
 	overlay_text += "Planar Speed: %.2f | Vertical: %.2f\n"
@@ -116,9 +116,9 @@ func _on_animation_event(event: Dictionary) -> void:
 
 func _refresh_log_view() -> void:
 	log_list.clear()
-	var filter_text := filter_edit.text.strip_edges().to_lower()
-	var selected_index := type_option.get_selected()
-	var selected_type := type_option.get_item_text(selected_index) if selected_index >= 0 else "All"
+	var filter_text = filter_edit.text.strip_edges().to_lower()
+	var selected_index = type_option.get_selected()
+	var selected_type = type_option.get_item_text(selected_index) if selected_index >= 0 else "All"
 	for i in range(log_entries.size() - 1, -1, -1):
 		var entry :Dictionary= log_entries[i]
 		if not _passes_filters(entry, filter_text, selected_type):
@@ -127,27 +127,27 @@ func _refresh_log_view() -> void:
 	_update_status_label()
 
 func _passes_filters(entry: Dictionary, filter_text: String, type_filter: String) -> bool:
-	var event_type := str(entry.get("event_type", ""))
+	var event_type = str(entry.get("event_type", ""))
 	if type_filter != "All" and type_filter != event_type:
 		return false
 	if filter_text == "":
 		return true
-	var payload := _format_entry(entry).to_lower()
+	var payload = _format_entry(entry).to_lower()
 	return payload.find(filter_text) != -1
 
 func _format_entry(entry: Dictionary) -> String:
-	var timestamp := float(entry.get("timestamp", 0.0)) - start_time
-	var frame := int(entry.get("frame", 0))
-	var event_type := str(entry.get("event_type", ""))
-	var anim := str(entry.get("animation", ""))
-	var state := str(entry.get("state", ""))
-	var source := str(entry.get("source", ""))
-	var reason := str(entry.get("reason", ""))
-	var velocity_y := float(entry.get("velocity_y", 0.0))
-	var speed := float(entry.get("speed", 0.0))
+	var timestamp = float(entry.get("timestamp", 0.0)) - start_time
+	var frame = int(entry.get("frame", 0))
+	var event_type = str(entry.get("event_type", ""))
+	var anim = str(entry.get("animation", ""))
+	var state = str(entry.get("state", ""))
+	var source = str(entry.get("source", ""))
+	var reason = str(entry.get("reason", ""))
+	var velocity_y = float(entry.get("velocity_y", 0.0))
+	var speed = float(entry.get("speed", 0.0))
 	var on_floor :bool= entry.get("is_on_floor", false)
-	var mode_value := int(entry.get("mode", GameState.mode))
-	var entry_text := "[%6.2fs | f%s] %s | anim=%s | state=%s | src=%s\n"
+	var mode_value = int(entry.get("mode", GameState.mode))
+	var entry_text = "[%6.2fs | f%s] %s | anim=%s | state=%s | src=%s\n"
 	entry_text += " speed=%.2f | vy=%.2f | floor=%s | reason=%s | mode=%s"
 	return entry_text % [
 		timestamp, frame,
@@ -184,14 +184,14 @@ func _connect_ui() -> void:
 	clear_button.pressed.connect(_clear_log)
 
 func _ensure_actions() -> void:
-	_ensure_action(overlay_hotkey_action, Key.KEY_F9)
+	_ensure_action(overlay_hotkey_action, Key.KEY_F8)
 	_ensure_action(log_hotkey_action, Key.KEY_F10)
 
 func _ensure_action(action: StringName, keycode: int) -> void:
 	if InputMap.has_action(action):
 		return
 	InputMap.add_action(action)
-	var event := InputEventKey.new()
+	var event = InputEventKey.new()
 	event.keycode = keycode
 	InputMap.action_add_event(action, event)
 
@@ -213,5 +213,5 @@ func _mode_name(mode_value: int) -> String:
 	return str(mode_value)
 
 func _update_status_label() -> void:
-	var mode_text := "Paused" if logging_paused else "Live"
+	var mode_text = "Paused" if logging_paused else "Live"
 	status_label.text = "%s | entries: %d" % [mode_text, log_entries.size()]

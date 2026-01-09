@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=4 uid="uid://da2d8n6vjoibv"]
+[gd_scene load_steps=6 format=4 uid="uid://da2d8n6vjoibv"]
 
-[ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="1_vafda"]
+[ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="1_vafda"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3e0u"]
 
@@ -37,9 +37,6 @@ shadow_mesh = SubResource("ArrayMesh_qh0kd")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wryly"]
 points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_400s5"]
-size = Vector3(1.375, 0.45922852, 1)
-
 [node name="stall" type="MeshInstance3D"]
 mesh = SubResource("ArrayMesh_sigek")
 skeleton = NodePath("")
@@ -49,16 +46,11 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_wryly")
 
-[node name="Stall 1" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4556055)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("1_vafda")
+[node name="DropoffSite" parent="." instance=ExtResource("1_vafda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0600035)
+display_name = "Wither's Bread bowels"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Stall 1"]
-transform = Transform3D(0.99900514, 0, -0.04459582, 0, 1, 0, 0.04459582, 0, 0.99900514, -0.1875, -0.56674635, 0)
-shape = SubResource("BoxShape3D_400s5")
+[node name="SnapshotCamera" parent="DropoffSite" index="4"]
+transform = Transform3D(0.47619215, 0, -0.87934124, 0, 1, 0, 0.87934124, 0, 0.47619215, -2.349243, 0, 0.37214494)
 
-[node name="Label3D" type="Label3D" parent="Stall 1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4326564, 0)
-text = "Stall Drop off 1"
+[editable path="DropoffSite"]

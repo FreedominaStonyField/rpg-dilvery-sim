@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdejavnfqhbmg"]
+
+[ext_resource type="Script" uid="uid://cir3edt0hisag" path="res://scripts/world/pickup.gd" id="1_xm4j0"]
+[ext_resource type="Texture2D" uid="uid://cg8plwfeaglkc" path="res://addons/prototype_mini_bundle/prototype_red.png" id="2_c1mx0"]
+[ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://addons/prototype_mini_bundle/M_prototype_dark.tres" id="3_y3h13"]
+
+[sub_resource type="SphereShape3D" id="4"]
+radius = 1.6582083
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y3h13"]
+albedo_texture = ExtResource("2_c1mx0")
+uv1_triplanar = true
+
+[node name="Pickup" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_xm4j0")
+item_name = "Package"
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.026260704, 0.50467426, 0)
+shape = SubResource("4")
+
+[node name="MeshInstance3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9272819, 0, -0.37436384, 0, 1, 0, 0.37436384, 0, 0.9272819, -0.0001486796, 0.6091989, 0.3187733)
+use_collision = true
+size = Vector3(0.175, 0.19736326, 0.21397461)
+material = SubResource("StandardMaterial3D_y3h13")
+
+[node name="Label3D" type="Label3D" parent="MeshInstance3D"]
+transform = Transform3D(0.9679814, 0, 0.25102204, 0, 1, 0, -0.25102204, 0, 0.9679814, 0, 0.19500828, 0)
+billboard = 2
+alpha_cut = 3
+alpha_hash_scale = 0.02
+alpha_antialiasing_mode = 1
+texture_filter = 5
+text = "Parsal"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+material = ExtResource("3_y3h13")

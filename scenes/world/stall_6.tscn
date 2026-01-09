@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=4 uid="uid://b7phy5qsgajuc"]
+
+[ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="1_fh216"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ha1nd"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lplgh"]
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAJ+7AAAAAAAAn7v//wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_1tfwy"]
+resource_name = "town cisco _Cube_034"
+_surfaces = [{
+"aabb": AABB(-1, -1, -2.6535392, 1.5083528, 2, 3.6535392),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ha1nd"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAJ+7AABU1QAAn7v//1TVAAAAAAAAVNUAAAAAAAD///////8AAP//AACfuwAA/////wAAAAD/////AAAAAFTV////////VNX/////AABU1f//AAD//1TV//8AAP///78AAJ+7////v/////////+/AAAAAP///78AAAAAAAD/v///AAD///+///8AAAAA/78AAAAA////v/////8AADb2AACfu///NvYAAJ+7AAA29v///////zb2VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3/ede663nXuut517rrede66")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lplgh")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6tky"]
+points = PackedVector3Array(-1, -1, -2.6535392, 0.50835276, -1, -2.6535392, -1, -1, 1, -1, 0.46573997, -2.6535392, 0.50835276, 1, -2.6535392, 0.50835276, -1, 1, -1, 0.46573997, 1, 0.50835276, 1, 1)
+
+[node name="stall6" type="MeshInstance3D"]
+transform = Transform3D(-0.98533773, 0, -0.17061579, 0, 1, 0, 0.17061579, 0, -0.98533773, 0, 0, 0)
+mesh = SubResource("ArrayMesh_1tfwy")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_d6tky")
+
+[node name="Stall 6" parent="." instance=ExtResource("1_fh216")]
+transform = Transform3D(-0.9853375, 0, 0.17061575, 0, 1, 0, -0.17061575, 0, -0.9853375, -1.273304, -0.10868615, 0.267622)
+
+[node name="Label3D" parent="Stall 6" index="2"]
+transform = Transform3D(-0.2988576, 0, 0.9542977, 0, 1, 0, -0.9542977, 0, -0.2988576, -0.12382126, 0.44987816, 0)
+pixel_size = 0.005
+billboard = 0
+text = "Stall 6 Dropoff"
+
+[node name="SnapshotCamera" parent="Stall 6" index="4"]
+transform = Transform3D(-0.4548767, 0, 0.8905545, 0, 1, 0, -0.8905545, 0, -0.4548767, 1.2946262, 0, -0.7631302)
+
+[editable path="Stall 6"]

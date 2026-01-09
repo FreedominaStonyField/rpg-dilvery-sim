@@ -10,6 +10,11 @@ signal interact_midpoint()
 @export var animation_player_path: NodePath = NodePath("../Emma avatarty/AnimationPlayer")
 @export var model_root_path: NodePath = NodePath("../Emma avatarty")
 
+const ANIM_LIB := "AnimationLibrary_Godot_Standard"
+const NON_LOOPING_ANIMS := [
+	"Jump_Land",
+	"Jump_Start"
+]
 @export_group("State Animations")
 @export var idle_anim: StringName = &""
 @export var walk_anim: StringName = &""
@@ -30,12 +35,12 @@ signal interact_midpoint()
 @export var interact_anim: StringName = &"AnimationLibrary_Godot_Standard/Interact"
 @export_range(0.0, 1.0, 0.05) var interact_midpoint_ratio: float = 0.5
 
-const STATE_IDLE := &"idle"
-const STATE_WALK := &"walk"
-const STATE_SPRINT := &"sprint"
-const STATE_JUMP_START := &"jump_start"
-const STATE_JUMP_LOOP := &"jump_loop"
-const STATE_LAND := &"land"
+const STATE_IDLE = &"idle"
+const STATE_WALK = &"walk"
+const STATE_SPRINT = &"sprint"
+const STATE_JUMP_START = &"jump_start"
+const STATE_JUMP_LOOP = &"jump_loop"
+const STATE_LAND = &"land"
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_player: AnimationPlayer
@@ -53,6 +58,7 @@ var debug_enabled: bool = OS.is_debug_build() or Engine.is_editor_hint()
 var _missing_anim_warnings: Dictionary = {}
 var _interact_active: bool = false
 var _interact_mid_timer: SceneTreeTimer
+var land_timer: float = 0.0
 
 func _ready() -> void:
 	if player == null:
@@ -63,6 +69,7 @@ func _ready() -> void:
 	if animation_player == null:
 		push_warning("AnimationPlayer missing for animator.")
 		return
+	_disable_animation_loops()
 	if animation_player.animation_started.is_connected(_on_animation_started) == false:
 		animation_player.animation_started.connect(_on_animation_started)
 	if animation_player.animation_finished.is_connected(_on_animation_finished) == false:
@@ -85,10 +92,17 @@ func _physics_process(delta: float) -> void:
 		return
 	if not GameState.is_playing():
 		return
+	var on_floor := player.is_on_floor()
+	_update_model_facing()
+	
+	# Decrement timer globally so a 1-frame bounce doesn't pause/reset the landing sequence
+	if land_timer > 0.0:
+		land_timer = max(land_timer - delta, 0.0)
+
 	if _interact_active:
 		state_time += delta
 		return
-	var on_floor := player.is_on_floor()
+	#var on_floor = _is_player_grounded()
 	if enable_facing:
 		_update_model_facing()
 	if not on_floor:
@@ -101,6 +115,12 @@ func _physics_process(delta: float) -> void:
 			_travel(STATE_JUMP_LOOP, "airborne_loop")
 	else:
 		jump_start_timer = 0.0
+		# Only trigger land if we aren't already in the middle of a landing sequence
+		if not was_on_floor and land_timer <= 0.0:
+			land_timer = _animation_length("Jump_Land", 0.35)
+			_travel("land")
+		if land_timer <= 0.0:
+			_play_ground_state()
 		_play_ground_state()
 	was_on_floor = on_floor
 	if blend_time_left > 0.0:
@@ -125,13 +145,20 @@ func _has_move_input() -> bool:
 		return player.is_move_input_active()
 	return _ground_speed() > 0.1
 
+func _is_player_grounded() -> bool:
+	if player == null:
+		return false
+	if player.has_method("is_grounded"):
+		return player.is_grounded()
+	return player.is_on_floor()
+
 func _is_sprinting() -> bool:
 	return player.has_method("is_sprinting") and player.is_sprinting()
 
 func _travel(state: StringName, reason: String = "") -> void:
 	if playback == null or playback.get_current_node() == state:
 		return
-	var previous_state := playback.get_current_node()
+	var previous_state = playback.get_current_node()
 	_start_blend(previous_state, state)
 	playback.travel(state)
 	last_state = state
@@ -143,7 +170,7 @@ func _travel(state: StringName, reason: String = "") -> void:
 	})
 
 func _apply_state_animations() -> void:
-	var machine := _get_state_machine()
+	var machine = _get_state_machine()
 	if machine == null:
 		return
 	_set_state_animation(machine, STATE_IDLE, idle_anim)
@@ -154,14 +181,14 @@ func _apply_state_animations() -> void:
 	_set_state_animation(machine, STATE_LAND, land_anim)
 
 func _apply_blend_times() -> void:
-	var machine := _get_state_machine()
+	var machine = _get_state_machine()
 	if machine == null:
 		return
-	var count := machine.get_transition_count()
+	var count = machine.get_transition_count()
 	for index in count:
 		var from_state: String = machine.get_transition_from(index)
 		var to_state: String = machine.get_transition_to(index)
-		var transition := machine.get_transition(index)
+		var transition = machine.get_transition(index)
 		if transition == null:
 			continue
 		transition.xfade_time = _get_transition_time(from_state, to_state)
@@ -179,14 +206,38 @@ func _set_state_animation(
 	) -> void:
 	if anim_name == StringName(""):
 		return
-	var node := machine.get_node(state_name)
+	var node = machine.get_node(state_name)
 	if node is AnimationNodeAnimation:
 		var anim_string := String(anim_name)
-		node.animation = anim_string
-		state_anim_map[state_name] = anim_string
+		var resolved := _resolve_anim_candidates([anim_string, _with_library(anim_string)])
+		node.animation = resolved
+		state_anim_map[state_name] = resolved
 
-func _animation_length(anim_name: StringName, default_length: float) -> float:
-	var anim_string := String(anim_name)
+func _resolve_anim_candidates(names: Array) -> String:
+	for name in names:
+		var candidate := _with_library(name)
+		if _has_animation(candidate):
+			return candidate
+		if _has_animation(name):
+			return name
+	
+	var fallback := animation_player.get_animation_list()[0] if animation_player.get_animation_list().size() > 0 else ""
+	push_warning("Missing animation candidates: %s. Using fallback: %s" % [names, fallback])
+	return fallback
+
+func _has_animation(name: String) -> bool:
+	return animation_player != null and animation_player.has_animation(name)
+
+func _with_library(name: String) -> String:
+	return "%s/%s" % [ANIM_LIB, name]
+
+func _animation_length(anim_key: StringName, default_length: float) -> float:
+	var anim_string := String(anim_key)
+	if anim_string == "":
+		return default_length
+	var anim_name := _with_library(anim_string)
+	if _has_animation(anim_name):
+		return animation_player.get_animation(anim_name).length
 	if _has_animation(anim_string):
 		return animation_player.get_animation(anim_string).length
 	return default_length
@@ -194,8 +245,8 @@ func _animation_length(anim_name: StringName, default_length: float) -> float:
 func _update_model_facing() -> void:
 	if model_root == null:
 		return
-	var move_dir := Vector3(player.velocity.x, 0.0, player.velocity.z)
-	var local_dir := player.global_transform.basis.inverse() * move_dir
+	var move_dir = Vector3(player.velocity.x, 0.0, player.velocity.z)
+	var local_dir = player.global_transform.basis.inverse() * move_dir
 	local_dir.y = 0.0
 	if local_dir.length() > 0.05:
 		last_local_move = local_dir.normalized()
@@ -205,18 +256,28 @@ func _update_model_facing() -> void:
 	var current_yaw := model_root.rotation.y
 	model_root.rotation.y = lerp_angle(current_yaw, target_yaw, facing_smoothing)
 
+func _disable_animation_loops() -> void:
+	if animation_player == null:
+		return
+	for name in NON_LOOPING_ANIMS:
+		for candidate in [_with_library(name), name]:
+			if animation_player.has_animation(candidate):
+				var anim := animation_player.get_animation(candidate)
+				if anim.loop_mode != Animation.LOOP_NONE:
+					anim.loop_mode = Animation.LOOP_NONE
+
 func _start_blend(from: StringName, to: StringName) -> void:
 	if from == "":
 		blend_from_state = ""
 		blend_time_left = 0.0
 		return
 	blend_from_state = from
-	var time := _get_transition_time(str(from), str(to))
+	var time = _get_transition_time(str(from), str(to))
 	blend_time_left = time
 	current_blend_duration = time
 
 func _get_transition_time(from: String, to: String) -> float:
-	var key := "%s>%s" % [from, to]
+	var key = "%s>%s" % [from, to]
 	if blend_overrides.has(key):
 		return blend_overrides[key]
 	return default_blend_time
@@ -248,9 +309,6 @@ func _warn_once(key: StringName, message: String) -> void:
 		return
 	_missing_anim_warnings[key] = true
 	push_warning(message)
-
-func _has_animation(name: String) -> bool:
-	return animation_player != null and animation_player.has_animation(name)
 
 func _on_animation_started(anim_name: StringName) -> void:
 	_emit_debug_event("AnimationStarted", str(anim_name), "AnimationPlayer", {
@@ -300,7 +358,7 @@ func get_debug_state() -> Dictionary:
 func get_blend_snapshot() -> Array[Dictionary]:
 	var blends: Array[Dictionary] = []
 	if blend_from_state != "":
-		var div := current_blend_duration if current_blend_duration > 0.0 else 1.0
+		var div = current_blend_duration if current_blend_duration > 0.0 else 1.0
 		var from_weight: float = clamp(blend_time_left / div, 0.0, 1.0)
 		blends.append({
 			"state": blend_from_state,
@@ -311,7 +369,7 @@ func get_blend_snapshot() -> Array[Dictionary]:
 	if current_state != "":
 		var current_weight: float = 1.0
 		if blend_from_state != "":
-			var div := current_blend_duration if current_blend_duration > 0.0 else 1.0
+			var div = current_blend_duration if current_blend_duration > 0.0 else 1.0
 			current_weight = 1.0 - clamp(blend_time_left / div, 0.0, 1.0)
 		blends.append({
 			"state": current_state,
@@ -325,7 +383,7 @@ func play_interact() -> bool:
 		return false
 	if animation_player == null:
 		return false
-	var anim_name := String(interact_anim)
+	var anim_name = String(interact_anim)
 	if anim_name == "":
 		return false
 	if not _has_animation(anim_name):

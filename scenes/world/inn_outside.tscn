@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://bqrk1wsxh50a"]
+[gd_scene load_steps=18 format=4 uid="uid://bqrk1wsxh50a"]
 
 [ext_resource type="Script" uid="uid://dg8oskfg6ije2" path="res://scripts/world/inn_interior.gd" id="1_ua573"]
+[ext_resource type="Material" uid="uid://ickkffutwcvo" path="res://demo/assets/materials/M_crystal_red.tres" id="2_7sgj7"]
+[ext_resource type="Material" uid="uid://dyk425xkp5jyl" path="res://assets/materials/retro-urban-kit/planks.tres" id="3_ftmaf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn1hl"]
 
@@ -117,11 +119,13 @@ size = Vector3(1.8169556, 2.084961, 1.2089844)
 
 [node name="Inn" type="Node3D"]
 script = ExtResource("1_ua573")
+sleep_cost = 700
 
 [node name="Cube_010" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.168398, 0, -1.3500578, 0, 1, 0, 1.6255554, 0, 3.4619422, -1.1202755, 0.8684208, -1.2041168)
 mesh = SubResource("ArrayMesh_m5bm6")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_010"]
 
@@ -132,6 +136,7 @@ shape = SubResource("ConvexPolygonShape3D_wej8i")
 transform = Transform3D(4.4024334, 0, -1.4258573, 0, 1, 0, 1.7168226, 0, 3.6563137, -1.1202755, 2.799323, -1.2041168)
 mesh = SubResource("ArrayMesh_oay35")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_011"]
 
@@ -142,13 +147,14 @@ shape = SubResource("ConvexPolygonShape3D_ua573")
 transform = Transform3D(0.93166363, 0, -0.9655416, 0, 1, 0, 0.363322, 0, 2.4759305, 3.909873, 0.91373426, 0.9686718)
 mesh = SubResource("ArrayMesh_h4gy8")
 skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_7sgj7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Cube_013"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_013/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_7sgj7")
 
-[node name="SafeArea" type="Area3D" parent="."]
+[node name="SafeArea" type="Area3D" parent="." groups=["safe_respawn"]]
 transform = Transform3D(0.9237258, 0, -0.38305426, 0, 1, 0, 0.38305426, 0, 0.9237258, -0.14080477, 1.4966346, 3.1831155)
 collision_layer = 0
 collision_mask = 2
@@ -167,10 +173,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1668396, 0.7424805, -0.1044
 shape = SubResource("BoxShape3D_ftmaf")
 
 [node name="Label3D" type="Label3D" parent="SafeArea/SleepSpot"]
-transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0, 0.50267637, 0)
-text = "Sleep Area"
+transform = Transform3D(1.0000001, 0, 1.1920929e-07, 0, 1, 0, -1.1920929e-07, 0, 1.0000001, -0.22382033, 1.3360876, -0.539737)
+text = "Hayworth Tavern"
 
 [node name="Label3D" type="Label3D" parent="SafeArea"]
 transform = Transform3D(0.36708567, 0, 0.9301871, 0, 1, 0, -0.9301871, 0, 0.36708567, 0.25800526, 0.7549504, 2.127806)
-text = "Safe Area
+text = "
 "
+
+[node name="RespawnPoint" type="Marker3D" parent="SafeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.9282265, 0, -0.37201598, 0, 1, 0, 0.37201598, 0, 0.9282265, -0.111158326, 0.66932607, 3.262477)
+size = Vector3(1, 1.5477295, 0.12414551)
+material = ExtResource("3_ftmaf")
