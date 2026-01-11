@@ -4,13 +4,15 @@
 [ext_resource type="Script" uid="uid://bskwjhufl88dr" path="res://scripts/world/dropoff.gd" id="2_6v0v1"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8vfj3"]
-radius = 1.0
+height = 0.15
+radius = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3o7xk"]
-radius = 3.106698
+radius = 10.0
 
 [node name="DropoffSite" type="Node3D"]
 script = ExtResource("1_0t6n1")
+site_id = &"9042c357-4244-447b-bef6-f20426126e3b"
 snapshot_enabled = true
 
 [node name="DeliveryArea" type="Area3D" parent="."]
@@ -24,7 +26,9 @@ shape = SubResource("CylinderShape3D_8vfj3")
 [node name="DropPoint" type="Marker3D" parent="."]
 
 [node name="Label3D" type="Label3D" parent="."]
-text = "Dropoff"
+visible = false
+billboard = 1
+text = "DropoffSite"
 
 [node name="LabelArea" type="Area3D" parent="."]
 collision_layer = 0
@@ -34,9 +38,9 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_3o7xk")
 
 [node name="SnapshotCamera" type="Camera3D" parent="."]
+fov = 60.0
 
 [node name="SnapshotViewport" type="SubViewport" parent="."]
-transparent_bg = false
 size = Vector2i(256, 256)
 
 [node name="SnapshotViewportCamera" type="Camera3D" parent="SnapshotViewport"]

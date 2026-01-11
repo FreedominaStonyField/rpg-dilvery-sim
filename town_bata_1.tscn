@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dm2gg6vvo7lfl"]
+[gd_scene load_steps=36 format=3 uid="uid://dm2gg6vvo7lfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="1_0klpl"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="1_1xcyt"]
@@ -13,13 +13,18 @@
 [ext_resource type="PackedScene" uid="uid://yj1mr0leicd3" path="res://scenes/world/DropoffSite.tscn" id="8_8iuey"]
 [ext_resource type="PackedScene" uid="uid://bdejavnfqhbmg" path="res://scenes/world/pickup.tscn" id="8_teyvk"]
 [ext_resource type="Material" uid="uid://cso4f2iyuxpmc" path="res://demo/assets/materials/M_crystal_purple.tres" id="8_x326c"]
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/truck.tres" id="10_y70pc"]
 [ext_resource type="Material" uid="uid://d0hyi5n6ng25w" path="res://demo/assets/materials/M_rock23_black_tp.tres" id="11_m5pti"]
-[ext_resource type="Material" uid="uid://bsuvtf06hoayt" path="res://assets/materials/retro-urban-kit/metal.tres" id="12_jc0h0"]
+[ext_resource type="Material" path="res://assets/materials/retro-urban-kit/grass.tres" id="11_wuf6b"]
+[ext_resource type="Material" uid="uid://dgjiw8udooecr" path="res://addons/prototype_mini_bundle/M_prototype_dark.tres" id="12_i0mfo"]
 [ext_resource type="PackedScene" uid="uid://0vmntyr615js" path="res://addons/prototype_mini_bundle/prop_cube.tscn" id="12_o3pm5"]
 [ext_resource type="PackedScene" uid="uid://c5hkhu8upxsf7" path="res://addons/prototype_mini_bundle/prop_cylinder.tscn" id="13_2pyq1"]
+[ext_resource type="Material" uid="uid://dyk425xkp5jyl" path="res://assets/materials/retro-urban-kit/planks.tres" id="13_gfek7"]
 [ext_resource type="Material" uid="uid://dfd2g23p4e26" path="res://assets/materials/retro-urban-kit/dirt.tres" id="13_jc0h0"]
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/prototype_mini_bundle/prop_torus.tscn" id="14_2djtc"]
 [ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://addons/prototype_mini_bundle/prop_prism.tscn" id="15_m5pti"]
+[ext_resource type="PackedScene" uid="uid://dfi06epfgeex0" path="res://assets/models/building.glb" id="16_kya01"]
+[ext_resource type="PackedScene" uid="uid://bp4b15dr62k4f" path="res://scenes/world/s_gate_block.tscn" id="21_6lmvi"]
 
 [sub_resource type="Gradient" id="Gradient_1xcyt"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -98,6 +103,9 @@ texture_list = Array[Terrain3DTextureAsset]([SubResource("Terrain3DTextureAsset_
 albedo_texture = ExtResource("2_nn78r")
 uv1_triplanar = true
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_kya01"]
+radius = 11.0
+
 [node name="TownBata1" type="Node3D"]
 
 [node name="Terrain3D" type="Terrain3D" parent="."]
@@ -114,7 +122,7 @@ size = Vector3(2, 1.2, 2.1000001)
 material = ExtResource("1_cl1x4")
 
 [node name="tower1_0" parent="Building1" instance=ExtResource("1_1xcyt")]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -26.588913, -6.0914917, 86.99999)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -23.588913, -6.0914917, 87.99999)
 
 [node name="MainRoad" type="Node3D" parent="."]
 
@@ -325,139 +333,139 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block12"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("3_cl1x4")
 
 [node name="Block13" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -86.217865, -0.045824938, 120.06181)
@@ -470,13 +478,13 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
@@ -500,7 +508,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
@@ -524,7 +532,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
@@ -548,7 +556,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
@@ -572,7 +580,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block13"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
@@ -612,142 +620,142 @@ size = Vector3(36, 0.15535009, 56)
 material = SubResource("StandardMaterial3D_o3pm5")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, -0.42232513, -23.922367)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, 0.077674866, 23.47771)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.92232513, 23.477707)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -4.5557065, -0.42232513, 22.477707)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 0.077674866, 23.477707)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, 0.077674866, 13.477707)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.92232513, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -4.5557065, -0.42232513, 12.477711)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 0.077674866, 13.477711)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, 0.077674866, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.92232513, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -4.5557065, -0.42232513, 3.2281914)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 0.077674866, 4.2281914)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, 0.077674866, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.92232513, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -4.5557065, -0.42232513, -6.290737)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 0.077674866, -5.290737)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 12.689037, 0.077674866, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.92232513, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -4.5557065, -0.42232513, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 0.077674866, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, 3.6890368, -0.42232513, -23.351826)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block14"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
+transform = Transform3D(0.9999998, 0, -3.5527137e-15, 0, 1, 0, 3.5527137e-15, 0, 0.9999998, -12.447765, 3.077674, -23.351826)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("8_x326c")
 
 [node name="Block15" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 27.782127, -0.045824938, 118.56181)
@@ -911,19 +919,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
@@ -935,19 +943,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block16"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
@@ -1056,140 +1064,140 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block17"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Block18" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 98.4651, -0.045824938, 64.56182)
 use_collision = true
 collision_mask = 3
 size = Vector3(35, 0.15535009, 56)
-material = SubResource("StandardMaterial3D_o3pm5")
+material = ExtResource("5_x326c")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
@@ -1261,13 +1269,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
@@ -1285,13 +1293,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
@@ -1309,13 +1317,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block18"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -1327,7 +1335,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Block19" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 59.465107, -0.045824938, 64.56182)
@@ -1340,25 +1348,25 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
@@ -1370,91 +1378,91 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999917, 0, -2.842171e-14, 0, 1, 0, 2.842171e-14, 0, 0.99999917, 1.932991, 1.5776747, 13.477722)
 use_collision = true
 size = Vector3(7, 3, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building134" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 45.932987, 3.0776749, 24.477715)
@@ -1516,203 +1524,23 @@ use_collision = true
 size = Vector3(7, 5, 8)
 material = ExtResource("1_cl1x4")
 
-[node name="Building144" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 192.93297, 3.0776749, 13.4777155)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building145" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 192.93297, 3.0776749, 4.228195)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building146" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 183.93297, 2.0776749, 4.228195)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building147" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 175.68823, 2.5776749, 3.2281952)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building148" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 192.93297, 3.0776749, -5.2907333)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building149" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 183.93297, 2.0776749, -5.2907333)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building150" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 175.68823, 2.5776749, -6.2907333)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building151" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 192.93297, 3.0776749, -15.348469)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building152" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 183.93297, 2.0776749, -15.348469)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building153" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 175.68823, 2.5776749, -16.348469)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building154" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 120.47771)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building155" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 111.22819)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building156" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 111.22819)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building157" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 151.22818)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building158" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 101.70926)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building159" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 101.70926)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building160" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 100.70926)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building161" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 91.65152)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building162" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 91.65152)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building163" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 90.65152)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building164" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 151.4777)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building165" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.9999972, 0, -9.2370556e-14, 0, 1, 0, 9.2370556e-14, 0, 0.9999972, 194.93297, 3.0776749, 143.22818)
-use_collision = true
-size = Vector3(7, 6, 24)
-material = ExtResource("1_cl1x4")
-
-[node name="Building166" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 151.22818)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building167" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 110.22819)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building168" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 101.70926)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building169" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 101.70926)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building170" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 100.70926)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
-[node name="Building171" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 185.93297, 3.0776749, 91.65152)
-use_collision = true
-size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building172" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 176.93297, 2.0776749, 91.65152)
-use_collision = true
-size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building173" type="CSGBox3D" parent="MainRoad/Block19"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 168.68823, 2.5776749, 90.65152)
-use_collision = true
-size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
-
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block19"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Block20" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 141.46509, -0.045824938, 10.561818)
@@ -1930,19 +1758,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
@@ -1954,19 +1782,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
@@ -1978,31 +1806,31 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block21"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("5_x326c")
 
 [node name="Block22" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 76.465096, -0.045824938, 11.561821)
@@ -2166,133 +1994,133 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block23"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Block24" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, 112.46509, -0.045824938, -37.938175)
@@ -2311,121 +2139,121 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block24"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -2456,136 +2284,136 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block25"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Block26" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -159.5349, -0.045824938, -170.43814)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -156.5349, -0.045824938, -170.43814)
 use_collision = true
 collision_mask = 3
 size = Vector3(35, 0.15535009, 56)
@@ -2595,25 +2423,25 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
@@ -2625,19 +2453,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
@@ -2649,19 +2477,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
@@ -2673,19 +2501,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
@@ -2697,19 +2525,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
@@ -2721,7 +2549,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("11_wuf6b")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block26"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
@@ -2730,7 +2558,7 @@ size = Vector3(5, 12, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Block27" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -119.534904, -0.045824938, -165.43814)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -118.534904, -0.045824938, -162.43814)
 use_collision = true
 collision_mask = 3
 size = Vector3(35, 0.15535009, 56)
@@ -2891,19 +2719,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
@@ -2915,19 +2743,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
@@ -2939,19 +2767,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
@@ -2963,19 +2791,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
@@ -2987,19 +2815,19 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
@@ -3011,7 +2839,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("12_i0mfo")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block28"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
@@ -3060,97 +2888,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block29"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -3326,140 +3154,140 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building103" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 23.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building118" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block41"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
 use_collision = true
 size = Vector3(5, 12, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("13_gfek7")
 
 [node name="Block42" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(1.3113416e-07, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, 1.3113416e-07, -148.61292, -0.045824938, -114.816505)
 use_collision = true
 collision_mask = 3
 size = Vector3(35, 0.15535009, 56)
-material = SubResource("StandardMaterial3D_o3pm5")
+material = ExtResource("13_gfek7")
 
 [node name="Building99" type="CSGBox3D" parent="MainRoad/Block42"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
@@ -3755,7 +3583,7 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block37"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
@@ -3785,7 +3613,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block37"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
@@ -3809,7 +3637,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block37"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
@@ -3833,7 +3661,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block37"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
@@ -3857,7 +3685,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block37"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
@@ -4045,19 +3873,19 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building101" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 23.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building102" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 22.477715)
@@ -4075,13 +3903,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
@@ -4099,13 +3927,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
@@ -4123,13 +3951,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
@@ -4147,13 +3975,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
@@ -4171,7 +3999,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block39"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
@@ -4190,7 +4018,7 @@ material = SubResource("StandardMaterial3D_o3pm5")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 2.5776749, -23.92237)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building100" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 23.477715)
@@ -4220,13 +4048,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
@@ -4244,13 +4072,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
@@ -4268,13 +4096,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
@@ -4292,13 +4120,13 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
@@ -4316,7 +4144,7 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
 use_collision = true
 size = Vector3(7, 5, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building105" type="CSGBox3D" parent="MainRoad/Block40"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 6.0776744, -23.35183)
@@ -4365,97 +4193,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block30"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -4510,97 +4338,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block31"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -4655,97 +4483,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block32"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -4800,97 +4628,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block33"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -4945,97 +4773,97 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building119" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 13.477715)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building120" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 12.477715)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building121" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 13.477715)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building122" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building123" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, 4.228195)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building124" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, 3.2281952)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building125" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, 4.228195)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building126" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building127" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -5.2907333)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building128" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -6.2907333)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building129" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -5.2907333)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building130" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 10.932991, 3.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building131" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.0776749, -15.348469)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building132" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -6.3117447, 2.5776749, -16.348469)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building133" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -14.203819, 3.077675, -15.348469)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("10_y70pc")
 
 [node name="Building104" type="CSGBox3D" parent="MainRoad/Block34"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.932991, 2.5776749, -23.35183)
@@ -5114,7 +4942,6 @@ site_id = &"3fcfab1d-7ef4-492f-8f1a-a67613ef5dbb"
 display_name = "Moonlit Alley"
 
 [node name="Label3D" parent="MainRoad/Building15/MoonlitAlleyDropoff" index="2"]
-visible = false
 text = "Moonlit Alley"
 
 [node name="SnapshotCamera" parent="MainRoad/Building15/MoonlitAlleyDropoff" index="4"]
@@ -5145,12 +4972,11 @@ size = Vector3(13, 0.5, 19)
 material = ExtResource("5_x326c")
 
 [node name="HarborsEndDropoff" parent="MainRoad/Building18" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, 1.4, 4.103241)
+transform = Transform3D(0.8660253, 0, 0.49999997, 0, 1, 0, -0.49999997, 0, 0.8660253, 146.52379, 1.4, -161.35974)
 site_id = &"d33ca587-35ce-4a72-8316-9bc0e1c6cd76"
 display_name = "Harbors End"
 
 [node name="Label3D" parent="MainRoad/Building18/HarborsEndDropoff" index="2"]
-visible = false
 text = "Harbors End"
 
 [node name="SnapshotCamera" parent="MainRoad/Building18/HarborsEndDropoff" index="4"]
@@ -5200,7 +5026,6 @@ site_id = &"32624ac2-4764-4af4-b863-3bc7f6169c16"
 display_name = "Ashen Atrium"
 
 [node name="Label3D" parent="MainRoad/Building50/AshenAtriumDropoff" index="2"]
-visible = false
 text = "Ashen Atrium"
 
 [node name="SnapshotCamera" parent="MainRoad/Building50/AshenAtriumDropoff" index="4"]
@@ -5278,24 +5103,6 @@ use_collision = true
 size = Vector3(1.5, 0.2, 6)
 material = ExtResource("4_8iuey")
 
-[node name="Building53" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -95.96837, 1.53185, 20.415668)
-use_collision = true
-size = Vector3(3, 3, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building54" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -95.96837, 1.53185, 76.415665)
-use_collision = true
-size = Vector3(3, 3, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building55" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -95.96837, 1.53185, -35.70739)
-use_collision = true
-size = Vector3(3, 3, 5)
-material = ExtResource("1_cl1x4")
-
 [node name="Building7" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -35.418007, 2.8820305, 20.915668)
 use_collision = true
@@ -5303,12 +5110,11 @@ size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="DropoffSite" parent="MainRoad/Building7" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.9659258, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.9659258, 37.62935, -2.4, -2.9678268)
+transform = Transform3D(-0.50000006, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, -0.50000006, 21.294271, -2.4, -169.0255)
 site_id = &"018e7879-b5ff-444b-939d-6467fd129456"
 display_name = "CornerStore"
 
 [node name="Label3D" parent="MainRoad/Building7/DropoffSite" index="2"]
-visible = false
 text = "CornerStore"
 
 [node name="SnapshotCamera" parent="MainRoad/Building7/DropoffSite" index="4"]
@@ -5326,7 +5132,6 @@ site_id = &"05a592a1-3618-4322-81da-46b80304668d"
 display_name = "Gilded Lantern"
 
 [node name="Label3D" parent="MainRoad/Building10/GildedLanternDropoff" index="2"]
-visible = false
 text = "Gilded Lantern"
 
 [node name="SnapshotCamera" parent="MainRoad/Building10/GildedLanternDropoff" index="4"]
@@ -5345,12 +5150,11 @@ size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="RustyKettleDropoff" parent="MainRoad/Building12" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -3.3828428, -1.6, 4.103241)
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 164.20145, -1.6, 139.16063)
 site_id = &"bc4ea780-1f35-4640-8a4e-ce173b816f3f"
 display_name = "Rusty Kettle"
 
 [node name="Label3D" parent="MainRoad/Building12/RustyKettleDropoff" index="2"]
-visible = false
 text = "Rusty Kettle"
 
 [node name="SnapshotCamera" parent="MainRoad/Building12/RustyKettleDropoff" index="4"]
@@ -5410,7 +5214,6 @@ site_id = &"d538775a-5799-435a-900f-057978e4875d"
 display_name = "Blue Thistle"
 
 [node name="Label3D" parent="MainRoad/Building60/BlueThistleDropoff" index="2"]
-visible = false
 text = "Blue Thistle"
 
 [node name="SnapshotCamera" parent="MainRoad/Building60/BlueThistleDropoff" index="4"]
@@ -5444,13 +5247,13 @@ material = ExtResource("11_m5pti")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 128.58197, 10.53185, 82.76463)
 use_collision = true
 size = Vector3(2, 9, 2)
-material = ExtResource("12_jc0h0")
+material = ExtResource("5_x326c")
 
 [node name="waypoint4" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 165.3999, 9.53185, -66.96483)
 use_collision = true
 size = Vector3(2, 7, 17)
-material = ExtResource("12_jc0h0")
+material = ExtResource("10_y70pc")
 
 [node name="waypoint5" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.25881904, 0, -0.96592575, 0, 1, 0, 0.96592575, 0, 0.25881904, -171.83212, 16.031849, -130.46483)
@@ -5500,7 +5303,6 @@ site_id = &"7ef63220-6a28-49d7-b223-df4d13718ddd"
 display_name = "Brass Harbor"
 
 [node name="Label3D" parent="MainRoad/Building67/BrassHarborDropoff" index="2"]
-visible = false
 text = "Brass Harbor"
 
 [node name="SnapshotCamera" parent="MainRoad/Building67/BrassHarborDropoff" index="4"]
@@ -5554,7 +5356,6 @@ site_id = &"38e4432d-249f-40e8-82e3-22a1409dd3cc"
 display_name = "Cinder Gate"
 
 [node name="Label3D" parent="MainRoad/Building74/CinderGateDropoff" index="2"]
-visible = false
 text = "Cinder Gate"
 
 [node name="SnapshotCamera" parent="MainRoad/Building74/CinderGateDropoff" index="4"]
@@ -5657,12 +5458,11 @@ size = Vector3(7, 5, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="WhisperedCourtDropoff" parent="MainRoad/Building90" instance=ExtResource("8_8iuey")]
-transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, -3.3828428, -1.6, 4.103241)
+transform = Transform3D(-0.25881907, 0, -0.9659259, 0, 1, 0, 0.9659259, 0, -0.25881907, -3.3828428, -1.6, 4.103241)
 site_id = &"d9a6e582-c1fc-4e13-b057-317bad960a64"
 display_name = "Whispered Court"
 
 [node name="Label3D" parent="MainRoad/Building90/WhisperedCourtDropoff" index="2"]
-visible = false
 text = "Whispered Court"
 
 [node name="SnapshotCamera" parent="MainRoad/Building90/WhisperedCourtDropoff" index="4"]
@@ -5684,25 +5484,25 @@ material = ExtResource("1_cl1x4")
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -8.276323, 3.0318499, 91.53953)
 use_collision = true
 size = Vector3(7, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building94" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -17.276323, 2.0318499, 91.53953)
 use_collision = true
 size = Vector3(7, 4, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building95" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -25.521055, 2.5318499, 90.53953)
 use_collision = true
 size = Vector3(7, 5, 8)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building96" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -33.41313, 3.03185, 91.53953)
 use_collision = true
 size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+material = ExtResource("6_teyvk")
 
 [node name="Building97" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -17.276323, 2.5318499, 44.709984)
@@ -5711,7 +5511,7 @@ size = Vector3(7, 5, 6)
 material = ExtResource("1_cl1x4")
 
 [node name="Building98" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -33.41313, 3.03185, 44.709984)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -30.413132, 3.03185, 45.709984)
 use_collision = true
 size = Vector3(5, 6, 6)
 material = ExtResource("1_cl1x4")
@@ -5741,7 +5541,6 @@ display_name = "Backbone ally"
 
 [node name="Label3D" parent="MainRoad/Building22/DropoffSite" index="2"]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0, 0)
-visible = false
 text = "Backbone ally"
 
 [node name="SnapshotCamera" parent="MainRoad/Building22/DropoffSite" index="4"]
@@ -5753,23 +5552,27 @@ use_collision = true
 size = Vector3(18, 6, 6)
 material = ExtResource("1_cl1x4")
 
-[node name="Building24" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -76.666275, 2.8820305, 11.19202)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
+[node name="Building24" parent="MainRoad" instance=ExtResource("16_kya01")]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -76.5, 0, 10)
 
 [node name="CopperFinchDropoff" parent="MainRoad/Building24" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.49999997, 0, -0.8660253, 0, 1, 0, 0.8660253, 0, 0.49999997, -3.523035, -1.9000001, 3.2604208)
+transform = Transform3D(0.49999994, 0, -0.86602527, 0, 1, 0, 0.86602527, 0, 0.49999994, -4.653409, 0.9820304, 4.7203903)
 site_id = &"a180c4ba-9bee-4f02-93fe-f6169b135a6d"
 display_name = "Copper Finch"
 
+[node name="CollisionShape3D" parent="MainRoad/Building24/CopperFinchDropoff/DeliveryArea" index="0"]
+transform = Transform3D(1.0000001, 0, 2.682209e-07, 0, 1, 0, -2.682209e-07, 0, 1.0000001, 1.9000018, -0.825, -0.90003854)
+
 [node name="Label3D" parent="MainRoad/Building24/CopperFinchDropoff" index="2"]
-visible = false
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 1.6428202, 1.5, -1.2454484)
 text = "Copper Finch"
 
+[node name="LabelAreaShape" parent="MainRoad/Building24/CopperFinchDropoff/LabelArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+shape = SubResource("SphereShape3D_kya01")
+
 [node name="SnapshotCamera" parent="MainRoad/Building24/CopperFinchDropoff" index="4"]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
+transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, 0.7320508, 0.6, 2.732051)
 
 [node name="Building25" type="CSGBox3D" parent="MainRoad"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -73.666275, 2.8820305, -25.913876)
@@ -5807,7 +5610,6 @@ site_id = &"2f64be94-11d5-40dc-8d59-9a86816be1c8"
 display_name = "Shady Roof"
 
 [node name="Label3D" parent="MainRoad/MikasDrugstore/ShadyRoofDropoff" index="2"]
-visible = false
 text = "Shady Roof"
 
 [node name="SnapshotCamera" parent="MainRoad/MikasDrugstore/ShadyRoofDropoff" index="4"]
@@ -5826,12 +5628,11 @@ size = Vector3(23, 6, 7.6)
 material = ExtResource("1_cl1x4")
 
 [node name="WakingOwlDropoff" parent="MainRoad/Building30" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.8660253, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, 0.8660253, -3.3828428, -1.9000001, 8.345881)
+transform = Transform3D(0.8660253, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, 0.8660253, -99.72, -1.9000001, 83.20674)
 site_id = &"c46e4da2-a7bc-4526-8e19-6bfaf7c1c318"
 display_name = "Waking Owl"
 
 [node name="Label3D" parent="MainRoad/Building30/WakingOwlDropoff" index="2"]
-visible = false
 text = "Waking Owl"
 
 [node name="SnapshotCamera" parent="MainRoad/Building30/WakingOwlDropoff" index="4"]
@@ -5843,266 +5644,10 @@ use_collision = true
 size = Vector3(15, 4.5, 5.4)
 material = ExtResource("1_cl1x4")
 
-[node name="Building32" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -18.084328)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building33" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -96.47562, 2.8820305, -1.1365719)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="SaltwindStoopDropoff" parent="MainRoad/Building33" instance=ExtResource("8_8iuey")]
-transform = Transform3D(-0.8660253, 0, -0.49999994, 0, 1, 0, 0.49999994, 0, -0.8660253, -43.990536, -1.5999985, -107.523674)
-site_id = &"66f719e1-a132-4789-bb86-5e80c877fc1d"
-display_name = "Saltwind Stoop"
-
-[node name="Label3D" parent="MainRoad/Building33/SaltwindStoopDropoff" index="2"]
-visible = false
-text = "Saltwind Stoop"
-
-[node name="SnapshotCamera" parent="MainRoad/Building33/SaltwindStoopDropoff" index="4"]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
-
-[node name="Building34" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 1.3820305, -9.617239)
-use_collision = true
-size = Vector3(5, 3, 10)
-material = ExtResource("1_cl1x4")
-
-[node name="Building35" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 4.1920214)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building36" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 11.19202)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building37" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -25.913876)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building38" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 37.91567)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building39" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -97.7863, 2.8820305, 45.09522)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building40" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 52.882755)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building41" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 60.192017)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="SunkenStepsDropoff" parent="MainRoad/Building41" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.258819, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.258819, -2.6063857, -1.6, 10.726021)
-site_id = &"ce0b9833-5197-4b47-8020-6a3908f82d2e"
-display_name = "Sunken Steps"
-
-[node name="Label3D" parent="MainRoad/Building41/SunkenStepsDropoff" index="2"]
-visible = false
-text = "Sunken Steps"
-
-[node name="SnapshotCamera" parent="MainRoad/Building41/SunkenStepsDropoff" index="4"]
-transform = Transform3D(0.8660254, 0, -0.5, 0, 1, 0, 0.5, 0, 0.8660254, -1, 0, 1.7320508)
-
-[node name="Building42" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 67.19202)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building43" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, 30.08612)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building99" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -133.96835, 1.53185, 6.4156713)
-use_collision = true
-size = Vector3(3, 3, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building100" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -136.1576, 2.8820305, -9.219957)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building101" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, -17.117239)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building102" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, -9.807978)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building103" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, -2.8079786)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building104" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, 23.915668)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building105" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -133.76028, 2.8820305, 31.385359)
-use_collision = true
-size = Vector3(15, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building118" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, 38.882755)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building119" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -134.96838, 2.8820305, 16.08612)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building120" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, -108.96835, 1.53185, 6.4156713)
-use_collision = true
-size = Vector3(3, 3, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building121" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -111.44598, 2.8820305, -13.006222)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building122" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, -17.117239)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building123" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, -9.807978)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building124" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, -2.8079786)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building125" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, 23.915668)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building126" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -112.756645, 2.8820305, 33.22557)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building127" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, 38.882755)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building128" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -109.96838, 2.8820305, 16.08612)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building44" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -74.2074)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building45" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.9884648, 0, 0.15145057, 0, 1, 0, -0.15145057, 0, 0.9884648, -97.44236, 2.8820305, -66.87149)
-use_collision = true
-size = Vector3(5.965332, 6, 5)
-material = ExtResource("1_cl1x4")
-
-[node name="Building46" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -59.240307)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building47" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -51.931046)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building48" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -44.931046)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building49" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -82.03694)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building129" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -74.2074)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building130" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -82.03694)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
-[node name="Building56" type="CSGBox3D" parent="MainRoad"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -96.96838, 2.8820305, -89.97255)
-use_collision = true
-size = Vector3(5, 6, 6)
-material = ExtResource("1_cl1x4")
-
 [node name="Inn" parent="MainRoad" instance=ExtResource("1_0klpl")]
 transform = Transform3D(-0.86602545, 0, -0.49999997, 0, 1, 0, 0.49999997, 0, -0.86602545, -24.24871, 0.16342956, -14)
+
+[node name="S-gate-block" parent="MainRoad" instance=ExtResource("21_6lmvi")]
 
 [node name="PropCube" parent="." instance=ExtResource("12_o3pm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.926445, 0.5318503, -28.393095)
@@ -6264,5 +5809,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.426445, 1.5318503, -22.49
 [editable path="MainRoad/Building24/CopperFinchDropoff"]
 [editable path="MainRoad/MikasDrugstore/ShadyRoofDropoff"]
 [editable path="MainRoad/Building30/WakingOwlDropoff"]
-[editable path="MainRoad/Building33/SaltwindStoopDropoff"]
-[editable path="MainRoad/Building41/SunkenStepsDropoff"]
