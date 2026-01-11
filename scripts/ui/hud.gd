@@ -45,7 +45,7 @@ func _ready() -> void:
 	package_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	PlayerData.money_changed.connect(_on_money_changed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	PlayerData.inventory_changed.connect(_on_inventory_changed)
 	TimeSystem.time_changed.connect(_on_time_changed)
 	TimeSystem.new_morning.connect(_on_new_morning)
 	TimeSystem.mugged.connect(_on_mugged)
@@ -62,8 +62,8 @@ func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	interaction_list.item_selected.connect(_on_interaction_item_selected)
-	_on_money_changed(PlayerData.money)
-	_on_carrying_changed(PlayerData.carrying_item)
+	_on_money_changed(PlayerData.get_money())
+	_on_inventory_changed()
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
 	package_menu.visible = false
@@ -85,8 +85,16 @@ func _process(_delta: float) -> void:
 func _on_money_changed(amount: int) -> void:
 	money_label.text = "$" + str(amount)
 
-func _on_carrying_changed(item_name: String) -> void:
-	var display_name = item_name.to_upper() if item_name != "" else "NONE"
+func _on_inventory_changed() -> void:
+	var count = PlayerData.get_item_count(Jobs.DELIVERY_ITEM_ID)
+	if count <= 0:
+		carrying_label.text = "NONE"
+		return
+	var item = PlayerData.get_item_by_id(Jobs.DELIVERY_ITEM_ID)
+	var name = item.display_name if item != null and item.display_name != "" else "Parcel"
+	var display_name = name.to_upper()
+	if count > 1:
+		display_name = "%s x%d" % [display_name, count]
 	carrying_label.text = display_name
 
 func _on_time_changed(day_time: float) -> void:
@@ -219,7 +227,6 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 	transition_tween.tween_callback(func() -> void:
 		if is_mugged:
 			PlayerData.reset_money()
-			PlayerData.clear_carrying()
 			Jobs.clear_active_job()
 		TimeSystem.start_new_day()
 	)

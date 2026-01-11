@@ -7,7 +7,7 @@ These describe the current prototype state, not permanent feature limits.
 If a task requests expanding beyond this list, update the list as part of the change.
 - No combat, no NPC AI, no dialogue trees
 - No saving/loading system beyond current save hooks
-- No inventory system yet (rebuild planned)
+- Inventory system (stackable, resource-based)
 - Stamina is a HUD placeholder (no exhaustion penalties yet)
 - No health/fall damage system yet
 - No multi-job juggling yet
@@ -22,7 +22,7 @@ and small helper scripts instead of deep class trees.
 - `GameState`: controls current mode (MENU, PLAYING, PAUSED, SLEEPING, MUGGED)
 - `TimeSystem`: day progression + curfew events
 - `Jobs`: manages the single active delivery job
-- `PlayerData`: money + carrying state
+- `PlayerData`: money + inventory
 - `UIEvents`: one-line event bus for HUD notifications (optional but recommended)
 - `SaveSystem`: save hooks for sleep and job completion
 
@@ -95,14 +95,14 @@ Every scene should have a script ONLY if it contains logic.
 - `GameState` gates input; menus pause play and show the mouse cursor.
 - `TimeSystem` controls day time, curfew, and morning reset.
 - `Jobs` builds offers at pickups, tracks the active job, and emits snapshots.
-- `PlayerData` owns money and notifies HUD updates.
+- `PlayerData` owns money + inventory and notifies HUD updates.
 - `UIEvents` is the UI event bus for prompts, menus, and notifications.
 - `SaveSystem` performs auto-save hooks on sleep and job completion.
 
 ## 9) Testing discipline
 Every change must keep these working:
 - Player can move + camera behaves
-- Pick up item -> carrying state updates
+- Pick up item -> inventory updates
 - Deliver -> money increases + HUD notify
 - Curfew mug -> money resets -> morning
 - Pause toggles without breaking input

@@ -14,7 +14,7 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.job_completed.connect(_on_job_state_changed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	PlayerData.inventory_changed.connect(_on_inventory_changed)
 	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
@@ -38,7 +38,7 @@ func _can_interact() -> bool:
 		return false
 	if not _matches_current_dropoff():
 		return false
-	if not PlayerData.is_carrying():
+	if not PlayerData.has_item_id(Jobs.DELIVERY_ITEM_ID):
 		return false
 	return true
 
@@ -53,7 +53,7 @@ func _deliver() -> void:
 func _on_job_state_changed(_payload = null) -> void:
 	_update_prompt()
 
-func _on_carrying_changed(_item_name: String) -> void:
+func _on_inventory_changed() -> void:
 	_update_prompt()
 
 func _update_prompt() -> void:

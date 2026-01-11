@@ -12,7 +12,7 @@ var dropoff_ref: Node3D = null
 func _ready() -> void:
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_finished)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	PlayerData.inventory_changed.connect(_on_inventory_changed)
 
 func has_ticket() -> bool:
 	return item_name != "" and recipient_name != ""
@@ -27,13 +27,13 @@ func get_details() -> Dictionary:
 func _on_job_started(dropoff: Node3D) -> void:
 	dropoff_ref = dropoff
 	recipient_name = _get_dropoff_display_name(dropoff)
-	if PlayerData.is_carrying():
-		item_name = PlayerData.carrying_item
+	if PlayerData.has_item_id(Jobs.DELIVERY_ITEM_ID):
+		item_name = _get_delivery_item_name()
 	_emit_update()
 
-func _on_carrying_changed(carrying: String) -> void:
-	item_name = carrying
-	if not Jobs.has_active_job() and carrying == "":
+func _on_inventory_changed() -> void:
+	item_name = _get_delivery_item_name()
+	if not Jobs.has_active_job() and item_name == "":
 		_clear_ticket()
 		return
 	_emit_update()
@@ -59,3 +59,11 @@ func _get_dropoff_display_name(dropoff: Node3D) -> String:
 		if site.display_name != "":
 			return site.display_name
 	return dropoff.name
+
+func _get_delivery_item_name() -> String:
+	var item = PlayerData.get_item_by_id(Jobs.DELIVERY_ITEM_ID)
+	if item == null:
+		return ""
+	if not PlayerData.has_item_id(Jobs.DELIVERY_ITEM_ID):
+		return ""
+	return item.display_name if item.display_name != "" else "Parcel"

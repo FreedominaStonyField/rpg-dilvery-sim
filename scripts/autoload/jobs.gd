@@ -8,7 +8,7 @@ signal job_offers_updated
 signal pickup_consumed(pickup: Node3D)
 signal jobs_restored
 
-const DELIVERY_ITEM_NAME = "Package"
+const DELIVERY_ITEM_ID: StringName = &"parcel"
 
 var current_dropoff: Node3D
 @export var offer_count: int = 3
@@ -356,9 +356,9 @@ func _clear_active_job_state() -> void:
 
 func _set_carrying_state(active: bool) -> void:
 	if active:
-		PlayerData.set_carrying(DELIVERY_ITEM_NAME)
+		PlayerData.ensure_item_count(DELIVERY_ITEM_ID, 1)
 		return
-	PlayerData.clear_carrying()
+	PlayerData.remove_all_of_item_id(DELIVERY_ITEM_ID)
 
 func _set_record_snapshot(record: JobRecord, snapshot: Texture2D) -> void:
 	if record == null or snapshot == null:

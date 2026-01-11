@@ -20,7 +20,7 @@ func _ready() -> void:
 	Jobs.job_available.connect(_on_job_available)
 	Jobs.job_started.connect(_on_job_state_changed)
 	Jobs.pickup_consumed.connect(_on_pickup_consumed)
-	PlayerData.carrying_changed.connect(_on_carrying_changed)
+	PlayerData.inventory_changed.connect(_on_inventory_changed)
 	_update_prompt()
 
 func _on_body_entered(body: Node3D) -> void:
@@ -51,7 +51,7 @@ func _on_job_available() -> void:
 func _on_job_state_changed(_dropoff: Node3D) -> void:
 	_update_prompt()
 
-func _on_carrying_changed(_item_name: String) -> void:
+func _on_inventory_changed() -> void:
 	_update_prompt()
 
 func _on_pickup_consumed(pickup: Node3D) -> void:
@@ -65,7 +65,7 @@ func _on_pickup_consumed(pickup: Node3D) -> void:
 func _can_interact() -> bool:
 	if not available:
 		return false
-	if Jobs.has_active_job() or PlayerData.is_carrying():
+	if Jobs.has_active_job() or PlayerData.has_item_id(Jobs.DELIVERY_ITEM_ID):
 		return false
 	return true
 

@@ -148,7 +148,7 @@ func _build_meta(tag: String) -> Dictionary:
 		"unix_time": Time.get_unix_time_from_system(),
 		"playtime_seconds": playtime_seconds,
 		"current_day": TimeSystem.current_day,
-		"money": PlayerData.money,
+		"money": PlayerData.get_money(),
 		"active_job": active_name
 	}
 
