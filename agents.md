@@ -85,6 +85,7 @@ Every scene should have a script ONLY if it contains logic.
 ## 7) Prototype gameplay rules
 - One item type
 - One active job at a time
+- Win Condition: Accumulate 5,000 gold to buy a "City Pass" and leave.
 - Curfew:
   - If outdoors when curfew hits: start a short timer, then mug.
   - If in safe zone: safe (no mugging)

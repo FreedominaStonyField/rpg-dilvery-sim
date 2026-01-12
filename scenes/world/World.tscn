@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://world"]
+[gd_scene load_steps=10 format=3 uid="uid://world"]
 
 [ext_resource type="Script" uid="uid://di14py3htg1yi" path="res://scripts/world/world.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://player" path="res://scenes/player/Player.tscn" id="2"]
@@ -34,7 +34,7 @@ dawn_angle = -0.5
 night_angle = -171.6
 
 [node name="Player" parent="." instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.95549, 0.039629526, -22.473682)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.800524, 41.834877, 82.34086)
 floor_constant_speed = true
 floor_max_angle = 0.8552113
 LandingCooldownMode = "Clamp Speed"

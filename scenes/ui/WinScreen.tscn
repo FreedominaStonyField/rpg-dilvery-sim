@@ -1,0 +1,78 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1yq2nqwmstxw"]
+
+[ext_resource type="Script" uid="uid://d2phtckkq4k7v" path="res://scripts/ui/win_screen.gd" id="1_7c0po"]
+
+[node name="WinScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7c0po")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.04, 0.05, 1)
+
+[node name="CreditsViewport" type="Control" parent="."]
+anchors_preset = 15
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.82
+grow_horizontal = 2
+grow_vertical = 2
+clip_contents = true
+
+[node name="CreditsContent" type="Control" parent="CreditsViewport"]
+layout_mode = 0
+
+[node name="CreditsVBox" type="VBoxContainer" parent="CreditsViewport/CreditsContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18
+
+[node name="TitleLabel" type="Label" parent="CreditsViewport/CreditsContent/CreditsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86, 1)
+theme_override_font_sizes/font_size = 36
+text = "CITY PASS GRANTED"
+
+[node name="SubtitleLabel" type="Label" parent="CreditsViewport/CreditsContent/CreditsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.75, 0.78, 1)
+theme_override_font_sizes/font_size = 16
+text = "Placeholder epilogue + credits"
+
+[node name="CreditsLabel" type="Label" parent="CreditsViewport/CreditsContent/CreditsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.85, 0.86, 0.88, 1)
+theme_override_font_sizes/font_size = 18
+text = "You hand over the last coins and feel the weight lift from your shoulders.\nThe clerk stamps your papers, and the gate finally opens.\n\nCREDITS\nDelivery Lead: Placeholder\nTown Planner: Placeholder\nCourier Log: Placeholder\nMusic: Placeholder\nSpecial Thanks: You"
+
+[node name="EpilogueLabel" type="Label" parent="CreditsViewport/CreditsContent/CreditsVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86, 1)
+theme_override_font_sizes/font_size = 20
+text = "EPILOGUE\n\nYou leave the city at sunrise, City Pass in hand.\nTomorrow is yours. The road is open.\n\nPlaceholder text."
+
+[node name="PromptLabel" type="Label" parent="."]
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.85
+anchor_right = 1.0
+anchor_bottom = 0.95
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 18
+horizontal_alignment = 1
+text = "PRESS ANY KEY TO RETURN TO THE MAIN MENU"
+visible = false

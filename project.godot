@@ -26,7 +26,7 @@ SaveSystem="*res://scripts/autoload/save_system.gd"
 
 [display]
 
-window/size/mode=3
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

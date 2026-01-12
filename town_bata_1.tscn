@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dm2gg6vvo7lfl"]
+[gd_scene load_steps=38 format=3 uid="uid://dm2gg6vvo7lfl"]
 
 [ext_resource type="PackedScene" uid="uid://bqrk1wsxh50a" path="res://scenes/world/inn_outside.tscn" id="1_0klpl"]
 [ext_resource type="PackedScene" uid="uid://cah85l68d2ftt" path="res://assets/models/tower_1_0.tscn" id="1_1xcyt"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://caqayjkbvlel5" path="res://addons/prototype_mini_bundle/prop_torus.tscn" id="14_2djtc"]
 [ext_resource type="PackedScene" uid="uid://ciuwt2yj4hcu2" path="res://addons/prototype_mini_bundle/prop_prism.tscn" id="15_m5pti"]
 [ext_resource type="PackedScene" uid="uid://dfi06epfgeex0" path="res://assets/models/building.glb" id="16_kya01"]
+[ext_resource type="Script" uid="uid://dd4tw2kml8kyp" path="res://scripts/world/city_pass_office.gd" id="17_citypass"]
 [ext_resource type="PackedScene" uid="uid://bp4b15dr62k4f" path="res://scenes/world/s_gate_block.tscn" id="21_6lmvi"]
 
 [sub_resource type="Gradient" id="Gradient_1xcyt"]
@@ -105,6 +106,9 @@ uv1_triplanar = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kya01"]
 radius = 11.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_city_pass"]
+size = Vector3(3, 3, 3)
 
 [node name="TownBata1" type="Node3D"]
 
@@ -4972,7 +4976,7 @@ size = Vector3(13, 0.5, 19)
 material = ExtResource("5_x326c")
 
 [node name="HarborsEndDropoff" parent="MainRoad/Building18" instance=ExtResource("8_8iuey")]
-transform = Transform3D(0.8660253, 0, 0.49999997, 0, 1, 0, -0.49999997, 0, 0.8660253, 146.52379, 1.4, -161.35974)
+transform = Transform3D(0.033050567, 0, 0.99945354, 0, 1, 0, -0.99945354, 0, 0.033050567, 146.44543, 0.5495242, -162.60796)
 site_id = &"d33ca587-35ce-4a72-8316-9bc0e1c6cd76"
 display_name = "Harbors End"
 
@@ -5603,6 +5607,24 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -52.09906, 
 use_collision = true
 size = Vector3(8, 14, 6)
 material = ExtResource("1_cl1x4")
+
+[node name="CityPassOffice" type="Area3D" parent="MainRoad/MikasDrugstore"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.285412, -6.2, 6.0030956)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("17_citypass")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainRoad/MikasDrugstore/CityPassOffice"]
+shape = SubResource("BoxShape3D_city_pass")
+
+[node name="OfficeLabel" type="Label3D" parent="MainRoad/MikasDrugstore/CityPassOffice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+billboard = 2
+alpha_cut = 3
+alpha_hash_scale = 0.02
+alpha_antialiasing_mode = 1
+texture_filter = 5
+text = "City Pass Office"
 
 [node name="ShadyRoofDropoff" parent="MainRoad/MikasDrugstore" instance=ExtResource("8_8iuey")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.40031528, -6)

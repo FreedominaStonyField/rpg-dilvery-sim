@@ -44,7 +44,6 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	package_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
-	PlayerData.money_changed.connect(_on_money_changed)
 	PlayerData.inventory_changed.connect(_on_inventory_changed)
 	TimeSystem.time_changed.connect(_on_time_changed)
 	TimeSystem.new_morning.connect(_on_new_morning)
@@ -62,7 +61,7 @@ func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	interaction_list.item_selected.connect(_on_interaction_item_selected)
-	_on_money_changed(PlayerData.get_money())
+	_update_money_label()
 	_on_inventory_changed()
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
@@ -82,10 +81,11 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_update_speed_label()
 
-func _on_money_changed(amount: int) -> void:
-	money_label.text = "$" + str(amount)
+func _update_money_label() -> void:
+	money_label.text = "$" + str(PlayerData.get_money())
 
 func _on_inventory_changed() -> void:
+	_update_money_label()
 	var count = PlayerData.get_item_count(Jobs.DELIVERY_ITEM_ID)
 	if count <= 0:
 		carrying_label.text = "NONE"
@@ -247,7 +247,9 @@ func _input(event: InputEvent) -> void:
 		toggle_pressed = event.pressed and event.keycode == Key.KEY_TAB
 	if toggle_pressed:
 		_set_package_menu_visible(not package_menu.visible)
-		get_viewport().set_input_as_handled()
+		var viewport = get_viewport()
+		if viewport != null:
+			viewport.set_input_as_handled()
 		return
 
 func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
@@ -280,34 +282,48 @@ func _unhandled_input(event: InputEvent) -> void:
 	if wheel_event and wheel_event.pressed:
 		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_select_interaction_index(interaction_selected_index - 1)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 		if wheel_event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_select_interaction_index(interaction_selected_index + 1)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 	var key_event = event as InputEventKey
 	if key_event and key_event.pressed and not key_event.echo:
 		if key_event.keycode == Key.KEY_UP:
 			_select_interaction_index(interaction_selected_index - 1)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 		if key_event.keycode == Key.KEY_DOWN:
 			_select_interaction_index(interaction_selected_index + 1)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 		if key_event.keycode == Key.KEY_PAGEUP:
 			_select_interaction_index(interaction_selected_index - 3)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 		if key_event.keycode == Key.KEY_PAGEDOWN:
 			_select_interaction_index(interaction_selected_index + 3)
-			get_viewport().set_input_as_handled()
+			var viewport = get_viewport()
+			if viewport != null:
+				viewport.set_input_as_handled()
 			return
 	var action = _get_selected_interaction_action()
 	if action != "" and event.is_action_pressed(action):
 		await _trigger_selected_interaction()
-		get_viewport().set_input_as_handled()
+		var viewport = get_viewport()
+		if viewport != null:
+			viewport.set_input_as_handled()
 
 func _bind_player_stamina() -> void:
 	if stamina_source != null and is_instance_valid(stamina_source):

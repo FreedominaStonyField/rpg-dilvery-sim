@@ -1,6 +1,5 @@
 extends Node
 
-signal money_changed(amount: int)
 signal inventory_changed
 
 @export var item_database_path: String = "res://data/databases/items"
@@ -9,12 +8,10 @@ const MONEY_ITEM_ID: StringName = &"money"
 
 var inventory: PlayerInventory = PlayerInventory.new()
 var item_database: DatabaseTable
-var _money_cache: int = 0
 
 func _ready() -> void:
 	_ensure_item_database()
 	inventory.inventory_changed.connect(_on_inventory_changed)
-	_refresh_money_cache(true)
 
 func add_money(amount: int) -> void:
 	if amount <= 0:
@@ -23,7 +20,6 @@ func add_money(amount: int) -> void:
 
 func reset_money() -> void:
 	remove_all_of_item_id(MONEY_ITEM_ID)
-	_refresh_money_cache(true)
 
 func spend_money(amount: int) -> bool:
 	if amount <= 0:
@@ -85,7 +81,6 @@ func get_money() -> int:
 
 func to_dict() -> Dictionary:
 	return {
-		"money": get_money(),
 		"inventory": inventory.to_dict()
 	}
 
@@ -95,7 +90,7 @@ func from_dict(data: Dictionary) -> void:
 	var legacy_money = int(data.get("money", 0))
 	if legacy_money > 0 and get_money() <= 0:
 		ensure_item_count(MONEY_ITEM_ID, legacy_money)
-	_refresh_money_cache(true)
+	inventory_changed.emit()
 
 func _ensure_item_database() -> void:
 	if item_database != null:
@@ -103,11 +98,4 @@ func _ensure_item_database() -> void:
 	item_database = DatabaseLoader.load_table(item_database_path)
 
 func _on_inventory_changed() -> void:
-	_refresh_money_cache(false)
 	inventory_changed.emit()
-
-func _refresh_money_cache(force_emit: bool) -> void:
-	var current = get_money()
-	if force_emit or current != _money_cache:
-		_money_cache = current
-		money_changed.emit(current)
