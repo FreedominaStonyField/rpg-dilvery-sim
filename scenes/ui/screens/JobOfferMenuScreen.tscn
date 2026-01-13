@@ -1,0 +1,189 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/screens/job_offer_menu_screen.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ui/job_offer_menu.gd" id="2"]
+
+[node name="JobOfferMenuScreen" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="OfferCenter" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JobOfferMenu" type="PanelContainer" parent="OfferCenter"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("2")
+
+[node name="OfferMargin" type="MarginContainer" parent="OfferCenter/JobOfferMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="OfferVBox" type="VBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="OfferHeader" type="VBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="OfferTitle" type="Label" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "DISPATCH OFFERS"
+
+[node name="OfferSubtitle" type="Label" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 12
+text = "Select a job, then confirm to lock it in."
+
+[node name="OfferRow" type="HBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LeftColumn" type="VBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="OffersList" type="ItemList" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/LeftColumn"]
+custom_minimum_size = Vector2(320, 220)
+layout_mode = 2
+fixed_icon_size = Vector2i(40, 40)
+
+[node name="OffersEmpty" type="Label" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/LeftColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 12
+text = "No offers yet."
+autowrap_mode = 3
+
+[node name="RightColumn" type="VBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="SnapshotPanel" type="PanelContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/RightColumn"]
+layout_mode = 2
+
+[node name="SnapshotRect" type="TextureRect" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/RightColumn/SnapshotPanel"]
+custom_minimum_size = Vector2(320, 200)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+
+[node name="RewardLabel" type="Label" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 16
+text = "Reward: --"
+
+[node name="OfferTip" type="Label" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/OfferRow/RightColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "Use move keys or the mouse to choose an offer."
+autowrap_mode = 3
+
+[node name="ButtonsRow" type="HBoxContainer" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="AcceptButton" type="Button" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/ButtonsRow"]
+layout_mode = 2
+text = "ACCEPT JOB"
+
+[node name="CancelButton" type="Button" parent="OfferCenter/JobOfferMenu/OfferMargin/OfferVBox/ButtonsRow"]
+layout_mode = 2
+text = "CANCEL"
+
+[node name="WarningLayer" type="Control" parent="OfferCenter/JobOfferMenu"]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+
+[node name="WarningDim" type="ColorRect" parent="OfferCenter/JobOfferMenu/WarningLayer"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="WarningPanel" type="PanelContainer" parent="OfferCenter/JobOfferMenu/WarningLayer"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -220.0
+offset_right = 280.0
+offset_bottom = 220.0
+
+[node name="WarningMargin" type="MarginContainer" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="WarningVBox" type="VBoxContainer" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="WarningTitle" type="Label" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.35, 0.45, 1)
+theme_override_font_sizes/font_size = 18
+text = "CONFIRM DISPATCH"
+
+[node name="WarningText" type="Label" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 12
+text = "Accepting locks you in. You cannot take another job until this one is complete."
+autowrap_mode = 3
+
+[node name="WarningSnapshot" type="TextureRect" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox"]
+custom_minimum_size = Vector2(520, 240)
+layout_mode = 2
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WarningHint" type="Label" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.604, 0.627, 0.651, 1)
+theme_override_font_sizes/font_size = 11
+text = "Lost? Head to the tower or any high point to get your bearings."
+autowrap_mode = 3
+
+[node name="WarningButtons" type="HBoxContainer" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="ConfirmButton" type="Button" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox/WarningButtons"]
+layout_mode = 2
+text = "CONFIRM JOB"
+
+[node name="BackButton" type="Button" parent="OfferCenter/JobOfferMenu/WarningLayer/WarningPanel/WarningMargin/WarningVBox/WarningButtons"]
+layout_mode = 2
+text = "BACK"

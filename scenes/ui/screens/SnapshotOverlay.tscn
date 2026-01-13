@@ -1,0 +1,66 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/screens/snapshot_overlay.gd" id="1"]
+
+[node name="SnapshotOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="SnapshotDim" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="SnapshotPanel" type="PanelContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+
+[node name="SnapshotMargin" type="MarginContainer" parent="SnapshotPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="SnapshotVBox" type="VBoxContainer" parent="SnapshotPanel/SnapshotMargin"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SnapshotHeader" type="HBoxContainer" parent="SnapshotPanel/SnapshotMargin/SnapshotVBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SnapshotTitle" type="Label" parent="SnapshotPanel/SnapshotMargin/SnapshotVBox/SnapshotHeader"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.247, 0.953, 1, 1)
+theme_override_font_sizes/font_size = 13
+text = "SNAPSHOT"
+
+[node name="SnapshotCloseButton" type="Button" parent="SnapshotPanel/SnapshotMargin/SnapshotVBox/SnapshotHeader"]
+layout_mode = 2
+text = "CLOSE"
+
+[node name="SnapshotRect" type="TextureRect" parent="SnapshotPanel/SnapshotMargin/SnapshotVBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 4
+stretch_mode = 5
