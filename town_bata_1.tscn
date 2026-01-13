@@ -5627,7 +5627,7 @@ texture_filter = 5
 text = "City Pass Office"
 
 [node name="ShadyRoofDropoff" parent="MainRoad/MikasDrugstore" instance=ExtResource("8_8iuey")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.40031528, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.8418379, -6)
 site_id = &"2f64be94-11d5-40dc-8d59-9a86816be1c8"
 display_name = "Shady Roof"
 

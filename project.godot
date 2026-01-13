@@ -24,10 +24,6 @@ PlayerData="*res://scripts/autoload/player_data.gd"
 UIEvents="*res://scripts/autoload/ui_events.gd"
 SaveSystem="*res://scripts/autoload/save_system.gd"
 
-[display]
-
-window/stretch/mode="viewport"
-
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Godot-MToon-Shader/plugin.cfg", "res://addons/prototype_mini_bundle/plugin.cfg", "res://addons/terrain_3d/plugin.cfg", "res://addons/vrm/plugin.cfg")
