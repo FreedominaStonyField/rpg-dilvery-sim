@@ -77,7 +77,7 @@ func _update_prompt() -> void:
 		UIEvents.unregister_interaction(self)
 
 func get_interaction_label() -> String:
-	return "Browse dispatch offers"
+	return "Browse job offers"
 
 func get_interaction_action() -> String:
 	return interact_action
@@ -94,7 +94,7 @@ func perform_interaction() -> void:
 	if not can_proceed:
 		return
 	_refresh_offers_if_possible()
-	UIEvents.request_package_menu(true)
+	UIEvents.request_job_offer_menu(true)
 
 func _refresh_offers_if_possible() -> void:
 	if not _can_interact():

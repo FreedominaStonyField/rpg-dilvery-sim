@@ -3,9 +3,9 @@ extends Control
 @export var roll_duration: float = 12.0
 @export var prompt_flash_period: float = 0.8
 
-@onready var credits_viewport: Control = $CreditsViewport
-@onready var credits_content: Control = $CreditsViewport/CreditsContent
-@onready var credits_vbox: VBoxContainer = $CreditsViewport/CreditsContent/CreditsVBox
+@onready var credits_viewport: Control = $CreditsPanel/CreditsViewport
+@onready var credits_content: Control = $CreditsPanel/CreditsViewport/CreditsContent
+@onready var credits_vbox: VBoxContainer = $CreditsPanel/CreditsViewport/CreditsContent/CreditsVBox
 @onready var prompt_label: Label = $PromptLabel
 
 var _flash_tween: Tween

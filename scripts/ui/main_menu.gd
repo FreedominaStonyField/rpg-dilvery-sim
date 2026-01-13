@@ -1,9 +1,9 @@
 extends Control
 
-@onready var start_button: Button = $UI_Layer/LayoutRoot/Split/MenuColumn/StartBtn
-@onready var quit_button: Button = $UI_Layer/LayoutRoot/Split/MenuColumn/QuitBtn
-@onready var load_button: Button = $UI_Layer/LayoutRoot/Split/MenuColumn/LoadBtn
-@onready var slot_list: ItemList = $UI_Layer/LayoutRoot/Split/MenuColumn/SlotList
+@onready var start_button: Button = $UI_Layer/LayoutRoot/Split/MenuPanel/MenuPanelMargin/MenuColumn/StartBtn
+@onready var quit_button: Button = $UI_Layer/LayoutRoot/Split/MenuPanel/MenuPanelMargin/MenuColumn/QuitBtn
+@onready var load_button: Button = $UI_Layer/LayoutRoot/Split/MenuPanel/MenuPanelMargin/MenuColumn/LoadBtn
+@onready var slot_list: ItemList = $UI_Layer/LayoutRoot/Split/MenuPanel/MenuPanelMargin/MenuColumn/SlotList
 
 func _ready() -> void:
 	get_tree().paused = false

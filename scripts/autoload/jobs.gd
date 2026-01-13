@@ -116,6 +116,9 @@ func get_job_offer_records() -> Array[JobRecord]:
 func has_job_offers() -> bool:
 	return not job_offers.is_empty()
 
+func has_offer_pickup() -> bool:
+	return offer_pickup != null
+
 func refresh_job_offers(pickup: Node3D) -> void:
 	if pickup == null:
 		_clear_job_offers()

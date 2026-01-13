@@ -1,12 +1,29 @@
 extends CanvasLayer
 
-const FADE_DURATION = 1.5
-const MESSAGE_HOLD = 5.5
+@export var notification_fade_in: float = 0.25
+@export var notification_hold: float = 4.0
+@export var notification_fade_out: float = 1.0
+@export var journal_open_duration: float = 0.22
+@export var journal_close_duration: float = 0.2
+@export var journal_flash_fade: float = 1.1
+@export var pause_fade_duration: float = 0.18
+@export var transition_fade_duration: float = 1.2
+@export var transition_hold: float = 4.5
+@export var interaction_fade_duration: float = 0.16
+@export var status_fade_in: float = 0.18
+@export var status_hold: float = 2.5
+@export var status_fade_out: float = 0.3
+@export var offer_menu_open_duration: float = 0.2
+@export var offer_menu_close_duration: float = 0.18
+@export var alert_text_color: Color = Color(1, 0.35, 0.45, 1)
+@export var rest_text_color: Color = Color(0.9, 0.95, 1, 1)
 
+@onready var status_row: Control = $MarginContainer/VBoxContainer/StatusRow
 @onready var money_label: Label = $MarginContainer/VBoxContainer/StatusRow/MoneyPanel/MoneyMargin/MoneyVBox/MoneyLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/StatusRow/TimePanel/TimeMargin/TimeVBox/TimeLabel
 @onready var carrying_label: Label = $PackageCenter/PackageMenu/PackageMargin/PackageVBox/InfoBlock/InfoMargin/InfoVBox/InfoGrid/CarryingValue
 @onready var package_menu: Control = $PackageCenter/PackageMenu
+@onready var job_offer_menu: Control = $OfferCenter/JobOfferMenu
 @onready var package_fade_timer: Timer = $PackageFadeTimer
 @onready var completion_audio: AudioStreamPlayer = $PackageCenter/PackageMenu/CompletionAudioPlayer
 @onready var notification_container: VBoxContainer = $NotificationContainer
@@ -15,7 +32,8 @@ const MESSAGE_HOLD = 5.5
 @onready var save_button: Button = $PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox/SaveButton
 @onready var menu_button: Button = $PauseMenu/PauseCenter/Panel/PauseMargin/PauseVBox/MenuButton
 @onready var fade_rect: ColorRect = $TransitionLayer/FadeRect
-@onready var transition_label: Label = $TransitionLayer/TransitionLabel
+@onready var transition_panel: PanelContainer = $TransitionLayer/TransitionPanel
+@onready var transition_label: Label = $TransitionLayer/TransitionPanel/TransitionMargin/TransitionLabel
 @onready var interact_prompt: Label = $InteractPrompt
 @onready var interaction_panel: Panel = $InteractionPanel
 @onready var interaction_list: ItemList = $InteractionPanel/PanelMargin/InteractionVBox/InteractionList
@@ -26,7 +44,14 @@ const MESSAGE_HOLD = 5.5
 
 var in_transition: bool = false
 var transition_tween: Tween
+var pause_tween: Tween
+var package_open_tween: Tween
+var offer_menu_tween: Tween
+var interaction_panel_tween: Tween
+var interact_prompt_tween: Tween
+var status_tween: Tween
 var package_pause_active: bool = false
+var job_offer_pause_active: bool = false
 var interact_prompt_owner_id: int = 0
 var stamina_source: Node
 var speed_source: Node
@@ -35,6 +60,10 @@ var package_fade_tween: Tween
 var interaction_entries: Array[Node] = []
 var interaction_selected_index: int = -1
 var inn_checkin_ratio: float = -1.0
+var status_pinned: bool = false
+var status_hold_active: bool = false
+var last_money: int = 0
+var inn_open_announced: bool = false
 
 const DAY_START_MINUTES = 6 * 60
 const DAY_END_MINUTES = 24 * 60
@@ -43,6 +72,7 @@ const INN_CHECKIN_FALLBACK = 0.75
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	package_menu.process_mode = Node.PROCESS_MODE_ALWAYS
+	job_offer_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	pause_menu.process_mode = Node.PROCESS_MODE_ALWAYS
 	PlayerData.inventory_changed.connect(_on_inventory_changed)
 	TimeSystem.time_changed.connect(_on_time_changed)
@@ -54,6 +84,7 @@ func _ready() -> void:
 	UIEvents.interaction_registered.connect(_on_interaction_registered)
 	UIEvents.interaction_unregistered.connect(_on_interaction_unregistered)
 	UIEvents.package_menu_requested.connect(_on_package_menu_requested)
+	UIEvents.job_offer_menu_requested.connect(_on_job_offer_menu_requested)
 	GameState.mode_changed.connect(_on_mode_changed)
 	Jobs.job_started.connect(_on_job_started)
 	Jobs.job_completed.connect(_on_job_completed)
@@ -61,17 +92,24 @@ func _ready() -> void:
 	save_button.pressed.connect(_on_save_pressed)
 	menu_button.pressed.connect(_on_menu_pressed)
 	interaction_list.item_selected.connect(_on_interaction_item_selected)
+	last_money = PlayerData.get_money()
 	_update_money_label()
 	_on_inventory_changed()
 	_on_time_changed(TimeSystem.day_time)
 	pause_menu.visible = false
 	package_menu.visible = false
+	job_offer_menu.visible = false
+	status_row.visible = false
+	status_row.modulate = Color(1, 1, 1, 0)
 	fade_rect.visible = false
 	fade_rect.color = Color(0, 0, 0, 0)
-	transition_label.visible = false
-	transition_label.modulate = Color(1, 1, 1, 0)
+	transition_panel.visible = false
+	transition_panel.modulate = Color(1, 1, 1, 0)
+	transition_label.modulate = Color(1, 1, 1, 1)
 	interact_prompt.visible = false
+	interact_prompt.modulate = Color(1, 1, 1, 0)
 	interaction_panel.visible = false
+	interaction_panel.modulate = Color(1, 1, 1, 0)
 	stamina_container.visible = false
 	_bind_player_stamina()
 	_bind_player_speed()
@@ -82,7 +120,11 @@ func _process(_delta: float) -> void:
 	_update_speed_label()
 
 func _update_money_label() -> void:
-	money_label.text = "$" + str(PlayerData.get_money())
+	var current_money = PlayerData.get_money()
+	money_label.text = "$" + str(current_money)
+	if current_money != last_money:
+		last_money = current_money
+		_show_status_temporarily()
 
 func _on_inventory_changed() -> void:
 	_update_money_label()
@@ -104,6 +146,9 @@ func _on_time_changed(day_time: float) -> void:
 		_format_inn_checkin_time()
 	]
 	time_label.tooltip_text = "Day time, curfew, and inn check-in"
+	if not inn_open_announced and _is_inn_open(day_time):
+		inn_open_announced = true
+		_show_status_temporarily()
 
 func _format_time(day_time: float) -> String:
 	var total_minutes = int(round(lerp(DAY_START_MINUTES, DAY_END_MINUTES, day_time)))
@@ -130,6 +175,7 @@ func _format_inn_checkin_time() -> String:
 func _on_new_morning() -> void:
 	if in_transition:
 		return
+	inn_open_announced = false
 	show_message("Morning. New deliveries available.")
 
 func _on_job_started(_dropoff: Node3D) -> void:
@@ -155,35 +201,41 @@ func show_message(message: String, duration: float = 5) -> void:
 	
 	var tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(label, "position", Vector2(0,0), 0.3).set_trans(Tween.TRANS_EXPO)
-	tween.tween_property(label, "modulate:a", 1.0, 0.3).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(label, "position", Vector2(0,0), notification_fade_in)
+	tween.tween_property(label, "modulate:a", 1.0, notification_fade_in)
 	tween.set_parallel(false)
 	
-	tween.tween_interval(duration)
+	var hold_time = duration if duration > 0.0 else notification_hold
+	tween.tween_interval(hold_time)
 	
 	tween.set_parallel(true)
-	tween.tween_property(label, "modulate:a", 0.0, 1.5).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(label, "modulate:a", 0.0, notification_fade_out)
 	tween.set_parallel(false)
 	
 	tween.tween_callback(label.queue_free)
 
 func _on_mode_changed(mode: GameState.Mode) -> void:
-	pause_menu.visible = (
+	var should_show_pause = (
 		mode == GameState.Mode.PAUSED
 		and not in_transition
 		and not package_pause_active
+		and not job_offer_pause_active
 	)
+	_set_pause_menu_visible(should_show_pause)
 	if mode == GameState.Mode.PLAYING and package_pause_active:
 		package_pause_active = false
-		package_menu.visible = false
-		package_menu.modulate = Color(1, 1, 1, 1)
+		_hide_package_menu(journal_close_duration)
+	if mode == GameState.Mode.PLAYING and job_offer_pause_active:
+		job_offer_pause_active = false
+		_hide_job_offer_menu(offer_menu_close_duration)
 	if mode != GameState.Mode.PLAYING and not package_pause_active:
-		package_menu.visible = false
-		package_menu.modulate = Color(1, 1, 1, 1)
-		if package_menu.has_method("clear_override"):
-			package_menu.call("clear_override")
+		_hide_package_menu(0.0)
+	if mode != GameState.Mode.PLAYING and not job_offer_pause_active:
+		_hide_job_offer_menu(0.0)
 	if mode != GameState.Mode.PAUSED and package_pause_active:
 		package_pause_active = false
+	if mode != GameState.Mode.PAUSED and job_offer_pause_active:
+		job_offer_pause_active = false
 	_update_interaction_visibility()
 
 func _on_resume_pressed() -> void:
@@ -201,7 +253,7 @@ func _on_save_pressed() -> void:
 		show_message("Saved %s" % slot_name)
 
 func _on_mugged() -> void:
-	_play_transition("You were mugged! Money lost.", true)
+	_play_transition("CURFEW VIOLATED\nSTOLEN: ALL CASH", true)
 
 func _on_sleep_sequence_requested(message: String) -> void:
 	_play_transition(message, false)
@@ -210,9 +262,14 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 	in_transition = true
 	fade_rect.visible = true
 	fade_rect.color = Color(0, 0, 0, 0)
-	transition_label.visible = true
+	transition_panel.visible = true
 	transition_label.text = message
-	transition_label.modulate = Color(1, 1, 1, 0)
+	transition_label.modulate = Color(1, 1, 1, 1)
+	transition_label.add_theme_color_override(
+		"font_color",
+		alert_text_color if is_mugged else rest_text_color
+	)
+	transition_panel.modulate = Color(1, 1, 1, 0)
 	if transition_tween:
 		transition_tween.kill()
 	var target_mode = GameState.Mode.SLEEPING
@@ -222,22 +279,22 @@ func _play_transition(message: String, is_mugged: bool) -> void:
 		SaveSystem.save_autosleep()
 	GameState.set_mode(target_mode)
 	transition_tween = create_tween()
-	transition_tween.tween_property(fade_rect, "color:a", 1.0, FADE_DURATION)
-	transition_tween.tween_property(transition_label, "modulate:a", 1.0, 0.25)
+	transition_tween.tween_property(fade_rect, "color:a", 1.0, transition_fade_duration)
+	transition_tween.tween_property(transition_panel, "modulate:a", 1.0, 0.25)
 	transition_tween.tween_callback(func() -> void:
 		if is_mugged:
 			PlayerData.reset_money()
 			Jobs.clear_active_job()
 		TimeSystem.start_new_day()
 	)
-	transition_tween.tween_interval(MESSAGE_HOLD)
-	transition_tween.tween_property(fade_rect, "color:a", 0.0, FADE_DURATION)
-	transition_tween.tween_property(transition_label, "modulate:a", 0.0, 0.25)
+	transition_tween.tween_interval(transition_hold)
+	transition_tween.tween_property(fade_rect, "color:a", 0.0, transition_fade_duration)
+	transition_tween.tween_property(transition_panel, "modulate:a", 0.0, 0.2)
 	transition_tween.tween_callback(_finish_transition)
 
 func _finish_transition() -> void:
 	fade_rect.visible = false
-	transition_label.visible = false
+	transition_panel.visible = false
 	in_transition = false
 	GameState.set_mode(GameState.Mode.PLAYING)
 
@@ -251,6 +308,21 @@ func _input(event: InputEvent) -> void:
 		if viewport != null:
 			viewport.set_input_as_handled()
 		return
+	if interaction_entries.is_empty():
+		return
+	if in_transition or package_pause_active or job_offer_pause_active or not GameState.is_playing():
+		return
+	if interaction_selected_index < 0:
+		interaction_selected_index = 0
+		if interaction_list.get_item_count() > 0:
+			interaction_list.select(0)
+	var action = _get_selected_interaction_action()
+	if action != "" and event.is_action_pressed(action):
+		await _trigger_selected_interaction()
+		var viewport = get_viewport()
+		if viewport != null:
+			viewport.set_input_as_handled()
+		return
 
 func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -> void:
 	if not interaction_entries.is_empty():
@@ -258,12 +330,12 @@ func _on_interact_prompt_changed(visible: bool, action: String, owner_id: int) -
 	if visible:
 		interact_prompt_owner_id = owner_id
 		interact_prompt.text = "Press %s to use" % _get_action_label(action)
-		interact_prompt.visible = true
+		_set_interact_prompt_visible(true)
 		return
 	if owner_id != 0 and owner_id != interact_prompt_owner_id:
 		return
 	interact_prompt_owner_id = 0
-	interact_prompt.visible = false
+	_set_interact_prompt_visible(false)
 
 func _get_action_label(action: String) -> String:
 	var events = InputMap.action_get_events(action)
@@ -276,7 +348,7 @@ func _get_action_label(action: String) -> String:
 func _unhandled_input(event: InputEvent) -> void:
 	if interaction_entries.is_empty():
 		return
-	if in_transition or package_pause_active or not GameState.is_playing():
+	if in_transition or package_pause_active or job_offer_pause_active or not GameState.is_playing():
 		return
 	var wheel_event = event as InputEventMouseButton
 	if wheel_event and wheel_event.pressed:
@@ -392,8 +464,7 @@ func _flash_package_menu(duration: float, completed_job: JobRecord = null) -> vo
 	if package_fade_tween:
 		package_fade_tween.kill()
 		package_fade_tween = null
-	package_menu.visible = true
-	package_menu.modulate = Color(1, 1, 1, 1)
+	_show_package_menu(journal_open_duration)
 	if completed_job != null and package_menu.has_method("show_completed_job"):
 		package_menu.call("show_completed_job", completed_job)
 	elif package_menu.has_method("clear_override"):
@@ -405,15 +476,12 @@ func _on_package_flash_timeout() -> void:
 	package_flash_timer = null
 	if package_pause_active or in_transition:
 		return
-	var fade_duration = 1.5
-	if package_fade_timer != null:
-		fade_duration = package_fade_timer.wait_time
 	package_fade_tween = create_tween()
 	package_fade_tween.tween_property(
 		package_menu,
 		"modulate:a",
 		0.0,
-		fade_duration
+		journal_flash_fade
 	).set_trans(Tween.TRANS_SINE)
 	package_fade_tween.tween_callback(_on_package_fade_finished)
 
@@ -440,15 +508,44 @@ func _set_package_menu_visible(visible: bool) -> void:
 	if package_fade_tween:
 		package_fade_tween.kill()
 		package_fade_tween = null
-	package_menu.visible = visible
+	if visible and job_offer_pause_active:
+		job_offer_pause_active = false
+		_hide_job_offer_menu(0.0)
 	package_pause_active = visible
-	package_menu.modulate = Color(1, 1, 1, 1)
+	status_pinned = visible
+	if visible:
+		_set_status_visible(true)
+	else:
+		_hide_status_if_needed()
+	if visible:
+		_show_package_menu(journal_open_duration)
+	else:
+		_hide_package_menu(journal_close_duration)
 	if package_menu.has_method("clear_override"):
 		package_menu.call("clear_override")
 	if visible and package_menu.has_method("focus_default"):
 		package_menu.call("focus_default")
 	if visible:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
+
+func _on_job_offer_menu_requested(visible: bool) -> void:
+	_set_job_offer_menu_visible(visible)
+
+func _set_job_offer_menu_visible(visible: bool) -> void:
+	if in_transition:
+		return
+	if visible and not GameState.is_playing() and not job_offer_pause_active:
+		return
+	if visible and package_pause_active:
+		package_pause_active = false
+		_hide_package_menu(0.0)
+	job_offer_pause_active = visible
+	if visible:
+		_show_job_offer_menu(offer_menu_open_duration)
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	else:
+		_hide_job_offer_menu(offer_menu_close_duration)
 	GameState.set_mode(GameState.Mode.PAUSED if visible else GameState.Mode.PLAYING)
 
 func _play_completion_sfx(job: JobRecord) -> void:
@@ -502,11 +599,12 @@ func _refresh_interaction_menu() -> void:
 func _update_interaction_visibility() -> void:
 	var should_show = GameState.is_playing()
 	should_show = should_show and not package_pause_active
+	should_show = should_show and not job_offer_pause_active
 	should_show = should_show and not in_transition
 	should_show = should_show and not interaction_entries.is_empty()
-	interaction_panel.visible = should_show
+	_set_interaction_panel_visible(should_show)
 	if should_show:
-		interact_prompt.visible = false
+		_set_interact_prompt_visible(false)
 
 func _update_interaction_hint() -> void:
 	var action = _get_selected_interaction_action()
@@ -572,3 +670,210 @@ func _prune_invalid_interactions() -> void:
 		var node = interaction_entries[i]
 		if node == null or not is_instance_valid(node):
 			interaction_entries.remove_at(i)
+
+func _set_pause_menu_visible(visible: bool) -> void:
+	if pause_tween:
+		pause_tween.kill()
+	if visible:
+		pause_menu.visible = true
+		pause_menu.modulate = Color(1, 1, 1, 0)
+		pause_tween = create_tween()
+		pause_tween.tween_property(
+			pause_menu,
+			"modulate:a",
+			1.0,
+			pause_fade_duration
+		).set_trans(Tween.TRANS_SINE)
+		return
+	if not pause_menu.visible:
+		return
+	pause_tween = create_tween()
+	pause_tween.tween_property(
+		pause_menu,
+		"modulate:a",
+		0.0,
+		pause_fade_duration
+	).set_trans(Tween.TRANS_SINE)
+	pause_tween.tween_callback(func() -> void:
+		pause_menu.visible = false
+		pause_menu.modulate = Color(1, 1, 1, 1)
+	)
+
+func _show_package_menu(duration: float) -> void:
+	if package_open_tween:
+		package_open_tween.kill()
+	package_menu.visible = true
+	package_menu.modulate = Color(1, 1, 1, 0)
+	package_open_tween = create_tween()
+	package_open_tween.tween_property(
+		package_menu,
+		"modulate:a",
+		1.0,
+		duration
+	).set_trans(Tween.TRANS_SINE)
+
+func _hide_package_menu(duration: float) -> void:
+	if package_open_tween:
+		package_open_tween.kill()
+	if package_fade_tween:
+		package_fade_tween.kill()
+		package_fade_tween = null
+	if duration <= 0.0:
+		package_menu.visible = false
+		package_menu.modulate = Color(1, 1, 1, 1)
+		if package_menu.has_method("clear_override"):
+			package_menu.call("clear_override")
+		return
+	package_open_tween = create_tween()
+	package_open_tween.tween_property(
+		package_menu,
+		"modulate:a",
+		0.0,
+		duration
+	).set_trans(Tween.TRANS_SINE)
+	package_open_tween.tween_callback(func() -> void:
+		package_menu.visible = false
+		package_menu.modulate = Color(1, 1, 1, 1)
+		if package_menu.has_method("clear_override"):
+			package_menu.call("clear_override")
+	)
+
+func _show_job_offer_menu(duration: float) -> void:
+	if offer_menu_tween:
+		offer_menu_tween.kill()
+	job_offer_menu.visible = true
+	job_offer_menu.modulate = Color(1, 1, 1, 0)
+	if job_offer_menu.has_method("focus_default"):
+		job_offer_menu.call("focus_default")
+	offer_menu_tween = create_tween()
+	offer_menu_tween.tween_property(
+		job_offer_menu,
+		"modulate:a",
+		1.0,
+		duration
+	).set_trans(Tween.TRANS_SINE)
+
+func _hide_job_offer_menu(duration: float) -> void:
+	if offer_menu_tween:
+		offer_menu_tween.kill()
+	if duration <= 0.0:
+		job_offer_menu.visible = false
+		job_offer_menu.modulate = Color(1, 1, 1, 1)
+		return
+	offer_menu_tween = create_tween()
+	offer_menu_tween.tween_property(
+		job_offer_menu,
+		"modulate:a",
+		0.0,
+		duration
+	).set_trans(Tween.TRANS_SINE)
+	offer_menu_tween.tween_callback(func() -> void:
+		job_offer_menu.visible = false
+		job_offer_menu.modulate = Color(1, 1, 1, 1)
+	)
+
+func _set_interaction_panel_visible(visible: bool) -> void:
+	if interaction_panel_tween:
+		interaction_panel_tween.kill()
+	if visible:
+		interaction_panel.visible = true
+		interaction_panel.modulate = Color(1, 1, 1, 0)
+		interaction_panel_tween = create_tween()
+		interaction_panel_tween.tween_property(
+			interaction_panel,
+			"modulate:a",
+			1.0,
+			interaction_fade_duration
+		).set_trans(Tween.TRANS_SINE)
+		return
+	if not interaction_panel.visible:
+		return
+	interaction_panel_tween = create_tween()
+	interaction_panel_tween.tween_property(
+		interaction_panel,
+		"modulate:a",
+		0.0,
+		interaction_fade_duration
+	).set_trans(Tween.TRANS_SINE)
+	interaction_panel_tween.tween_callback(func() -> void:
+		interaction_panel.visible = false
+		interaction_panel.modulate = Color(1, 1, 1, 1)
+	)
+
+func _set_interact_prompt_visible(visible: bool) -> void:
+	if interact_prompt_tween:
+		interact_prompt_tween.kill()
+	if visible:
+		interact_prompt.visible = true
+		interact_prompt.modulate = Color(1, 1, 1, 0)
+		interact_prompt_tween = create_tween()
+		interact_prompt_tween.tween_property(
+			interact_prompt,
+			"modulate:a",
+			1.0,
+			interaction_fade_duration
+		).set_trans(Tween.TRANS_SINE)
+		return
+	if not interact_prompt.visible:
+		return
+	interact_prompt_tween = create_tween()
+	interact_prompt_tween.tween_property(
+		interact_prompt,
+		"modulate:a",
+		0.0,
+		interaction_fade_duration
+	).set_trans(Tween.TRANS_SINE)
+	interact_prompt_tween.tween_callback(func() -> void:
+		interact_prompt.visible = false
+		interact_prompt.modulate = Color(1, 1, 1, 1)
+	)
+
+func _set_status_visible(visible: bool) -> void:
+	if status_tween:
+		status_tween.kill()
+	if visible:
+		status_row.visible = true
+		status_row.modulate = Color(1, 1, 1, 0)
+		status_tween = create_tween()
+		status_tween.tween_property(
+			status_row,
+			"modulate:a",
+			1.0,
+			status_fade_in
+		).set_trans(Tween.TRANS_SINE)
+		return
+	if not status_row.visible:
+		return
+	status_tween = create_tween()
+	status_tween.tween_property(
+		status_row,
+		"modulate:a",
+		0.0,
+		status_fade_out
+	).set_trans(Tween.TRANS_SINE)
+	status_tween.tween_callback(func() -> void:
+		status_row.visible = false
+		status_row.modulate = Color(1, 1, 1, 1)
+	)
+
+func _show_status_temporarily() -> void:
+	if status_pinned:
+		_set_status_visible(true)
+		return
+	status_hold_active = true
+	_set_status_visible(true)
+	if status_tween:
+		status_tween.tween_interval(status_hold)
+		status_tween.tween_callback(func() -> void:
+			status_hold_active = false
+			_hide_status_if_needed()
+		)
+
+func _hide_status_if_needed() -> void:
+	if status_pinned or status_hold_active:
+		return
+	_set_status_visible(false)
+
+func _is_inn_open(day_time: float) -> bool:
+	var ratio = inn_checkin_ratio if inn_checkin_ratio >= 0.0 else INN_CHECKIN_FALLBACK
+	return day_time >= ratio

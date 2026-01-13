@@ -97,6 +97,7 @@ func _set_completed(job: JobRecord) -> void:
 	snapshot_rect.texture = job.snapshot
 	snapshot_rect.visible = snapshot_rect.texture != null
 	_set_no_active_visible(false)
+	offers_block.visible = false
 
 func _set_idle(status_text: String) -> void:
 	status_value.text = status_text
@@ -105,7 +106,7 @@ func _set_idle(status_text: String) -> void:
 	snapshot_rect.texture = null
 	snapshot_rect.visible = false
 	_set_no_active_visible(true)
-	offers_block.visible = true
+	offers_block.visible = false
 
 func _on_job_started(dropoff: Node3D) -> void:
 	override_job = null
@@ -179,28 +180,14 @@ func _refresh_completed_list() -> void:
 	_update_completed_empty()
 
 func _refresh_offers() -> void:
-	if Jobs.has_active_job():
-		offers_block.visible = false
-		return
-	offers_block.visible = true
+	offers_block.visible = false
 	offers_list.clear()
-	for job in Jobs.get_job_offer_records():
-		var label = "$%d  %s" % [job.reward, _get_job_display_name(job)]
-		var icon = job.snapshot
-		offers_list.add_item(label, icon)
-		var index = offers_list.get_item_count() - 1
-		offers_list.set_item_metadata(index, job)
-	offers_list.visible = offers_list.get_item_count() > 0
-	offers_empty.visible = offers_list.get_item_count() == 0
-	if offers_list.get_item_count() > 0 and offers_list.get_selected_items().size() == 0:
-		offers_list.select(0)
-	_update_offer_hint()
+	offers_list.visible = false
+	offers_empty.visible = false
+	offers_hint.visible = false
 
 func _update_offer_hint() -> void:
-	if offers_list.get_item_count() == 0:
-		offers_hint.text = "Visit a pickup point to view dispatch offers."
-		return
-	offers_hint.text = "Double click or press Enter to accept."
+	return
 
 func _on_offer_activated(index: int) -> void:
 	Jobs.accept_job_offer(index)
