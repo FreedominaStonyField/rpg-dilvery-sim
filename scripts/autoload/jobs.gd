@@ -126,15 +126,30 @@ func refresh_job_offers(pickup: Node3D) -> void:
 	if has_active_job():
 		_clear_job_offers()
 		return
+	if has_job_offers():
+		if offer_pickup == pickup:
+			job_offers_updated.emit()
+		return
 	offer_pickup = pickup
 	var dropoffs = get_dropoff_sites()
 	if dropoffs.is_empty():
 		_clear_job_offers()
 		return
+	var unique_dropoffs: Array[DropoffSite] = []
+	var seen_locations: Dictionary = {}
+	for site in dropoffs:
+		var key = _get_dropoff_offer_key(site)
+		if seen_locations.has(key):
+			continue
+		seen_locations[key] = true
+		unique_dropoffs.append(site)
+	if unique_dropoffs.is_empty():
+		_clear_job_offers()
+		return
 	offer_generation += 1
 	var generation = offer_generation
 	job_offers.clear()
-	var candidates: Array[DropoffSite] = dropoffs.duplicate()
+	var candidates: Array[DropoffSite] = unique_dropoffs.duplicate()
 	var count = clamp(offer_count, 1, candidates.size())
 	for _i in range(count):
 		var index = rng.randi_range(0, candidates.size() - 1)
@@ -149,6 +164,15 @@ func refresh_job_offers(pickup: Node3D) -> void:
 		})
 	job_offers_updated.emit()
 	_capture_offer_snapshots(generation)
+
+func _get_dropoff_offer_key(site: DropoffSite) -> String:
+	if site == null:
+		return ""
+	if site.site_id != &"":
+		return String(site.site_id)
+	if site.display_name != "":
+		return site.display_name
+	return site.name
 
 func accept_job_offer(index: int) -> bool:
 	if has_active_job():
@@ -171,6 +195,8 @@ func clear_offer_pickup(pickup: Node3D) -> void:
 	if pickup == null:
 		return
 	if offer_pickup == pickup:
+		if has_job_offers():
+			return
 		offer_pickup = null
 		_clear_job_offers()
 
